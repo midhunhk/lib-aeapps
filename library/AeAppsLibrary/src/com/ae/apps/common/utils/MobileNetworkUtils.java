@@ -18,7 +18,7 @@ public class MobileNetworkUtils {
 			intent.setData(Uri.parse(uri));
 			context.startActivity(intent);
 		} catch (Exception e) {
-
+			// Report no exception
 		}
 	}
 
@@ -27,17 +27,15 @@ public class MobileNetworkUtils {
 	 * 
 	 * @param contactNo
 	 */
-	public static void textContact(Context context,String contactNo) {
+	public static void textContact(Context context, String contactNo) {
 		try {
 			String uri = "smsto:" + contactNo;
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			// intent.putExtra(Intent.EXTRA_PHONE_NUMBER, Uri.parse(uri));
 			intent.putExtra("address", contactNo);
 			intent.setData(Uri.parse(uri));
-			// intent.setType("vnd.android-dir/mms-sms");
 			context.startActivity(intent);
 		} catch (Exception e) {
-
+			// Report no exception
 		}
 	}
 }

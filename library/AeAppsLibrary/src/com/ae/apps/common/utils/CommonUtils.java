@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class CommonUtils {
 
-	private static int		MINIMUM_STRING_LENGTH	= 26;
+	public static final int	MINIMUM_STRING_LENGTH	= 26;
 
 	/**
 	 * Formats a timestamp as required
@@ -23,13 +23,20 @@ public class CommonUtils {
 				lastContactedTimeString = dateFormat.format(date);
 			}
 		}
-
 		return lastContactedTimeString;
 	}
 
+	/**
+	 * Well, truncates the given string if length greater than MINIMUM_STRING_LENGTH with an ellipsis
+	 * 
+	 * @param sourceString
+	 * @return
+	 */
 	public static String truncateString(String sourceString) {
+		// Don't want to return a null here
 		if (sourceString == null)
 			return "";
+		// Do the truncation
 		if (sourceString.length() > MINIMUM_STRING_LENGTH) {
 			String truncated = sourceString.substring(0, MINIMUM_STRING_LENGTH) + "...";
 			return truncated;
