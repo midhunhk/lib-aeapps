@@ -16,6 +16,7 @@ import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
+import android.util.Log;
 
 import com.ae.apps.common.utils.CommonUtils;
 import com.ae.apps.common.vo.ContactVo;
@@ -28,10 +29,10 @@ import com.ae.apps.common.vo.PhoneNumberVo;
  */
 public class ContactManager {
 
-	private static String			SMS_PERSON		= "person";
-	private static String			SMS_URI_INBOX	= "content://sms/inbox";
-	private static String			DATE_FORMAT		= "MMM dd, yyyy h:m a";
-	// private static String TAG = "ContactManager";
+	private static final String		SMS_PERSON		= "person";
+	private static final String		SMS_URI_INBOX	= "content://sms/inbox";
+	private static final String		DATE_FORMAT		= "MMM dd, yyyy h:m a";
+	private static final String		TAG				= "ContactManager";
 
 	private ContentResolver			contentResolver;
 	private ArrayList<ContactVo>	contactsList;
@@ -130,7 +131,6 @@ public class ContactManager {
 				// Retrieve values from the table
 				String phoneNumber = phoneCursor.getString(phoneCursor
 						.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
 				// Create a PhoneNumberObject
 				PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
 				phoneNumberVo.setPhoneNumber(phoneNumber);
@@ -201,7 +201,7 @@ public class ContactManager {
 	public List<MessageVo> getContactMessages(String contactId) {
 		MessageVo messageVo = null;
 		List<MessageVo> messagesList = new ArrayList<MessageVo>();
-		String[] projection = new String[] { "_id", "address", "person", "body" };
+		String[] projection = new String[] { "_id", "address", SMS_PERSON, "body" };
 		Cursor inboxCursor = contentResolver.query(Uri.parse(SMS_URI_INBOX), projection, SMS_PERSON + " = ?",
 				new String[] { contactId }, null);
 
@@ -251,9 +251,9 @@ public class ContactManager {
 	private ArrayList<ContactVo> fetchAllContacts() {
 		ArrayList<ContactVo> contactsList = new ArrayList<ContactVo>();
 
+		Log.d(TAG, "Read from the contacts table");
 		Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 		if (cursor.getCount() > 0) {
-
 			String id = null;
 			String name = null;
 			String timesContacted = null;
@@ -292,6 +292,7 @@ public class ContactManager {
 			}
 		}
 		cursor.close();
+		Log.d(TAG, "Found " + contactsList.size() + " contacts");
 		return contactsList;
 	}
 }
