@@ -27,9 +27,9 @@ public class SimpleGraphView extends View {
 	private float[]			value_degree	= null;
 	private String[]		labels			= null;
 	private int[]			colors			= null;
-	private int				temp			= 0;
+	private float			temp			= 0;
 	private Paint			paint			= new Paint(Paint.ANTI_ALIAS_FLAG);
-	private RectF			rectf			= new RectF(10, 10, 230, 230);
+	private RectF			rectf			= new RectF(10, 10, 250, 250);
 
 	public SimpleGraphView(Context context, float[] values, int[] themeColors) {
 		super(context);
@@ -48,9 +48,12 @@ public class SimpleGraphView extends View {
 	/**
 	 * Simple Pie Chart with label fields
 	 * 
-	 * @param context the application context
-	 * @param values Values in degrees for the Pie Chart
-	 * @param labels Labels to display for each part of the pie
+	 * @param context
+	 *            the application context
+	 * @param values
+	 *            Values in degrees for the Pie Chart
+	 * @param labels
+	 *            Labels to display for each part of the pie
 	 */
 	public SimpleGraphView(Context context, float[] values, String[] labels) {
 		this(context, values, DEFAULT_THEME);
@@ -60,10 +63,14 @@ public class SimpleGraphView extends View {
 	/**
 	 * Create a Simple Pie Chart with label and values. Specify a custom theme for the Pie Chart
 	 * 
-	 * @param context the application context
-	 * @param values Values in degrees for the Pie Chart
-	 * @param labels Labels to display for each part of the pie
-	 * @param themeColors Theme colors as array of packed ints alpha, r, g, b
+	 * @param context
+	 *            the application context
+	 * @param values
+	 *            Values in degrees for the Pie Chart
+	 * @param labels
+	 *            Labels to display for each part of the pie
+	 * @param themeColors
+	 *            Theme colors as array of packed ints alpha, r, g, b
 	 */
 	public SimpleGraphView(Context context, float[] values, String[] labels, int[] themeColors) {
 		this(context, values, themeColors);
@@ -91,7 +98,7 @@ public class SimpleGraphView extends View {
 				paint.setColor(colors[i % colors.length]);
 				canvas.drawArc(rectf, 0, value_degree[i], true, paint);
 			} else {
-				temp += (int) value_degree[i - 1];
+				temp += value_degree[i - 1];
 				paint.setColor(colors[i % colors.length]);
 				canvas.drawArc(rectf, temp, value_degree[i], true, paint);
 			}
@@ -100,7 +107,7 @@ public class SimpleGraphView extends View {
 		if (labels != null && labels.length > 0) {
 			// Draw the labels
 			int xCoordinate = 15;
-			int yCoordinate = 250;
+			int yCoordinate = 260;
 			for (int i = 0; i < labels.length; i++) {
 				paint.setColor(colors[i % colors.length]);
 				canvas.drawText(labels[i], yCoordinate, xCoordinate, paint);
