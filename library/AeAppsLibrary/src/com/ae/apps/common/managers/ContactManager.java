@@ -239,6 +239,25 @@ public class ContactManager {
 		return contactId;
 	}
 
+	/**
+	 * Does a lookup on the contacts by phone number lookup
+	 * 
+	 * @param address
+	 * @return
+	 */
+	public String getContactIdFromAddress(String address) {
+		String contactId = null;
+		//String[] projection = new String[] { "_id", "number", "lookup" };
+		Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
+		Cursor cursor = contentResolver.query(personUri, null, null, null, null);
+		if (cursor.moveToFirst()) {
+			contactId = cursor.getString(cursor.getColumnIndex("_id"));
+		}
+		cursor.close();
+
+		return contactId;
+	}
+
 	// ---------------------------------
 	// Private Methods
 	// ---------------------------------
