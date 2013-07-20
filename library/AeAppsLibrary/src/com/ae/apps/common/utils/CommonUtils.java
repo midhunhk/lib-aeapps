@@ -2,6 +2,7 @@ package com.ae.apps.common.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class CommonUtils {
 
@@ -18,7 +19,7 @@ public class CommonUtils {
 		if (timestamp != null && timestamp.trim().length() > 0) {
 			long tempLastContacted = Long.parseLong(timestamp);
 			if (tempLastContacted > 0) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+				SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
 				Date date = new Date(Long.parseLong(timestamp));
 				lastContactedTimeString = dateFormat.format(date);
 			}
