@@ -52,14 +52,6 @@ public class SMSManager {
 		return count;
 	}
 
-	/*
-	 * private ContactItem getContactByAddr(Context context, final SMSItem sms) { Uri personUri =
-	 * Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, sms.mAddress); Cursor cur =
-	 * context.getContentResolver().query(personUri, new String[] { PhoneLookup.DISPLAY_NAME }, null, null, null); if
-	 * (cur.moveToFirst()) { int nameIdx = cur.getColumnIndex(PhoneLookup.DISPLAY_NAME); ContactItem item = new
-	 * ContactItem(); item.mName = cur.getString(nameIdx); cur.close(); return item; } return null; }
-	 */
-
 	/**
 	 * Returns a Set of unique sender contact ids
 	 * 
@@ -93,17 +85,5 @@ public class SMSManager {
 		Log.d(TAG, "Unique Senders Count " + sendersMap.size());
 
 		return sendersMap;
-		/*
-		 * Uri parsedUri = Uri.parse(SMS_URI_INBOX); String[] projection = new String[] { "_id", "address", "person" };
-		 * Cursor cursor = contentResolver.query(parsedUri, null, null, null, null); String s[] =
-		 * cursor.getColumnNames(); int ss = cursor.getColumnCount();
-		 * 
-		 * if (cursor.getCount() > 0) { String person; int personIndex = cursor.getColumnIndex("person"); if
-		 * (cursor.moveToFirst()) do { // The person will be the foreign key from the Contacts table person =
-		 * cursor.getString(personIndex);
-		 * 
-		 * if (person != null) { if (sendersMap.containsKey(person)) { sendersMap.put(person, sendersMap.get(person) +
-		 * 1); } else { sendersMap.put(person, 1); } } } while (cursor.moveToNext()); }
-		 */
 	}
 }

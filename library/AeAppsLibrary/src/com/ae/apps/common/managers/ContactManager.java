@@ -247,9 +247,9 @@ public class ContactManager {
 	 */
 	public String getContactIdFromAddress(String address) {
 		String contactId = null;
-		//String[] projection = new String[] { "_id", "number", "lookup" };
+		String[] projection = new String[] { "_id"};
 		Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
-		Cursor cursor = contentResolver.query(personUri, null, null, null, null);
+		Cursor cursor = contentResolver.query(personUri, projection, null, null, null);
 		if (cursor.moveToFirst()) {
 			contactId = cursor.getString(cursor.getColumnIndex("_id"));
 		}
