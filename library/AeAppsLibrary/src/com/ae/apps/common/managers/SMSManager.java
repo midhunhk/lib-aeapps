@@ -19,6 +19,7 @@ import android.util.Log;
 public class SMSManager {
 
 	public static String	SMS_URI_ALL		= "content://sms/";
+	public static String	SMS_URI_SENT	= "content://sms/sent";
 	public static String	SMS_URI_INBOX	= "content://sms/inbox";
 
 	private static String	TAG				= "SMSManager";
