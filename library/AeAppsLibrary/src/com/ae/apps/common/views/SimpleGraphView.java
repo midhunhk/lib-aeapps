@@ -25,10 +25,11 @@ public class SimpleGraphView extends View {
 	private static int[]		DEFAULT_THEME	= { Color.LTGRAY, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLACK,
 			Color.RED, Color.DKGRAY, Color.CYAN };
 	private static final int	PADDING			= 10;
+	private float				temp			= 0;
+	private float				mDensity		= 1;
 	private float[]				value_degree	= null;
 	private String[]			labels			= null;
 	private int[]				colors			= null;
-	private float				temp			= 0;
 	private Paint				mChartPaint		= new Paint(Paint.ANTI_ALIAS_FLAG);
 	private Paint				mTextPaint		= new Paint(Paint.ANTI_ALIAS_FLAG);
 	private RectF				mBoundingRect	= new RectF(PADDING, PADDING, 250, 250);
@@ -47,7 +48,8 @@ public class SimpleGraphView extends View {
 			value_degree[i] = values[i];
 		}
 		// Set FontSize based on scale
-		mTextPaint.setTextSize(12 * getResources().getDisplayMetrics().density);
+		mDensity = getResources().getDisplayMetrics().density;
+		mTextPaint.setTextSize(12 * mDensity);
 	}
 
 	/**
@@ -101,17 +103,17 @@ public class SimpleGraphView extends View {
 		for (int i = 0; i < value_degree.length; i++) {
 			if (i == 0) {
 				mChartPaint.setColor(colors[i % colors.length]);
-				canvas.drawArc(mBoundingRect, 0, value_degree[i], true, mChartPaint);
+				canvas.drawArc(mBoundingRect, - 90 , value_degree[i], true, mChartPaint);
 			} else {
 				temp += value_degree[i - 1];
 				mChartPaint.setColor(colors[i % colors.length]);
-				canvas.drawArc(mBoundingRect, temp, value_degree[i], true, mChartPaint);
+				canvas.drawArc(mBoundingRect, temp - 90 , value_degree[i], true, mChartPaint);
 			}
 		}
 
 		if (labels != null && labels.length > 0) {
 			// Draw the labels
-			int xCoordinate = (int) (PADDING * 1.5);
+			int xCoordinate = (int) (PADDING * mDensity);
 			int yCoordinate = (int) mBoundingRect.right + PADDING;
 			for (int i = 0; i < labels.length; i++) {
 				mTextPaint.setColor(colors[i % colors.length]);
@@ -123,17 +125,17 @@ public class SimpleGraphView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		int rectSize = 0;
 		int specWidth = MeasureSpec.getSize(widthMeasureSpec);
 		int specHeight = MeasureSpec.getSize(heightMeasureSpec);
-		int rectSize = 0;
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 			// We are going to divide the screen width into two for chart and the text block
 			rectSize = Math.min(specHeight, specWidth / 2);
 		} else {
 			// For landscape, use 65% height instead of 50%
-			rectSize = (int) (specHeight * 0.65);
+			rectSize = (int) (specHeight * 0.75);
 		}
-		// This rectangle turns into a square and the chart is drawn on it
+		// The Bounding rectangle becomes a square and the chart is drawn on it
 		mBoundingRect.set(PADDING, PADDING, rectSize, rectSize);
 		setMeasuredDimension(specWidth, rectSize + PADDING);
 	}
