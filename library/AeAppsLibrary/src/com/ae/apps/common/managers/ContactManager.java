@@ -35,7 +35,7 @@ public class ContactManager {
 	private static final String		TAG				= "ContactManager";
 
 	private ContentResolver			contentResolver;
-	private ArrayList<ContactVo>	contactsList;
+	protected ArrayList<ContactVo>	contactsList;
 
 	/**
 	 * Constructor
@@ -119,7 +119,7 @@ public class ContactManager {
 	 * @param contactVo
 	 * @return
 	 */
-	private ContactVo getContactPhoneDetails(ContactVo contactVo) {
+	protected ContactVo getContactPhoneDetails(ContactVo contactVo) {
 		if (contactVo.getPhoneNumbersList() == null && contactVo.getHasPhoneNumber()) {
 			ArrayList<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
 
