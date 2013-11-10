@@ -10,8 +10,11 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- * A Manager class for acting on the sms inbox. Not to be confused with the 
- * class with the same name in the android SDK.
+ * A Manager class for acting on the sms inbox. Not to be confused with the class with the same name in the android SDK.
+ * 
+ * Need following permissions in manifest
+ * 
+ * android.permission.READ_SMS
  * 
  * @author Midhun
  * 

@@ -8,6 +8,7 @@ import java.util.Random;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,22 +27,33 @@ import com.ae.apps.common.vo.PhoneNumberVo;
 /**
  * The ContactManager class manages access to the Android's Contacts and related tables to retrieve information which
  * are exposed via public methods.
+ * 
+ * Need following permissions in manifest 
+ * 	android.permission.READ_CONTACTS 
+ * 	android.permission.CALL_PHONE
+ * 	android.permission.READ_SMS
  */
 public class ContactManager {
 
 	private static final String		SMS_PERSON		= "person";
 	private static final String		SMS_URI_INBOX	= "content://sms/inbox";
-	private static final String		DATE_FORMAT		= "MMM dd, yyyy h:m a";
+	private static final String		DATE_FORMAT		= "MMM dd, yyyy hh:mm a";
 	private static final String		TAG				= "ContactManager";
 
 	private ContentResolver			contentResolver;
+	private Resources				res;
 	protected ArrayList<ContactVo>	contactsList;
 
 	/**
 	 * Constructor
+	 * 
+	 * @param contentResolver
+	 * @param res
+	 *            resources instance
 	 */
-	public ContactManager(ContentResolver contentResolver) {
+	public ContactManager(ContentResolver contentResolver, Resources res) {
 		this.contentResolver = contentResolver;
+		this.res = res;
 
 		// Read all the contacts from the contacts database
 		contactsList = fetchAllContacts();
@@ -127,13 +139,24 @@ public class ContactManager {
 			Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
 					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contactVo.getId() },
 					null);
+			String phoneLabel;
+			String phoneNumber;
+			String customLabel;
+			int phoneNumberIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+			int phoneTypeIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
+			int phoneLabelIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL);
+
 			while (phoneCursor.moveToNext()) {
 				// Retrieve values from the table
-				String phoneNumber = phoneCursor.getString(phoneCursor
-						.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+				phoneNumber = phoneCursor.getString(phoneNumberIndex);
+				customLabel = phoneCursor.getString(phoneLabelIndex);
+				phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneTypeIndex,
+						customLabel);
+
 				// Create a PhoneNumberObject
 				PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
 				phoneNumberVo.setPhoneNumber(phoneNumber);
+				phoneNumberVo.setPhoneType(phoneLabel);
 
 				phoneNumbersList.add(phoneNumberVo);
 			}
@@ -247,7 +270,7 @@ public class ContactManager {
 	 */
 	public String getContactIdFromAddress(String address) {
 		String contactId = null;
-		String[] projection = new String[] { "_id"};
+		String[] projection = new String[] { "_id" };
 		Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
 		Cursor cursor = contentResolver.query(personUri, projection, null, null, null);
 		if (cursor.moveToFirst()) {

@@ -15,7 +15,7 @@ public class CommonUtils {
 	 * @return
 	 */
 	public static String formatTimeStamp(String timestamp, String pattern) {
-		String lastContactedTimeString = "Never";
+		String lastContactedTimeString = null; //"Never";
 		if (timestamp != null && timestamp.trim().length() > 0) {
 			long tempLastContacted = Long.parseLong(timestamp);
 			if (tempLastContacted > 0) {
