@@ -43,6 +43,18 @@ public class ContactManager {
 	private ContentResolver			contentResolver;
 	private Resources				res;
 	protected ArrayList<ContactVo>	contactsList;
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param contentResolver
+	 */
+	public ContactManager(ContentResolver contentResolver) {
+		this.contentResolver = contentResolver;
+
+		// Read all the contacts from the contacts database
+		contactsList = fetchAllContacts();
+	}
 
 	/**
 	 * Constructor
@@ -52,11 +64,8 @@ public class ContactManager {
 	 *            resources instance
 	 */
 	public ContactManager(ContentResolver contentResolver, Resources res) {
-		this.contentResolver = contentResolver;
+		this(contentResolver);
 		this.res = res;
-
-		// Read all the contacts from the contacts database
-		contactsList = fetchAllContacts();
 	}
 
 	/**
@@ -149,9 +158,11 @@ public class ContactManager {
 			while (phoneCursor.moveToNext()) {
 				// Retrieve values from the table
 				phoneNumber = phoneCursor.getString(phoneNumberIndex);
-				customLabel = phoneCursor.getString(phoneLabelIndex);
-				phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneTypeIndex,
+				if( null != res){
+					customLabel = phoneCursor.getString(phoneLabelIndex);
+					phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneTypeIndex,
 						customLabel);
+				}
 
 				// Create a PhoneNumberObject
 				PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
