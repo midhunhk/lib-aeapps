@@ -148,9 +148,9 @@ public class ContactManager {
 			Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
 					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contactVo.getId() },
 					null);
-			String phoneLabel;
-			String phoneNumber;
-			String customLabel;
+			String phoneLabel = null;
+			String phoneNumber= null;
+			String customLabel= null;
 			int phoneNumberIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 			int phoneTypeIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
 			int phoneLabelIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL);
