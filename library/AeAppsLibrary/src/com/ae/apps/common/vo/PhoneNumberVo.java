@@ -1,6 +1,13 @@
 package com.ae.apps.common.vo;
 
+/**
+ * Represents a Phone number of a contact
+ * 
+ * @author Midhun
+ * 
+ */
 public class PhoneNumberVo {
+
 	private String phoneType;
 	private String phoneNumber;
 	private String lastTimeContacted;
@@ -42,4 +49,5 @@ public class PhoneNumberVo {
 	public void setPhoneType(String phoneType) {
 		this.phoneType = phoneType;
 	}
+
 }

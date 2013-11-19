@@ -141,30 +141,35 @@ public class ContactManager {
 	 * @return
 	 */
 	protected ContactVo getContactPhoneDetails(ContactVo contactVo) {
+		// Make sure we update the contact only if we didnt populate the phonenumbers list already 
+		// and the contact has phone numbers
 		if (contactVo.getPhoneNumbersList() == null && contactVo.getHasPhoneNumber()) {
 			ArrayList<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
-
-			// Contact has phone number
 			Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
 					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contactVo.getId() },
 					null);
-			String phoneLabel = null;
-			String phoneNumber= null;
-			String customLabel= null;
+			
+			int phoneType;
+			String phoneLabel  = null;
+			String phoneNumber = null;
+			String customLabel = null;
+			
+			// Prefetch some column indexes from the cursor
 			int phoneNumberIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 			int phoneTypeIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
 			int phoneLabelIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL);
 
 			while (phoneCursor.moveToNext()) {
-				// Retrieve values from the table
+				// Retrieve values from the cursor
+				phoneType = phoneCursor.getInt(phoneTypeIndex);
 				phoneNumber = phoneCursor.getString(phoneNumberIndex);
 				if( null != res){
 					customLabel = phoneCursor.getString(phoneLabelIndex);
-					phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneTypeIndex,
+					phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneType,
 						customLabel);
 				}
 
-				// Create a PhoneNumberObject
+				// Lets save this phone number as a vo 
 				PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
 				phoneNumberVo.setPhoneNumber(phoneNumber);
 				phoneNumberVo.setPhoneType(phoneLabel);
