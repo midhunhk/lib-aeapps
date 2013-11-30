@@ -19,7 +19,7 @@ import android.widget.ImageView;
  * This should be similar to how Google+ shows profile images.
  * Use it like you would an ImageView.
  * 
- * @author unattributed
+ * @author unattributed / from stackoverflow.com
  * 
  */
 public class RoundedImageView extends ImageView {
@@ -44,8 +44,8 @@ public class RoundedImageView extends ImageView {
 		if (getWidth() == 0 || getHeight() == 0) {
 			return;
 		}
-		Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-		Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+		Bitmap originalBitmap = ((BitmapDrawable) drawable).getBitmap();
+		Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
 		// Create the rounded bitmap and display it using the Canvas
 		Bitmap roundBitmap = getCroppedBitmp(bitmap, getHeight());
@@ -76,6 +76,7 @@ public class RoundedImageView extends ImageView {
 		paint.setFilterBitmap(true);
 		paint.setDither(true);
 		canvas.drawARGB(0, 0, 0, 0);
+		
 		// TODO : remove hardcoding here
 		paint.setColor(Color.parseColor("#bab399"));
 		canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f, sbmp.getHeight() / 2 + 0.7f, sbmp.getWidth() / 2 + 0.1f, paint);
