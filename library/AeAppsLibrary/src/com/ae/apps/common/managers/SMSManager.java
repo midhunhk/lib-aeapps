@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- * A Manager class for acting on the sms inbox. Not to be confused with the class that has the same name
- * and present as part of the Android SDK.
+ * A Manager class for acting on the sms inbox. Not to be confused with the class that has the same name and present as
+ * part of the Android SDK.
  * 
  * You will need the following permissions in manifest
  * 
@@ -24,6 +24,7 @@ public class SMSManager {
 
 	public static String	SMS_URI_ALL		= "content://sms/";
 	public static String	SMS_URI_SENT	= "content://sms/sent";
+	public static String	SMS_URI_DRAFTS	= "content://sms/draft";
 	public static String	SMS_URI_INBOX	= "content://sms/inbox";
 
 	private static String	TAG				= "SMSManager";
@@ -49,9 +50,12 @@ public class SMSManager {
 		int count = 0;
 		Uri parsedUri = Uri.parse(uri);
 		String[] projection = new String[] { "_id", "thread_id", "address" };
+		
 		Cursor cursor = contentResolver.query(parsedUri, projection, null, null, null);
-		count = cursor.getCount();
-		cursor.close();
+		if (cursor != null) {
+			count = cursor.getCount();
+			cursor.close();
+		}
 
 		Log.d(TAG, "Exiting getMessagesCount with count as " + count);
 		return count;
