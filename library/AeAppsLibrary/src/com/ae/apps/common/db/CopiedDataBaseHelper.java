@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,7 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 	private SQLiteDatabase	mDataBase;
-	private final Context	mContext;
+	private AssetManager	mAssetManager;
 	private String			databaseName;
 	private static String	databasePath	= null;
 
@@ -35,7 +36,7 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 	 */
 	public CopiedDataBaseHelper(Context context, String databaseName, CursorFactory factory, int version) {
 		super(context, databaseName, factory, version);
-		mContext = context;
+		mAssetManager = context.getAssets();
 		this.databaseName = databaseName;
 		databasePath = context.getDatabasePath(databaseName).toString();
 	}
@@ -86,7 +87,7 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 	 * */
 	protected void copyDataBase() throws IOException {
 		// Open your local db as the input stream
-		InputStream myInput = mContext.getAssets().open(databaseName);
+		InputStream myInput = mAssetManager.open(databaseName);
 
 		// Path to the just created empty db
 		String outFileName = databasePath;
