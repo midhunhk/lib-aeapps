@@ -2,6 +2,8 @@ package com.ae.apps.common.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 
 public class MobileNetworkUtils {
@@ -38,4 +40,40 @@ public class MobileNetworkUtils {
 			// Report no exception
 		}
 	}
+
+	/**
+	 * This method checks whether Internet connectivity is available on the device
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static boolean isInternetAvailable(Context context) {
+		// Request the Connectivity service to the OS
+		ConnectivityManager connectivityManager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+		// Check the current state of the Network Information
+		if (networkInfo == null)
+			return false;
+		if (networkInfo.isConnected() == false)
+			return false;
+		if (networkInfo.isAvailable() == false)
+			return false;
+		return true;
+	}
+
+	/**
+	 * Launches an Intent to open a web page
+	 * 
+	 * @param context
+	 * @param url
+	 */
+	public static void launchWebPage(Context context, String url) {
+		Intent i = new Intent(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(url));
+		context.startActivity(i);
+	}
+
 }
