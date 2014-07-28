@@ -302,14 +302,18 @@ public class ContactManager {
 	 */
 	public String getContactIdFromAddress(String address) {
 		String contactId = null;
-		if (address != null) {
-			String[] projection = new String[] { "_id" };
-			Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
-			Cursor cursor = contentResolver.query(personUri, projection, null, null, null);
-			if (cursor.moveToFirst()) {
-				contactId = cursor.getString(cursor.getColumnIndex("_id"));
+		try{
+			if (address != null) {
+				String[] projection = new String[] { "_id" };
+				Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
+				Cursor cursor = contentResolver.query(personUri, projection, null, null, null);
+				if (cursor.moveToFirst()) {
+					contactId = cursor.getString(cursor.getColumnIndex("_id"));
+				}
+				cursor.close();
 			}
-			cursor.close();
+		} catch(IllegalArgumentException i){
+			// Maybe a device specific implementation difference
 		}
 
 		return contactId;
