@@ -38,7 +38,7 @@ public class ContactManager {
 	private static final String		DATE_FORMAT		= "MMM dd, yyyy hh:mm a";
 	private static final String		TAG				= "ContactManager";
 
-	private ContentResolver			contentResolver;
+	private final ContentResolver	contentResolver;
 	private Resources				res;
 	protected ArrayList<ContactVo>	contactsList;
 
@@ -302,7 +302,7 @@ public class ContactManager {
 	 */
 	public String getContactIdFromAddress(String address) {
 		String contactId = null;
-		try{
+		try {
 			if (address != null) {
 				String[] projection = new String[] { "_id" };
 				Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
@@ -312,7 +312,7 @@ public class ContactManager {
 				}
 				cursor.close();
 			}
-		} catch(IllegalArgumentException i){
+		} catch (IllegalArgumentException i) {
 			// Maybe a device specific implementation difference
 		}
 
