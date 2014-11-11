@@ -19,7 +19,9 @@ import android.widget.ImageView;
  * This should be similar to how Google+ shows profile images.
  * Use it like you would an ImageView.
  * 
- * @author unattributed / from stackoverflow.com
+ * @author based on the stackoverflow question at
+ * 
+ * http://stackoverflow.com/questions/16208365/create-a-circular-image-view-in-android
  * 
  */
 public class RoundedImageView extends ImageView {
