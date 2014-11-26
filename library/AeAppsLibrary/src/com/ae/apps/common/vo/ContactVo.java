@@ -16,6 +16,9 @@ public class ContactVo implements Comparable<ContactVo> {
 	private String						lastContactedTime;
 	private boolean						hasPhoneNumber;
 	private ArrayList<PhoneNumberVo>	phoneNumbersList;
+	
+	private boolean mockUser;
+	private int mockProfileImageResource;
 
 	/**
 	 * @param id
@@ -113,5 +116,21 @@ public class ContactVo implements Comparable<ContactVo> {
 			return 0;
 		}
 		return this.id.compareTo(another.id);
+	}
+
+	public boolean isMockUser() {
+		return mockUser;
+	}
+
+	public void setMockUser(boolean mockUser) {
+		this.mockUser = mockUser;
+	}
+
+	public int getMockProfileImageResource() {
+		return mockProfileImageResource;
+	}
+
+	public void setMockProfileImageResource(int mockProfileImageResource) {
+		this.mockProfileImageResource = mockProfileImageResource;
 	}
 }

@@ -129,7 +129,7 @@ public class ContactManager {
 
 		return photo;
 	}
-	
+
 	/**
 	 * Returns a Bitmap object for the contact's photo, returning a default image
 	 * 
@@ -137,12 +137,35 @@ public class ContactManager {
 	 * @param defaultImage
 	 * @return
 	 */
-	public Bitmap getContactPhoto(String contactId, Bitmap defaultImage){
+	public Bitmap getContactPhoto(String contactId, Bitmap defaultImage) {
 		Bitmap contactPhoto = getContactPhoto(contactId);
-		if(null == contactPhoto){
+		if (null == contactPhoto) {
 			return defaultImage;
 		}
 		return contactPhoto;
+	}
+
+	/**
+	 * Returns a Bitmap object taking into consideration whether the supplied contact is mock
+	 * 
+	 * @param contactVo
+	 * @param defaultImage
+	 * @param resource
+	 * @return
+	 */
+	public Bitmap getContactPhotoWithMock(ContactVo contactVo, Bitmap defaultImage, Resources resource) {
+		if (contactVo.isMockUser()) {
+			try {
+				// try to decode the image resource if this is a mock user
+				Bitmap bitmap = BitmapFactory.decodeResource(resource, contactVo.getMockProfileImageResource());
+				if(null != bitmap){
+					return bitmap;
+				}
+			} catch (Exception exception) {
+				Log.e(TAG, "getContactPhotoWithMock() " + exception.getMessage());
+			}
+		}
+		return getContactPhoto(contactVo.getId(), defaultImage);
 	}
 
 	/**
