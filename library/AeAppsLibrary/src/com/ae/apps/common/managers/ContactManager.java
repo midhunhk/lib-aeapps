@@ -129,6 +129,21 @@ public class ContactManager {
 
 		return photo;
 	}
+	
+	/**
+	 * Returns a Bitmap object for the contact's photo, returning a default image
+	 * 
+	 * @param contactId
+	 * @param defaultImage
+	 * @return
+	 */
+	public Bitmap getContactPhoto(String contactId, Bitmap defaultImage){
+		Bitmap contactPhoto = getContactPhoto(contactId);
+		if(null == contactPhoto){
+			return defaultImage;
+		}
+		return contactPhoto;
+	}
 
 	/**
 	 * 
