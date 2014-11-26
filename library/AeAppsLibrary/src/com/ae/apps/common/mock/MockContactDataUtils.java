@@ -35,7 +35,11 @@ public class MockContactDataUtils {
 		// Create the phone number list and add one
 		ArrayList<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
 		PhoneNumberVo numberVo = new PhoneNumberVo();
-		numberVo.setPhoneNumber("87 778 6267");
+		numberVo.setPhoneNumber("87 7781 6267");
+		phoneNumbersList.add(numberVo);
+		
+		numberVo = new PhoneNumberVo();
+		numberVo.setPhoneNumber("86 2343 6789");
 		phoneNumbersList.add(numberVo);
 
 		Random random = new Random();
