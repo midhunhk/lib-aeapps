@@ -1,10 +1,10 @@
 package com.ae.apps.common.views;
 
+import android.R;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Bitmap.Config;
-import android.graphics.Color;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
@@ -48,19 +48,43 @@ public class RoundedImageView extends ImageView {
 		}
 		Bitmap originalBitmap = ((BitmapDrawable) drawable).getBitmap();
 		Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
+		
+		int imageRadius = getImageRadiusSize();
 
 		// Create the rounded bitmap and display it using the Canvas
-		Bitmap roundBitmap = getCroppedBitmp(bitmap, getHeight());
+		Bitmap roundBitmap = getCroppedBitmp(bitmap, imageRadius);
 		canvas.drawBitmap(roundBitmap, 0, 0, null);
 	}
 
+	/**
+	 * Get radius size for the rounded image
+	 * We use height for calculating the radius
+	 * 
+	 * @return
+	 */
+	protected int getImageRadiusSize() {
+		int imageHeight = getHeight();
+		int minHeight = (getMinimumHeight() > 0) ? getMinimumHeight() : imageHeight;
+		int maxHeight = (getMaxHeight() > 0) ? getMaxHeight() : imageHeight;
+		
+		// Check if image height is atleast minheight
+		if(imageHeight <= minHeight){
+			return minHeight;
+		}
+		
+		// Check if image size is atmost maxHeight
+		if(imageHeight >= maxHeight){
+			return maxHeight;
+		}
+		return imageHeight;
+	}
 	/**
 	 * Creates the cropped bitmap in a circular shape
 	 * 
 	 * @param bitmap Source bitmap which should be in a rectangular shape
 	 * @param radius The radius for the Round shape
 	 */
-	private Bitmap getCroppedBitmp(Bitmap bitmap, int radius) {
+	protected Bitmap getCroppedBitmp(Bitmap bitmap, int radius) {
 		Bitmap sbmp;
 		if (bitmap.getWidth() != radius || bitmap.getHeight() != radius) {
 			sbmp = Bitmap.createScaledBitmap(bitmap, radius, radius, false);
@@ -72,7 +96,7 @@ public class RoundedImageView extends ImageView {
 
 		// Create the drawing tools and draw
 		final Paint paint = new Paint();
-		final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
+		final Rect rect = new Rect(0, 0, radius, radius);
 
 		paint.setAntiAlias(true);
 		paint.setFilterBitmap(true);
@@ -80,7 +104,8 @@ public class RoundedImageView extends ImageView {
 		canvas.drawARGB(0, 0, 0, 0);
 		
 		// TODO : remove hardcoding here
-		paint.setColor(Color.parseColor("#bab399"));
+		paint.setColor(getResources().getColor(R.color.white));
+		
 		canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f, sbmp.getHeight() / 2 + 0.7f, sbmp.getWidth() / 2 + 0.1f, paint);
 		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 		canvas.drawBitmap(sbmp, rect, rect, paint);
