@@ -64,8 +64,9 @@ public class RoundedImageView extends ImageView {
 	 */
 	protected int getImageRadiusSize() {
 		int imageHeight = getHeight();
-		int minHeight = (getMinimumHeight() > 0) ? getMinimumHeight() : imageHeight;
-		int maxHeight = (getMaxHeight() > 0) ? getMaxHeight() : imageHeight;
+		int minHeight = (getSuggestedMinimumHeight() > 0) ? getSuggestedMinimumHeight() : imageHeight;
+		// getMaxHeight() is min api 16
+		// int maxHeight = (getMaxHeight() > 0) ? getMaxHeight() : imageHeight;
 		
 		// Check if image height is atleast minheight
 		if(imageHeight <= minHeight){
@@ -73,9 +74,9 @@ public class RoundedImageView extends ImageView {
 		}
 		
 		// Check if image size is atmost maxHeight
-		if(imageHeight >= maxHeight){
+		/*if(imageHeight >= maxHeight){
 			return maxHeight;
-		}
+		}*/
 		return imageHeight;
 	}
 	/**
