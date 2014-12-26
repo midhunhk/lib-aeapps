@@ -50,7 +50,7 @@ public class SMSManager {
 		int count = 0;
 		Uri parsedUri = Uri.parse(uri);
 		String[] projection = new String[] { "_id", "thread_id", "address" };
-		
+
 		Cursor cursor = contentResolver.query(parsedUri, projection, null, null, null);
 		if (cursor != null) {
 			count = cursor.getCount();
@@ -69,30 +69,33 @@ public class SMSManager {
 	public Map<String, Integer> getUniqueSenders() {
 		Map<String, Integer> sendersMap = new HashMap<String, Integer>();
 
-		Uri parsedUri = Uri.parse(SMS_URI_INBOX);
-		String[] projection = new String[] { "_id", "address", "person" };
-		Cursor cursor = contentResolver.query(parsedUri, projection, null, null, null);
+		try {
+			Uri parsedUri = Uri.parse(SMS_URI_INBOX);
+			String[] projection = new String[] { "_id", "address", "person" };
+			Cursor cursor = contentResolver.query(parsedUri, projection, null, null, null);
 
-		if (cursor.getCount() > 0) {
-			String address;
-			int addressIndex = cursor.getColumnIndex("address");
-			if (cursor.moveToFirst())
-				do {
-					// The person will be the foreign key from the Contacts table
-					address = cursor.getString(addressIndex);
+			if (cursor.getCount() > 0) {
+				String address;
+				int addressIndex = cursor.getColumnIndex("address");
+				if (cursor.moveToFirst())
+					do {
+						// The person will be the foreign key from the Contacts table
+						address = cursor.getString(addressIndex);
 
-					if (address != null) {
-						if (sendersMap.containsKey(address)) {
-							sendersMap.put(address, sendersMap.get(address) + 1);
-						} else {
-							sendersMap.put(address, 1);
+						if (address != null) {
+							if (sendersMap.containsKey(address)) {
+								sendersMap.put(address, sendersMap.get(address) + 1);
+							} else {
+								sendersMap.put(address, 1);
+							}
 						}
-					}
-				} while (cursor.moveToNext());
+					} while (cursor.moveToNext());
+			}
+			cursor.close();
+			Log.d(TAG, "Unique Senders Count " + sendersMap.size());
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
 		}
-		cursor.close();
-		Log.d(TAG, "Unique Senders Count " + sendersMap.size());
-
 		return sendersMap;
 	}
 }
