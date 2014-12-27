@@ -13,7 +13,7 @@ import android.content.DialogInterface;
 public class DialogUtils {
 
 	/**
-	 * Displays a
+	 * Displays a basic dialog with a button
 	 * 
 	 * @param context
 	 * @param titleResourceId
@@ -34,5 +34,18 @@ public class DialogUtils {
 				}
 			});
 		builder.show();
+	}
+	
+	/**
+	 * To display a Material Dialog box, with title, content and a button
+	 * 
+	 * @param context
+	 * @param titleResourceId
+	 * @param messageResourceId
+	 * @param positiveButtonResourceId
+	 */
+	public static void showMaterialDialog(final Context context, int titleResourceId, int messageResourceId, 
+			int positiveButtonResourceId){
+		
 	}
 }
