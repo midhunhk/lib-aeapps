@@ -26,6 +26,7 @@ import android.widget.ImageView;
  */
 public class RoundedImageView extends ImageView {
 	
+	private static final int	RADIUS_DIFF	= 10;
 	public RoundedImageView(Context context) {
 		super(context);
 	}
@@ -65,6 +66,8 @@ public class RoundedImageView extends ImageView {
 	protected int getImageRadiusSize() {
 		int imageHeight = getHeight();
 		int minHeight = (getSuggestedMinimumHeight() > 0) ? getSuggestedMinimumHeight() : imageHeight;
+		int maxHeight = minHeight + RADIUS_DIFF;
+		
 		// getMaxHeight() is min api 16
 		// int maxHeight = (getMaxHeight() > 0) ? getMaxHeight() : imageHeight;
 		
@@ -74,9 +77,9 @@ public class RoundedImageView extends ImageView {
 		}
 		
 		// Check if image size is atmost maxHeight
-		/*if(imageHeight >= maxHeight){
+		if(imageHeight >= maxHeight){
 			return maxHeight;
-		}*/
+		}
 		return imageHeight;
 	}
 	/**
