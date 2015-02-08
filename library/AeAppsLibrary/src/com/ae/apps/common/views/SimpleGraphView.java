@@ -10,8 +10,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * The SimpleGraphView is a very basic Graph view that displays a pie chart and optionally the labels as legend. A
- * custom theme can be specified through a constructor version.
+ * A very basic Graph view that displays a pie chart and optionally the labels as legend. A custom theme can be
+ * specified through a constructor version.
  * 
  * Note that not all validations are made in this class, hence please make sure of the data that are passed in.
  * 
@@ -19,17 +19,20 @@ import android.view.View;
  * 
  */
 public class SimpleGraphView extends View {
+
 	/**
-	 * If a theme is not provided, this will be used
+	 * If a theme is not present, one will be provided
 	 */
 	private static int[]		DEFAULT_THEME	= { Color.LTGRAY, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLACK,
 			Color.RED, Color.DKGRAY, Color.CYAN };
 	private static final int	PADDING			= 10;
-	private float				temp			= 0;
+	private static final int	LINE_HEIGHT		= 30;
+	
+	private float				mTotalDegree	= 0;
 	private float				mDensity		= 1;
-	private float[]				value_degree	= null;
-	private String[]			labels			= null;
-	private int[]				colors			= null;
+	private float[]				mDegreeValues	= null;
+	private String[]			mLabels			= null;
+	private int[]				mColors			= null;
 	private Paint				mChartPaint		= new Paint(Paint.ANTI_ALIAS_FLAG);
 	private Paint				mTextPaint		= new Paint(Paint.ANTI_ALIAS_FLAG);
 	private RectF				mBoundingRect	= new RectF(PADDING, PADDING, 250, 250);
@@ -39,14 +42,12 @@ public class SimpleGraphView extends View {
 
 		// Check if a valid themeColors array is passed to us
 		if (themeColors != null && themeColors.length > 0) {
-			colors = themeColors;
+			mColors = themeColors;
 		} else {
-			colors = DEFAULT_THEME;
+			mColors = DEFAULT_THEME;
 		}
-		value_degree = new float[values.length];
-		for (int i = 0; i < values.length; i++) {
-			value_degree[i] = values[i];
-		}
+		mDegreeValues = values;
+
 		// Set FontSize based on scale
 		mDensity = getResources().getDisplayMetrics().density;
 		mTextPaint.setTextSize(12 * mDensity);
@@ -64,7 +65,7 @@ public class SimpleGraphView extends View {
 	 */
 	public SimpleGraphView(Context context, float[] values, String[] labels) {
 		this(context, values, DEFAULT_THEME);
-		this.labels = labels;
+		this.mLabels = labels;
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class SimpleGraphView extends View {
 	 */
 	public SimpleGraphView(Context context, float[] values, String[] labels, int[] themeColors) {
 		this(context, values, themeColors);
-		this.labels = labels;
+		this.mLabels = labels;
 	}
 
 	public SimpleGraphView(Context context) {
@@ -100,44 +101,52 @@ public class SimpleGraphView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		for (int i = 0; i < value_degree.length; i++) {
+		drawData(canvas);
+
+		drawLabels(canvas);
+	}
+
+	private void drawData(Canvas canvas) {
+		for (int i = 0; i < mDegreeValues.length; i++) {
 			if (i == 0) {
-				mChartPaint.setColor(colors[i % colors.length]);
-				canvas.drawArc(mBoundingRect, - 90 , value_degree[i], true, mChartPaint);
+				mChartPaint.setColor(mColors[i % mColors.length]);
+				canvas.drawArc(mBoundingRect, -90, mDegreeValues[i], true, mChartPaint);
 			} else {
-				temp += value_degree[i - 1];
-				mChartPaint.setColor(colors[i % colors.length]);
-				canvas.drawArc(mBoundingRect, temp - 90 , value_degree[i], true, mChartPaint);
+				mTotalDegree += mDegreeValues[i - 1];
+				mChartPaint.setColor(mColors[i % mColors.length]);
+				canvas.drawArc(mBoundingRect, mTotalDegree - 90, mDegreeValues[i], true, mChartPaint);
 			}
 		}
+	}
 
-		if (labels != null && labels.length > 0) {
+	private void drawLabels(Canvas canvas) {
+		if (mLabels != null && mLabels.length > 0) {
 			// Draw the labels
-			int xCoordinate = (int) (PADDING * mDensity);
+			int xCoordinate = (int) (PADDING * mDensity) + PADDING;
 			int yCoordinate = (int) mBoundingRect.right + PADDING;
-			for (int i = 0; i < labels.length; i++) {
-				mTextPaint.setColor(colors[i % colors.length]);
-				canvas.drawText(labels[i], yCoordinate, xCoordinate, mTextPaint);
-				xCoordinate += 30;
+			for (int i = 0; i < mLabels.length; i++) {
+				mTextPaint.setColor(mColors[i % mColors.length]);
+				canvas.drawText(mLabels[i], yCoordinate, xCoordinate, mTextPaint);
+				xCoordinate += LINE_HEIGHT;
 			}
 		}
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int rectSize = 0;
+		int rectangleSize = 0;
 		int specWidth = MeasureSpec.getSize(widthMeasureSpec);
 		int specHeight = MeasureSpec.getSize(heightMeasureSpec);
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 			// We are going to divide the screen width into two for chart and the text block
-			rectSize = Math.min(specHeight, specWidth / 2);
+			rectangleSize = Math.min(specHeight, specWidth / 2);
 		} else {
-			// For landscape, use 65% height instead of 50%
-			rectSize = (int) (specHeight * 0.75);
+			// For landscape, use 75% height
+			rectangleSize = (int) (specHeight * 0.75);
 		}
 		// The Bounding rectangle becomes a square and the chart is drawn on it
-		mBoundingRect.set(PADDING, PADDING, rectSize, rectSize);
-		setMeasuredDimension(specWidth, rectSize + PADDING);
+		mBoundingRect.set(PADDING, PADDING, rectangleSize, rectangleSize);
+		setMeasuredDimension(specWidth, rectangleSize + PADDING);
 	}
 
 }

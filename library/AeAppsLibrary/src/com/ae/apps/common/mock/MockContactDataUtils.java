@@ -13,29 +13,26 @@ import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
 public class MockContactDataUtils {
-	
-	private static final String	LOCALE_FR		= "fr";
-	private static final String	LOCALE_ES		= "es";
-	
+
+	private static final String	LOCALE_FR			= "fr";
+	private static final String	LOCALE_ES			= "es";
 
 	/**
 	 * Mock names, TODO read from resources
 	 */
-	private static String mockNamesEN[] = { "Elliot Hobbs", "Aiden Perry",
-			"Daisy Forster", "Luis Gibson", "Martin J. Fox", "Catherine"};
-	private static String		mockNamesES[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
-		"Germana Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
-		"Aidee Padrón Cazares"				};
-	private static String		mockNamesFR[]	= { "Lyle Coulombe", "Saber Rivière", "Algernon Monjeau",
-		"Emmeline Lamy", "Sylvie Mouet", "Carolos Bourgeau", "Cécile Fresne", "Loring Deslauriers" };
-	
+	private static String		mockNamesEN[]		= { "James Elliot", "Aiden Perry", "Daisy Forster", "Matt Gibson",
+			"Martin J. Fox", "Catherine", "Scott Burns", "Jesse Whitehurst", "Diana Brown" };
+	private static String		mockNamesES[]		= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
+			"Germana Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
+			"Aidee Padrón Cazares"					};
+	private static String		mockNamesFR[]		= { "Lyle Coulombe", "Saber Rivière", "Algernon Monjeau",
+			"Emmeline Lamy", "Sylvie Mouet", "Carolos Bourgeau", "Cécile Fresne", "Loring Deslauriers" };
+
 	/**
 	 * mock profile images
 	 */
-	private static int mockProfileImages[] = { R.drawable.profile_icon_1,
-			R.drawable.profile_icon_2, R.drawable.profile_icon_3,
-			R.drawable.profile_icon_4, R.drawable.profile_icon_5,
-			R.drawable.profile_icon_6};
+	private static int			mockProfileImages[]	= { R.drawable.profile_icon_1, R.drawable.profile_icon_2,
+			R.drawable.profile_icon_3, R.drawable.profile_icon_4, R.drawable.profile_icon_5, R.drawable.profile_icon_6 };
 
 	/**
 	 * Returns a mock contact
@@ -51,7 +48,7 @@ public class MockContactDataUtils {
 		PhoneNumberVo numberVo = new PhoneNumberVo();
 		numberVo.setPhoneNumber("87 7781 6267");
 		phoneNumbersList.add(numberVo);
-		
+
 		numberVo = new PhoneNumberVo();
 		numberVo.setPhoneNumber("86 2343 6789");
 		phoneNumbersList.add(numberVo);
@@ -63,7 +60,7 @@ public class MockContactDataUtils {
 		// set mock details for this contact
 		contactVo.setMockUser(true);
 		contactVo.setMockProfileImageResource(mockProfileImages[randomVal]);
-		
+
 		contactVo.setName(randomName);
 		contactVo.setId(String.valueOf(randomVal));
 		contactVo.setTimesContacted(String.valueOf(randomVal));
@@ -72,7 +69,7 @@ public class MockContactDataUtils {
 
 		return contactVo;
 	}
-	
+
 	/**
 	 * A mock implementation for giving mock results. Used mainly for screenshots
 	 * 
@@ -119,6 +116,5 @@ public class MockContactDataUtils {
 		}
 		return mockedList;
 	}
-
 
 }
