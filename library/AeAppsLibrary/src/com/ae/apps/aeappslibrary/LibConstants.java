@@ -8,5 +8,5 @@ package com.ae.apps.aeappslibrary;
  */
 public interface LibConstants {
 
-	String	LIB_VERSION	= "1.2";
+	String	LIB_VERSION	= "1.3";
 }
