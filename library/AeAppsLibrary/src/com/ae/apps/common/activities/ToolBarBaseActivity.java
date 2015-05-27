@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Midhun Harikumar
+ * Copyright 2015 Midhun Harikumar
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.ae.apps.common.activities;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
@@ -28,7 +28,7 @@ import android.view.KeyEvent;
  * @author midhunhk
  *
  */
-public abstract class ToolBarBaseActivity extends ActionBarActivity {
+public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
 	Toolbar	mToolbar	= null;
 
