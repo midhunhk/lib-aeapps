@@ -44,8 +44,21 @@ public class DialogUtils {
 	 * @param messageResourceId
 	 * @param positiveButtonResourceId
 	 */
-	public static void showMaterialDialog(final Context context, int titleResourceId, int messageResourceId, 
-			int positiveButtonResourceId){
+	public static void showMaterialInfoDialog(final Context context, int titleResourceId, int messageResourceId, 
+			int positiveButtonResourceId) {
+		android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context)
+		.setCancelable(true)
+		.setTitle(titleResourceId)
+		.setMessage(messageResourceId)
+		.setPositiveButton(positiveButtonResourceId, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// We shall dismiss the dialog when the positive button is clicked
+				dialog.dismiss();
+			}
+		});
+	builder.show();
 		
 	}
 }
