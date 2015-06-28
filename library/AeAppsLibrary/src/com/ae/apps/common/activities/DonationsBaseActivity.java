@@ -36,9 +36,9 @@ import com.ae.apps.common.utils.inapp.Purchase;
  */
 public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 
-	private boolean mDebugLog 				= true;
-	private static final int	RC_REQUEST	= 2001;
 	private static final String	TAG			= "DonationsBase";
+	private boolean mDebugLog 				= false;
+	private static final int	RC_REQUEST	= 2001;
 	private IabHelper			mHelper		= null;
 	private Activity mActivity 				= null;
 
@@ -52,7 +52,7 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 		mHelper = new IabHelper(this, getBase64PublicKey());
 
 		// This should be false in release build
-		mHelper.enableDebugLogging(true);
+		mHelper.enableDebugLogging(false);
 
 		// Setup IAB
 		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
@@ -96,6 +96,7 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 				return;
 			}
 			
+			// Process the purchase of the item
 			processPurchase(result, info);
 		}
 	};
@@ -106,6 +107,8 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 			return;
 		}
 		
+		// A manage product in in-app-billing v3 cannot be purchased again unless it is consumed
+		// We want to let users donate more than once
 		if(checkPurchaseResponse(info)){
 			mHelper.consumeAsync(info, mConsumeFinishedListener);
 		}
