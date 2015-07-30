@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import android.content.Context;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 public class CommonUtils {
 
 	public static final int	MINIMUM_STRING_LENGTH	= 26;
@@ -43,5 +47,19 @@ public class CommonUtils {
 			return truncated;
 		}
 		return sourceString;
+	}
+	
+	/**
+	 * Create an animation object from the values passed in
+	 * 
+	 * @param context
+	 * @param animRes
+	 * @param startOffset
+	 * @return
+	 */
+	public static Animation createAnimation(Context context, int animRes, int startOffset){
+		Animation animation = AnimationUtils.loadAnimation(context, animRes);
+		animation.setStartOffset(startOffset);
+		return animation;
 	}
 }
