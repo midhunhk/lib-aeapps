@@ -40,15 +40,19 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
 		// Find the toolbar and set it as action bar
 		mToolbar = (Toolbar) findViewById(getToolbarResourceId());
-		setSupportActionBar(mToolbar);
+		if (null != mToolbar) {
+			setSupportActionBar(mToolbar);
+		}
 	}
-	
+
 	/**
 	 * Sets the toolbartitle
 	 * 
 	 */
-	protected void setToolbarTitle(String title){
-		getSupportActionBar().setTitle(title);
+	protected void setToolbarTitle(String title) {
+		if (null != getSupportActionBar()) {
+			getSupportActionBar().setTitle(title);
+		}
 	}
 
 	/**
@@ -68,7 +72,7 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 	protected abstract int getToolbarResourceId();
 
 	/**
-	 * Returns the layout resource id
+	 * Returns the layout resource id for the activity
 	 * 
 	 * @return
 	 */
