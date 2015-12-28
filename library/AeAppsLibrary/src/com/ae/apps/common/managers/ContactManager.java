@@ -230,27 +230,50 @@ public class ContactManager {
 			int phoneTypeIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
 			int phoneLabelIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL);
 
+			List<String> phoneNumbers = new ArrayList<String>();
 			while (phoneCursor.moveToNext()) {
 				// Retrieve values from the cursor
 				phoneType = phoneCursor.getInt(phoneTypeIndex);
 				phoneNumber = phoneCursor.getString(phoneNumberIndex);
-				if (null != res) {
-					customLabel = phoneCursor.getString(phoneLabelIndex);
-					phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneType,
+				
+				// Check for duplicate numbers before adding to the phone numbers
+				if(!checkIfPhoneNumberExists(phoneNumbers, phoneNumber){
+					// Get the label for this number
+					if (null != res) {
+						customLabel = phoneCursor.getString(phoneLabelIndex);
+						phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneType,
 							customLabel);
+					}
+
+					// Save this phone number as a VO
+					PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
+					phoneNumberVo.setPhoneNumber(phoneNumber);
+					phoneNumberVo.setPhoneType(phoneLabel);
+
+					phoneNumbersList.add(phoneNumberVo);
 				}
-
-				// Lets save this phone number as a vo
-				PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
-				phoneNumberVo.setPhoneNumber(phoneNumber);
-				phoneNumberVo.setPhoneType(phoneLabel);
-
-				phoneNumbersList.add(phoneNumberVo);
 			}
 			phoneCursor.close();
 			contactVo.setPhoneNumbersList(phoneNumbersList);
 		}
 		return contactVo;
+	}
+	
+	/**
+	 * Checks whether the numberToCheck is present in the supplied list.
+	 * Adds the number to the list if it doesn't exist and returns false
+	 */
+	private boolean checkIfPhoneNumberExists(List<String> phoneNumbers, String numberToCheck){
+		// Remove spaces, hyphens and + symbols from the phone number for comparison
+		String unformattedNumber = numberToCheck.replaceAll("\\s+","")
+				.replaceAll("\\+", "")
+				.replaceAll("\\-", "");
+		if(phoneNumbers.contains(unformattedNumber)){
+			return true;
+		} else {
+			phoneNumbers.add(unformattedNumber);
+			return false;
+		}
 	}
 
 	/**
