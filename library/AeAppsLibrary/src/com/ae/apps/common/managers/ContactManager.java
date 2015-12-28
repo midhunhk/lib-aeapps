@@ -92,6 +92,21 @@ public class ContactManager {
 	public int getTotalContactCount() {
 		return contactsList.size();
 	}
+	
+	/**
+	 * Returns a copy of the contacts list
+	 * 
+	 * Note that this is an expensive operation as a new list is created with original 
+	 * values and returned to the caller. 
+	 * 
+	 * @return
+	 */
+	protected List<ContactVo> getAllContacts(){
+		if(null != contactsList){
+			return new ArrayList<ContactVo>(contactsList);
+		}
+		return null;
+	}
 
 	/**
 	 * Returns a random contactVo from the list if the list is non empty, null otherwise
@@ -176,7 +191,7 @@ public class ContactManager {
 			try {
 				// try to decode the image resource if this is a mock user
 				Bitmap bitmap = BitmapFactory.decodeResource(resource, contactVo.getMockProfileImageResource());
-				if(null != bitmap){
+				if (null != bitmap) {
 					return bitmap;
 				}
 			} catch (Exception exception) {
@@ -216,6 +231,8 @@ public class ContactManager {
 		// and the contact has phone numbers
 		if (contactVo.getPhoneNumbersList() == null && contactVo.getHasPhoneNumber()) {
 			ArrayList<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
+
+			// Query to fetch the Phone Entries with this Contact's Id
 			Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
 					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contactVo.getId() },
 					null);
@@ -235,14 +252,14 @@ public class ContactManager {
 				// Retrieve values from the cursor
 				phoneType = phoneCursor.getInt(phoneTypeIndex);
 				phoneNumber = phoneCursor.getString(phoneNumberIndex);
-				
+
 				// Check for duplicate numbers before adding to the phone numbers
-				if(!checkIfPhoneNumberExists(phoneNumbers, phoneNumber){
+				if (!checkIfPhoneNumberExists(phoneNumbers, phoneNumber)) {
 					// Get the label for this number
 					if (null != res) {
 						customLabel = phoneCursor.getString(phoneLabelIndex);
 						phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(res, phoneType,
-							customLabel);
+								customLabel);
 					}
 
 					// Save this phone number as a VO
@@ -250,6 +267,7 @@ public class ContactManager {
 					phoneNumberVo.setPhoneNumber(phoneNumber);
 					phoneNumberVo.setPhoneType(phoneLabel);
 
+					// Add this Phone Number to the list of phone numbers
 					phoneNumbersList.add(phoneNumberVo);
 				}
 			}
@@ -258,17 +276,20 @@ public class ContactManager {
 		}
 		return contactVo;
 	}
-	
+
 	/**
-	 * Checks whether the numberToCheck is present in the supplied list.
-	 * Adds the number to the list if it doesn't exist and returns false
+	 * Checks whether the numberToCheck is present in the supplied list. Adds the number to the list if it doesn't exist
+	 * and returns false
 	 */
-	private boolean checkIfPhoneNumberExists(List<String> phoneNumbers, String numberToCheck){
+	private boolean checkIfPhoneNumberExists(List<String> phoneNumbers, String numberToCheck) {
 		// Remove spaces, hyphens and + symbols from the phone number for comparison
-		String unformattedNumber = numberToCheck.replaceAll("\\s+","")
+		String unformattedNumber = numberToCheck.replaceAll("\\s+", "")
 				.replaceAll("\\+", "")
-				.replaceAll("\\-", "");
-		if(phoneNumbers.contains(unformattedNumber)){
+				.replaceAll("\\-", "")
+				.replaceAll("\\(", "")
+				.replaceAll("\\)", "")
+				.trim();
+		if (phoneNumbers.contains(unformattedNumber)) {
 			return true;
 		} else {
 			phoneNumbers.add(unformattedNumber);
@@ -454,20 +475,20 @@ public class ContactManager {
 		Log.d(TAG, "Found " + contactsList.size() + " contacts");
 		return contactsList;
 	}
-	
+
 	/**
 	 * Shows this contact in the Android's Contact Manager
 	 * 
 	 * @param contactVo
 	 */
-	public void showContactInAddressBook(Context context, ContactVo contactVo){
-		if(null != contactVo && null != contactVo.getId()){
+	public void showContactInAddressBook(Context context, ContactVo contactVo) {
+		if (null != contactVo && null != contactVo.getId()) {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			
+
 			Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactVo.getId());
 			intent.setData(uri);
-			
+
 			context.startActivity(intent);
-		}		
+		}
 	}
 }
