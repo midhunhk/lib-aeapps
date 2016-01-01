@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- margins -->
+    <dimen name="margin_small">6dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="margin_extra_large">32dp</dimen>
+    
+    <!-- paddings -->
+    <dimen name="padding_small">6dip</dimen>
+    <dimen name="padding_medium">10dip</dimen>
+    <dimen name="padding_large">14dip</dimen>
+    <dimen name="padding_horizontal">10dip</dimen>
+    
+    <!-- cards -->
+    <dimen name="card_margin">6dp</dimen>
+    <dimen name="card_padding">3dp</dimen>
+    
+</resources>

@@ -43,11 +43,15 @@ import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
 /**
- * The ContactManager class manages access to the Android's Contacts and related tables to retrieve information which
- * are exposed via public methods.
+ * The ContactManager abstracts access to the Android's Contacts API and provide public methods to retrieve data. 
+ * Users of ContactManager do not need to know the internals of Android's ContactsAPI or database calls.
  * 
- * Need following permissions in manifest android.permission.READ_CONTACTS android.permission.CALL_PHONE
- * android.permission.READ_SMS
+ * <p>Need the following permissions in manifest</p>
+ * <pre> 
+ * 	android.permission.READ_CONTACTS 
+ * 	android.permission.CALL_PHONE
+ * 	android.permission.READ_SMS
+ * </pre>
  */
 public class ContactManager {
 
@@ -136,11 +140,11 @@ public class ContactManager {
 	 * @param id
 	 * @return
 	 */
-	public ContactVo getContactWithPhoneDetails(String id) {
+	public ContactVo getContactWithPhoneDetails(final String contactId) {
 		ContactVo contactVo = null;
 
-		if (null != id && getTotalContactCount() > 0) {
-			contactVo = getContactPhoneDetails(getContactInfo(id));
+		if (null != contactId && getTotalContactCount() > 0) {
+			contactVo = getContactPhoneDetails(getContactInfo(contactId));
 		}
 
 		return contactVo;
@@ -152,7 +156,7 @@ public class ContactManager {
 	 * @param contactId
 	 * @return
 	 */
-	public Bitmap getContactPhoto(String contactId) {
+	public Bitmap getContactPhoto(final String contactId) {
 		long contactIdLong = Long.parseLong(contactId);
 		Uri contactPhotoUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactIdLong);
 
@@ -170,7 +174,7 @@ public class ContactManager {
 	 * @param defaultImage
 	 * @return
 	 */
-	public Bitmap getContactPhoto(String contactId, Bitmap defaultImage) {
+	public Bitmap getContactPhoto(final String contactId, final Bitmap defaultImage) {
 		Bitmap contactPhoto = getContactPhoto(contactId);
 		if (null == contactPhoto) {
 			return defaultImage;
@@ -186,7 +190,7 @@ public class ContactManager {
 	 * @param resource
 	 * @return
 	 */
-	public Bitmap getContactPhotoWithMock(ContactVo contactVo, Bitmap defaultImage, Resources resource) {
+	public Bitmap getContactPhotoWithMock(final ContactVo contactVo, final Bitmap defaultImage, final Resources resource) {
 		if (contactVo.isMockUser()) {
 			try {
 				// try to decode the image resource if this is a mock user
@@ -206,7 +210,7 @@ public class ContactManager {
 	 * @param contactId
 	 * @return
 	 */
-	public ContactVo getContactInfo(String contactId) {
+	public ContactVo getContactInfo(final String contactId) {
 		ContactVo contactVo = null;
 		String tmp;
 		for (ContactVo vo : contactsList) {
@@ -225,7 +229,7 @@ public class ContactManager {
 	 * @param contactVo
 	 * @return
 	 */
-	protected ContactVo getContactPhoneDetails(ContactVo contactVo) {
+	protected ContactVo getContactPhoneDetails(final ContactVo contactVo) {
 		// Make sure we update the contact only if we didnt populate the
 		// phonenumbers list already
 		// and the contact has phone numbers
@@ -278,31 +282,11 @@ public class ContactManager {
 	}
 
 	/**
-	 * Checks whether the numberToCheck is present in the supplied list. Adds the number to the list if it doesn't exist
-	 * and returns false
-	 */
-	private boolean checkIfPhoneNumberExists(List<String> phoneNumbers, String numberToCheck) {
-		// Remove spaces, hyphens and + symbols from the phone number for comparison
-		String unformattedNumber = numberToCheck.replaceAll("\\s+", "")
-				.replaceAll("\\+", "")
-				.replaceAll("\\-", "")
-				.replaceAll("\\(", "")
-				.replaceAll("\\)", "")
-				.trim();
-		if (phoneNumbers.contains(unformattedNumber)) {
-			return true;
-		} else {
-			phoneNumbers.add(unformattedNumber);
-			return false;
-		}
-	}
-
-	/**
 	 * 
 	 * @param contactId
 	 * @return
 	 */
-	public InputStream openPhoto(long contactId) {
+	public InputStream openPhoto(final long contactId) {
 		Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
 		Uri photoUri = Uri.withAppendedPath(contactUri, Contacts.Photo.CONTENT_DIRECTORY);
 		Cursor cursor = contentResolver.query(photoUri, new String[] { Contacts.Photo.DATA15 }, null, null, null);
@@ -329,7 +313,7 @@ public class ContactManager {
 	 * @param contactVo
 	 * @return
 	 */
-	public MessageVo getLatestMessage(String contactId) {
+	public MessageVo getLatestMessage(final String contactId) {
 		MessageVo messageVo = null;
 		// TODO : Complete this method
 		/*
@@ -353,7 +337,7 @@ public class ContactManager {
 	 * @param contactId
 	 * @return
 	 */
-	public List<MessageVo> getContactMessages(String contactId) {
+	public List<MessageVo> getContactMessages(final String contactId) {
 		MessageVo messageVo = null;
 		List<MessageVo> messagesList = new ArrayList<MessageVo>();
 		String[] projection = new String[] { "_id", "address", SMS_PERSON, "body" };
@@ -379,7 +363,7 @@ public class ContactManager {
 	 * @param rawContactId
 	 * @return
 	 */
-	public long getContactIdFromRawContactId(String rawContactId) {
+	public long getContactIdFromRawContactId(final String rawContactId) {
 		long contactId = 0;
 		String[] projection = new String[] { RawContacts._ID, RawContacts.CONTACT_ID };
 		Cursor cursor = contentResolver.query(RawContacts.CONTENT_URI, projection, RawContacts._ID + " = ?",
@@ -400,7 +384,7 @@ public class ContactManager {
 	 * @param address
 	 * @return
 	 */
-	public String getContactIdFromAddress(String address) {
+	public String getContactIdFromAddress(final String address) {
 		String contactId = null;
 		try {
 			if (address != null) {
@@ -419,6 +403,22 @@ public class ContactManager {
 		return contactId;
 	}
 
+	/**
+	 * Shows this contact in the Android's Contact Manager
+	 * 
+	 * @param contactVo
+	 */
+	public void showContactInAddressBook(Context context, ContactVo contactVo) {
+		if (null != contactVo && null != contactVo.getId()) {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			
+			Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactVo.getId());
+			intent.setData(uri);
+			
+			context.startActivity(intent);
+		}
+	}
+	
 	// ---------------------------------
 	// Private Methods
 	// ---------------------------------
@@ -475,20 +475,25 @@ public class ContactManager {
 		Log.d(TAG, "Found " + contactsList.size() + " contacts");
 		return contactsList;
 	}
-
+	
 	/**
-	 * Shows this contact in the Android's Contact Manager
-	 * 
-	 * @param contactVo
+	 * Checks whether the numberToCheck is present in the supplied list. Adds the number to the list if it doesn't exist
+	 * and returns false
 	 */
-	public void showContactInAddressBook(Context context, ContactVo contactVo) {
-		if (null != contactVo && null != contactVo.getId()) {
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-
-			Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactVo.getId());
-			intent.setData(uri);
-
-			context.startActivity(intent);
+	private boolean checkIfPhoneNumberExists(final List<String> phoneNumbers, final String numberToCheck) {
+		// Remove spaces, hyphens and + symbols from the phone number for comparison
+		String unformattedNumber = numberToCheck.replaceAll("\\s+", "")
+				.replaceAll("\\+", "")
+				.replaceAll("\\-", "")
+				.replaceAll("\\(", "")
+				.replaceAll("\\)", "")
+				.trim();
+		if (phoneNumbers.contains(unformattedNumber)) {
+			return true;
+		} else {
+			phoneNumbers.add(unformattedNumber);
+			return false;
 		}
 	}
+
 }

@@ -1,6 +1,7 @@
 Version 1.5 [Dec 2015]
 -----------
 Remove duplicate phone numbers for contacts
+Added come common views, colors and dimensions
 
 Version 1.4 [May 2015]
 -----------
