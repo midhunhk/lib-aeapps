@@ -19,6 +19,7 @@ package com.ae.apps.common.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.ae.apps.common.utils.inapp.IabHelper;
@@ -80,7 +81,7 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 	 * @param extraData
 	 */
 	protected void launchPurchaseFlow(String productCode, String extraData){
-		if(null != productCode && !productCode.isEmpty()){
+		if(null != productCode && !TextUtils.isEmpty(productCode)){
 			// on button click after selecting a purchase item
 			mHelper.launchPurchaseFlow(mActivity, productCode, RC_REQUEST, mPurchaseFinishedlistener, extraData);
 		}
