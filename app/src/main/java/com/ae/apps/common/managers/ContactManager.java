@@ -127,7 +127,7 @@ public class ContactManager {
 			int contactIndex = random.nextInt(numContacts);
 			contactVo = getContactPhoneDetails(contactsList.get(contactIndex));
 
-			// Update the contactslist with the updated contact item
+			// Update the contacts list with the updated contact item
 			contactsList.set(contactIndex, contactVo);
 		}
 
@@ -137,7 +137,7 @@ public class ContactManager {
 	/**
 	 * Returns a contact with phone details
 	 * 
-	 * @param id
+	 * @param contactId
 	 * @return
 	 */
 	public ContactVo getContactWithPhoneDetails(final String contactId) {
@@ -230,8 +230,8 @@ public class ContactManager {
 	 * @return
 	 */
 	protected ContactVo getContactPhoneDetails(final ContactVo contactVo) {
-		// Make sure we update the contact only if we didnt populate the
-		// phonenumbers list already
+		// Make sure we update the contact only if we didn't populate the
+		// phone numbers list already
 		// and the contact has phone numbers
 		if (contactVo.getPhoneNumbersList() == null && contactVo.getHasPhoneNumber()) {
 			ArrayList<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
@@ -310,7 +310,7 @@ public class ContactManager {
 	/**
 	 * Returns a MessageVo for the contactId
 	 * 
-	 * @param contactVo
+	 * @param contactId
 	 * @return
 	 */
 	public MessageVo getLatestMessage(final String contactId) {
@@ -466,7 +466,7 @@ public class ContactManager {
 					contactVo.setTimesContacted(timesContacted);
 					contactVo.setLastContactedTime(lastContactedTimeString);
 
-					// Add the to an arraylist
+					// Add the contact to a list
 					contactsList.add(contactVo);
 				}
 			}
