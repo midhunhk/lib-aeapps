@@ -61,7 +61,7 @@ public class ContactManager {
 	private static final String		TAG				= "ContactManager";
 
 	protected final ContentResolver	contentResolver;
-	private Resources				res;
+	protected Resources				res;
 	protected ArrayList<ContactVo>	contactsList;
 
 	/**
