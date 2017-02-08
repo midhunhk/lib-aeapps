@@ -60,7 +60,7 @@ public class ContactManager {
 	private static final String		DATE_FORMAT		= "MMM dd, yyyy hh:mm a";
 	private static final String		TAG				= "ContactManager";
 
-	private final ContentResolver	contentResolver;
+	protected final ContentResolver	contentResolver;
 	private Resources				res;
 	protected ArrayList<ContactVo>	contactsList;
 
@@ -79,9 +79,8 @@ public class ContactManager {
 	/**
 	 * Constructor
 	 * 
-	 * @param contentResolver
-	 * @param res
-	 *            resources instance
+	 * @param contentResolver The content resolver
+	 * @param res Resources instance
 	 */
 	public ContactManager(ContentResolver contentResolver, Resources res) {
 		this(contentResolver);
