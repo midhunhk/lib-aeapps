@@ -85,5 +85,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	protected long update(String table, ContentValues values, String whereClause, String[] whereArgs) {
 		return mDataBase.update(table, values, whereClause, whereArgs);
 	}
+	
+	/**
+	 * Deletes an existing row
+	 * 
+	 * @param table The table name
+	 * @param whereClause the whereClause
+	 * @param whereArgs the WhereArgs
+	 * @return update result
+	 */
+	protected long delete(String table, String whereClause, String[] whereArgs) {
+		return mDataBase.delete(table, whereClause, whereArgs);
+	}
 
 }
