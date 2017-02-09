@@ -40,14 +40,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Runs a query on the real database
 	 * 
-	 * @param table
-	 * @param columns
-	 * @param selection
-	 * @param selectionArgs
-	 * @param groupBy
-	 * @param having
-	 * @param orderBy
-	 * @return
+	 * @param table The table name
+	 * @param columns The columns
+	 * @param selection The selection
+	 * @param selectionArgs the selectionArgs
+	 * @param groupBy The groupBy clause
+	 * @param having The having clause
+	 * @param orderBy The orderBy clause
+	 * @return Cursor
 	 */
 	protected Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy,
 			String having, String orderBy) {
@@ -65,9 +65,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Inserts a row
 	 * 
-	 * @param table
-	 * @param values
-	 * @return
+	 * @param table The table name
+	 * @param values Values to be inserted
+	 * @return insert result
 	 */
 	protected long insert(String table, ContentValues values) {
 		return mDataBase.insert(table, null, values);
@@ -76,11 +76,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Updates an existing row
 	 * 
-	 * @param table
-	 * @param values
-	 * @param whereClause
-	 * @param whereArgs
-	 * @return
+	 * @param table The table name
+	 * @param values the values
+	 * @param whereClause the whereClause
+	 * @param whereArgs the WhereArgs
+	 * @return update result
 	 */
 	protected long update(String table, ContentValues values, String whereClause, String[] whereArgs) {
 		return mDataBase.update(table, values, whereClause, whereArgs);
