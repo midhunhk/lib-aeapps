@@ -1,4 +1,4 @@
-Ae-Apps-Lib
+libAeApps
 ===============
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
 
@@ -24,6 +24,7 @@ Implementation
 Presently the following android app projects written by me make use of this library.
 * <a href="https://github.com/midhunhk/message-counter">Message Counter</a>
 * <a href="https://github.com/midhunhk/random-contact">Random Contact</a>
+* <a href="https://github.com/midhunhk/trip-o-meter">Trip 'O Meter</a>
 
 License
 =======
