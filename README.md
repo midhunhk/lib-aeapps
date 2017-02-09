@@ -26,6 +26,10 @@ Presently the following android app projects written by me make use of this libr
 * <a href="https://github.com/midhunhk/random-contact">Random Contact</a>
 * <a href="https://github.com/midhunhk/trip-o-meter">Trip 'O Meter</a>
 
+Changelog
+===============
+To see the history of changes [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
+
 License
 =======
  Licensed under the Apache License, Version 2.0 (the "License");
