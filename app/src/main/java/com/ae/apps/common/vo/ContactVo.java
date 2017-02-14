@@ -118,6 +118,12 @@ public class ContactVo implements Comparable<ContactVo> {
 		return this.id.compareTo(another.id);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		ContactVo other = (ContactVo) o;
+		return this.getId().equals(other.getId());
+	}
+
 	public boolean isMockUser() {
 		return mockUser;
 	}
