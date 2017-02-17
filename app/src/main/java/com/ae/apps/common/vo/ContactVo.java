@@ -124,6 +124,11 @@ public class ContactVo implements Comparable<ContactVo> {
 		return this.getId().equals(other.getId());
 	}
 
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
 	public boolean isMockUser() {
 		return mockUser;
 	}
