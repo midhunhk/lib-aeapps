@@ -4,7 +4,7 @@ This Android library project contains some reusable code that can be used across
 
 Naming
 ======
-The name ae represents **Artistik Expressionz**. My apps follow the package structure "com.ae.apps.[appname]". 
+The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
 The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits. The latest release code name is **Damson**.
 
@@ -29,14 +29,15 @@ The following components are available as part of this library as of now.
 
 Implementation
 ==============
-Presently the following android app projects written by me make use of this library.
+Presently the following android app projects make use of this library.
+
 * <a href="https://github.com/midhunhk/message-counter">Message Counter</a>
 * <a href="https://github.com/midhunhk/random-contact">Random Contact</a>
 * <a href="https://github.com/midhunhk/trip-o-meter">Trip 'O Meter</a>
 
 Changelog
 ===============
-To see the history of changes [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
+To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
 
 License
 =======
