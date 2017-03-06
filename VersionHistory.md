@@ -3,7 +3,8 @@
 Version 1.5 (Damson)
 -----------
 **Version 1.5.3 [Feb 2017]**  
-Added delete operation in DatabaseHelper  
+Added ContactPickerFragment
+Updated ContactVO
 
 **Version 1.5.2 [Jan 2017]**  
 Added delete operation in DatabaseHelper  
