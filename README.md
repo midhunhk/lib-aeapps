@@ -4,20 +4,28 @@ This Android library project contains some reusable code that can be used across
 
 Naming
 ======
-The name ae represents **Artistik Expressionz**. My apps follow the package structure "com.ae.apps.[appname]".
+The name ae represents **Artistik Expressionz**. My apps follow the package structure "com.ae.apps.[appname]". 
+
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits. The latest release code name is **Damson**.
+
+Damson is a kind of plum. Originally, the fruit comes from the Mediterranean. The Damson is generally less sweet than other kinds of plum and is used in jams, jellies, and liqueurs.
 
 Contents
 ========
-The following contents are available as part of this library.
-* Base Activity for Donations (Google Play In-App Billing v3)
-* Base Activity for Toolbar
-* DataBaseHelper
-* CopiedDataBaseHelper for using a database file from app's assets folder
-* Contact Manager for accessing Android's Contacts API
-* SMS Manager for accessing Android's SMS API
-* Utility methods
-* SimpleGraphView draws a pie chart
-* RoundedImageView shows an image inside a Circle
+The following components are available as part of this library as of now.
+
+* Activities
+  * Base Activity for Donations (Google Play In-App Billing v3)
+  * Base Activity for ToolbarActivity
+* Database  
+  * DataBaseHelper
+  * CopiedDataBaseHelper for using a database file from app's assets folder
+* Managers  
+  * Contact Manager for accessing Android's Contacts API
+  * SMS Manager for accessing Android's SMS API  
+* Utility Components
+  * SimpleGraphView draws a pie chart
+  * RoundedImageView shows an image inside a Circle
 
 Implementation
 ==============
