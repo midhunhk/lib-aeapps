@@ -26,6 +26,7 @@ The following components are available as part of this library as of now.
 * Utility Components
   * SimpleGraphView draws a pie chart
   * RoundedImageView shows an image inside a Circle
+  * Mock Contact Data
 
 Implementation
 ==============
