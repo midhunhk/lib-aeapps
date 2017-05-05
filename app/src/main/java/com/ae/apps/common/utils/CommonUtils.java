@@ -10,6 +10,9 @@ import android.content.pm.PackageManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+/**
+ * 
+ */
 public class CommonUtils {
 
     public static final int MINIMUM_STRING_LENGTH = 26;

@@ -1,6 +1,7 @@
 # built application files
 *.apk
 *.ap_
+*.iml
 
 # files for the dex VM
 *.dex
@@ -18,6 +19,7 @@ gradle/
 local.properties
 gradlew
 gradlew.bat
+.gitignore
 
 # Eclipse project files
 .classpath
