@@ -3,21 +3,29 @@ package com.ae.apps.common.utils;
 import java.util.Comparator;
 import java.util.Map;
 
-public class ValueComparator implements Comparator<String> {
+/**
+ * Comparator that can be used for sorting a map based on the values
+ *
+ * @param <K>
+ * @param <V>
+ */
+public class ValueComparator<K, V extends Comparable<V>> implements Comparator<K> {
 
-	private Map<String, Float>	base;
+    private Map<K, V> base;
 
-	public ValueComparator(Map<String, Float> base) {
-		this.base = base;
-	}
+    public ValueComparator(Map<K, V> base) {
+        this.base = base;
+    }
 
-	@Override
-	public int compare(String a, String b) {
-		if (base.get(a) >= base.get(b)) {
-			return -1;
-		} else {
-			return 1;
-		}
-	}
+    @Override
+    public int compare(K a, K b) {
+        if (null == a || null == b) {
+            return 0;
+        }
+        if (null == base.get(a) || null == base.get(b)) {
+            return 0;
+        }
+        return base.get(b).compareTo(base.get(a));
+    }
 
 }

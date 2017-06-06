@@ -16,12 +16,6 @@
 
 package com.ae.apps.common.managers;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -42,6 +36,12 @@ import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * The ContactManager abstracts access to the Android's Contacts API and provide public methods to retrieve data.
  * Users of ContactManager do not need to know the internals of Android's ContactsAPI or database calls.
@@ -59,6 +59,9 @@ public class ContactManager {
     private static final String SMS_URI_INBOX = "content://sms/inbox";
     private static final String DATE_FORMAT = "MMM dd, yyyy hh:mm a";
     private static final String TAG = "ContactManager";
+    private static final String SMS_BODY = "body";
+    private static final String SMS_ADDRESS = "address";
+    private static final String ID = "_id";
 
     private boolean addContactsWithPhoneNumbers;
 
@@ -234,8 +237,8 @@ public class ContactManager {
 
             int phoneType;
             String phoneLabel = null;
-            String phoneNumber = null;
-            String customLabel = null;
+            String phoneNumber;
+            String customLabel;
 
             // Prefetch some column indexes from the cursor
             int phoneNumberIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
@@ -328,14 +331,14 @@ public class ContactManager {
      * @return
      */
     public List<MessageVo> getContactMessages(final String contactId) {
-        MessageVo messageVo = null;
+        MessageVo messageVo;
         List<MessageVo> messagesList = new ArrayList<MessageVo>();
-        String[] projection = new String[]{"_id", "address", SMS_PERSON, "body"};
+        String[] projection = new String[]{ID, SMS_ADDRESS, SMS_PERSON, SMS_BODY};
         Cursor inboxCursor = contentResolver.query(Uri.parse(SMS_URI_INBOX), projection, SMS_PERSON + " = ?",
                 new String[]{contactId}, null);
 
         if (inboxCursor.moveToLast()) {
-            int bodyIndex = inboxCursor.getColumnIndex("body");
+            int bodyIndex = inboxCursor.getColumnIndex(SMS_BODY);
             do {
                 String messageBody = inboxCursor.getString(bodyIndex);
                 messageVo = new MessageVo();
@@ -376,18 +379,24 @@ public class ContactManager {
      */
     public String getContactIdFromAddress(final String address) {
         String contactId = null;
+        Cursor cursor = null;
         try {
             if (address != null) {
-                String[] projection = new String[]{"_id"};
+                String[] projection = new String[]{ID};
                 Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
-                Cursor cursor = contentResolver.query(personUri, projection, null, null, null);
-                if (cursor.moveToFirst()) {
-                    contactId = cursor.getString(cursor.getColumnIndex("_id"));
+                if (null != personUri) {
+                    cursor = contentResolver.query(personUri, projection, null, null, null);
+                    if (null != cursor && cursor.moveToFirst()) {
+                        contactId = cursor.getString(cursor.getColumnIndex(ID));
+                    }
                 }
-                cursor.close();
             }
         } catch (IllegalArgumentException i) {
             // Maybe a device specific implementation difference
+        } finally {
+            if (null != cursor) {
+                cursor.close();
+            }
         }
 
         return contactId;
