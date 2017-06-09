@@ -7,12 +7,29 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 21
+        
+        versionCode 33
+        versionName "2.0.1"
+        versionCodeName "elderberry"
+        
+        archivesBaseName = "lib-ae-apps"
+        version = android.defaultConfig.versionName
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    
+    libraryVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.aar')) {
+                def fileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
         }
     }
     
