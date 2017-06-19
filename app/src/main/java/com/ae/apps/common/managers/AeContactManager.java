@@ -89,4 +89,12 @@ interface AeContactManager {
      * @return
      */
     String getContactIdFromAddress(String address);
+
+    /**
+     * Returns a Bitmap object for the contact's photo
+     *
+     * @param contactId contact id
+     * @return contact photo
+     */
+    Bitmap getContactPhoto(final String contactId);
 }

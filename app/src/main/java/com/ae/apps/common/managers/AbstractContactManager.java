@@ -221,13 +221,8 @@ abstract class AbstractContactManager implements AeContactManager {
         return 0;
     }
 
-    /**
-     * Returns a Bitmap object for the contact's photo
-     *
-     * @param contactId contact id
-     * @return contact photo
-     */
-    private Bitmap getContactPhoto(final String contactId) {
+    @Override
+    public Bitmap getContactPhoto(final String contactId) {
         long contactIdLong = Long.parseLong(contactId);
         Uri contactPhotoUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactIdLong);
 
