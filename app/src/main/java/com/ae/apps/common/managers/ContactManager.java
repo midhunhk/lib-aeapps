@@ -164,4 +164,34 @@ public class ContactManager extends AbstractContactManager {
         public ContactsDataConsumer consumer;
     }
 
+    public static class Builder{
+        private Config config;
+
+        public Builder(ContentResolver contentResolver, Resources resources){
+            this.config = new Config();
+            this.config.contentResolver = contentResolver;
+            this.config.resources = resources;
+        }
+
+        public Builder addContactsWithPhoneNumbers(boolean addContactsWithPhoneNumbers){
+            this.config.addContactsWithPhoneNumbers = addContactsWithPhoneNumbers;
+            return this;
+        }
+
+        public Builder readContactsAsync(boolean readContactsAsync){
+            this.config.readContactsAsync = readContactsAsync;
+            return this;
+        }
+
+        public Builder consumer(ContactsDataConsumer consumer){
+            this.config.consumer = consumer;
+            return this;
+        }
+
+        public ContactManager build(){
+            return new ContactManager(this.config);
+        }
+
+    }
+
 }
