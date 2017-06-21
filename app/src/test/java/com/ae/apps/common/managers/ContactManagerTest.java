@@ -12,22 +12,21 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 /**
- * Created by midhunhk on 6/22/2017.
+ * Unit tests for ContactManager
  */
-
 public class ContactManagerTest {
 
-    Cursor cursor = Mockito.mock(Cursor.class);
-    Resources resources = Mockito.mock(Resources.class);
-    ContentResolver contentResolver = Mockito.mock(ContentResolver.class);
+    private Cursor cursor = Mockito.mock(Cursor.class);
+    private Resources resources = Mockito.mock(Resources.class);
+    private ContentResolver contentResolver = Mockito.mock(ContentResolver.class);
 
     @Test
-    public void testGetAllContacts(){
+    public void testGetAllContacts() {
         ContactManager.Config config = new ContactManager.Config();
         config.contentResolver = contentResolver;
         config.resources = resources;
@@ -40,7 +39,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void testGetAllContactsAsync(){
+    public void testGetAllContactsAsync() {
         ContactManager.Config config = new ContactManager.Config();
         config.contentResolver = contentResolver;
         config.resources = resources;
@@ -61,19 +60,18 @@ public class ContactManagerTest {
             System.out.println("Force wait start for async method to complete");
             Thread.sleep(300);
             System.out.println("Force wait end for async method to complete");
-        } catch (InterruptedException ex){
-
+        } catch (InterruptedException ex) {
+            System.err.println(ex.getMessage());
         }
         assertEquals(contactManager.contactManagerStatus, AbstractContactManager.STATUS.READY);
         assertEquals(contactManager.getAllContacts(), new ArrayList<ContactVo>());
     }
 
     @Test
-    public void testContactManagerBuilder(){
+    public void testContactManagerBuilder() {
         mockMethods();
 
-        ContactManager.Builder builder = new ContactManager.Builder(contentResolver, resources);
-        ContactManager contactManager = builder
+        ContactManager contactManager = new ContactManager.Builder(contentResolver, resources)
                 .addContactsWithPhoneNumbers(false)
                 .readContactsAsync(false)
                 .build();
