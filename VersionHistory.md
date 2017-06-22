@@ -2,6 +2,7 @@ Version 2.0 (Elderberry)
 -----------
 #### Version 2.0.0 [May 2017]
 - Updates to ContactManager
+- Add contacts without contact numbers
 - Integration with Travis CI
 
 #### Version 2.0.1 [Junit 2017]
