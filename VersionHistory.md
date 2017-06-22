@@ -1,5 +1,3 @@
-## Version History
-
 Version 2.0 (Elderberry)
 -----------
 #### Version 2.0.0 [May 2017]
