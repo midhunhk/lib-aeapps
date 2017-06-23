@@ -2,26 +2,18 @@ package com.ae.apps.common.managers;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.provider.ContactsContract;
-
-import com.ae.apps.common.vo.ContactVo;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for ContactManager
  */
 public class ContactManagerTest {
 
-    private Cursor cursor = Mockito.mock(Cursor.class);
     private Resources resources = Mockito.mock(Resources.class);
     private ContentResolver contentResolver = Mockito.mock(ContentResolver.class);
 
@@ -30,12 +22,11 @@ public class ContactManagerTest {
         ContactManager.Config config = new ContactManager.Config();
         config.contentResolver = contentResolver;
         config.resources = resources;
-
-        mockMethods();
+        config.useMockService = true;
 
         ContactManager contactManager = new ContactManager(config);
-        assertEquals(contactManager.contactManagerStatus, AbstractContactManager.STATUS.READY);
-        assertEquals(contactManager.getAllContacts(), new ArrayList<ContactVo>());
+        assertEquals(AbstractContactManager.STATUS.READY, contactManager.contactManagerStatus);
+        assertEquals(5, contactManager.getAllContacts().size());
     }
 
     @Test
@@ -44,6 +35,7 @@ public class ContactManagerTest {
         config.contentResolver = contentResolver;
         config.resources = resources;
         config.readContactsAsync = true;
+        config.useMockService = true;
         config.consumer = new AbstractContactManager.ContactsDataConsumer() {
             @Override
             public void onContactsRead() {
@@ -51,10 +43,10 @@ public class ContactManagerTest {
             }
         };
 
-        mockMethods();
-
         System.out.println("Creating ContactManager instance");
+
         ContactManager contactManager = new ContactManager(config);
+
         assertEquals(contactManager.contactManagerStatus, AbstractContactManager.STATUS.UNINITIALIZED);
         try {
             System.out.println("Force wait start for async method to complete");
@@ -63,26 +55,22 @@ public class ContactManagerTest {
         } catch (InterruptedException ex) {
             System.err.println(ex.getMessage());
         }
-        assertEquals(contactManager.contactManagerStatus, AbstractContactManager.STATUS.READY);
-        assertEquals(contactManager.getAllContacts(), new ArrayList<ContactVo>());
+
+        assertEquals(AbstractContactManager.STATUS.READY, contactManager.contactManagerStatus);
+        assertEquals(5, contactManager.getAllContacts().size());
     }
 
     @Test
     public void testContactManagerBuilder() {
-        mockMethods();
 
         ContactManager contactManager = new ContactManager.Builder(contentResolver, resources)
                 .addContactsWithPhoneNumbers(false)
                 .readContactsAsync(false)
+                /* set MockService as true only for unit testing */
+                .useMockService(true)
                 .build();
 
         assertNotNull(contactManager);
     }
 
-    private void mockMethods() {
-        when(contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null))
-                .thenReturn(cursor);
-        when(cursor.getCount())
-                .thenReturn(0);
-    }
 }
