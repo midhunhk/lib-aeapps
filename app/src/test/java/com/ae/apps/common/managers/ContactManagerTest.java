@@ -3,8 +3,9 @@ package com.ae.apps.common.managers;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,8 +15,16 @@ import static org.junit.Assert.assertNotNull;
  */
 public class ContactManagerTest {
 
-    private Resources resources = Mockito.mock(Resources.class);
-    private ContentResolver contentResolver = Mockito.mock(ContentResolver.class);
+    @Mock
+    private Resources resources;
+
+    @Mock
+    private ContentResolver contentResolver;
+
+    @Before
+    public void setUp(){
+        System.out.println("setUp is called before each test");
+    }
 
     @Test
     public void testGetAllContacts() {
