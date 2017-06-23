@@ -88,9 +88,13 @@ public class ContactService implements AeContactService {
                 lastContactedTime = cursor.getString(cursor
                         .getColumnIndex(ContactsContract.Contacts.LAST_TIME_CONTACTED));
 
-                // Support v1.5 and below API to exclude contacts without phone numbers
                 hasPhoneNumber = Integer.parseInt(hasPhoneNumberText) > 0;
-                if (!addContactsWithPhoneNumbers || addContactsWithPhoneNumbers && hasPhoneNumber) {
+
+                // Simplification of below expression
+                // !addContactsWithPhoneNumbers || addContactsWithPhoneNumbers && hasPhoneNumber
+                boolean addContact = !addContactsWithPhoneNumbers || hasPhoneNumber;
+
+                if (addContact) {
                     lastContactedTimeString = CommonUtils.formatTimeStamp(lastContactedTime, DATE_FORMAT);
 
                     // Save that data to a VO
