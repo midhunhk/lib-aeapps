@@ -1,3 +1,18 @@
+/*
+ * Copyright 2017 Midhun Harikumar
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ae.apps.common.services;
 
 import android.content.ContentResolver;
@@ -9,6 +24,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.ae.apps.common.utils.CommonUtils;
 import com.ae.apps.common.utils.ContactUtils;
@@ -47,6 +64,7 @@ public class ContactService implements AeContactService {
         this.resources = resources;
     }
 
+    @NonNull
     @Override
     public List<ContactVo> getContacts(boolean addContactsWithPhoneNumbers) {
         List<ContactVo> contactsList = new ArrayList<>();
@@ -107,6 +125,7 @@ public class ContactService implements AeContactService {
         return BitmapFactory.decodeStream(photoDataStream);
     }
 
+    @NonNull
     @Override
     public List<PhoneNumberVo> getContactPhoneDetails(String contactId) {
         List<PhoneNumberVo> phoneNumbersList = new ArrayList<>();
@@ -156,6 +175,7 @@ public class ContactService implements AeContactService {
         return phoneNumbersList;
     }
 
+    @NonNull
     @Override
     public List<MessageVo> getContactMessages(String contactId) {
         MessageVo messageVo;
@@ -193,8 +213,9 @@ public class ContactService implements AeContactService {
         return contactId;
     }
 
+    @Nullable
     @Override
-    public String getContactIdFromAddress(String address) {
+    public String getContactIdFromAddress(@Nullable String address) {
         String contactId = null;
         Cursor cursor = null;
         try {
@@ -219,6 +240,7 @@ public class ContactService implements AeContactService {
         return contactId;
     }
 
+    @Nullable
     @Override
     public InputStream openPhoto(long contactId) {
         Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
