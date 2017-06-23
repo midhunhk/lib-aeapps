@@ -1,5 +1,6 @@
 package com.ae.apps.common.services;
 
+import java.io.InputStream;
 import java.util.List;
 
 import android.graphics.Bitmap;
@@ -60,4 +61,15 @@ public interface AeContactService {
      * @return contactid
      */
     String getContactIdFromAddress(final String address);
+
+    /**
+     * Opens a contact photo?
+     *
+     * See if you could use @LINK{getContactPhoto()} instead
+     *
+     * @param contactId contactId
+     * @return contact photo
+     */
+    @Deprecated
+    InputStream openPhoto(final long contactId);
 }

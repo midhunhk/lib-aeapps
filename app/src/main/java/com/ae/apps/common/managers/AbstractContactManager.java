@@ -19,13 +19,13 @@ package com.ae.apps.common.managers;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.util.TimingLogger;
 
 import com.ae.apps.common.services.AeContactService;
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -178,7 +178,13 @@ abstract class AbstractContactManager implements AeContactManager {
     protected List<ContactVo> fetchAllContacts() {
         contactManagerStatus = STATUS.INITIALIZING;
 
+        TimingLogger timingLogger = new TimingLogger("ContactManager", "Read Contacts");
+        timingLogger.addSplit("start to read contacts");
+
         List<ContactVo> contactsList = contactService.getContacts(addContactsWithPhoneNumbers);
+
+        timingLogger.addSplit("end reading contacts");
+        timingLogger.dumpToLog();
 
         contactManagerStatus = STATUS.READY;
 

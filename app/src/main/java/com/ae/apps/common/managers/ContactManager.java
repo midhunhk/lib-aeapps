@@ -17,24 +17,21 @@
 package com.ae.apps.common.managers;
 
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.ae.apps.common.mock.MockContactService;
-import com.ae.apps.common.services.AeContactService;
 import com.ae.apps.common.services.ContactService;
 import com.ae.apps.common.vo.ContactVo;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +56,7 @@ public class ContactManager extends AbstractContactManager {
      *
      * @param config configuration for initializing a ContactManager object
      */
-    public ContactManager(Config config) {
+    public ContactManager(@NonNull Config config) {
         this.contentResolver = config.contentResolver;
         this.resources = config.resources;
         this.addContactsWithPhoneNumbers = config.addContactsWithPhoneNumbers;
@@ -73,8 +70,9 @@ public class ContactManager extends AbstractContactManager {
         }
 
         if (config.readContactsAsync && null != config.consumer) {
-            // Lazy load contacts if contacts data are not required
-            // when creating an instance of this object
+            // Lazy load contacts if contacts data are not required when creating
+            // an instance of this object and not block the calling method while
+            // we are reading the contacts
             this.consumer = config.consumer;
             fetchContactsAsync();
         } else {
@@ -91,6 +89,7 @@ public class ContactManager extends AbstractContactManager {
      *
      * @return all contacts
      */
+    @Nullable
     public List<ContactVo> getAllContacts() {
         if (STATUS.READY == contactManagerStatus && null != contactsList) {
             return new ArrayList<>(contactsList);
@@ -106,7 +105,7 @@ public class ContactManager extends AbstractContactManager {
      * @param resource     resources
      * @return contact image
      */
-    public Bitmap getContactPhotoWithMock(final ContactVo contactVo, final Bitmap defaultImage, final Resources resource) {
+    public Bitmap getContactPhotoWithMock(@NonNull final ContactVo contactVo, final Bitmap defaultImage, final Resources resource) {
         if (contactVo.isMockUser()) {
             try {
                 // try to decode the image resource if this is a mock user
@@ -125,25 +124,9 @@ public class ContactManager extends AbstractContactManager {
      * @param contactId contact id
      * @return contact image
      */
+    @Nullable
     public InputStream openPhoto(final long contactId) {
-        Uri contactUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId);
-        Uri photoUri = Uri.withAppendedPath(contactUri, Contacts.Photo.CONTENT_DIRECTORY);
-        Cursor cursor = contentResolver.query(photoUri, new String[]{Contacts.Photo.DATA15}, null, null, null);
-
-        if (cursor == null) {
-            return null;
-        }
-        try {
-            if (cursor.moveToFirst()) {
-                byte[] data = cursor.getBlob(0);
-                if (data != null) {
-                    return new ByteArrayInputStream(data);
-                }
-            }
-        } finally {
-            cursor.close();
-        }
-        return null;
+        return contactService.openPhoto(contactId);
     }
 
     /**
@@ -151,7 +134,7 @@ public class ContactManager extends AbstractContactManager {
      *
      * @param contactVo contact vo
      */
-    public void showContactInAddressBook(Context context, ContactVo contactVo) {
+    public void showContactInAddressBook(@NonNull Context context, @Nullable ContactVo contactVo) {
         if (null != contactVo && null != contactVo.getId()) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
 
@@ -175,6 +158,9 @@ public class ContactManager extends AbstractContactManager {
         public ContactsDataConsumer consumer;
     }
 
+    /**
+     * Builds an instance of ContactManager
+     */
     public static class Builder {
         private Config config;
 
@@ -184,26 +170,31 @@ public class ContactManager extends AbstractContactManager {
             this.config.resources = resources;
         }
 
+        @NonNull
         public Builder addContactsWithPhoneNumbers(boolean addContactsWithPhoneNumbers) {
             this.config.addContactsWithPhoneNumbers = addContactsWithPhoneNumbers;
             return this;
         }
 
+        @NonNull
         public Builder readContactsAsync(boolean readContactsAsync) {
             this.config.readContactsAsync = readContactsAsync;
             return this;
         }
 
+        @NonNull
         public Builder consumer(ContactsDataConsumer consumer) {
             this.config.consumer = consumer;
             return this;
         }
 
+        @NonNull
         public Builder useMockService(boolean useMockService) {
             this.config.useMockService = useMockService;
             return this;
         }
 
+        @NonNull
         public ContactManager build() {
             return new ContactManager(this.config);
         }

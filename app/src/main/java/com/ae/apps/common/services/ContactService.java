@@ -16,6 +16,7 @@ import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class ContactService implements AeContactService {
                 }
             }
         }
-        if(null != cursor) {
+        if (null != cursor) {
             cursor.close();
         }
 
@@ -216,5 +217,27 @@ public class ContactService implements AeContactService {
         }
 
         return contactId;
+    }
+
+    @Override
+    public InputStream openPhoto(long contactId) {
+        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
+        Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+        Cursor cursor = contentResolver.query(photoUri, new String[]{ContactsContract.Contacts.Photo.DATA15}, null, null, null);
+
+        if (cursor == null) {
+            return null;
+        }
+        try {
+            if (cursor.moveToFirst()) {
+                byte[] data = cursor.getBlob(0);
+                if (data != null) {
+                    return new ByteArrayInputStream(data);
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+        return null;
     }
 }
