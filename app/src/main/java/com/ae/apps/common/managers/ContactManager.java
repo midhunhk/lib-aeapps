@@ -29,6 +29,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.util.Log;
 
+import com.ae.apps.common.services.AeContactService;
 import com.ae.apps.common.vo.ContactVo;
 
 import java.io.ByteArrayInputStream;
@@ -49,6 +50,7 @@ import java.util.List;
  */
 public class ContactManager extends AbstractContactManager {
 
+    private AeContactService contactService;
     private static final String TAG = "ContactManager";
 
     /**
