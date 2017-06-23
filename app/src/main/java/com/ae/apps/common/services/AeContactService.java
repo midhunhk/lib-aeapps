@@ -8,6 +8,9 @@ import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
+/**
+ * Specification for a DAO that accesses the Android Contacts API
+ */
 public interface AeContactService {
 	
 	/**
@@ -49,4 +52,12 @@ public interface AeContactService {
 	 * @return contactId
 	 */
 	long getContactIdFromRawContactId(final String rawContactId);
+
+    /**
+     * Get contactId corresponding to an "address"
+     *
+     * @param address address to find the contact id for
+     * @return contactid
+     */
+    String getContactIdFromAddress(final String address);
 }

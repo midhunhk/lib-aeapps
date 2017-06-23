@@ -29,7 +29,9 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.util.Log;
 
+import com.ae.apps.common.mock.MockContactService;
 import com.ae.apps.common.services.AeContactService;
+import com.ae.apps.common.services.ContactService;
 import com.ae.apps.common.vo.ContactVo;
 
 import java.io.ByteArrayInputStream;
@@ -50,7 +52,6 @@ import java.util.List;
  */
 public class ContactManager extends AbstractContactManager {
 
-    private AeContactService contactService;
     private static final String TAG = "ContactManager";
 
     /**
@@ -62,6 +63,14 @@ public class ContactManager extends AbstractContactManager {
         this.contentResolver = config.contentResolver;
         this.resources = config.resources;
         this.addContactsWithPhoneNumbers = config.addContactsWithPhoneNumbers;
+
+        // Decide whether to create a Mock implementation or accessing the phone's
+        // contacts database. Set to true for unit tests
+        if (config.useMockService) {
+            this.contactService = new MockContactService();
+        } else {
+            this.contactService = new ContactService(contentResolver, resources);
+        }
 
         if (config.readContactsAsync && null != config.consumer) {
             // Lazy load contacts if contacts data are not required
@@ -153,7 +162,6 @@ public class ContactManager extends AbstractContactManager {
         }
     }
 
-
     /**
      * Configuration data for initializing a ContactManager instance
      * This is a temporary workaround
@@ -163,37 +171,42 @@ public class ContactManager extends AbstractContactManager {
         public Resources resources;
         public boolean addContactsWithPhoneNumbers;
         public boolean readContactsAsync;
+        public boolean useMockService;
         public ContactsDataConsumer consumer;
     }
 
-    public static class Builder{
+    public static class Builder {
         private Config config;
 
-        public Builder(ContentResolver contentResolver, Resources resources){
+        public Builder(ContentResolver contentResolver, Resources resources) {
             this.config = new Config();
             this.config.contentResolver = contentResolver;
             this.config.resources = resources;
         }
 
-        public Builder addContactsWithPhoneNumbers(boolean addContactsWithPhoneNumbers){
+        public Builder addContactsWithPhoneNumbers(boolean addContactsWithPhoneNumbers) {
             this.config.addContactsWithPhoneNumbers = addContactsWithPhoneNumbers;
             return this;
         }
 
-        public Builder readContactsAsync(boolean readContactsAsync){
+        public Builder readContactsAsync(boolean readContactsAsync) {
             this.config.readContactsAsync = readContactsAsync;
             return this;
         }
 
-        public Builder consumer(ContactsDataConsumer consumer){
+        public Builder consumer(ContactsDataConsumer consumer) {
             this.config.consumer = consumer;
             return this;
         }
 
-        public ContactManager build(){
+        public Builder useMockService(boolean useMockService) {
+            this.config.useMockService = useMockService;
+            return this;
+        }
+
+        public ContactManager build() {
             return new ContactManager(this.config);
         }
 
     }
-
 }
