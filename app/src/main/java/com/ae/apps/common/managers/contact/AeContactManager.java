@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ae.apps.common.managers;
+package com.ae.apps.common.managers.contact;
 
 import android.graphics.Bitmap;
 
@@ -25,9 +25,37 @@ import java.util.List;
 
 /**
  * A specification for a ContactManager used in AE App lab projects
+ * <p>
+ * <pre>
+ *     Call @link{fetchAllContacts} or @link{fetchAllContactsAsync} to initialize the contacts
+ * </pre>
  */
-
 interface AeContactManager {
+
+    /**
+     * Invoke to fetch all contacts and use them right away
+     *
+     * @return
+     */
+    void fetchAllContacts();
+
+    /**
+     * Invoke to fetch contacts in a separate thread. Use if lazily creating an instance
+     * of @link{{@link AeContactManager}}
+     *
+     * @param consumer consumer to be notified when the contacts have been read
+     */
+    void fetchAllContactsAsync(final ContactDataConsumer consumer);
+
+    /**
+     * Invoke to fetch all contacts once read from are read. Returns a copy of the contacts list.
+     * Note that this is an expensive operation as a new list is created with original
+     * values and returned to the caller.
+     *
+     * @return contacts list
+     * @throws UnsupportedOperationException {@inheritDoc}
+     */
+    List<ContactVo> getAllContacts() throws UnsupportedOperationException;
 
     /**
      * Gets the total contacts read
@@ -49,7 +77,7 @@ interface AeContactManager {
      * @param contactId contact id
      * @return contact vo
      */
-    ContactVo getContactWithPhoneDetails(String contactId);
+    ContactVo getContactWithPhoneDetails(final String contactId);
 
     /**
      * Returns a Bitmap object for the contact's photo, returning a default image
@@ -58,13 +86,13 @@ interface AeContactManager {
      * @param defaultImage default image
      * @return contact photo
      */
-    Bitmap getContactPhoto(String contactId, Bitmap defaultImage);
+    Bitmap getContactPhoto(final String contactId, final Bitmap defaultImage);
 
     /**
      * @param contactId contact id
      * @return contact vo
      */
-    ContactVo getContactInfo(String contactId);
+    ContactVo getContactInfo(final String contactId);
 
     /**
      * Returns the list of messages for this contact with id
@@ -72,7 +100,7 @@ interface AeContactManager {
      * @param contactId contact id
      * @return list of message vo s
      */
-    List<MessageVo> getContactMessages(String contactId);
+    List<MessageVo> getContactMessages(final String contactId);
 
     /**
      * Returns the contactId based on the rawContactId
@@ -80,7 +108,7 @@ interface AeContactManager {
      * @param rawContactId ra contact id
      * @return
      */
-    long getContactIdFromRawContactId(String rawContactId);
+    long getContactIdFromRawContactId(final String rawContactId);
 
     /**
      * Does a lookup on the contacts by phone number lookup
@@ -88,7 +116,7 @@ interface AeContactManager {
      * @param address address
      * @return
      */
-    String getContactIdFromAddress(String address);
+    String getContactIdFromAddress(final String address);
 
     /**
      * Returns a Bitmap object for the contact's photo
@@ -97,4 +125,5 @@ interface AeContactManager {
      * @return contact photo
      */
     Bitmap getContactPhoto(final String contactId);
+
 }

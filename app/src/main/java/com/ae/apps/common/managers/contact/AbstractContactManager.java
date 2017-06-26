@@ -14,40 +14,84 @@
  * limitations under the License.
  */
 
-package com.ae.apps.common.managers;
+package com.ae.apps.common.managers.contact;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.util.TimingLogger;
+import android.support.annotation.Nullable;
 
 import com.ae.apps.common.services.AeContactService;
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 /**
  * An abstract implementation of common methods for AeContactManager
  */
-abstract class AbstractContactManager implements AeContactManager {
+public abstract class AbstractContactManager implements AeContactManager {
 
     protected enum STATUS {
         UNINITIALIZED, INITIALIZING, READY
     }
 
-    protected AeContactService contactService;
+    protected STATUS contactManagerStatus = STATUS.UNINITIALIZED;
+
+    protected AeContactService mContactService;
     protected Resources resources;
     protected ContentResolver contentResolver;
-    protected List<ContactVo> contactsList;
 
-    protected STATUS contactManagerStatus = STATUS.UNINITIALIZED;
+    protected List<ContactVo> contactsList;
 
     // Config Item
     protected boolean addContactsWithPhoneNumbers;
-    protected ContactsDataConsumer consumer;
+
+    @Override
+    public void fetchAllContacts() {
+        // The getContacts method is not called once the data is READY
+        if (STATUS.UNINITIALIZED == contactManagerStatus) {
+            contactManagerStatus = STATUS.INITIALIZING;
+
+            // Read the contacts data from the device
+            contactsList = mContactService.getContacts(addContactsWithPhoneNumbers);
+
+            contactManagerStatus = STATUS.READY;
+        }
+    }
+
+    @Override
+    public void fetchAllContactsAsync(final ContactDataConsumer consumer) {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                fetchAllContacts();
+
+                // Inform the consumer that the data is ready
+                if (null != consumer) {
+                    consumer.onContactsRead();
+                }
+            }
+        }).start();
+    }
+
+    @Nullable
+    @Override
+    public List<ContactVo> getAllContacts() throws UnsupportedOperationException {
+        if (STATUS.READY == contactManagerStatus) {
+            if (null != contactsList) {
+                return new ArrayList<>(contactsList);
+            } else {
+                return Collections.emptyList();
+            }
+        }
+        throw new UnsupportedOperationException("Call fetchAllContacts() or fetchAllContactsAsync() before invoking this");
+    }
 
     /**
      * Fetches all the Phone numbers for this contacts.
@@ -60,7 +104,7 @@ abstract class AbstractContactManager implements AeContactManager {
         // phone numbers list already
         // and the contact has phone numbers
         if (contactVo.getPhoneNumbersList() == null && contactVo.getHasPhoneNumber()) {
-            List<PhoneNumberVo> phoneNumbersList = contactService.getContactPhoneDetails(contactVo.getId());
+            List<PhoneNumberVo> phoneNumbersList = mContactService.getContactPhoneDetails(contactVo.getId());
 
             contactVo.setPhoneNumbersList(phoneNumbersList);
         }
@@ -69,17 +113,17 @@ abstract class AbstractContactManager implements AeContactManager {
 
     @Override
     public List<MessageVo> getContactMessages(final String contactId) {
-        return contactService.getContactMessages(contactId);
+        return mContactService.getContactMessages(contactId);
     }
 
     @Override
     public long getContactIdFromRawContactId(final String rawContactId) {
-        return contactService.getContactIdFromRawContactId(rawContactId);
+        return mContactService.getContactIdFromRawContactId(rawContactId);
     }
 
     @Override
     public String getContactIdFromAddress(final String address) {
-        return contactService.getContactIdFromAddress(address);
+        return mContactService.getContactIdFromAddress(address);
     }
 
     @Override
@@ -120,7 +164,7 @@ abstract class AbstractContactManager implements AeContactManager {
 
     @Override
     public Bitmap getContactPhoto(final String contactId) {
-        return contactService.getContactPhoto(contactId);
+        return mContactService.getContactPhoto(contactId);
     }
 
     @Override
@@ -150,77 +194,6 @@ abstract class AbstractContactManager implements AeContactManager {
         }
 
         return contactVo;
-    }
-
-    /**
-     * Fetches all contacts as async ona new thread
-     */
-    protected void fetchContactsAsync() {
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                contactsList = fetchAllContacts();
-
-                // Inform the consumer that the data is ready
-                if (null != consumer) {
-                    consumer.onContactsRead();
-                }
-            }
-        }).start();
-    }
-
-    /**
-     * Fetches all the contacts from the contacts data table
-     *
-     * @return list of contacts
-     */
-    protected List<ContactVo> fetchAllContacts() {
-        contactManagerStatus = STATUS.INITIALIZING;
-
-        TimingLogger timingLogger = new TimingLogger("ContactManager", "Read Contacts");
-        timingLogger.addSplit("start to read contacts");
-
-        List<ContactVo> contactsList = contactService.getContacts(addContactsWithPhoneNumbers);
-
-        timingLogger.addSplit("end reading contacts");
-        timingLogger.dumpToLog();
-
-        contactManagerStatus = STATUS.READY;
-
-        return contactsList;
-    }
-
-    /**
-     * Returns a MessageVo for the contactId
-     *
-     * @param contactId contact id
-     * @return
-     */
-    public MessageVo getLatestMessage(final String contactId) {
-        MessageVo messageVo = null;
-        // TODO : Complete this method
-        /*
-         * Cursor inboxCursor = contentResolver.query(Uri.parse(SMS_INBOX_URI), null, SMS_PERSON + " = ?", new String[]
-		 * { contactId }, null);
-		 *
-		 * if (inboxCursor != null) { if (inboxCursor.moveToNext()) { int bodyColumn =
-		 * inboxCursor.getColumnIndex(COLUMN_BODY); if (bodyColumn > 0) { String messageBody =
-		 * inboxCursor.getString(bodyColumn); messageVo = new MessageVo(); messageVo.setBody(messageBody); } } }
-		 */
-        List<MessageVo> listOfMessages = getContactMessages(contactId);
-        if (listOfMessages != null && listOfMessages.size() > 0) {
-            messageVo = listOfMessages.get(0);
-        }
-        return messageVo;
-    }
-
-    /**
-     * Represents a consumer that needs contacts data and supplies a callback when the
-     * contacts data are read
-     */
-    public interface ContactsDataConsumer {
-        void onContactsRead();
     }
 
 }

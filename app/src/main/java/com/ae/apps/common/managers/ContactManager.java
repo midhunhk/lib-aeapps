@@ -28,19 +28,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.ae.apps.common.mock.MockContactService;
+import com.ae.apps.common.managers.contact.AbstractContactManager;
 import com.ae.apps.common.services.ContactService;
 import com.ae.apps.common.vo.ContactVo;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ContactManager abstracts access to the Android's Contacts API and provide public methods to retrieve data.
  * Users of ContactManager do not need to know the internals of Android's ContactsAPI or database calls.
  * <p>
- * <p>Need the following permissions in manifest</p>
+ * <p>Needs the following permissions added to the manifest</p>
  * <pre>
  * 	android.permission.READ_CONTACTS
  * 	android.permission.CALL_PHONE
@@ -54,47 +52,15 @@ public class ContactManager extends AbstractContactManager {
     /**
      * Construct an instance with configuration
      *
-     * @param config configuration for initializing a ContactManager object
+     * @param builder for initializing a ContactManager object
      */
-    public ContactManager(@NonNull Config config) {
-        this.contentResolver = config.contentResolver;
-        this.resources = config.resources;
-        this.addContactsWithPhoneNumbers = config.addContactsWithPhoneNumbers;
+    private ContactManager(@NonNull Builder builder) {
+        this.contentResolver = builder.contentResolver;
+        this.resources = builder.resources;
+        this.addContactsWithPhoneNumbers = builder.addContactsWithPhoneNumbers;
 
-        // Decide whether to create a Mock implementation or accessing the phone's
-        // contacts database. Set to true for unit tests
-        if (config.useMockService) {
-            this.contactService = new MockContactService();
-        } else {
-            this.contactService = new ContactService(contentResolver, resources);
-        }
-
-        if (config.readContactsAsync && null != config.consumer) {
-            // Lazy load contacts if contacts data are not required when creating
-            // an instance of this object and not block the calling method while
-            // we are reading the contacts
-            this.consumer = config.consumer;
-            fetchContactsAsync();
-        } else {
-            // Read all the contacts from the contacts database
-            contactsList = fetchAllContacts();
-        }
-    }
-
-    /**
-     * Returns a copy of the contacts list
-     * <p>
-     * Note that this is an expensive operation as a new list is created with original
-     * values and returned to the caller.
-     *
-     * @return all contacts
-     */
-    @Nullable
-    public List<ContactVo> getAllContacts() {
-        if (STATUS.READY == contactManagerStatus && null != contactsList) {
-            return new ArrayList<>(contactsList);
-        }
-        return null;
+        // Create the service class instance to serve the contacts
+        this.mContactService = new ContactService(contentResolver, resources);
     }
 
     /**
@@ -126,7 +92,7 @@ public class ContactManager extends AbstractContactManager {
      */
     @Nullable
     public InputStream openPhoto(final long contactId) {
-        return contactService.openPhoto(contactId);
+        return mContactService.openPhoto(contactId);
     }
 
     /**
@@ -146,57 +112,27 @@ public class ContactManager extends AbstractContactManager {
     }
 
     /**
-     * Configuration data for initializing a ContactManager instance
-     * This is a temporary workaround
-     */
-    public static class Config {
-        public ContentResolver contentResolver;
-        public Resources resources;
-        public boolean addContactsWithPhoneNumbers;
-        public boolean readContactsAsync;
-        public boolean useMockService;
-        public ContactsDataConsumer consumer;
-    }
-
-    /**
      * Builds an instance of ContactManager
      */
     public static class Builder {
-        private Config config;
+        private ContentResolver contentResolver;
+        private Resources resources;
+        private boolean addContactsWithPhoneNumbers;
 
         public Builder(ContentResolver contentResolver, Resources resources) {
-            this.config = new Config();
-            this.config.contentResolver = contentResolver;
-            this.config.resources = resources;
+            this.contentResolver = contentResolver;
+            this.resources = resources;
         }
 
         @NonNull
         public Builder addContactsWithPhoneNumbers(boolean addContactsWithPhoneNumbers) {
-            this.config.addContactsWithPhoneNumbers = addContactsWithPhoneNumbers;
-            return this;
-        }
-
-        @NonNull
-        public Builder readContactsAsync(boolean readContactsAsync) {
-            this.config.readContactsAsync = readContactsAsync;
-            return this;
-        }
-
-        @NonNull
-        public Builder consumer(ContactsDataConsumer consumer) {
-            this.config.consumer = consumer;
-            return this;
-        }
-
-        @NonNull
-        public Builder useMockService(boolean useMockService) {
-            this.config.useMockService = useMockService;
+            this.addContactsWithPhoneNumbers = addContactsWithPhoneNumbers;
             return this;
         }
 
         @NonNull
         public ContactManager build() {
-            return new ContactManager(this.config);
+            return new ContactManager(this);
         }
 
     }

@@ -32,15 +32,18 @@ import java.util.List;
  */
 public class MockContactService implements AeContactService {
 
+    /**
+     * Number of contacts served by this implementation
+     */
+    public final static int MOCK_CONTACTS_SIZE = 5;
+
     private List<ContactVo> list;
 
     public MockContactService() {
         list = new ArrayList<>();
-        list.add(MockContactDataUtils.getMockContact());
-        list.add(MockContactDataUtils.getMockContact());
-        list.add(MockContactDataUtils.getMockContact());
-        list.add(MockContactDataUtils.getMockContact());
-        list.add(MockContactDataUtils.getMockContact());
+        for (int i = 0; i < MOCK_CONTACTS_SIZE; i++) {
+            list.add(MockContactDataUtils.getMockContact());
+        }
     }
 
     @Override
