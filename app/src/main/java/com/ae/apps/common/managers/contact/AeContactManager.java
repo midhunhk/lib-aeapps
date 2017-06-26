@@ -30,7 +30,7 @@ import java.util.List;
  *     Call @link{fetchAllContacts} or @link{fetchAllContactsAsync} to initialize the contacts
  * </pre>
  */
-interface AeContactManager {
+public interface AeContactManager {
 
     /**
      * Invoke to fetch all contacts and use them right away
