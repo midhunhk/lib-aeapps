@@ -54,7 +54,7 @@ public class ContactManager extends AbstractContactManager {
      *
      * @param builder for initializing a ContactManager object
      */
-    private ContactManager(@NonNull Builder builder) {
+    protected ContactManager(@NonNull Builder builder) {
         this.contentResolver = builder.contentResolver;
         this.resources = builder.resources;
         this.addContactsWithPhoneNumbers = builder.addContactsWithPhoneNumbers;
