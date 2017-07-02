@@ -63,5 +63,10 @@ public class ContactManagerTest {
         String contactId = contactManager.getAllContacts().get(0).getId();
         assertNotNull(contactManager.getContactWithPhoneDetails(contactId).getPhoneNumbersList());
     }
+    
+    @Test(expected = UnsupportedOperationException.class)
+    public void testUnsupportedOperationException() {
+        String contactId = contactManager.getAllContacts().get(0).getId();
+    }
 
 }
