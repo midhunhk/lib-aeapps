@@ -44,7 +44,7 @@ public class MockContactDataUtils {
 		ContactVo contactVo = new ContactVo();
 
 		// Create the phone number list and add one
-		ArrayList<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
+		List<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
 		PhoneNumberVo numberVo = new PhoneNumberVo();
 		numberVo.setPhoneNumber("87 7781 6267");
 		phoneNumbersList.add(numberVo);

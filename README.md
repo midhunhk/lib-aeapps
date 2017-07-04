@@ -6,9 +6,9 @@ This Android library project contains some reusable code that can be used across
 # Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits. The latest release code name is **Damson**.
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits. The latest release code name is **Elderberry**.
 
-Damson is a kind of plum. Originally, the fruit comes from the Mediterranean. The Damson is generally less sweet than other kinds of plum and is used in jams, jellies, and liqueurs.
+Sambucus is a genus of flowering plants in the family Adoxaceae. The various species are commonly called elder or elderberry. The genus occurs in temperate to subtropical regions of the world. More widespread in the Northern Hemisphere, its Southern Hemisphere occurrence is restricted to parts of Australasia and South America. Many species are widely cultivated for their ornamental leaves, flowers and fruit
 
 # Contents
 The following components are available as part of this library as of now.
@@ -26,6 +26,7 @@ The following components are available as part of this library as of now.
   * SimpleGraphView draws a pie chart
   * RoundedImageView shows an image inside a Circle
   * Mock Contact Data
+  * EmptyRecyclerView provides a way to specify an empty layout
 
 # Implementations
 Presently the following android app projects make use of this library.
