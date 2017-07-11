@@ -21,6 +21,7 @@ local.properties
 gradlew
 gradlew.bat
 .gitignore
+genrelease.cmd
 
 # Eclipse project files
 .classpath

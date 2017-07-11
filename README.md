@@ -1,5 +1,6 @@
 # libAeApps
-[ ![Download](https://api.bintray.com/packages/midhunhk/lib-ae-apps/ae-apps-library/images/download.svg) ](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/midhunhk/lib-ae-apps/ae-apps-library/images/download.svg?version=V2.0.5) ](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/V2.0.5/link)
+[![Bintray](https://img.shields.io/bintray/v/asciidoctor/maven/asciidoctorj.svg)](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/_latestVersion)
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
 
@@ -37,6 +38,20 @@ Presently the following android app projects make use of this library.
 
 # Changelog
 To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
+
+# Using
+1. Include the library as a maven repository.
+
+`
+repositories {
+    maven {
+        url  "http://dl.bintray.com/midhunhk/lib-ae-apps" 
+    }
+}
+`
+
+2. Add as a compile time dependency
+`compile 'com.ae.apps:lib-ae-apps:2.0.5'`
 
 # License
 Licensed under the Apache License, Version 2.0 (the "License");
