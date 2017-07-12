@@ -1,7 +1,8 @@
 # libAeApps
-[![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library)
-[ ![Download](https://api.bintray.com/packages/midhunhk/lib-ae-apps/ae-apps-library/images/download.svg?version=V2.0.5) ](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/V2.0.5/link)
-[![Bintray](https://img.shields.io/bintray/v/asciidoctor/maven/asciidoctorj.svg)](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/_latestVersion)
+[![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
+[![Download](https://api.bintray.com/packages/midhunhk/lib-ae-apps/ae-apps-library/images/download.svg?version=V2.0.5)](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/V2.0.5/link) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.0.0.svg)](https://github.com/midhunhk/ae-apps-library) 
+[![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
 
