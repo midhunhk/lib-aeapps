@@ -40,5 +40,5 @@ licenses:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
     
-script:
-    - TERM=dumb ./gradlew test assembleDebug
+#script:
+#    - TERM=dumb ./gradlew test assembleDebug
