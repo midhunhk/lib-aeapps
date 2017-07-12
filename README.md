@@ -1,4 +1,5 @@
 # libAeApps
+[![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library)
 [ ![Download](https://api.bintray.com/packages/midhunhk/lib-ae-apps/ae-apps-library/images/download.svg?version=V2.0.5) ](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/V2.0.5/link)
 [![Bintray](https://img.shields.io/bintray/v/asciidoctor/maven/asciidoctorj.svg)](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/_latestVersion)
 
