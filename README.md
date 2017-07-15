@@ -1,6 +1,6 @@
 # libAeApps
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
-[![Download](https://api.bintray.com/packages/midhunhk/lib-ae-apps/ae-apps-library/images/download.svg?version=V2.0.5)](https://bintray.com/midhunhk/lib-ae-apps/ae-apps-library/V2.0.5/link) 
+[![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.0.0.svg)](https://github.com/midhunhk/ae-apps-library) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
@@ -47,7 +47,7 @@ To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-ap
 `
 repositories {
     maven {
-        url  "http://dl.bintray.com/midhunhk/lib-ae-apps" 
+        url  "http://dl.bintray.com/midhunhk/android-libraries" 
     }
 }
 `
