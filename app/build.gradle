@@ -9,8 +9,8 @@ android {
         targetSdkVersion 21
         
         versionCode 33
-        versionName "2.0.1"
-        // versionCodeName "elderberry"
+        versionName "2.1.0"
+        // versionCodeName "fig"
         
         archivesBaseName = "lib-ae-apps"
         version = android.defaultConfig.versionName
@@ -41,7 +41,7 @@ android {
 ext {
     PUBLISH_GROUP_ID = 'com.ae.apps'
     PUBLISH_ARTIFACT_ID = 'android-libraries'
-    PUBLISH_VERSION = '2.0.5'
+    PUBLISH_VERSION = '2.1.0'
 }
 
 buildscript {
