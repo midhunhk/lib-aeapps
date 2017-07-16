@@ -1,3 +1,8 @@
+Version 2.1 (Fig)
+-----------
+#### Version 2.1.0 [July 2017]
+ - Deploy library to jcenter
+
 Version 2.0 (Elderberry)
 -----------
 #### Version 2.0.0 [May 2017]
