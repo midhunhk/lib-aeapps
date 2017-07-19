@@ -1,7 +1,7 @@
 # libAeApps
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.0.5.svg)](https://github.com/midhunhk/ae-apps-library) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.0.0.svg)](https://github.com/midhunhk/ae-apps-library) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
@@ -9,9 +9,9 @@ This Android library project contains some reusable code that can be used across
 # Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits. The latest release code name is **Elderberry**.
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Fig**.
 
-Sambucus is a genus of flowering plants in the family Adoxaceae. The various species are commonly called elder or elderberry. The genus occurs in temperate to subtropical regions of the world. More widespread in the Northern Hemisphere, its Southern Hemisphere occurrence is restricted to parts of Australasia and South America. Many species are widely cultivated for their ornamental leaves, flowers and fruit
+Ficus carica is an Asian species of flowering plants in the mulberry family, known as the common fig (or just the fig). It is the source of the fruit also called the fig, and as such is an important crop in those areas where it is grown commercially. Native to the Middle East and western Asia, it has been sought out and cultivated since ancient times, and is now widely grown throughout the world, both for its fruit and as an ornamental plant.
 
 # Contents
 The following components are available as part of this library as of now.
