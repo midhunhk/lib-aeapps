@@ -42,18 +42,28 @@ Presently the following android app projects make use of this library.
 To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
 
 # Using
-1. Include the library as a maven repository.
+#### 1. Include the library as a maven repository.
 
 `
-repositories {
-    maven {
-        url  "http://dl.bintray.com/midhunhk/android-libraries" 
-    }
-}
+repositories {    
+    maven {    
+        url  "http://dl.bintray.com/midhunhk/android-libraries"     
+    }    
+}    
 `
 
-2. Add as a compile time dependency
-`compile 'com.ae.apps:lib-ae-apps:2.0.5'`
+#### 2. (i) Maven Dependency
+`
+<dependency>    
+  <groupId>com.ae.apps</groupId>    
+  <artifactId>android-libraries</artifactId>    
+  <version>2.1.0</version>    
+  <type>pom</type>    
+</dependency>
+`
+
+#### 2. (ii) Gradle - Add as a compile time dependency
+  `compile 'com.ae.apps:android-libraries:2.1.0'`
 
 # License
 Licensed under the Apache License, Version 2.0 (the "License");
