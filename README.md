@@ -1,4 +1,4 @@
-# libAeApps
+# libAeApps (Grapefruit)
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.0.0.svg)](https://github.com/midhunhk/ae-apps-library) 
@@ -9,7 +9,7 @@ This Android library project contains some reusable code that can be used across
 # Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Fig**.
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Grapefruit**.
 
 Ficus carica is an Asian species of flowering plants in the mulberry family, known as the common fig (or just the fig). It is the source of the fruit also called the fig, and as such is an important crop in those areas where it is grown commercially. Native to the Middle East and western Asia, it has been sought out and cultivated since ancient times, and is now widely grown throughout the world, both for its fruit and as an ornamental plant.
 
