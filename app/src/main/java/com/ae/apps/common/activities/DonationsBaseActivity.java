@@ -104,6 +104,7 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 	
 	private void processPurchase(IabResult result, Purchase info) {
 		if(result.isFailure()){
+			mHelper.flagEndAsync();
 			// Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
 			return;
 		}
@@ -141,6 +142,7 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 				return;
 			}
 			
+			mHelper.flagEndAsync();
 			onPurchaseConsumeFinished(purchase, result);
 		}
 	};
