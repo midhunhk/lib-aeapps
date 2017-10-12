@@ -8,7 +8,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
         
-        versionCode 36
+        versionCode 37
         versionName "2.2.0"
 
         archivesBaseName = "lib-ae-apps"
@@ -29,6 +29,23 @@ android {
                 def fileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
+        }
+    }
+
+    // Tasks for Generating JavaDocs
+    libraryVariants.all { variant ->
+        task("generate${variant.name}Javadoc", type: Javadoc) {
+            description "Generates Javadoc for $variant.name."
+            source = variant.javaCompiler.source
+            title = "LibAeApps " + android.defaultConfig.versionName
+            exclude '**/BuildConfig.java'
+            exclude '**/R.java'
+            exclude '**/inapp/*.java'
+            exclude '**/billing/*.java'
+            failOnError false
+            ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+            classpath = files(variant.javaCompiler.classpath.files) + files(ext.androidJar)
+            destinationDir = file("${project.projectDir}/../docs")
         }
     }
     
