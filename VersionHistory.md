@@ -1,3 +1,9 @@
+Version 2.2 (Grapefruit)
+-----------
+#### Version 2.2.0 [Oct 2017]
+ - Fix flagStartAsync not getting reset after Donation
+ - Generate Java docs for library 
+ 
 Version 2.1 (Fig)
 -----------
 #### Version 2.1.0 [July 2017]
