@@ -11,7 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 /**
- * 
+ * Common Utilities
  */
 public class CommonUtils {
 
@@ -20,8 +20,9 @@ public class CommonUtils {
     /**
      * Formats a timestamp as required
      *
-     * @param timestamp
-     * @return
+     * @param timestamp timestamp
+     * @param pattern   pattern
+     * @return formatted time stamp
      */
     public static String formatTimeStamp(String timestamp, String pattern) {
         String lastContactedTimeString = null; //"Never";
@@ -39,8 +40,8 @@ public class CommonUtils {
     /**
      * Well, truncates the given string if length greater than MINIMUM_STRING_LENGTH with an ellipsis
      *
-     * @param sourceString
-     * @return
+     * @param sourceString source
+     * @return truncated string
      */
     public static String truncateString(String sourceString) {
         // Don't want to return a null here
@@ -57,10 +58,10 @@ public class CommonUtils {
     /**
      * Create an animation object from the values passed in
      *
-     * @param context
-     * @param animRes
-     * @param startOffset
-     * @return
+     * @param context the context
+     * @param animRes animation resource
+     * @param startOffset animation start offset
+     * @return Animation object
      */
     public static Animation createAnimation(Context context, int animRes, int startOffset) {
         Animation animation = AnimationUtils.loadAnimation(context, animRes);
@@ -71,8 +72,8 @@ public class CommonUtils {
     /**
      * Checks if this is a first install of an application
      *
-     * @param context
-     * @return
+     * @param context the context
+     * @return true if first install
      */
     public static boolean isFirstInstall(Context context) {
         try {

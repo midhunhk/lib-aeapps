@@ -40,8 +40,7 @@ public class ContactMessageVo implements Comparable<ContactMessageVo> {
 	}
 
 	/**
-	 * @param contactVo
-	 *            the contactId to set
+	 * @param contactVo the contactId to set
 	 */
 	public void setContactVo(ContactVo contactVo) {
 		this.contactVo = contactVo;
@@ -55,17 +54,24 @@ public class ContactMessageVo implements Comparable<ContactMessageVo> {
 	}
 
 	/**
-	 * @param messageCount
-	 *            the messageCount to set
+	 * @param messageCount the messageCount to set
 	 */
 	public void setMessageCount(int messageCount) {
 		this.messageCount = messageCount;
 	}
 
+	/**
+	 *
+	 * @return bitmap
+	 */
 	public Bitmap getPhoto() {
 		return photo;
 	}
 
+	/**
+	 *
+	 * @param photo contact photo
+	 */
 	public void setPhoto(Bitmap photo) {
 		this.photo = photo;
 	}

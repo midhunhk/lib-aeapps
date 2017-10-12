@@ -87,6 +87,8 @@ public class ContactManager extends AbstractContactManager {
     }
 
     /**
+     * Opens the contact's photo
+     *
      * @param contactId contact id
      * @return contact image
      */
