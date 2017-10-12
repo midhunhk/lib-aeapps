@@ -32,7 +32,7 @@ public interface AeContactService {
 	/**
 	 * Read all contacts from the phone's contact database
 	 * 
-	 * @param addContactsWithPhoneNumbers
+	 * @param addContactsWithPhoneNumbers flag
 	 * @return list of contacts
 	 */
 	List<ContactVo> getContacts(boolean addContactsWithPhoneNumbers);
@@ -40,7 +40,7 @@ public interface AeContactService {
 	/**
 	 * Returns the contact photo
 	 * 
-	 * @param contactId
+	 * @param contactId contactId
 	 * @return contact photo if it exists
 	 */
 	Bitmap getContactPhoto(final String contactId);
@@ -48,7 +48,7 @@ public interface AeContactService {
 	/**
 	 * Returns the list of phone numbers for this contact if it exists
 	 * 
-	 * @param contactId
+	 * @param contactId contactId
 	 * @return list of phone numbers for this contact
 	 */
 	List<PhoneNumberVo> getContactPhoneDetails(String contactId);
@@ -56,7 +56,7 @@ public interface AeContactService {
 	/**
 	 * Returns list of messages for this contact
 	 * 
-	 * @param contactId
+	 * @param contactId contactId
 	 * @return list of messages
 	 */
 	List<MessageVo> getContactMessages(String contactId);
@@ -64,7 +64,7 @@ public interface AeContactService {
 	/**
 	 * Returns the contactId when given the rawContactId which is used in the master table 
 	 * 
-	 * @param rawContactId
+	 * @param rawContactId contactId
 	 * @return contactId
 	 */
 	long getContactIdFromRawContactId(final String rawContactId);
@@ -73,7 +73,7 @@ public interface AeContactService {
      * Get contactId corresponding to an "address"
      *
      * @param address address to find the contact id for
-     * @return contactid
+     * @return contactId
      */
     String getContactIdFromAddress(final String address);
 

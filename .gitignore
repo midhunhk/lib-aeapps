@@ -22,6 +22,7 @@ gradlew
 gradlew.bat
 .gitignore
 genrelease.cmd
+genJavaDoc.cmd
 
 # Eclipse project files
 .classpath

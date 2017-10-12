@@ -11,7 +11,7 @@ public class MobileNetworkUtils {
 	/**
 	 * Call a contact
 	 * 
-	 * @param contactNo
+	 * @param contactNo the contact no
 	 */
 	public static void callContact(Context context, String contactNo) {
 		try {
@@ -27,7 +27,7 @@ public class MobileNetworkUtils {
 	/**
 	 * Text a contact
 	 * 
-	 * @param contactNo
+	 * @param contactNo contact number
 	 */
 	public static void textContact(Context context, String contactNo) {
 		try {
@@ -44,8 +44,8 @@ public class MobileNetworkUtils {
 	/**
 	 * This method checks whether Internet connectivity is available on the device
 	 * 
-	 * @param context
-	 * @return
+	 * @param context the context
+	 * @return true if internet connection available
 	 */
 	public static boolean isInternetAvailable(Context context) {
 		// Request the Connectivity service to the OS
@@ -57,9 +57,9 @@ public class MobileNetworkUtils {
 		// Check the current state of the Network Information
 		if (networkInfo == null)
 			return false;
-		if (networkInfo.isConnected() == false)
+		if (!networkInfo.isConnected())
 			return false;
-		if (networkInfo.isAvailable() == false)
+		if (!networkInfo.isAvailable())
 			return false;
 		return true;
 	}
@@ -67,8 +67,8 @@ public class MobileNetworkUtils {
 	/**
 	 * Launches an Intent to open a web page
 	 * 
-	 * @param context
-	 * @param url
+	 * @param context the context
+	 * @param url url
 	 */
 	public static void launchWebPage(Context context, String url) {
 		Intent i = new Intent(Intent.ACTION_VIEW);

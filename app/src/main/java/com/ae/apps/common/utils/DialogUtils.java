@@ -33,9 +33,9 @@ public class DialogUtils {
 	 * 
 	 * Note: Do not pass getBaseContext() and instead this from an activity
 	 * 
-	 * @param context
-	 * @param titleResourceId
-	 * @param messageResourceId
+	 * @param context the context
+	 * @param titleResourceId title resource id
+	 * @param messageResourceId message resource id
 	 */
 	public static void showWithMessageAndOkButton(final Context context, int titleResourceId, int messageResourceId,
 			int buttonResourceId) {
@@ -57,10 +57,10 @@ public class DialogUtils {
 	/**
 	 * To display a Material Dialog box, with title, content and a button
 	 * 
-	 * @param context
-	 * @param titleResourceId
-	 * @param messageResourceId
-	 * @param positiveButtonResourceId
+	 * @param context the context
+	 * @param titleResourceId title resource id
+	 * @param messageResourceId message resource id
+	 * @param positiveButtonResourceId positive button resource id
 	 */
 	public static void showMaterialInfoDialog(final Context context, int titleResourceId, int messageResourceId, 
 			int positiveButtonResourceId) {

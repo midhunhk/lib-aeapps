@@ -89,6 +89,8 @@ public interface AeContactManager {
     Bitmap getContactPhoto(final String contactId, final Bitmap defaultImage);
 
     /**
+     * Returns the contact info
+     *
      * @param contactId contact id
      * @return contact vo
      */
@@ -105,8 +107,8 @@ public interface AeContactManager {
     /**
      * Returns the contactId based on the rawContactId
      *
-     * @param rawContactId ra contact id
-     * @return
+     * @param rawContactId raw contact id
+     * @return contact id
      */
     long getContactIdFromRawContactId(final String rawContactId);
 
@@ -114,7 +116,7 @@ public interface AeContactManager {
      * Does a lookup on the contacts by phone number lookup
      *
      * @param address address
-     * @return
+     * @return contact id
      */
     String getContactIdFromAddress(final String address);
 
