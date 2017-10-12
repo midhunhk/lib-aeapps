@@ -1,0 +1,10 @@
+com.ae.apps.common.activities
+com.ae.apps.common.db
+com.ae.apps.common.fragments
+com.ae.apps.common.managers
+com.ae.apps.common.managers.contact
+com.ae.apps.common.mock
+com.ae.apps.common.services
+com.ae.apps.common.utils
+com.ae.apps.common.views
+com.ae.apps.common.vo
