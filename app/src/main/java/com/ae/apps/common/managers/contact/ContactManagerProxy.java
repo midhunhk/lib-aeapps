@@ -14,6 +14,7 @@ import java.util.List;
  * Note: mContactManager must be initialized before using any of its methods
  */
 public class ContactManagerProxy implements AeContactManager {
+
     protected AeContactManager mContactManager;
 
     @Override

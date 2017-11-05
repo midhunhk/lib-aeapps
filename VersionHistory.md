@@ -1,5 +1,10 @@
 Version 2.2 (Grapefruit)
 -----------
+#### Version 2.2.1 [Nov 2017]
+ - Add ContactManagerProxy class
+ - Add animation resources
+ - Add reusable properties
+ 
 #### Version 2.2.0 [Oct 2017]
  - Fix flagStartAsync not getting reset after Donation
  - Generate Java docs for library 
