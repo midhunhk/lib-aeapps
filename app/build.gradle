@@ -9,7 +9,7 @@ android {
         targetSdkVersion 21
 
         versionCode 38
-        versionName "2.2.1"
+        versionName "$PUBLISH_VERSION"
 
         archivesBaseName = "lib-ae-apps"
         version = android.defaultConfig.versionName
