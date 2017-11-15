@@ -1,5 +1,11 @@
 Version 2.2 (Grapefruit)
 -----------
+#### Version 2.2.1 [Nov 2017]
+ - Add MultiContactPicker Activity
+ - Add ContactManagerProxy class
+ - Add animation resources
+ - Add reusable properties
+ 
 #### Version 2.2.0 [Oct 2017]
  - Fix flagStartAsync not getting reset after Donation
  - Generate Java docs for library 
@@ -11,14 +17,14 @@ Version 2.1 (Fig)
 
 Version 2.0 (Elderberry)
 -----------
+#### Version 2.0.1 [June 2017]
+- Refactor ContactManager implementation
+- Unit test cases
+
 #### Version 2.0.0 [May 2017]
 - Updates to ContactManager
 - Add contacts without contact numbers
 - Integration with Travis CI
-
-#### Version 2.0.1 [June 2017]
-- Refactor ContactManager implementation
-- Unit test cases
 
 Version 1.5 (Damson)
 -----------

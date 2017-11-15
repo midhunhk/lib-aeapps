@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 21
-        
-        versionCode 37
-        versionName "2.2.0"
+
+        versionCode 38
+        versionName "$PUBLISH_VERSION"
 
         archivesBaseName = "lib-ae-apps"
         version = android.defaultConfig.versionName
@@ -21,14 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    
+
     libraryVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.aar')) {
-                def fileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
+        variant.outputs.all { output ->
+            outputFileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
         }
     }
 
@@ -48,39 +44,19 @@ android {
             destinationDir = file("${project.projectDir}/../docs")
         }
     }
-    
+
     lintOptions {
         abortOnError false
     }
 }
 
-ext {
-    PUBLISH_GROUP_ID = 'com.ae.apps'
-    PUBLISH_ARTIFACT_ID = 'android-libraries'
-    PUBLISH_VERSION = '2.2.0'
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
-    }
-}
-
 dependencies {
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIB_VERSION"
+    compile "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
+    compile "com.android.support:cardview-v7:$SUPPORT_LIB_VERSION"
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
 
-    // Required -- JUnit 4 framework
     testCompile 'junit:junit:4.12'
-    // Optional -- Mockito framework
     testCompile 'org.mockito:mockito-core:1.10.19'
 }
 

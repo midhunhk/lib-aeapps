@@ -1,6 +1,13 @@
 package com.ae.apps.common.utils;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
+
 import java.util.List;
+
+import static android.net.Uri.withAppendedPath;
 
 /**
  * Helper methods for Contact
@@ -26,6 +33,22 @@ public class ContactUtils {
         } else {
             phoneNumbers.add(unformattedNumber);
             return false;
+        }
+    }
+
+    /**
+     * Shows this contact in the Android's Contact Manager
+     *
+     * @param contactId contactId
+     */
+    public static void showContactInAddressBook(Context context, String contactId) {
+        if (null != contactId) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+            Uri uri = withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactId);
+            intent.setData(uri);
+
+            context.startActivity(intent);
         }
     }
 }
