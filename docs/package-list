@@ -1,4 +1,5 @@
 com.ae.apps.common.activities
+com.ae.apps.common.activities.multicontact
 com.ae.apps.common.db
 com.ae.apps.common.fragments
 com.ae.apps.common.managers
