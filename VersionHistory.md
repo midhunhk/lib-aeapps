@@ -1,5 +1,8 @@
 Version 2.2 (Grapefruit)
 -----------
+#### Version 2.2.2 [Nov 2017]
+ - Add MultiContactPicker Activity
+ 
 #### Version 2.2.1 [Nov 2017]
  - Add ContactManagerProxy class
  - Add animation resources

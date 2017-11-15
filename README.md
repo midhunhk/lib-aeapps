@@ -19,6 +19,7 @@ The following components are available as part of this library as of now.
 * Activities
   * Base Activity for Donations (Google Play In-App Billing v3)
   * Base Activity for ToolbarActivity
+  * Base Activity for Multiple Contact Picker
 * Database  
   * DataBaseHelper
   * CopiedDataBaseHelper for using a database file from app's assets folder
