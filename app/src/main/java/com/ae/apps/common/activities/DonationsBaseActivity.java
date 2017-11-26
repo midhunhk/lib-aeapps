@@ -61,7 +61,7 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 			@Override
 			public void onIabSetupFinished(IabResult result) {
 				if (!result.isSuccess()) {
-					logDebug("problem in setup inapp " + result);
+					logDebug("problem in setup in app " + result);
 				}
 			}
 		});
@@ -77,12 +77,13 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 	/**
 	 * Launches the purchase flow using IAB
 	 * 
-	 * @param productCode 
-	 * @param extraData
+	 * @param productCode  productCode
+	 * @param extraData extraData
 	 */
 	protected void launchPurchaseFlow(String productCode, String extraData){
-		if(null != productCode && !TextUtils.isEmpty(productCode)){
+		if(null != productCode && !TextUtils.isEmpty(productCode) && null != mHelper){
 			// on button click after selecting a purchase item
+			mHelper.flagEndAsync();
 			mHelper.launchPurchaseFlow(mActivity, productCode, RC_REQUEST, mPurchaseFinishedlistener, extraData);
 		}
 	}
@@ -119,16 +120,16 @@ public abstract class DonationsBaseActivity extends ToolBarBaseActivity{
 	/**
 	 * Check the purchase response to see if we are good
 	 * 
-	 * @param info
-	 * @return
+	 * @param info information
+	 * @return purchase status
 	 */
 	protected abstract boolean checkPurchaseResponse(Purchase info);
 
 	/**
 	 * Invoked when purchase is consumed successfully
 	 * 
-	 * @param purchase
-	 * @param result
+	 * @param purchase purchase item
+	 * @param result purchase result
 	 */
 	protected abstract void onPurchaseConsumeFinished(Purchase purchase, IabResult result);
 	
