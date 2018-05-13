@@ -1,5 +1,14 @@
+Version 2.3 (Huckleberry)
+-----------
+#### Version 2.3.0 [TBD]
+ - More ContactUtil methods
+
 Version 2.2 (Grapefruit)
 -----------
+#### Version 2.2.2 [Nov 2017]
+ - flagEndAsync before new purchase flow
+ - Downgrade support library version for Message Counter
+ 
 #### Version 2.2.1 [Nov 2017]
  - Add MultiContactPicker Activity
  - Add ContactManagerProxy class

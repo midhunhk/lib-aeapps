@@ -25,16 +25,16 @@ public class CommonUtils {
      * @return formatted time stamp
      */
     public static String formatTimeStamp(String timestamp, String pattern) {
-        String lastContactedTimeString = null; //"Never";
+        String timeString = null; //"Never";
         if (timestamp != null && timestamp.trim().length() > 0) {
             long tempLastContacted = Long.parseLong(timestamp);
             if (tempLastContacted > 0) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
                 Date date = new Date(Long.parseLong(timestamp));
-                lastContactedTimeString = dateFormat.format(date);
+                timeString = dateFormat.format(date);
             }
         }
-        return lastContactedTimeString;
+        return timeString;
     }
 
     /**
@@ -49,8 +49,7 @@ public class CommonUtils {
             return "";
         // Do the truncation
         if (sourceString.length() > MINIMUM_STRING_LENGTH) {
-            String truncated = sourceString.substring(0, MINIMUM_STRING_LENGTH) + "...";
-            return truncated;
+            return sourceString.substring(0, MINIMUM_STRING_LENGTH) + "...";
         }
         return sourceString;
     }

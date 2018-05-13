@@ -3,7 +3,7 @@ buildscript {
     ext {
         PUBLISH_GROUP_ID = 'com.ae.apps'
         PUBLISH_ARTIFACT_ID = 'android-libraries'
-        PUBLISH_VERSION = '2.2.2'
+        PUBLISH_VERSION = '2.3.0'
         SUPPORT_LIB_VERSION = '25.3.1'
     }
     repositories {
