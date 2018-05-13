@@ -9,7 +9,7 @@ android:
     - tools
 
     # Same version as specified in build.gradle
-    - build-tools-26.0.2
+    - build-tools-27.0.3
 
     # SDK version
     - android-25
