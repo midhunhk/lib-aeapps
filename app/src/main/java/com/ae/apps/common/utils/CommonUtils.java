@@ -74,7 +74,7 @@ public class CommonUtils {
      * @param context the context
      * @return true if first install
      */
-    public static boolean isFirstInstall(Context context) {
+    public static boolean isFirstInstall(final Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return packageInfo.firstInstallTime == packageInfo.lastUpdateTime;
@@ -82,5 +82,21 @@ public class CommonUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * Checks if a package is installed
+     *
+     * @param packageName package name to check
+     * @param context the context
+     * @return true if package is installed, false otherwise
+     */
+    public static boolean isPackageInstalled(String packageName, final Context context) {
+        try {
+            context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }
