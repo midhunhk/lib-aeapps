@@ -3,6 +3,8 @@ package com.ae.apps.common.utils;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -18,6 +20,7 @@ import static android.net.Uri.withAppendedPath;
 public class ContactUtils {
 
     private static final String WHATSAPP_ID_SUFFIX = "@s.whatsapp.net";
+    private static final String CONTENT_CONTACTS_DATA = "content://com.android.contacts/data/";
 
     /**
      * Checks whether the numberToCheck is present in the supplied list. Adds the number to the list if it doesn't exist
@@ -73,8 +76,8 @@ public class ContactUtils {
     /**
      * Tries to open a WhatsApp Contact
      *
-     * @param context
-     * @param contactId
+     * @param context the context
+     * @param contactId the contact id
      */
     public static void openWhatsAppContact(final Context context, String contactId){
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("content://com.android.contacts/data/" + contactId));
@@ -101,7 +104,10 @@ public class ContactUtils {
                     new String[] { ContactsContract.Contacts.Data._ID },
                     ContactsContract.Data.DATA1 + "=?",
                     new String[] { id }, null);
-            if(null != cursor && !cursor.moveToFirst()){
+            if(null == cursor){
+                return;
+            }
+            if(!cursor.moveToFirst()){
                 Toast.makeText(context, "WhatsApp contact with this number not found. Make sure it has country code.",
                         Toast.LENGTH_LONG).show();
                 return;
