@@ -39,7 +39,9 @@ android {
             exclude '**/billing/*.java'
             failOnError false
             ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-            doFirst { classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar) }
+            doFirst {
+                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+            }
             destinationDir = file("${project.projectDir}/../docs")
         }
     }
@@ -55,6 +57,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
 
+    implementation 'com.android.support:support-v4:25.4.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
 }

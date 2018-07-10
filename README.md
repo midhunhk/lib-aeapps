@@ -20,6 +20,9 @@ The following components are available as part of this library as of now.
   * Base Activity for Donations (Google Play In-App Billing v3)
   * Base Activity for ToolbarActivity
   * Base Activity for Multiple Contact Picker
+* Fragments
+  * Contact Picker
+  * Permission Checker Base Fragment that checks for Runtime permissions
 * Database  
   * DataBaseHelper
   * CopiedDataBaseHelper for using a database file from app's assets folder
@@ -58,13 +61,13 @@ repositories {
 <dependency>    
   <groupId>com.ae.apps</groupId>    
   <artifactId>android-libraries</artifactId>    
-  <version>2.2.0</version>    
+  <version>2.3.0</version>    
   <type>pom</type>    
 </dependency>
 `
 
 #### 2. (ii) Gradle - Add as a compile time dependency
-  `compile 'com.ae.apps:android-libraries:2.2.0'`
+  `compile 'com.ae.apps:android-libraries:2.3.0'`
 
 # License
 Licensed under the Apache License, Version 2.0 (the "License");

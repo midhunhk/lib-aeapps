@@ -7,8 +7,11 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 
 /**
  * Common Utilities
@@ -98,5 +101,19 @@ public class CommonUtils {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+
+    /**
+     * Creates a FrameLayout that can be used as a parent container
+     *
+     * @param context the context
+     * @return an instance of FrameLayout
+     */
+    public static ViewGroup createParentLayout(final Context context){
+        FrameLayout layout = new FrameLayout(context);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
+        layout.setLayoutParams(lp);
+        return layout;
     }
 }
