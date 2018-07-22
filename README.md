@@ -9,9 +9,9 @@ This Android library project contains some reusable code that can be used across
 # Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Huckleberry**.
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Indian Plum**.
 
-Huckleberries are perennial evergreen shrubs about 2 to 3 feet tall when grown in full sun but may become 10 feet or more when grown in shade conditions. Leaves of the huckleberry are serrated, feel a bit leathery. The black-purple berries of the huckleberry plant are resultant of tiny, pale pink urn-shaped flowers that appear in the spring. This delicious fruit is, in turn, eaten fresh or turned into jams and other preserves. :bird: Birds find the berries hard to resist as well.
+Indian Plum: This flowering shrub or small tree is native to the Pacific Northwest, west of the Cascade Mountains. The reddish fruit are non-toxic and loved by birds.
 
 # Contents
 The following components are available as part of this library as of now.
