@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- commonly used dps -->
+    <dimen name="unit_xxs">1dp</dimen>
+    <dimen name="unit_xs">2dp</dimen>
+    <dimen name="unit_s">4dp</dimen>
+    <dimen name="unit_m">8dp</dimen>
+    <dimen name="unit_l">16dp</dimen>
+    <dimen name="unit_xl">32dp</dimen>
+    <dimen name="unit_xxl">48dp</dimen>
+
     <!-- margins -->
     <dimen name="margin_small">6dp</dimen>
     <dimen name="margin_medium">12dp</dimen>
