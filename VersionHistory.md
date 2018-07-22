@@ -1,5 +1,5 @@
 ## Version 2.3 (Huckleberry)
-#### Version 2.3.0 [TBD]
+#### Version 2.3.0 [Jul 2018]
  - More ContactUtil methods
  - PermissionCheckingFragment
 
