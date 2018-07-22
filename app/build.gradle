@@ -2,13 +2,12 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 21
 
-        versionCode 38
+        versionCode 39
         versionName "$PUBLISH_VERSION"
 
         archivesBaseName = "lib-ae-apps"
@@ -40,7 +39,9 @@ android {
             exclude '**/billing/*.java'
             failOnError false
             ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-            classpath = files(variant.javaCompiler.classpath.files) + files(ext.androidJar)
+            doFirst {
+                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+            }
             destinationDir = file("${project.projectDir}/../docs")
         }
     }

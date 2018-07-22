@@ -1,7 +1,7 @@
-# libAeApps (Grapefruit)
+# libAeApps (Huckleberry)
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.0.0.svg)](https://github.com/midhunhk/ae-apps-library) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V2.3.0.svg)](https://github.com/midhunhk/ae-apps-library) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
@@ -9,9 +9,9 @@ This Android library project contains some reusable code that can be used across
 # Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Grapefruit**.
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Huckleberry**.
 
-The grapefruit (Citrus paradisi) is a subtropical citrus tree known for its sour to semi-sweet, somewhat bitter fruit.
+Huckleberries are perennial evergreen shrubs about 2 to 3 feet tall when grown in full sun but may become 10 feet or more when grown in shade conditions. Leaves of the huckleberry are serrated, feel a bit leathery. The black-purple berries of the huckleberry plant are resultant of tiny, pale pink urn-shaped flowers that appear in the spring. This delicious fruit is, in turn, eaten fresh or turned into jams and other preserves. :bird: Birds find the berries hard to resist as well.
 
 # Contents
 The following components are available as part of this library as of now.
@@ -20,6 +20,9 @@ The following components are available as part of this library as of now.
   * Base Activity for Donations (Google Play In-App Billing v3)
   * Base Activity for ToolbarActivity
   * Base Activity for Multiple Contact Picker
+* Fragments
+  * Contact Picker
+  * Permission Checker Base Fragment that checks for Runtime permissions
 * Database  
   * DataBaseHelper
   * CopiedDataBaseHelper for using a database file from app's assets folder
@@ -58,13 +61,13 @@ repositories {
 <dependency>    
   <groupId>com.ae.apps</groupId>    
   <artifactId>android-libraries</artifactId>    
-  <version>2.2.0</version>    
+  <version>2.3.0</version>    
   <type>pom</type>    
 </dependency>
 `
 
 #### 2. (ii) Gradle - Add as a compile time dependency
-  `compile 'com.ae.apps:android-libraries:2.2.0'`
+  `compile 'com.ae.apps:android-libraries:2.3.0'`
 
 # License
 Licensed under the Apache License, Version 2.0 (the "License");

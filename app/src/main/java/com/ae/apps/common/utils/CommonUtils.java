@@ -7,8 +7,11 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 
 /**
  * Common Utilities
@@ -25,16 +28,16 @@ public class CommonUtils {
      * @return formatted time stamp
      */
     public static String formatTimeStamp(String timestamp, String pattern) {
-        String lastContactedTimeString = null; //"Never";
+        String timeString = null; //"Never";
         if (timestamp != null && timestamp.trim().length() > 0) {
             long tempLastContacted = Long.parseLong(timestamp);
             if (tempLastContacted > 0) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
                 Date date = new Date(Long.parseLong(timestamp));
-                lastContactedTimeString = dateFormat.format(date);
+                timeString = dateFormat.format(date);
             }
         }
-        return lastContactedTimeString;
+        return timeString;
     }
 
     /**
@@ -49,8 +52,7 @@ public class CommonUtils {
             return "";
         // Do the truncation
         if (sourceString.length() > MINIMUM_STRING_LENGTH) {
-            String truncated = sourceString.substring(0, MINIMUM_STRING_LENGTH) + "...";
-            return truncated;
+            return sourceString.substring(0, MINIMUM_STRING_LENGTH) + "...";
         }
         return sourceString;
     }
@@ -75,7 +77,7 @@ public class CommonUtils {
      * @param context the context
      * @return true if first install
      */
-    public static boolean isFirstInstall(Context context) {
+    public static boolean isFirstInstall(final Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             return packageInfo.firstInstallTime == packageInfo.lastUpdateTime;
@@ -83,5 +85,35 @@ public class CommonUtils {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * Checks if a package is installed
+     *
+     * @param packageName package name to check
+     * @param context the context
+     * @return true if package is installed, false otherwise
+     */
+    public static boolean isPackageInstalled(String packageName, final Context context) {
+        try {
+            context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Creates a FrameLayout that can be used as a parent container
+     *
+     * @param context the context
+     * @return an instance of FrameLayout
+     */
+    public static ViewGroup createParentLayout(final Context context){
+        FrameLayout layout = new FrameLayout(context);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
+        layout.setLayoutParams(lp);
+        return layout;
     }
 }
