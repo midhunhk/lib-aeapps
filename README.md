@@ -1,7 +1,7 @@
 # libAeApps (Huckleberry)
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/v2.2.2.svg)](https://github.com/midhunhk/ae-apps-library) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V2.2.2.svg)](https://github.com/midhunhk/ae-apps-library) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
