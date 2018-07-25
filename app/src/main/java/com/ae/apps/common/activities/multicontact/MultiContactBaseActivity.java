@@ -29,7 +29,9 @@ import java.util.List;
  * </pre>
  * <p>
  * Use a layout that contains the below layout in 'getLayoutResourceId()'
- * <include layout="@layout/layout_multi_contact_picker"/>
+ * <pre>
+ *  <include layout="@layout/layout_multi_contact_picker"/>
+ * </pre>
  */
 public abstract class MultiContactBaseActivity extends ToolBarBaseActivity
         implements MultiContactInteractionListener {

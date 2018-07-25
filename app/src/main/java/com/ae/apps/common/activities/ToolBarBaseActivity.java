@@ -47,7 +47,8 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
 	/**
 	 * Sets the toolbartitle
-	 * 
+	 *
+	 * @param title Title for the toolbar
 	 */
 	protected void setToolbarTitle(String title) {
 		if (null != getSupportActionBar()) {
@@ -58,7 +59,7 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 	/**
 	 * Returns the toolbar instance
 	 * 
-	 * @return
+	 * @return the toolbar instance
 	 */
 	protected Toolbar getToolBar() {
 		return mToolbar;
@@ -67,14 +68,14 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 	/**
 	 * Returns the toolbar resource id. Should be R.id.toolbar in most cases
 	 * 
-	 * @return
+	 * @return return the toolbar resource id
 	 */
 	protected abstract int getToolbarResourceId();
 
 	/**
 	 * Returns the layout resource id for the activity
 	 * 
-	 * @return
+	 * @return return the layout resource id
 	 */
 	protected abstract int getLayoutResourceId();
 
@@ -86,12 +87,10 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// Fix for NPE on LG Devices when pressing hardware menu button
-		if (keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)) {
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+        // Fix for NPE on LG Devices when pressing hardware menu button
+        return keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)
+                || super.onKeyDown(keyCode, event);
+    }
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
