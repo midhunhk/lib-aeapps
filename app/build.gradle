@@ -7,7 +7,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 21
 
-        versionCode 39
+        versionCode 40
         versionName "$PUBLISH_VERSION"
 
         archivesBaseName = "lib-ae-apps"
@@ -57,7 +57,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$SUPPORT_LIB_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.7'
     testImplementation 'org.mockito:mockito-core:1.10.19'
 }
 
