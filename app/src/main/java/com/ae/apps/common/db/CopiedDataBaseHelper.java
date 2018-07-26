@@ -29,10 +29,10 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Required constructor
 	 * 
-	 * @param context
-	 * @param databaseName
-	 * @param factory
-	 * @param version
+	 * @param context context
+	 * @param databaseName  database name
+	 * @param factory cursor factory
+	 * @param version database version
 	 */
 	public CopiedDataBaseHelper(Context context, String databaseName, CursorFactory factory, int version) {
 		super(context, databaseName, factory, version);
@@ -44,9 +44,8 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Creates the database
 	 * 
-	 * @throws IOException
 	 */
-	public void createDataBase() throws IOException {
+	public void createDataBase() {
 		boolean dbExist = checkDataBase();
 		if (dbExist) {
 			// do nothing - database already exists
@@ -78,12 +77,12 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 		if (checkDB != null) {
 			checkDB.close();
 		}
-		return checkDB != null ? true : false;
+		return checkDB != null;
 	}
 
 	/**
 	 * Copies your database from your local assets-folder to the just created empty database in the system folder, from
-	 * where it can be accessed and handled. This is done by transfering bytestream.
+	 * where it can be accessed and handled. This is done by transferring byte stream.
 	 * */
 	protected void copyDataBase() throws IOException {
 		// Open your local db as the input stream
@@ -95,7 +94,7 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 		// Open the empty db as the output stream
 		OutputStream myOutput = new FileOutputStream(outFileName);
 
-		// transfer bytes from the inputfile to the outputfile
+		// transfer bytes from the input file to the output file
 		byte[] buffer = new byte[1024];
 		int length;
 		while ((length = myInput.read(buffer)) > 0) {
@@ -108,12 +107,20 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 		myInput.close();
 	}
 
+	/**
+	 * Opens the database
+	 *
+	 * @throws SQLException while opening the database
+	 */
 	public void openDataBase() throws SQLException {
 		// Open the database
 		String myPath = databasePath;
 		mDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 	}
 
+    /**
+     * close the database
+     */
 	@Override
 	public synchronized void close() {
 		if (mDataBase != null)
@@ -121,11 +128,23 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 		super.close();
 	}
 
+    /**
+     * Invoked onCreate
+     *
+     * @param arg0 database
+     */
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
 
 	}
 
+    /**
+     * called on database upgrade
+     *
+     * @param db database
+     * @param oldVersion oldversion
+     * @param newVersion newversion
+     */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -134,14 +153,14 @@ public abstract class CopiedDataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * Runs a query on the real database
 	 * 
-	 * @param table
-	 * @param columns
-	 * @param selection
-	 * @param selectionArgs
-	 * @param groupBy
-	 * @param having
-	 * @param orderBy
-	 * @return
+	 * @param table table name
+	 * @param columns columns
+	 * @param selection selection
+	 * @param selectionArgs selectionargs
+	 * @param groupBy groupby
+	 * @param having having clause
+	 * @param orderBy orderby
+	 * @return cursor
 	 */
 	protected Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy,
 			String having, String orderBy) {
