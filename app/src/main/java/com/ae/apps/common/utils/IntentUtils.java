@@ -14,24 +14,50 @@ public class IntentUtils {
         private String mSubject;
         private String mBody;
 
+        /**
+         * Create a new instance of the builder
+         */
         public EmailIntentBuilder() {
         }
 
+        /**
+         * set the to address
+         *
+         * @param to to address
+         * @return this instance
+         */
         public EmailIntentBuilder to(String to) {
             mTo = to;
             return this;
         }
 
+        /**
+         * set the subject
+         *
+         * @param subject the email subject
+         * @return this instance
+         */
         public EmailIntentBuilder subject(String subject) {
             mSubject = subject;
             return this;
         }
 
+        /**
+         * set the body
+         *
+         * @param body the email body
+         * @return this instance
+         */
         public EmailIntentBuilder body(String body) {
             mBody = body;
             return this;
         }
 
+        /**
+         * get the intent for an email
+         *
+         * @return the intent
+         */
         public Intent get() {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setType("text/html");

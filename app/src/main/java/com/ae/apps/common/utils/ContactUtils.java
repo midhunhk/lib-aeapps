@@ -28,6 +28,7 @@ public class ContactUtils {
      *
      * @param phoneNumbers  phone numbers
      * @param numberToCheck number to check
+     * @return true if phone number exists
      */
     public static boolean checkIfPhoneNumberExists(final List<String> phoneNumbers, final String numberToCheck) {
         String unformattedNumber = cleanupPhoneNumber(numberToCheck);
@@ -60,6 +61,7 @@ public class ContactUtils {
     /**
      * Shows this contact in the Android's Contact Manager
      *
+     * @param context the context
      * @param contactId contactId
      */
     public static void showContactInAddressBook(Context context, String contactId) {

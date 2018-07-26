@@ -52,16 +52,15 @@ public class MobileNetworkUtils {
 		ConnectivityManager connectivityManager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+		NetworkInfo networkInfo = connectivityManager != null ?
+				connectivityManager.getActiveNetworkInfo() : null;
 
 		// Check the current state of the Network Information
 		if (networkInfo == null)
 			return false;
 		if (!networkInfo.isConnected())
 			return false;
-		if (!networkInfo.isAvailable())
-			return false;
-		return true;
+		return networkInfo.isAvailable();
 	}
 
 	/**

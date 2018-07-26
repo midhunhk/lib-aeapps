@@ -6,8 +6,8 @@ import java.util.Map;
 /**
  * Comparator that can be used for sorting a map based on the values
  *
- * @param <K>
- * @param <V>
+ * @param <K> k
+ * @param <V> v
  */
 public class ValueComparator<K, V extends Comparable<V>> implements Comparator<K> {
 

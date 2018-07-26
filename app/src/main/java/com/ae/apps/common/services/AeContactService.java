@@ -15,14 +15,14 @@
  */
 package com.ae.apps.common.services;
 
-import java.io.InputStream;
-import java.util.List;
-
 import android.graphics.Bitmap;
 
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
+
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * Specification for a DAO that accesses the Android Contacts API
@@ -80,7 +80,7 @@ public interface AeContactService {
     /**
      * Opens a contact photo?
      *
-     * See if you could use @LINK{getContactPhoto()} instead
+     * See if you could use getContactPhoto instead
      *
      * @param contactId contactId
      * @return contact photo
