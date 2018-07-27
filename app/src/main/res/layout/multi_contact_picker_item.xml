@@ -17,12 +17,12 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_medium"
         android:layout_marginStart="@dimen/margin_medium"
+        android:layout_toEndOf="@+id/multiContactPickerProfileImage"
         android:layout_toRightOf="@+id/multiContactPickerProfileImage"
         android:gravity="center_vertical"
         android:padding="@dimen/padding_medium"
         android:text="Contact Name"
         android:textSize="18sp"/>
-        android:layout_toEndOf="@+id/multiContactPickerProfileImage"/>
 
     <CheckBox
         android:id="@+id/multiContactPickerCheckBox"

@@ -20,4 +20,5 @@ public class CommonUtilsTest {
         assertEquals("abcdefghijklmnopqrstuvwxyz...",
                 CommonUtils.truncateString("abcdefghijklmnopqrstuvwxyz1234"));
     }
+
 }
