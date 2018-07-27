@@ -1,6 +1,7 @@
 ## Version 3.0 (Indian Plum)
 #### Version 3.0.0 [Jul 2018]
  - Remove DonationsActivity
+ - Add Runtime Permission Checker
  
 ## Version 2.3 (Huckleberry)
 #### Version 2.3.0 [Jul 2018]

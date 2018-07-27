@@ -38,13 +38,13 @@ public class MockContactDataUtils {
 	/**
 	 * Returns a mock contact
 	 * 
-	 * @return ContactVo
+	 * @return ContactVo contactVo
 	 */
 	public static ContactVo getMockContact() {
 		ContactVo contactVo = new ContactVo();
 
 		// Create the phone number list and add one
-		List<PhoneNumberVo> phoneNumbersList = new ArrayList<PhoneNumberVo>();
+		List<PhoneNumberVo> phoneNumbersList = new ArrayList<>();
 		PhoneNumberVo numberVo = new PhoneNumberVo();
 		numberVo.setPhoneNumber("87 7781 6267");
 		phoneNumbersList.add(numberVo);
@@ -73,14 +73,14 @@ public class MockContactDataUtils {
 	/**
 	 * A mock implementation for giving mock results. Used mainly for screenshots
 	 *
-	 * @param resource
-	 * @return
+	 * @param resource resource
+	 * @return list of contact messages
 	 */
 	public static List<ContactMessageVo> getMockContactMessageList(Resources resource) {
 		Random random = new Random();
 		int startSeed = 180;
 		int prevRandom = 0;
-		int currRandom = 0;
+		int currRandom;
 		ContactVo contactVo;
 		ContactMessageVo messageVo;
 		List<ContactMessageVo> mockedList = new ArrayList<>();
