@@ -1,13 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ae.apps.aeappslibrary"
-    android:versionCode="36"
-    android:versionName="2.1.1" >
-
-    <!--<uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="21" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>-->
-
+    package="com.ae.apps.aeappslibrary">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 </manifest>
