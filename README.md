@@ -1,4 +1,4 @@
-# libAeApps (Huckleberry)
+# libAeApps (Indian Plum)
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V2.3.0.svg)](https://github.com/midhunhk/ae-apps-library) 
@@ -61,13 +61,13 @@ repositories {
 <dependency>    
   <groupId>com.ae.apps</groupId>    
   <artifactId>android-libraries</artifactId>    
-  <version>2.3.0</version>    
+  <version>3.0.0</version>    
   <type>pom</type>    
 </dependency>
 `
 
 #### 2. (ii) Gradle - Add as a compile time dependency
-  `compile 'com.ae.apps:android-libraries:2.3.0'`
+  `compile 'com.ae.apps:android-libraries:3.0.0'`
 
 # License
 Licensed under the Apache License, Version 2.0 (the "License");
