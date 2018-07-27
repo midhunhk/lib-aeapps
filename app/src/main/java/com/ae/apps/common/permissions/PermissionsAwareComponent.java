@@ -4,6 +4,8 @@ package com.ae.apps.common.permissions;
  * A Component that is aware of Runtime Permissions. This would typically
  * be an Activity or a Fragment that depends on some runtime permissions to be
  * granted inorder to function
+ *
+ * @since 3.0
  */
 public interface PermissionsAwareComponent {
 

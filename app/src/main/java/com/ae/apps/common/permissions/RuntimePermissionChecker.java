@@ -8,6 +8,8 @@ import android.support.v4.content.PermissionChecker;
 /**
  * A helper class to check and handle RuntimePermissions.
  * Use this in an Activity or Fragment that implements {@link PermissionsAwareComponent}
+ *
+ * @since 3.0
  */
 public class RuntimePermissionChecker {
 

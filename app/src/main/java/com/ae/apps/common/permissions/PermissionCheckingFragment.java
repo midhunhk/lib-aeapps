@@ -1,4 +1,4 @@
-package com.ae.apps.common.fragments;
+package com.ae.apps.common.permissions;
 
 
 import android.content.Context;
@@ -15,6 +15,8 @@ import com.ae.apps.common.utils.CommonUtils;
 
 /**
  * An abstract Fragment that can check for Runtime Permissions if your app target is above Lollipop
+ *
+ * Use {@link RuntimePermissionChecker} if you need to extend any other component
  *
  * The onCreateView method is used to check for the permission and returns an empty
  * FrameLayout to the Activity that hosts this fragment.
