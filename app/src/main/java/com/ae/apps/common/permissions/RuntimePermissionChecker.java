@@ -47,6 +47,8 @@ public class RuntimePermissionChecker {
     }
 
     /**
+     * Does the validation whether all permissions were granted
+     *
      * Since the callback for requestPermissions comes to the component,
      * this method needs to be explicitly invoked to check the result
      *
@@ -54,11 +56,20 @@ public class RuntimePermissionChecker {
      * @param grantResults grant result of permissions
      */
     public void handlePermissionsResult(String[] permissions, int[] grantResults) {
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults.length > 0 && checkPermissionGrantResults(grantResults)) {
             mComponent.onPermissionsGranted();
         } else {
             mComponent.onPermissionsDenied();
         }
+    }
+
+    private boolean checkPermissionGrantResults(int[] grantResults) {
+        for (int result : grantResults) {
+            if (PackageManager.PERMISSION_GRANTED != result) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean checkAllPermissions(String[] permissions) {
