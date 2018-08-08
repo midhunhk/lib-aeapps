@@ -1,4 +1,7 @@
 ## Version 3.0 (Indian Plum)
+#### Version 3.0.2 [Aug 2018]
+ - Remove permission requests from manifest
+ 
 #### Version 3.0.1 [Aug 2018]
  - Bug Fixes
  
