@@ -1,6 +1,7 @@
 # libAeApps (Indian Plum)
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
+[![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/ae-apps-library)
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V2.3.0.svg)](https://github.com/midhunhk/ae-apps-library) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
@@ -45,30 +46,41 @@ Presently the following android app projects make use of this library.
 # Changelog
 To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
 
-# Using
-#### 1. Include the library as a maven repository.
+# Using the library
+## 1. Use library from JCenter
 
-`
-repositories {    
-    maven {    
-        url  "http://dl.bintray.com/midhunhk/android-libraries"     
-    }    
+```
+repositories {
+  maven { 
+    url  "http://dl.bintray.com/midhunhk/android-libraries"     
+  }    
 }    
-`
+```
 
-#### 2. (i) Maven Dependency
-`
-<dependency>    
-  <groupId>com.ae.apps</groupId>    
-  <artifactId>android-libraries</artifactId>    
-  <version>3.0.0</version>    
-  <type>pom</type>    
-</dependency>
-`
+```
+dependencies {  
+  implementation 'com.ae.apps:android-libraries:3.0.2'
+}
+```
 
-#### 2. (ii) Gradle - Add as a compile time dependency
-  `compile 'com.ae.apps:android-libraries:3.0.0'`
+## 2. Use library from JitPack
 
+Add below code to root gradle.build file  
+```  
+allprojects {  
+  repositories {
+    maven { url 'https://jitpack.io' }  
+  }  
+}
+```  
+Add Dependency  
+
+```  
+dependencies {  
+  implementation 'com.github.midhunhk:ae-apps-library:V3.0.2'  
+}  
+```
+ 
 # License
 Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
