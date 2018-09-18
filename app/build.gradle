@@ -28,25 +28,6 @@ android {
         }
     }
 
-    // Tasks for Generating JavaDocs
-   /* libraryVariants.all { variant ->
-        task("generate${variant.name}Javadoc", type: Javadoc) {
-            description "Generates Javadoc for $variant.name."
-            source = variant.javaCompiler.source
-            title = "LibAeApps " + android.defaultConfig.versionName
-            exclude '**/BuildConfig.java'
-            exclude '**/R.java'
-            exclude '**/inapp/*.java'
-            exclude '**/billing/*.java'
-            failOnError false
-            ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-            doFirst {
-                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar) + deps.supportAnnotations
-            }
-            destinationDir = file("${project.projectDir}/../docs")
-        }
-    }*/
-
     lintOptions {
         abortOnError false
     }
