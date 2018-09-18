@@ -1,18 +1,19 @@
 language: android
-jdk:
-  - oraclejdk8
+jdk: oraclejdk8
 android:
   components:
     - tools
-    - build-tools-28.0.2              # Same version as specified in build.gradle
+    - platform-tools
+    - build-tools-27.0.3              # Same version as specified in build.gradle
     - android-28                      # SDK version
-    - extra-android-m2repository      # Additional Components
-    - sys-img-armeabi-v7a-android-21  # Android Image
-
+    - extra-android-m2repository      
+    - extra-google-m2repository 
+    - sys-img-armeabi-v7a-android-22  # Android Image
   licenses:
-    - '.+'
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
      
-# Run before running the build script
 before_script:
     - wget http://services.gradle.org/distributions/gradle-4.4-bin.zip
     - unzip gradle-4.4-bin.zip
@@ -22,12 +23,3 @@ before_script:
 #    - emulator -avd test -no-skin -no-audio -no-window &
 #    - android-wait-for-emulator
 #    - adb shell input keyevent 82 &
-    
-# Licenses to be accepted
-licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-    
-#script:
-#    - TERM=dumb ./gradlew test assembleDebug
