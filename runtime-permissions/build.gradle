@@ -17,24 +17,7 @@
 
 apply plugin: 'com.android.library'
 
-android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-
-        versionCode rootProject.ext.PUBLISH.versionCode
-        versionName rootProject.ext.PUBLISH.versionName
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
+apply from: '../buildSrc/android_common.gradle'
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -44,6 +27,7 @@ dependencies {
     implementation project(':core')
     
     testImplementation deps.junit
+    testImplementation deps.mockitoCore
     androidTestImplementation deps.runner
     androidTestImplementation deps.espressoCore
 }
