@@ -29,7 +29,7 @@ android {
     }
 
     // Tasks for Generating JavaDocs
-    libraryVariants.all { variant ->
+   /* libraryVariants.all { variant ->
         task("generate${variant.name}Javadoc", type: Javadoc) {
             description "Generates Javadoc for $variant.name."
             source = variant.javaCompiler.source
@@ -41,11 +41,11 @@ android {
             failOnError false
             ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
             doFirst {
-                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+                classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar) + deps.supportAnnotations
             }
             destinationDir = file("${project.projectDir}/../docs")
         }
-    }
+    }*/
 
     lintOptions {
         abortOnError false
@@ -57,7 +57,8 @@ dependencies {
     implementation deps.supportv4
     implementation deps.cardview
     implementation deps.appcompat
-
+    //implementation deps.supportAnnotations
+    
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }
