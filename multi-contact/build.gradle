@@ -44,4 +44,5 @@ dependencies {
     androidTestImplementation deps.espressoCore
 
     implementation project(':core')
+    implementation project(':app')      // to fix build issue
 }
