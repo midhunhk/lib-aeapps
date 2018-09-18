@@ -37,7 +37,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
     implementation project(':core')
+    
+    testImplementation deps.junit
+    testImplementation deps.mockitoCore
 }
