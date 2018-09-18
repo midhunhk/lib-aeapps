@@ -1,0 +1,13 @@
+ext.PUBLISH = [
+        group_id : 'com.ae.apps',
+        artifact_id : 'lib-ae-apps',
+        version : '4.0.0',
+        versionCode: 400,
+        versionName : '4.0.0'
+]
+
+ext{
+    PUBLISH_GROUP_ID = PUBLISH.group_id
+    PUBLISH_ARTIFACT_ID = PUBLISH.artifact_id
+    PUBLISH_VERSION = PUBLISH.version
+}

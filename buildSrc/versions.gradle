@@ -1,0 +1,41 @@
+// Variables for entire project
+ext {
+    // Setup
+    minSdkVersion = 16
+    targetSdkVersion = 28
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.1"
+
+    // Common versions
+    supportLibraryVersion = "28.0.0-rc01"
+    espressoVersion = "2.2.2"
+}
+
+// Plugins
+ext.PLUGINS = [
+        gradle               : "com.android.tools.build:gradle:3.1.4",
+        bintray              : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2',
+        android_maven        : 'com.github.dcendents:android-maven-plugin:1.2'
+]
+
+// Dependencies
+ext.deps = [
+        // compile
+        design               : "com.android.support:design:$supportLibraryVersion",
+        appcompatv7          : "com.android.support:appcompat-v7:$supportLibraryVersion",
+        supportv4            : "com.android.support:support-v4:$supportLibraryVersion",
+        recyclerviewv7       : "com.android.support:recyclerview-v7:$supportLibraryVersion",
+        cardviewv7           : "com.android.support:cardview-v7:$supportLibraryVersion",
+        supportAnnotations   : "com.android.support:support-annotations:$supportLibraryVersion",
+
+        // androidTestCompile
+        espressoCore         : "com.android.support.test.espresso:espresso-core:$espressoVersion",
+        espressoIntents      : "com.android.support.test.espresso:espresso-intents:$espressoVersion",
+        espressoContrib      : "com.android.support.test.espresso:espresso-contrib:$espressoVersion",
+        testingSupportLib    : "com.android.support.test:testing-support-lib:0.1",
+        runner               : "com.android.support.test:runner:0.5",
+
+        // testCompile
+        junit                : "junit:junit:4.12",
+        mockitoCore          : "org.mockito:mockito-core:2.8.9",
+]
