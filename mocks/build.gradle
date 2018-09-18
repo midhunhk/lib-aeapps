@@ -41,4 +41,7 @@ dependencies {
     implementation deps.appcompat
 
     implementation project(':core')
+    
+    testImplementation deps.junit
+    testImplementation deps.mockitoCore
 }
