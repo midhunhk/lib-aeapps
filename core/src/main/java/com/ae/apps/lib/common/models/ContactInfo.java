@@ -17,6 +17,8 @@
 
 package com.ae.apps.lib.common.models;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -24,7 +26,8 @@ import java.util.List;
  *
  * @since 4.0
  */
-public class ContactInfo {
+public class ContactInfo implements Comparable<ContactInfo>{
+
     private String id;
     private String name;
     private String timesContacted;
@@ -78,5 +81,18 @@ public class ContactInfo {
 
     public void setPhoneNumbersList(List<PhoneNumberInfo> phoneNumbersList) {
         this.phoneNumbersList = phoneNumbersList;
+    }
+
+    @Override
+    public int compareTo(@NonNull ContactInfo another) {
+        if(this.id == null || another.id == null) {
+            return 0;
+        }
+        return this.id.compareTo(another.id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

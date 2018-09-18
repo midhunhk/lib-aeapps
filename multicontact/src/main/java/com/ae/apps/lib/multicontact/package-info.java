@@ -15,27 +15,10 @@
  *
  */
 
-package com.ae.apps.lib.common.utils;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 /**
- * Created by user on 6/24/2017.
+ * Base Activity and utilities for supporting multiple contact picker
+ *
+ * @since 2.2.1
+ * @author midhunhk
  */
-
-public class CommonUtilsTest {
-
-    @Test
-    public void testTruncateString() {
-        assertEquals("", CommonUtils.truncateString(null));
-        assertNotNull(CommonUtils.truncateString(null));
-
-        assertEquals("Hello", CommonUtils.truncateString("Hello"));
-        assertEquals("abcdefghijklmnopqrstuvwxyz...",
-                CommonUtils.truncateString("abcdefghijklmnopqrstuvwxyz1234"));
-    }
-
-}
+package com.ae.apps.lib.multicontact;

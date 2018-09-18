@@ -15,27 +15,17 @@
  *
  */
 
-package com.ae.apps.lib.common.utils;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+package com.ae.apps.lib.multicontact;
 
 /**
- * Created by user on 6/24/2017.
+ * Constants used for MultiContactPicker
  */
 
-public class CommonUtilsTest {
+public interface MultiContactPickerConstants {
 
-    @Test
-    public void testTruncateString() {
-        assertEquals("", CommonUtils.truncateString(null));
-        assertNotNull(CommonUtils.truncateString(null));
+    String CONTACT_ID_SEPARATOR = ",";
 
-        assertEquals("Hello", CommonUtils.truncateString("Hello"));
-        assertEquals("abcdefghijklmnopqrstuvwxyz...",
-                CommonUtils.truncateString("abcdefghijklmnopqrstuvwxyz1234"));
-    }
+    String RESULT_CONTACT_IDS = "contact_ids";
 
+    String PRESELECTED_CONTACT_IDS = "preselected_contact_ids";
 }

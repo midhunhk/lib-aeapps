@@ -53,10 +53,10 @@ android {
 }
 
 dependencies {
-    implementation deps.recyclerviewv7
+    implementation deps.recyclerview
     implementation deps.supportv4
-    implementation deps.cardviewv7
-    implementation deps.appcompatv7
+    implementation deps.cardview
+    implementation deps.appcompat
 
     testImplementation deps.junit
     testImplementation deps.mockitoCore

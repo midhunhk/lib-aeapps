@@ -33,7 +33,7 @@ ext.deps = [
         espressoIntents      : "com.android.support.test.espresso:espresso-intents:$espressoVersion",
         espressoContrib      : "com.android.support.test.espresso:espresso-contrib:$espressoVersion",
         testingSupportLib    : "com.android.support.test:testing-support-lib:0.1",
-        runner               : "com.android.support.test:runner:0.5",
+        runner               : "com.android.support.test:runner:1.0.2",
 
         // testCompile
         junit                : "junit:junit:4.12",
