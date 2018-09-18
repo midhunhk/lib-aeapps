@@ -1,1 +1,1 @@
-include ':app', ':core', ':utilities', ':multicontact', ':mocks'
+include ':app', ':core', ':utilities', ':multicontact', ':mocks', ':runtime-permissions'
