@@ -27,6 +27,7 @@ dependencies {
     // Modules
     implementation project(':app')      // to fix build issue
     implementation project(':core')
+    implementation project(':utilities')
     
     // Test Dependencies
     testImplementation deps.junit
