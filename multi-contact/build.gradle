@@ -39,10 +39,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.appcompat
+    implementation deps.recyclerview
+
+    implementation project(':app')      // to fix build issue
+    implementation project(':core')
+    
     testImplementation deps.junit
     androidTestImplementation deps.runner
     androidTestImplementation deps.espressoCore
-
-    implementation project(':core')
-    implementation project(':app')      // to fix build issue
 }
