@@ -15,10 +15,5 @@
   ~
   -->
 
-<resources>
-    <string name="app_name">multicontact</string>
-
-    <string name="str_multi_contact_continue">Continue</string>
-    <string name="str_multi_contact_validation">Please select at least one contact</string>
-    <string name="str_multi_contact_no_contacts">No Contacts to display</string>
-</resources>
+<manifest package="com.ae.apps"
+          xmlns:android="http://schemas.android.com/apk/res/android"/>

@@ -1,1 +1,1 @@
-include ':app', ':core', ':utilities', ':multicontact'
+include ':app', ':core', ':utilities', ':multicontact', ':mocks'
