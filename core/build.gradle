@@ -21,6 +21,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.appcompat
+    implementation deps.recyclerview
+    
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }
