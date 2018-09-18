@@ -1,4 +1,4 @@
-package com.ae.apps.common.views;
+package com.ae.apps.lib.custom.views;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -53,8 +53,8 @@ public class EmptyRecyclerView extends RecyclerView {
         if (emptyView != null && getAdapter() != null) {
             final boolean emptyViewVisible =
                     getAdapter().getItemCount() == 0;
-            emptyView.setVisibility(emptyViewVisible ? VISIBLE : GONE);
-            setVisibility(emptyViewVisible ? GONE : VISIBLE);
+            emptyView.setVisibility(emptyViewVisible ? View.VISIBLE : View.GONE);
+            setVisibility(emptyViewVisible ? View.GONE : View.VISIBLE);
         }
     }
 

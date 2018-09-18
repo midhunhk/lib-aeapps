@@ -1,4 +1,4 @@
-package com.ae.apps.common.views;
+package com.ae.apps.lib.custom.views;
 
 import android.content.Context;
 import android.content.res.Configuration;
