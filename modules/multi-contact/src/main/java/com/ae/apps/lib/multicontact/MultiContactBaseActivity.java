@@ -92,7 +92,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
     }
 
     private void setUpRecyclerView() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
+        RecyclerView recyclerView = findViewById(R.id.list);
 
         if (null != recyclerView) {
             List<ContactInfo> contactsList = contactsList();

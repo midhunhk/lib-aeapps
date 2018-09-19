@@ -15,7 +15,7 @@
  *
  */
 
-package com.ae.apps.lib.contacts;
+package com.ae.apps.lib.contacts.service;
 
 import android.graphics.Bitmap;
 
@@ -36,7 +36,7 @@ public class MockContactService implements AeContactService {
     /**
      * Number of contacts served by this implementation
      */
-    private final static int MOCK_CONTACTS_SIZE = 5;
+    public final static int MOCK_CONTACTS_SIZE = 5;
 
     private List<ContactInfo> list;
 
