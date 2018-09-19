@@ -14,7 +14,7 @@ buildscript {
     dependencies {
         classpath Plugins.gradle
         classpath Plugins.bintray
-        classpath Plugins.android_maven
+        classpath Plugins.androidMaven
     }
 }
 

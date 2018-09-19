@@ -9,15 +9,16 @@ ext {
     supportLibraryVersion = "28.0.0-rc01"
     espressoVersion = "2.2.2"
     gradleBuildToolVersion = "3.1.4"
+    androidMavenPluginVersion = "2.0"
     junitVersion = "4.12"
     mockitoCoreVersion = "2.8.9"
 }
 
 // Plugins
 ext.Plugins = [
-        gradle               : "com.android.tools.build:gradle:$gradleBuildToolVersion",
-        bintray              : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2',
-        android_maven        : 'com.github.dcendents:android-maven-plugin:1.2'
+        gradle              : "com.android.tools.build:gradle:$gradleBuildToolVersion",
+        bintray             : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2',
+        androidMaven        : "com.github.dcendents:android-maven-plugin:$androidMavenPluginVersion"
 ]
 
 // Dependencies
