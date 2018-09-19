@@ -15,5 +15,5 @@
   ~
   -->
 
-<manifest package="com.ae.apps.lib"
+<manifest package="com.ae.apps.lib.runtime-permissions"
           xmlns:android="http://schemas.android.com/apk/res/android"/>

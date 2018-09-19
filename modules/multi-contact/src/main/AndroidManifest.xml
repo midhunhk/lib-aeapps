@@ -15,5 +15,5 @@
   ~
   -->
 
-<manifest package="com.ae.apps"
+<manifest package="com.ae.apps.lib.multi-contact"
           xmlns:android="http://schemas.android.com/apk/res/android"/>

@@ -15,5 +15,5 @@
   ~
   -->
 
-<manifest package="com.ae.apps"
+<manifest package="com.ae.apps.lib.utilities"
           xmlns:android="http://schemas.android.com/apk/res/android"/>
