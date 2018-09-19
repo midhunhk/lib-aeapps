@@ -26,11 +26,13 @@ import android.view.KeyEvent;
  * Base activity to support toolbar in activity layouts
  * 
  * @author midhunhk
+ * @deprecated Use {@link AppCompatActivity} instead
  *
  */
 public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
-	Toolbar	mToolbar	= null;
+    private static final String BRAND_LGE = "LGE";
+    Toolbar	mToolbar	= null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 		setContentView(getLayoutResourceId());
 
 		// Find the toolbar and set it as action bar
-		mToolbar = (Toolbar) findViewById(getToolbarResourceId());
+		mToolbar = findViewById(getToolbarResourceId());
 		if (null != mToolbar) {
 			setSupportActionBar(mToolbar);
 		}
@@ -81,21 +83,23 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
 	protected void displayHomeAsUp() {
 		// Show the back arrow in toolbar to go back
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(null != getSupportActionBar()) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Fix for NPE on LG Devices when pressing hardware menu button
-        return keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)
+        return keyCode == KeyEvent.KEYCODE_MENU && BRAND_LGE.equals(Build.BRAND)
                 || super.onKeyDown(keyCode, event);
     }
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// Fix for NPE on LG Devices when pressing hardware menu button
-		if (keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)) {
+		if (keyCode == KeyEvent.KEYCODE_MENU && BRAND_LGE.equals(Build.BRAND)) {
 			openOptionsMenu();
 			return true;
 		}
