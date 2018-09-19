@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,11 @@
 
 apply plugin: 'com.android.library'
 
-apply from: '../buildSrc/android_common.gradle'
+apply from: '../../buildSrc/android_common.gradle'
 
 dependencies {
-    // Libraries
-    implementation deps.appcompat
-    implementation deps.recyclerview
-
-    // Modules
-    implementation project(':app')      // to fix build issue
-    implementation project(':core')
-    implementation project(':utilities')
+    implementation project(':modules:core')
     
-    // Test Dependencies
     testImplementation deps.junit
-    androidTestImplementation deps.runner
-    androidTestImplementation deps.espressoCore
+    testImplementation deps.mockitoCore
 }

@@ -1,1 +1,8 @@
-include ':app', ':core', ':utilities', ':multi-contact', ':mocks', ':runtime-permissions', ':database-helpers'
+include ':modules:app'
+include ':modules:core'
+include ':modules:utilities'
+include ':modules:multi-contact'
+include ':modules:mocks'
+include ':modules:runtime-permissions'
+include ':modules:database-helpers'
+

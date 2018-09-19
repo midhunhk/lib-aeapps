@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'maven'
+
+apply from: '../../buildSrc/android_common.gradle'
+
+dependencies {
+    implementation deps.appcompat
+    implementation deps.recyclerview
+    
+    testImplementation deps.junit
+    testImplementation deps.mockitoCore
+}

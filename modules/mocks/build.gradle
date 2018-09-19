@@ -17,17 +17,14 @@
 
 apply plugin: 'com.android.library'
 
-apply from: '../buildSrc/android_common.gradle'
+apply from: '../../buildSrc/android_common.gradle'
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.appcompat
-    
-    implementation project(':app')      // to fix build issue
-    implementation project(':core')
+
+    implementation project(':modules:app')      // Referring to app until build errors are fixed
+    implementation project(':modules:core')
     
     testImplementation deps.junit
     testImplementation deps.mockitoCore
-    androidTestImplementation deps.runner
-    androidTestImplementation deps.espressoCore
 }

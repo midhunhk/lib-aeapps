@@ -13,7 +13,7 @@ ext {
 
 // Plugins
 ext.PLUGINS = [
-        gradle               : "com.android.tools.build:gradle:3.1.4",
+        gradle               : 'com.android.tools.build:gradle:3.1.4',
         bintray              : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2',
         android_maven        : 'com.github.dcendents:android-maven-plugin:1.2'
 ]
