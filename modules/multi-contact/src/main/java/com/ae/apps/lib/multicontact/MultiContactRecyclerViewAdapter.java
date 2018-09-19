@@ -27,7 +27,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ae.apps.R;
 import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.HashMap;

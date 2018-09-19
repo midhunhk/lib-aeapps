@@ -26,7 +26,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ae.apps.R;
 import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.ArrayList;
