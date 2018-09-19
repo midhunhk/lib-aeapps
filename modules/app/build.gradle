@@ -39,7 +39,7 @@ dependencies {
     implementation deps.appcompat
     implementation deps.supportAnnotations
 
-    testImplementation project(':modules:mocks')
+    implementation project(':modules:mocks')
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }

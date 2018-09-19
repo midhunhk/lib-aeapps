@@ -37,7 +37,7 @@ import java.io.InputStream;
 /**
  * The ContactManager abstracts access to the Android's Contacts API and provide public methods to retrieve data.
  * Users of ContactManager do not need to know the internals of Android's ContactsAPI or database calls.
- * <p>
+ *
  * <p>Needs the following permissions added to the manifest</p>
  * <pre>
  * 	android.permission.READ_CONTACTS
@@ -100,6 +100,7 @@ public class ContactManager extends AbstractContactManager {
     /**
      * Shows this contact in the Android's Contact Manager
      *
+     * @param context the context
      * @param contactVo contact vo
      */
     public void showContactInAddressBook(@NonNull Context context, @Nullable ContactVo contactVo) {

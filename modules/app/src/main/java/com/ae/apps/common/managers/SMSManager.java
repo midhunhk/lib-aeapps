@@ -22,10 +22,10 @@ import android.util.Log;
  */
 public class SMSManager {
 
-	public static String	SMS_URI_ALL		= "content://sms/";
-	public static String	SMS_URI_SENT	= "content://sms/sent";
-	public static String	SMS_URI_DRAFTS	= "content://sms/draft";
-	public static String	SMS_URI_INBOX	= "content://sms/inbox";
+	public static final String	SMS_URI_ALL		= "content://sms/";
+	public static final String	SMS_URI_SENT	= "content://sms/sent";
+	public static final String	SMS_URI_DRAFTS	= "content://sms/draft";
+	public static final String	SMS_URI_INBOX	= "content://sms/inbox";
 
 	private static String	TAG				= "SMSManager";
 
@@ -34,7 +34,7 @@ public class SMSManager {
 	/**
 	 * Constructor
 	 * 
-	 * @param context
+	 * @param context the context
 	 */
 	public SMSManager(Context context) {
 		this.contentResolver = context.getContentResolver();
@@ -43,8 +43,9 @@ public class SMSManager {
 	/**
 	 * Returns the number of messages in the inbox uri
 	 * 
-	 * @param uri
-	 * @return
+	 * @param uri uri
+	 *
+	 * @return number of messages
 	 */
 	public int getMessagesCount(String uri) {
 		int count = 0;
@@ -64,7 +65,7 @@ public class SMSManager {
 	/**
 	 * Returns a Set of unique sender contact ids
 	 * 
-	 * @return
+	 * @return a mapping of unique message senders
 	 */
 	public Map<String, Integer> getUniqueSenders() {
 		Map<String, Integer> sendersMap = new HashMap<String, Integer>();
@@ -74,7 +75,7 @@ public class SMSManager {
 			String[] projection = new String[] { "_id", "address", "person" };
 			Cursor cursor = contentResolver.query(parsedUri, projection, null, null, null);
 
-			if (cursor.getCount() > 0) {
+			if (null != cursor && cursor.getCount() > 0) {
 				String address;
 				int addressIndex = cursor.getColumnIndex("address");
 				if (cursor.moveToFirst())
@@ -91,7 +92,9 @@ public class SMSManager {
 						}
 					} while (cursor.moveToNext());
 			}
-			cursor.close();
+			if(null != cursor) {
+				cursor.close();
+			}
 			Log.d(TAG, "Unique Senders Count " + sendersMap.size());
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());

@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * A specification for a ContactManager used in AE App lab projects
- * <p>
+ *
  * <pre>
  *     Call @link{fetchAllContacts} or @link{fetchAllContactsAsync} to initialize the contacts
  * </pre>
@@ -35,7 +35,6 @@ public interface AeContactManager {
     /**
      * Invoke to fetch all contacts and use them right away
      *
-     * @return
      */
     void fetchAllContacts();
 
