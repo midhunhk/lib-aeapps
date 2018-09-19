@@ -17,17 +17,12 @@
 
 package com.ae.apps.lib.mock;
 
-import android.content.res.Resources;
-
-import com.ae.apps.aeappslibrary.R;
-import com.ae.apps.common.vo.ContactMessageVo;
-import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.lib.R;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 public class MockContactDataUtils {
@@ -86,54 +81,6 @@ public class MockContactDataUtils {
         contactInfo.setPhoneNumbersList(phoneNumbersList);
 
         return contactInfo;
-    }
-
-    /**
-     * A mock implementation for giving mock results. Used mainly for screenshots
-     *
-     * @param resource resource
-     * @return list of contact messages
-     */
-    public static List<ContactMessageVo> getMockContactMessageList(Resources resource) {
-        Random random = new Random();
-        int startSeed = 180;
-        int prevRandom = 0;
-        int currRandom;
-        ContactVo contactVo;
-        ContactMessageVo messageVo;
-        List<ContactMessageVo> mockedList = new ArrayList<>();
-
-        // Supply different set of mock names based on current locale, default is EN
-        String[] mockNames;
-        String locale = Locale.getDefault().getLanguage();
-        if (LOCALE_ES.equalsIgnoreCase(locale)) {
-            mockNames = mockNamesES;
-        } else if (LOCALE_FR.equalsIgnoreCase(locale)) {
-            mockNames = mockNamesFR;
-        } else {
-            mockNames = mockNamesEN;
-        }
-
-        // Some important calculations are about to happen
-        for (String name : mockNames) {
-            contactVo = new ContactVo();
-            contactVo.setName(name);
-            messageVo = new ContactMessageVo();
-            messageVo.setContactVo(contactVo);
-            if (prevRandom == 0) {
-                currRandom = startSeed;
-            } else {
-                currRandom = random.nextInt(startSeed);
-            }
-            if (currRandom > prevRandom) {
-                currRandom = (int) (currRandom * 0.75);
-            }
-            messageVo.setMessageCount(currRandom);
-            prevRandom = currRandom;
-            startSeed -= 2;
-            mockedList.add(messageVo);
-        }
-        return mockedList;
     }
 
 }
