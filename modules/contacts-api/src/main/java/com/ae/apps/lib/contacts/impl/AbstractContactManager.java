@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Midhun Harikumar
+ * Copyright (c) 2015 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
-package com.ae.apps.lib.contacts;
+package com.ae.apps.lib.contacts.impl;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
@@ -24,7 +25,9 @@ import android.support.annotation.Nullable;
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
-import com.ae.apps.lib.contacts.services.AeContactService;
+import com.ae.apps.lib.contacts.AeContactManager;
+import com.ae.apps.lib.contacts.ContactDataConsumer;
+import com.ae.apps.lib.contacts.service.AeContactService;
 
 import java.util.ArrayList;
 import java.util.Collections;
