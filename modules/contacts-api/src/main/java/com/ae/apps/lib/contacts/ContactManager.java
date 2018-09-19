@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ae.apps.common.managers;
+package com.ae.apps.lib.contacts;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -28,9 +28,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.ae.apps.common.managers.contact.AbstractContactManager;
-import com.ae.apps.common.services.ContactService;
 import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.lib.contacts.services.ContactService;
 
 import java.io.InputStream;
 

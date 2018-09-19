@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.ae.apps.common.managers.contact;
+package com.ae.apps.lib.contacts;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 
-import com.ae.apps.common.services.AeContactService;
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;
+import com.ae.apps.lib.contacts.services.AeContactService;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ae.apps.common.managers.contact;
+package com.ae.apps.lib.contacts;
 
 import android.graphics.Bitmap;
 

@@ -1,4 +1,4 @@
-package com.ae.apps.common.managers.contact;
+package com.ae.apps.lib.contacts;
 
 /**
  * Consumers that need to invoke the async version of fetch contacts must implement this to receive a callback

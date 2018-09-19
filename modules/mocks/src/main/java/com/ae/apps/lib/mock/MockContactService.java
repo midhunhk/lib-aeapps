@@ -19,7 +19,7 @@ package com.ae.apps.lib.mock;
 
 import android.graphics.Bitmap;
 
-import com.ae.apps.common.services.AeContactService;
+import com.ae.apps.lib.contacts.services.AeContactService;
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.common.vo.MessageVo;
 import com.ae.apps.common.vo.PhoneNumberVo;

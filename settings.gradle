@@ -1,5 +1,6 @@
 include ':modules:app'
 include ':modules:core'
+include ':modules:contacts-api'
 include ':modules:utilities'
 include ':modules:multi-contact'
 include ':modules:mocks'
