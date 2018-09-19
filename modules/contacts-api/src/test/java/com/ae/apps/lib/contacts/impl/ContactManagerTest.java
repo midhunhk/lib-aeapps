@@ -21,7 +21,7 @@ import android.content.ContentResolver;
 import android.content.res.Resources;
 
 import com.ae.apps.lib.contacts.ContactDataConsumer;
-import com.ae.apps.lib.contacts.MockContactService;
+import com.ae.apps.lib.contacts.service.MockContactService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +67,8 @@ public class ContactManagerTest {
             public void onContactsRead() {
                 System.out.println("onContactsRead() callback");
                 assertEquals(AbstractContactManager.STATUS.READY, contactManager.contactManagerStatus);
-                assertEquals(MockContactService.MOCK_CONTACTS_SIZE, contactManager.getAllContacts().size());
+                int size = null != contactManager.getAllContacts() ? contactManager.getAllContacts().size() : 0;
+                assertEquals(MockContactService.MOCK_CONTACTS_SIZE, size);
             }
         });
 
