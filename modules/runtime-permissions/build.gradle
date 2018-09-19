@@ -21,10 +21,10 @@ apply from: '../../buildSrc/android_common.gradle'
 
 dependencies {
     implementation deps.appcompat
-    
-    implementation project(':modules:app')      // to fix build issue
+
     implementation project(':modules:core')
-    
+    implementation project(':modules:utilities')
+
     testImplementation deps.junit
     testImplementation deps.mockitoCore
     androidTestImplementation deps.runner

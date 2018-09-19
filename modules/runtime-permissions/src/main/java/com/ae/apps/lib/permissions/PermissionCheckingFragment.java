@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 package com.ae.apps.lib.permissions;
 
-
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -28,7 +27,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ae.apps.common.utils.CommonUtils;
+import com.ae.apps.lib.common.utils.CommonUtils;
+
 
 /**
  * An abstract Fragment that can check for Runtime Permissions if your app target is above Lollipop

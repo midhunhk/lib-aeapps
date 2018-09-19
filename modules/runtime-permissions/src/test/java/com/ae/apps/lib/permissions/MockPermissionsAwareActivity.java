@@ -39,4 +39,9 @@ public class MockPermissionsAwareActivity extends Activity implements Permission
     public void onPermissionsDenied() {
 
     }
+
+    @Override
+    public void onPermissionsRequired() {
+
+    }
 }

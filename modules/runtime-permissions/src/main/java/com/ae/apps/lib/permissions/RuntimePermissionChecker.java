@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,11 @@ public class RuntimePermissionChecker {
     private PermissionsAwareComponent mComponent;
     private Context mContext;
 
+    /**
+     * Initialize an instance of RuntimePermissionChecker
+     *
+     * @param component a component that is aware of Runtime Permissions
+     */
     public RuntimePermissionChecker(PermissionsAwareComponent component) {
         if (null == component) {
             throw new IllegalArgumentException("component must not be null");
@@ -48,15 +53,15 @@ public class RuntimePermissionChecker {
     }
 
     /**
-     * Checks if the required permissions are already granted or asks the component
-     * to make the request for permissions
+     * Checks if the required permissions are already granted or informs the component
+     * that permissions are required
      */
     public void checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkAllPermissions(mComponent.requiredPermissions())) {
                 mComponent.onPermissionsGranted();
             } else {
-                mComponent.requestForPermissions();
+                mComponent.onPermissionsRequired();
             }
         } else {
             mComponent.onPermissionsGranted();

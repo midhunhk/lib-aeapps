@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,16 @@ public interface PermissionsAwareComponent {
      * can do requestPermission
      */
     void requestForPermissions();
+
+    /**
+     *  Callback that is invoked when permissions are required
+     *
+     *  This API is introduced so that the implementing Component can show a view or
+     *  message to the user about the need for the permissions
+     *
+     *  @since 4.0
+     */
+    void onPermissionsRequired();
 
     /**
      * Callback that is invoked when permissions are granted
