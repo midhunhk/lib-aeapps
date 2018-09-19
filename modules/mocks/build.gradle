@@ -22,7 +22,6 @@ apply from: '../../buildSrc/android_common.gradle'
 dependencies {
     implementation deps.appcompat
 
-    implementation project(':modules:app')      // Referring to app until build errors are fixed
     implementation project(':modules:core')
     
     testImplementation deps.junit
