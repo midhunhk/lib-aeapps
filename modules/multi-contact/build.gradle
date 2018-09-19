@@ -25,7 +25,6 @@ dependencies {
     implementation deps.recyclerview
 
     // Modules
-    implementation project(':modules:app')      // to fix build issue
     implementation project(':modules:core')
     implementation project(':modules:utilities')
     

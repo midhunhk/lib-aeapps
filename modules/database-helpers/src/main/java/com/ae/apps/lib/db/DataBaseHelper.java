@@ -28,6 +28,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Boilerplate code and helper for a simple database
  * 
  * @author Midhun
+ * @deprecated Use Room database from JetPack for new projects
+ * @see android.database.sqlite.SQLiteOpenHelper
  * 
  */
 public class DataBaseHelper extends SQLiteOpenHelper {

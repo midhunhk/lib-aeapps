@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ae.apps.aeappslibrary.R;
-import com.ae.apps.common.activities.ToolBarBaseActivity;
-import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ import java.util.List;
  *  <include layout="@layout/layout_multi_contact_picker"/>
  * </pre>
  */
-public abstract class MultiContactBaseActivity extends ToolBarBaseActivity
+public abstract class MultiContactBaseActivity extends AppCompatActivity
         implements MultiContactInteractionListener {
 
     protected List<String> mSelectedContactIds;
@@ -95,7 +95,7 @@ public abstract class MultiContactBaseActivity extends ToolBarBaseActivity
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
 
         if (null != recyclerView) {
-            List<ContactVo> contactsList = contactsList();
+            List<ContactInfo> contactsList = contactsList();
             MultiContactRecyclerViewAdapter mViewAdapter = new MultiContactRecyclerViewAdapter(contactsList, this);
             recyclerView.setAdapter(mViewAdapter);
         }

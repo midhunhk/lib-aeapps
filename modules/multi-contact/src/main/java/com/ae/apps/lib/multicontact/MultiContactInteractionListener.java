@@ -18,6 +18,7 @@
 package com.ae.apps.lib.multicontact;
 
 import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ interface MultiContactInteractionListener {
      *
      * @return contacts list
      */
-    List<ContactVo> contactsList();
+    List<ContactInfo> contactsList();
 
     /**
      * Invoked when a contact is selected

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ae.apps.aeappslibrary.R;
-import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,11 +38,11 @@ import java.util.Map;
  */
 class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ContactVo> mValues;
+    private final List<ContactInfo> mValues;
     private final Map<String, Boolean> mCheckedStatus;
     private final MultiContactInteractionListener mListener;
 
-    MultiContactRecyclerViewAdapter(final List<ContactVo> values, MultiContactInteractionListener listener) {
+    MultiContactRecyclerViewAdapter(final List<ContactInfo> values, MultiContactInteractionListener listener) {
         mValues = values;
         mListener = listener;
         mCheckedStatus = new HashMap<>();
@@ -99,16 +99,16 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         final ImageView mProfileImage;
         final TextView mProfileName;
         final CheckBox mCheckBox;
-        ContactVo mItem;
+        ContactInfo mItem;
         boolean mItemSelected;
 
         ViewHolder(View view) {
             super(view);
             mView = view;
             mItemSelected = false;
-            mProfileImage = (ImageView) view.findViewById(R.id.multiContactPickerProfileImage);
-            mProfileName = (TextView) view.findViewById(R.id.multiContactPickerProfileName);
-            mCheckBox = (CheckBox) view.findViewById(R.id.multiContactPickerCheckBox);
+            mProfileImage = view.findViewById(R.id.multiContactPickerProfileImage);
+            mProfileName = view.findViewById(R.id.multiContactPickerProfileName);
+            mCheckBox = view.findViewById(R.id.multiContactPickerCheckBox);
         }
     }
 }
