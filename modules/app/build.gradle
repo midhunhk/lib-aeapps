@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'maven'
-
-group = rootProject.ext.PUBLISH.group_id
+// apply plugin: 'maven'
+// group = rootProject.ext.PUBLISH.group_id
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -38,8 +37,9 @@ dependencies {
     implementation deps.supportv4
     implementation deps.cardview
     implementation deps.appcompat
-    //implementation deps.supportAnnotations
-    
+    implementation deps.supportAnnotations
+
+    testImplementation project(':modules:mocks')
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }
