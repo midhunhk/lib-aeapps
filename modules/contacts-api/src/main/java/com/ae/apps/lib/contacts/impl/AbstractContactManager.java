@@ -22,9 +22,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 
-import com.ae.apps.common.vo.ContactVo;
-import com.ae.apps.common.vo.MessageVo;
-import com.ae.apps.common.vo.PhoneNumberVo;
+import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.MessageInfo;
+import com.ae.apps.lib.common.models.PhoneNumberInfo;
 import com.ae.apps.lib.contacts.AeContactManager;
 import com.ae.apps.lib.contacts.ContactDataConsumer;
 import com.ae.apps.lib.contacts.service.AeContactService;
@@ -49,7 +49,7 @@ public abstract class AbstractContactManager implements AeContactManager {
     protected Resources resources;
     protected ContentResolver contentResolver;
 
-    protected List<ContactVo> contactsList;
+    protected List<ContactInfo> contactsList;
 
     // Config Item
     protected boolean addContactsWithPhoneNumbers;
@@ -85,7 +85,7 @@ public abstract class AbstractContactManager implements AeContactManager {
 
     @Nullable
     @Override
-    public List<ContactVo> getAllContacts() throws UnsupportedOperationException {
+    public List<ContactInfo> getAllContacts() throws UnsupportedOperationException {
         if (STATUS.READY == contactManagerStatus) {
             if (null != contactsList) {
                 return new ArrayList<>(contactsList);
@@ -102,12 +102,12 @@ public abstract class AbstractContactManager implements AeContactManager {
      * @param contactVo contactVo
      * @return contact vo
      */
-    private ContactVo getContactPhoneDetails(final ContactVo contactVo) {
+    private ContactInfo getContactPhoneDetails(final ContactInfo contactVo) {
         // Make sure we update the contact only if we didn't populate the
         // phone numbers list already
         // and the contact has phone numbers
-        if (contactVo.getPhoneNumbersList() == null && contactVo.getHasPhoneNumber()) {
-            List<PhoneNumberVo> phoneNumbersList = mContactService.getContactPhoneDetails(contactVo.getId());
+        if (contactVo.getPhoneNumbersList() == null && contactVo.hasPhoneNumber()) {
+            List<PhoneNumberInfo> phoneNumbersList = mContactService.getContactPhoneDetails(contactVo.getId());
 
             contactVo.setPhoneNumbersList(phoneNumbersList);
         }
@@ -115,7 +115,7 @@ public abstract class AbstractContactManager implements AeContactManager {
     }
 
     @Override
-    public List<MessageVo> getContactMessages(final String contactId) {
+    public List<MessageInfo> getContactMessages(final String contactId) {
         return mContactService.getContactMessages(contactId);
     }
 
@@ -130,10 +130,10 @@ public abstract class AbstractContactManager implements AeContactManager {
     }
 
     @Override
-    public ContactVo getContactInfo(final String contactId) {
-        ContactVo contactVo = null;
+    public ContactInfo getContactInfo(final String contactId) {
+        ContactInfo contactVo = null;
         String tmp;
-        for (ContactVo vo : contactsList) {
+        for (ContactInfo vo : contactsList) {
             tmp = vo.getId();
             if (tmp.equals(contactId)) {
                 contactVo = vo;
@@ -171,8 +171,8 @@ public abstract class AbstractContactManager implements AeContactManager {
     }
 
     @Override
-    public ContactVo getRandomContact() {
-        ContactVo contactVo = null;
+    public ContactInfo getRandomContact() {
+        ContactInfo contactVo = null;
         // generate a random number less than contactsList.size();
         int numContacts = getTotalContactCount();
 
@@ -189,8 +189,8 @@ public abstract class AbstractContactManager implements AeContactManager {
     }
 
     @Override
-    public ContactVo getContactWithPhoneDetails(final String contactId) {
-        ContactVo contactVo = null;
+    public ContactInfo getContactWithPhoneDetails(final String contactId) {
+        ContactInfo contactVo = null;
 
         if (null != contactId && getTotalContactCount() > 0) {
             contactVo = getContactPhoneDetails(getContactInfo(contactId));

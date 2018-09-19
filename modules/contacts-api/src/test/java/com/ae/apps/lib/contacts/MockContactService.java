@@ -15,16 +15,16 @@
  *
  */
 
-package com.ae.apps.lib.mock;
+package com.ae.apps.lib.contacts;
 
 import android.graphics.Bitmap;
 
+import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.MessageInfo;
+import com.ae.apps.lib.common.models.PhoneNumberInfo;
 import com.ae.apps.lib.contacts.service.AeContactService;
-import com.ae.apps.common.vo.ContactVo;
-import com.ae.apps.common.vo.MessageVo;
-import com.ae.apps.common.vo.PhoneNumberVo;
+import com.ae.apps.lib.mock.MockContactDataUtils;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +36,9 @@ public class MockContactService implements AeContactService {
     /**
      * Number of contacts served by this implementation
      */
-    public final static int MOCK_CONTACTS_SIZE = 5;
+    private final static int MOCK_CONTACTS_SIZE = 5;
 
-    private List<ContactVo> list;
+    private List<ContactInfo> list;
 
     public MockContactService() {
         list = new ArrayList<>();
@@ -48,7 +48,7 @@ public class MockContactService implements AeContactService {
     }
 
     @Override
-    public List<ContactVo> getContacts(boolean addContactsWithPhoneNumbers) {
+    public List<ContactInfo> getContacts(boolean addContactsWithPhoneNumbers) {
         return list;
     }
 
@@ -58,12 +58,12 @@ public class MockContactService implements AeContactService {
     }
 
     @Override
-    public List<PhoneNumberVo> getContactPhoneDetails(String contactId) {
+    public List<PhoneNumberInfo> getContactPhoneDetails(String contactId) {
         return list.get(0).getPhoneNumbersList();
     }
 
     @Override
-    public List<MessageVo> getContactMessages(String contactId) {
+    public List<MessageInfo> getContactMessages(String contactId) {
         return null;
     }
 
@@ -77,8 +77,4 @@ public class MockContactService implements AeContactService {
         return null;
     }
 
-    @Override
-    public InputStream openPhoto(long contactId) {
-        return null;
-    }
 }

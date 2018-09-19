@@ -67,7 +67,7 @@ public class ContactInfo implements Comparable<ContactInfo>{
         this.lastContactedTime = lastContactedTime;
     }
 
-    public boolean isHasPhoneNumber() {
+    public boolean hasPhoneNumber() {
         return hasPhoneNumber;
     }
 

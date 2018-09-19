@@ -18,8 +18,8 @@ package com.ae.apps.lib.contacts;
 
 import android.graphics.Bitmap;
 
-import com.ae.apps.common.vo.ContactVo;
-import com.ae.apps.common.vo.MessageVo;
+import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.MessageInfo;
 
 import java.util.List;
 
@@ -34,7 +34,6 @@ public interface AeContactManager {
 
     /**
      * Invoke to fetch all contacts and use them right away
-     *
      */
     void fetchAllContacts();
 
@@ -52,9 +51,9 @@ public interface AeContactManager {
      * values and returned to the caller.
      *
      * @return contacts list
-     * @throws UnsupportedOperationException {@inheritDoc}
+     * @throws UnsupportedOperationException {@inheritDoc} unless implemented
      */
-    List<ContactVo> getAllContacts() throws UnsupportedOperationException;
+    List<ContactInfo> getAllContacts() throws UnsupportedOperationException;
 
     /**
      * Gets the total contacts read
@@ -68,7 +67,7 @@ public interface AeContactManager {
      *
      * @return a ContactVo object
      */
-    ContactVo getRandomContact();
+    ContactInfo getRandomContact();
 
     /**
      * Returns a contact with phone details
@@ -76,7 +75,7 @@ public interface AeContactManager {
      * @param contactId contact id
      * @return contact vo
      */
-    ContactVo getContactWithPhoneDetails(final String contactId);
+    ContactInfo getContactWithPhoneDetails(final String contactId);
 
     /**
      * Returns a Bitmap object for the contact's photo, returning a default image
@@ -93,7 +92,7 @@ public interface AeContactManager {
      * @param contactId contact id
      * @return contact vo
      */
-    ContactVo getContactInfo(final String contactId);
+    ContactInfo getContactInfo(final String contactId);
 
     /**
      * Returns the list of messages for this contact with id
@@ -101,7 +100,7 @@ public interface AeContactManager {
      * @param contactId contact id
      * @return list of message vo s
      */
-    List<MessageVo> getContactMessages(final String contactId);
+    List<MessageInfo> getContactMessages(final String contactId);
 
     /**
      * Returns the contactId based on the rawContactId

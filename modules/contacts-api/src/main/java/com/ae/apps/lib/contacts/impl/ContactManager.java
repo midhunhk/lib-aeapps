@@ -21,18 +21,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.contacts.service.ContactService;
-
-import java.io.InputStream;
 
 /**
  * The ContactManager abstracts access to the Android's Contacts API and provide public methods to retrieve data.
@@ -63,56 +58,6 @@ public class ContactManager extends AbstractContactManager {
         this.mContactService = new ContactService(contentResolver, resources);
     }
 
-    /**
-     * Returns a Bitmap object taking into consideration whether the supplied contact is mock
-     *
-     * @param contactVo    contact vo
-     * @param defaultImage default image
-     * @param resource     resources
-     * @return contact image
-     */
-    public Bitmap getContactPhotoWithMock(@NonNull final ContactVo contactVo, final Bitmap defaultImage, final Resources resource) {
-        if (contactVo.isMockUser()) {
-            try {
-                // try to decode the image resource if this is a mock user
-                Bitmap bitmap = BitmapFactory.decodeResource(resource, contactVo.getMockProfileImageResource());
-                if (null != bitmap) {
-                    return bitmap;
-                }
-            } catch (Exception exception) {
-                Log.e(TAG, "getContactPhotoWithMock() " + exception.getMessage());
-            }
-        }
-        return getContactPhoto(contactVo.getId(), defaultImage);
-    }
-
-    /**
-     * Opens the contact's photo
-     *
-     * @param contactId contact id
-     * @return contact image
-     */
-    @Nullable
-    public InputStream openPhoto(final long contactId) {
-        return mContactService.openPhoto(contactId);
-    }
-
-    /**
-     * Shows this contact in the Android's Contact Manager
-     *
-     * @param context the context
-     * @param contactVo contact vo
-     */
-    public void showContactInAddressBook(@NonNull Context context, @Nullable ContactVo contactVo) {
-        if (null != contactVo && null != contactVo.getId()) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-
-            Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactVo.getId());
-            intent.setData(uri);
-
-            context.startActivity(intent);
-        }
-    }
 
     /**
      * Builds an instance of ContactManager

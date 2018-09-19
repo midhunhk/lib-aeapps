@@ -17,6 +17,7 @@
 
 package com.ae.apps.lib.multicontact;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ae.apps.aeappslibrary.R;
+import com.ae.apps.R;
 import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.HashMap;
@@ -49,17 +50,17 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.multi_contact_picker_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mProfileName.setText(mValues.get(position).getName());
-        holder.mProfileImage.setImageResource(R.drawable.profile_icon_4);
+        holder.mProfileImage.setImageResource(com.ae.apps.lib.R.drawable.profile_icon_4);
 
         final String contactId = holder.mItem.getId();
 

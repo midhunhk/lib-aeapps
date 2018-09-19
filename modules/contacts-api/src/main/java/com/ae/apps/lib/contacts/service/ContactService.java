@@ -27,13 +27,12 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.ae.apps.common.utils.CommonUtils;
-import com.ae.apps.common.utils.ContactUtils;
-import com.ae.apps.common.vo.ContactVo;
-import com.ae.apps.common.vo.MessageVo;
-import com.ae.apps.common.vo.PhoneNumberVo;
+import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.MessageInfo;
+import com.ae.apps.lib.common.models.PhoneNumberInfo;
+import com.ae.apps.lib.common.utils.CommonUtils;
+import com.ae.apps.lib.common.utils.ContactUtils;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +65,8 @@ public class ContactService implements AeContactService {
 
     @NonNull
     @Override
-    public List<ContactVo> getContacts(boolean addContactsWithPhoneNumbers) {
-        List<ContactVo> contactsList = new ArrayList<>();
+    public List<ContactInfo> getContacts(boolean addContactsWithPhoneNumbers) {
+        List<ContactInfo> contactsList = new ArrayList<>();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         if (null != cursor && cursor.getCount() > 0) {
             String id;
@@ -98,7 +97,7 @@ public class ContactService implements AeContactService {
                     lastContactedTimeString = CommonUtils.formatTimeStamp(lastContactedTime, DATE_FORMAT);
 
                     // Save that data to a VO
-                    ContactVo contactVo = new ContactVo();
+                    ContactInfo contactVo = new ContactInfo();
                     contactVo.setId(id);
                     contactVo.setName(name);
 
@@ -131,8 +130,8 @@ public class ContactService implements AeContactService {
 
     @NonNull
     @Override
-    public List<PhoneNumberVo> getContactPhoneDetails(String contactId) {
-        List<PhoneNumberVo> phoneNumbersList = new ArrayList<>();
+    public List<PhoneNumberInfo> getContactPhoneDetails(String contactId) {
+        List<PhoneNumberInfo> phoneNumbersList = new ArrayList<>();
 
         // Query to fetch the Phone Entries with this Contact's Id
         Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
@@ -166,7 +165,7 @@ public class ContactService implements AeContactService {
                     }
 
                     // Save this phone number as a VO
-                    PhoneNumberVo phoneNumberVo = new PhoneNumberVo();
+                    PhoneNumberInfo phoneNumberVo = new PhoneNumberInfo();
                     phoneNumberVo.setPhoneNumber(phoneNumber);
                     phoneNumberVo.setPhoneType(phoneLabel);
 
@@ -181,9 +180,9 @@ public class ContactService implements AeContactService {
 
     @NonNull
     @Override
-    public List<MessageVo> getContactMessages(String contactId) {
-        MessageVo messageVo;
-        List<MessageVo> messagesList = new ArrayList<>();
+    public List<MessageInfo> getContactMessages(String contactId) {
+        MessageInfo messageVo;
+        List<MessageInfo> messagesList = new ArrayList<>();
         String[] projection = new String[]{ID, SMS_ADDRESS, SMS_PERSON, SMS_BODY};
         Cursor inboxCursor = contentResolver.query(Uri.parse(SMS_URI_INBOX), projection, SMS_PERSON + " = ?",
                 new String[]{contactId}, null);
@@ -192,7 +191,7 @@ public class ContactService implements AeContactService {
             int bodyIndex = inboxCursor.getColumnIndex(SMS_BODY);
             do {
                 String messageBody = inboxCursor.getString(bodyIndex);
-                messageVo = new MessageVo();
+                messageVo = new MessageInfo();
                 messageVo.setBody(messageBody);
                 messagesList.add(messageVo);
             } while (inboxCursor.moveToNext());
@@ -244,26 +243,4 @@ public class ContactService implements AeContactService {
         return contactId;
     }
 
-    @Nullable
-    @Override
-    public InputStream openPhoto(long contactId) {
-        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
-        Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
-        Cursor cursor = contentResolver.query(photoUri, new String[]{ContactsContract.Contacts.Photo.DATA15}, null, null, null);
-
-        if (cursor == null) {
-            return null;
-        }
-        try {
-            if (cursor.moveToFirst()) {
-                byte[] data = cursor.getBlob(0);
-                if (data != null) {
-                    return new ByteArrayInputStream(data);
-                }
-            }
-        } finally {
-            cursor.close();
-        }
-        return null;
-    }
 }

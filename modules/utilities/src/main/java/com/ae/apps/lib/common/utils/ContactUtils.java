@@ -78,7 +78,7 @@ public class ContactUtils {
     /**
      * Shows this contact in the Android's Contact Manager
      *
-     * @param context the context
+     * @param context   the context
      * @param contactId contactId
      */
     public static void showContactInAddressBook(Context context, String contactId) {
@@ -95,14 +95,14 @@ public class ContactUtils {
     /**
      * Tries to open a WhatsApp Contact
      *
-     * @param context the context
+     * @param context   the context
      * @param contactId the contact id
      */
-    public static void openWhatsAppContact(final Context context, String contactId){
+    public static void openWhatsAppContact(final Context context, String contactId) {
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("content://com.android.contacts/data/" + contactId));
-        try{
+        try {
             context.startActivity(i);
-        } catch (ActivityNotFoundException ex){
+        } catch (ActivityNotFoundException ex) {
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -112,38 +112,39 @@ public class ContactUtils {
      * The number should have the Country code prefixed when it was saved,
      * else whatsapp will not open
      *
-     * @param context context
+     * @param context   context
      * @param contactNo contactNo
      */
-    public static void sendWhatsAppMethod(final Context context, final String contactNo){
+    public static void sendWhatsAppMethod(final Context context, final String contactNo) {
         String id = cleanupPhoneNumber(contactNo) + WHATSAPP_ID_SUFFIX;
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver().query(ContactsContract.Data.CONTENT_URI,
-                    new String[] { ContactsContract.Contacts.Data._ID },
+                    new String[]{ContactsContract.Contacts.Data._ID},
                     ContactsContract.Data.DATA1 + "=?",
-                    new String[] { id }, null);
-            if(null == cursor){
+                    new String[]{id}, null);
+            if (null == cursor) {
                 return;
             }
-            if(!cursor.moveToFirst()){
+            if (!cursor.moveToFirst()) {
                 Toast.makeText(context, "WhatsApp contact with this number not found. Make sure it has country code.",
                         Toast.LENGTH_LONG).show();
                 return;
             }
             Intent sendIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(CONTENT_CONTACTS_DATA + cursor.getString(0)));
             PackageManager packageManager = context.getPackageManager();
-            if(null == sendIntent.resolveActivity(packageManager)){
+            if (null == sendIntent.resolveActivity(packageManager)) {
                 Toast.makeText(context, "No Activity to handle this Intent", Toast.LENGTH_SHORT).show();
             } else {
                 context.startActivity(sendIntent);
             }
-        } catch (ActivityNotFoundException ex){
+        } catch (ActivityNotFoundException ex) {
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
-            if(null != cursor){
+            if (null != cursor) {
                 cursor.close();
             }
         }
     }
+
 }

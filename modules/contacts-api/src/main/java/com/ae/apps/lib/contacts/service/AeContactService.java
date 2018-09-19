@@ -17,11 +17,10 @@ package com.ae.apps.lib.contacts.service;
 
 import android.graphics.Bitmap;
 
-import com.ae.apps.common.vo.ContactVo;
-import com.ae.apps.common.vo.MessageVo;
-import com.ae.apps.common.vo.PhoneNumberVo;
+import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.MessageInfo;
+import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public interface AeContactService {
 	 * @param addContactsWithPhoneNumbers flag
 	 * @return list of contacts
 	 */
-	List<ContactVo> getContacts(boolean addContactsWithPhoneNumbers);
+	List<ContactInfo> getContacts(boolean addContactsWithPhoneNumbers);
 	
 	/**
 	 * Returns the contact photo
@@ -51,7 +50,7 @@ public interface AeContactService {
 	 * @param contactId contactId
 	 * @return list of phone numbers for this contact
 	 */
-	List<PhoneNumberVo> getContactPhoneDetails(String contactId);
+	List<PhoneNumberInfo> getContactPhoneDetails(String contactId);
 	
 	/**
 	 * Returns list of messages for this contact
@@ -59,7 +58,7 @@ public interface AeContactService {
 	 * @param contactId contactId
 	 * @return list of messages
 	 */
-	List<MessageVo> getContactMessages(String contactId);
+	List<MessageInfo> getContactMessages(String contactId);
 	
 	/**
 	 * Returns the contactId when given the rawContactId which is used in the master table 
@@ -77,14 +76,4 @@ public interface AeContactService {
      */
     String getContactIdFromAddress(final String address);
 
-    /**
-     * Opens a contact photo?
-     *
-     * See if you could use getContactPhoto instead
-     *
-     * @param contactId contactId
-     * @return contact photo
-     */
-    @Deprecated
-    InputStream openPhoto(final long contactId);
 }

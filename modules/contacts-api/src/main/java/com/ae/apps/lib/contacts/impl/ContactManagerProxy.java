@@ -19,8 +19,8 @@ package com.ae.apps.lib.contacts.impl;
 
 import android.graphics.Bitmap;
 
-import com.ae.apps.common.vo.ContactVo;
-import com.ae.apps.common.vo.MessageVo;
+import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.MessageInfo;
 import com.ae.apps.lib.contacts.AeContactManager;
 import com.ae.apps.lib.contacts.ContactDataConsumer;
 
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * An implementation of ContactManager that proxies all calls to an underling implementation
  * of ContactManager.
- *
+ * <p>
  * Note: mContactManager must be initialized before using any of its methods
  */
 public class ContactManagerProxy implements AeContactManager {
@@ -47,7 +47,7 @@ public class ContactManagerProxy implements AeContactManager {
     }
 
     @Override
-    public List<ContactVo> getAllContacts() throws UnsupportedOperationException {
+    public List<ContactInfo> getAllContacts() throws UnsupportedOperationException {
         return mContactManager.getAllContacts();
     }
 
@@ -57,12 +57,12 @@ public class ContactManagerProxy implements AeContactManager {
     }
 
     @Override
-    public ContactVo getRandomContact() {
+    public ContactInfo getRandomContact() {
         return mContactManager.getRandomContact();
     }
 
     @Override
-    public ContactVo getContactWithPhoneDetails(String contactId) {
+    public ContactInfo getContactWithPhoneDetails(String contactId) {
         return mContactManager.getContactWithPhoneDetails(contactId);
     }
 
@@ -72,12 +72,12 @@ public class ContactManagerProxy implements AeContactManager {
     }
 
     @Override
-    public ContactVo getContactInfo(String contactId) {
+    public ContactInfo getContactInfo(String contactId) {
         return mContactManager.getContactInfo(contactId);
     }
 
     @Override
-    public List<MessageVo> getContactMessages(String contactId) {
+    public List<MessageInfo> getContactMessages(String contactId) {
         return mContactManager.getContactMessages(contactId);
     }
 
