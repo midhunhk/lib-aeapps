@@ -18,8 +18,6 @@ app/AeAppsLibrary.iml
 
 # Local configuration file (sdk path, etc)
 local.properties
-gradlew
-gradlew.bat
 .gitignore
 genrelease.cmd
 genJavaDoc.cmd
