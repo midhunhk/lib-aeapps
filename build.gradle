@@ -12,9 +12,9 @@ buildscript {
     }
 
     dependencies {
-        classpath PLUGINS.gradle
-        classpath PLUGINS.bintray
-        classpath PLUGINS.android_maven
+        classpath Plugins.gradle
+        classpath Plugins.bintray
+        classpath Plugins.android_maven
     }
 }
 

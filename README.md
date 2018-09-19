@@ -1,20 +1,20 @@
-# libAeApps (Indian Plum)
+# libAeApps
 [![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
 [![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/ae-apps-library)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V2.3.0.svg)](https://github.com/midhunhk/ae-apps-library) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V3.0.2.svg)](https://github.com/midhunhk/ae-apps-library) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
 
-# Library Name
+## Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries. The latest release code name is **Indian Plum**.
+The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries.
 
-Indian Plum: This flowering shrub or small tree is native to the Pacific Northwest, west of the Cascade Mountains. The reddish fruit are non-toxic and loved by birds.
+Juneberry: 
 
-# Contents
+## Contents
 The following components are available as part of this library as of now.
 
 * Activities
@@ -36,18 +36,18 @@ The following components are available as part of this library as of now.
   * Mock Contact Data
   * EmptyRecyclerView provides a way to specify an empty layout
 
-# Implementations
+## Implementations
 Presently the following android app projects make use of this library.
 
 * <a href="https://github.com/midhunhk/message-counter">Message Counter</a>
 * <a href="https://github.com/midhunhk/random-contact">Random Contact</a>
 * <a href="https://github.com/midhunhk/trip-o-meter">Trip 'O Meter</a>
 
-# Changelog
+## Changelog
 To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
 
-# Using the library
-## 1. Use library from JCenter
+## Using the library
+### 1. Use library from JCenter
 
 ```
 repositories {
@@ -63,7 +63,7 @@ dependencies {
 }
 ```
 
-## 2. Use library from JitPack
+### 2. Use library from JitPack
 
 Add below code to root gradle.build file  
 ```  
@@ -81,7 +81,7 @@ dependencies {
 }  
 ```
  
-# License
+## License
 Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at

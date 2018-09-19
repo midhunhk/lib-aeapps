@@ -6,14 +6,16 @@ ext {
     compileSdkVersion = 28
     buildToolsVersion = "28.0.1"
 
-    // Common versions
     supportLibraryVersion = "28.0.0-rc01"
     espressoVersion = "2.2.2"
+    gradleBuildToolVersion = "3.1.4"
+    junitVersion = "4.12"
+    mockitoCoreVersion = "2.8.9"
 }
 
 // Plugins
-ext.PLUGINS = [
-        gradle               : 'com.android.tools.build:gradle:3.1.4',
+ext.Plugins = [
+        gradle               : "com.android.tools.build:gradle:$gradleBuildToolVersion",
         bintray              : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2',
         android_maven        : 'com.github.dcendents:android-maven-plugin:1.2'
 ]
@@ -36,6 +38,6 @@ ext.deps = [
         runner               : "com.android.support.test:runner:1.0.2",
 
         // testCompile
-        junit                : "junit:junit:4.12",
-        mockitoCore          : "org.mockito:mockito-core:2.8.9",
+        junit                : "junit:junit:$junitVersion",
+        mockitoCore          : "org.mockito:mockito-core:$mockitoCoreVersion"
 ]
