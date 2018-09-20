@@ -29,8 +29,8 @@ dependencies {
     implementation deps.recyclerview
 
     // Modules
-    implementation project(':core')
-    implementation project(':utilities')
+    api project(':core')
+    api project(':utilities')
     
     // Test Dependencies
     testImplementation deps.junit

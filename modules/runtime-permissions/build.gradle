@@ -26,8 +26,8 @@ apply from: '../../buildSrc/android_common.gradle'
 dependencies {
     implementation deps.appcompat
 
-    implementation project(':core')
-    implementation project(':utilities')
+    api project(':core')
+    api project(':utilities')
 
     testImplementation deps.junit
     testImplementation deps.mockitoCore
