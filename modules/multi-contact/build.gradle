@@ -16,6 +16,10 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = rootProject.ext.Publish.group_id
+archivesBaseName = 'multi-contact'
 
 apply from: '../../buildSrc/android_common.gradle'
 
