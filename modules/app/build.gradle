@@ -1,29 +1,24 @@
 apply plugin: 'com.android.library'
-// apply plugin: 'maven'
-// group = rootProject.ext.PUBLISH.group_id
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = rootProject.ext.Publish.group_id
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         versionCode 40
-        versionName rootProject.ext.PUBLISH.versionName
+        versionName rootProject.ext.Publish.versionName
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        archivesBaseName = rootProject.ext.PUBLISH.artifact_id
+        archivesBaseName = rootProject.ext.Publish.artifact_id
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
-    }
-
-    libraryVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
         }
     }
 
@@ -42,5 +37,3 @@ dependencies {
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'

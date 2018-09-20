@@ -22,8 +22,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode rootProject.ext.PUBLISH.versionCode
-        versionName rootProject.ext.PUBLISH.versionName
+        versionCode rootProject.ext.Publish.versionCode
+        versionName rootProject.ext.Publish.versionName
     }
 
     buildTypes {

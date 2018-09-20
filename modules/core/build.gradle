@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = rootProject.ext.Publish.group_id
 
 apply from: '../../buildSrc/android_common.gradle'
 
@@ -10,3 +12,5 @@ dependencies {
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }
+
+// apply from: '../../buildSrc/javadoc_tasks.gradle'
