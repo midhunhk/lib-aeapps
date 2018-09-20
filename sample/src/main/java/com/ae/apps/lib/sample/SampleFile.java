@@ -17,11 +17,11 @@
 
 package com.ae.apps.lib.sample;
 
-import com.ae.apps.lib.sms.SMSManager;
+//import com.ae.apps.lib.sms.SMSManager;
 
 public class SampleFile {
 
     public void sampleMethod() {
-        SMSManager smsManager;
+        // SMSManager smsManager;
     }
 }
