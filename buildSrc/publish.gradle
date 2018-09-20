@@ -1,6 +1,11 @@
 ext.Publish = [
         group_id : 'com.ae.apps',
         artifact_id : 'lib-ae-apps',
+
+        // JitPack.io
+        jitpack_group_id : 'com.github.midhunhk',
+        jitpack_artifact_id : 'ae-apps-library',
+
         version : '4.0.0',
         versionCode: 400,
         versionName : '4.0.0'
