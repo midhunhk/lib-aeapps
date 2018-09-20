@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium">
+                android:padding="@dimen/unit_m">
 
     <com.ae.apps.lib.custom.views.RoundedImageView
         android:id="@+id/multiContactPickerProfileImage"
@@ -15,12 +15,12 @@
         android:id="@+id/multiContactPickerProfileName"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/unit_m"
+        android:layout_marginStart="@dimen/unit_m"
         android:layout_toEndOf="@+id/multiContactPickerProfileImage"
         android:layout_toRightOf="@+id/multiContactPickerProfileImage"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding_medium"
+        android:padding="@dimen/unit_m"
         android:text="Contact Name"
         android:textSize="18sp"/>
 
