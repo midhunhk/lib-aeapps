@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
     //implementation 'com.github.midhunhk:ae-apps-library:core:juneberry-SNAPSHOT'
     //implementation project(':modules:core:')
+    //implementation 'com.github.midhunhk:ae-apps-library:4.0.0-alpha.2'
 }

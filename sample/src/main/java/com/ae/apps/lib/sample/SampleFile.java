@@ -22,6 +22,6 @@ package com.ae.apps.lib.sample;
 public class SampleFile {
 
     public void sampleMethod() {
-        // SMSManager smsManager;
+        //SMSManager smsManager;
     }
 }
