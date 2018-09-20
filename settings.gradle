@@ -1,8 +1,15 @@
-include ':modules:core'
-include ':modules:contacts-api'
-include ':modules:utilities'
-include ':modules:multi-contact'
-include ':modules:mocks'
-include ':modules:runtime-permissions'
-include ':modules:database-helpers'
+include ':core'
+project(':core').projectDir = new File('modules/core')
+include ':contacts-api'
+project(':contacts-api').projectDir = new File('modules/contacts-api')
+include ':utilities'
+project(':utilities').projectDir = new File('modules/utilities')
+include ':multi-contact'
+project(':multi-contact').projectDir = new File('modules/multi-contact')
+include ':mocks'
+project(':mocks').projectDir = new File('modules/mocks')
+include ':runtime-permissions'
+project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
+include ':database-helpers'
+project(':database-helpers').projectDir = new File('modules/database-helpers')
 include ':sample'

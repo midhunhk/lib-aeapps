@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Midhun Harikumar
+ * Copyright (c) 2015 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
  *
  */
 
-apply plugin: 'com.android.library'
+package com.ae.apps.lib.sample;
 
-apply from: '../../buildSrc/android_common.gradle'
+import com.ae.apps.lib.sms.SMSManager;
 
-dependencies {
-    implementation project(':core')
-    
-    testImplementation deps.junit
-    testImplementation deps.mockitoCore
+public class SampleFile {
+
+    public void sampleMethod() {
+        SMSManager smsManager;
+    }
 }
