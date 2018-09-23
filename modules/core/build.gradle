@@ -12,6 +12,7 @@ dependencies {
     
     testImplementation deps.junit
     testImplementation deps.mockitoCore
+    testImplementation project(':mocks')
 }
 
 // apply from: '../../buildSrc/javadoc_tasks.gradle'

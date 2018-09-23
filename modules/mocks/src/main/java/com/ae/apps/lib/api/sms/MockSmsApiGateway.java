@@ -18,18 +18,22 @@
 package com.ae.apps.lib.api.sms;
 
 import com.ae.apps.lib.common.models.MessageInfo;
+import com.ae.apps.lib.mock.sms.MockSmsApiUtils;
 
 import java.util.List;
 
 public class MockSmsApiGateway extends AbstractSmsApiGateway {
+
+    public static final int MESSAGE_INFO_COUNT = 5;
+
     @Override
     public List<MessageInfo> getMessagesForUri(String uri) {
-        return null;
+        return MockSmsApiUtils.getMessageInfoList(MESSAGE_INFO_COUNT);
     }
 
     @Override
     public List<MessageInfo> getMessagesForContact(String uri, String contactId) {
-        return null;
+        return MockSmsApiUtils.getMessageInfoList(MESSAGE_INFO_COUNT);
     }
 
 }

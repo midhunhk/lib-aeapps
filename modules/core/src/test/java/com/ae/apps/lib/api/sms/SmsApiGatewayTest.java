@@ -19,7 +19,9 @@ package com.ae.apps.lib.api.sms;
 
 import android.content.ContentResolver;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 
 public class SmsApiGatewayTest {
@@ -35,5 +37,27 @@ public class SmsApiGatewayTest {
         MockSmsApiGateway mockSmsApiGateway = new MockSmsApiGateway();
         mockSmsApiGateway.mContentResolver = contentResolver;
         apiGateway = mockSmsApiGateway;
+    }
+
+    @Test
+    public void shouldReturnMessageCountForUri() {
+        long messageCount = apiGateway.getMessageCountForUri(SmsApiConstants.URI_ALL);
+        Assert.assertEquals(MockSmsApiGateway.MESSAGE_INFO_COUNT, messageCount);
+    }
+
+    @Test
+    public void shouldReturnMessageCountForContactId() {
+        long messageCount = apiGateway.getMessageCountForContact(SmsApiConstants.URI_ALL, "contact_id");
+        Assert.assertEquals(MockSmsApiGateway.MESSAGE_INFO_COUNT, messageCount);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionForInvalidUri_messageCountForUri() {
+        apiGateway.getMessageCountForUri("INVALID_URI");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionForInvalidUri_messageCountForContact() {
+        apiGateway.getMessageCountForContact("INVALID_URI", "contact_id");
     }
 }
