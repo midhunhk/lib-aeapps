@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Midhun Harikumar
+ * Copyright (c) 2018 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
 
 package com.ae.apps.lib.api.sms;
 
+import android.content.ContentResolver;
+
 import com.ae.apps.lib.common.models.MessageInfo;
 
 import java.util.List;
@@ -25,6 +27,8 @@ import java.util.List;
  * An abstract implementation of the SmsApiGateway interface
  */
 public abstract class AbstractSmsApiGateway implements SmsApiGateway {
+
+    protected ContentResolver mContentResolver;
 
     @Override
     public long getMessageCountForContact(String uri, String contactId) {

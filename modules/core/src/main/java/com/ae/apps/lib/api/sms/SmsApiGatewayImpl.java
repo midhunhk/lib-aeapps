@@ -37,8 +37,6 @@ import static com.ae.apps.lib.api.sms.SmsApiConstants.SMS_TABLE_PROJECTION;
  */
 public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
 
-    private final ContentResolver mContentResolver;
-
     public SmsApiGatewayImpl(final Context context) {
         this.mContentResolver = context.getContentResolver();
     }
