@@ -24,31 +24,38 @@ package com.ae.apps.lib.common.models;
  */
 public class MessageInfo {
 
+    private String id;
+    private String threadId;
+    private String address;
     private String person;
     private String body;
     private String type;
+    private String protocol;
     private long date;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public String getId() {
 
-        MessageInfo that = (MessageInfo) o;
-
-        if (date != that.date) return false;
-        if (person != null ? !person.equals(that.person) : that.person != null) return false;
-        if (body != null ? !body.equals(that.body) : that.body != null) return false;
-        return type != null ? type.equals(that.type) : that.type == null;
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        int result = person != null ? person.hashCode() : 0;
-        result = 31 * result + (body != null ? body.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (int) (date ^ (date >>> 32));
-        return result;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getThreadId() {
+        return threadId;
+    }
+
+    public void setThreadId(String threadId) {
+        this.threadId = threadId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPerson() {
@@ -82,5 +89,41 @@ public class MessageInfo {
 
     public void setDate(long date) {
         this.date = date;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MessageInfo that = (MessageInfo) o;
+
+        if (date != that.date) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (threadId != null ? !threadId.equals(that.threadId) : that.threadId != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (person != null ? !person.equals(that.person) : that.person != null) return false;
+        if (body != null ? !body.equals(that.body) : that.body != null) return false;
+        return type != null ? type.equals(that.type) : that.type == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (threadId != null ? threadId.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (person != null ? person.hashCode() : 0);
+        result = 31 * result + (body != null ? body.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (int) (date ^ (date >>> 32));
+        return result;
     }
 }

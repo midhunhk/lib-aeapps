@@ -17,9 +17,51 @@
 
 package com.ae.apps.lib.api.sms;
 
-/**
- * 
- */
-public interface SmsApiService {
+import com.ae.apps.lib.common.models.MessageInfo;
 
+import java.util.List;
+
+/**
+ * A gateway which provides an abstraction over Android's SMS API
+ * Requires the permission <b>android.permission.READ_SMS</b> in the manifest
+ *
+ * Replacement for the SMSManager implementation from libAeApps up to version 3
+ *
+ * @since 4.0
+ */
+public interface SmsApiGateway {
+
+    /**
+     * Returns a list of SMS Messages based on the URI requested
+     *
+     * @param uri The URI
+     * @return list of messages
+     */
+    List<MessageInfo> getMessagesForUri(final String uri);
+
+    /**
+     * Returns the number of messages based on the URI requested
+     *
+     * @param uri the URI
+     * @return number of messages
+     */
+    long getMessageCountForUri(final String uri);
+
+    /**
+     * Returns the list of messages for the specified contact and URI
+     *
+     * @param uri the uri
+     * @param contactId the contact id
+     * @return list of messages
+     */
+    List<MessageInfo> getMessagesForContact(final String uri, final String contactId);
+
+    /**
+     * Returns the number of messages for the specified contact and URI
+     *
+     * @param uri the uri
+     * @param contactId the contact id
+     * @return number of messages
+     */
+    long getMessageCountForContact(final String uri, final String contactId);
 }
