@@ -17,11 +17,14 @@
 
 package com.ae.apps.lib.api.sms;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SmsApiConstants {
+public final class SmsApiConstants {
+
+    private SmsApiConstants(){
+
+    }
 
     /* public constants */
     public static final String URI_ALL = "content://sms/";
