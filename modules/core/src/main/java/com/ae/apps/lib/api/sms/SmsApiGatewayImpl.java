@@ -42,15 +42,14 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
 
     @Override
     public List<MessageInfo> getMessagesForUri(String uri) {
-        if (!checkIfValidUri(uri)) {
-            throw new IllegalArgumentException(uri + " is not a valid URI");
-        }
+        checkInputParams(uri);
+
         Cursor cursor = mContentResolver.query(Uri.parse(uri),
                 SMS_TABLE_PROJECTION,
                 null, null, null);
         List<MessageInfo> messages = new ArrayList<>();
         if (cursor != null && cursor.moveToFirst()) {
-            createMessageInfoList(cursor);
+            SmsApiUtils.createMessageInfoList(cursor);
             cursor.close();
         }
         return messages;
@@ -58,37 +57,16 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
 
     @Override
     public List<MessageInfo> getMessagesForContact(String uri, String contactId) {
-        if (!checkIfValidUri(uri)) {
-            throw new IllegalArgumentException(uri + " is not a valid URI");
-        }
+        checkInputParams(uri);
+
         Cursor cursor = mContentResolver.query(Uri.parse(uri),
                 SMS_TABLE_PROJECTION,
                 SELECT_BY_PERSON, new String[]{contactId}, null);
         List<MessageInfo> messages = new ArrayList<>();
         if (null != cursor && cursor.moveToFirst()) {
-            messages = createMessageInfoList(cursor);
+            messages = SmsApiUtils.createMessageInfoList(cursor);
         }
         return messages;
     }
 
-    private List<MessageInfo> createMessageInfoList(Cursor cursor) {
-        List<MessageInfo> messages = new ArrayList<>();
-        MessageInfo messageInfo;
-        do {
-            messageInfo = createMessageInfo(cursor);
-            messages.add(messageInfo);
-        } while (cursor.moveToNext());
-        return messages;
-    }
-
-    private MessageInfo createMessageInfo(final Cursor cursor) {
-        MessageInfo messageInfo = new MessageInfo();
-        messageInfo.setId(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_ID)));
-        messageInfo.setThreadId(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_THREAD_ID)));
-        messageInfo.setAddress(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_ADDRESS)));
-        messageInfo.setBody(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_BODY)));
-        messageInfo.setPerson(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_PERSON)));
-        messageInfo.setDate(Long.parseLong(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_DATE))));
-        return messageInfo;
-    }
 }

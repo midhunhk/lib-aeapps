@@ -32,11 +32,10 @@ public abstract class AbstractSmsApiGateway implements SmsApiGateway {
 
     @Override
     public long getMessageCountForContact(String uri, String contactId) {
-        if(!checkIfValidUri(uri)){
-            throw new IllegalArgumentException(uri + " is not a valid URI");
-        }
+        checkInputParams(uri);
+
         List<MessageInfo> messages = getMessagesForContact(uri, contactId);
-        if(null != messages && !messages.isEmpty()){
+        if (null != messages && !messages.isEmpty()) {
             return messages.size();
         }
         return 0;
@@ -44,17 +43,22 @@ public abstract class AbstractSmsApiGateway implements SmsApiGateway {
 
     @Override
     public long getMessageCountForUri(String uri) {
-        if(!checkIfValidUri(uri)){
-            throw new IllegalArgumentException(uri + " is not a valid URI");
-        }
+        checkInputParams(uri);
+
         List<MessageInfo> messages = getMessagesForUri(uri);
-        if(null != messages && !messages.isEmpty()){
+        if (null != messages && !messages.isEmpty()) {
             return messages.size();
         }
         return 0;
     }
 
-    protected boolean checkIfValidUri(final String uri){
+    protected boolean checkIfValidUri(final String uri) {
         return null != uri && SmsApiConstants.ALL_URIS.contains(uri);
+    }
+
+    protected void checkInputParams(String uri) {
+        if (!checkIfValidUri(uri)) {
+            throw new IllegalArgumentException(uri + " is not a valid URI");
+        }
     }
 }
