@@ -24,6 +24,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
@@ -50,6 +51,19 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
     protected transient List<ContactInfo> mContacts = Collections.emptyList();
 
     @Override
+    public void initialize(final ContactInfoFilterOptions options) {
+        if (STATE.UNINITIALIZED == gatewayState) {
+            gatewayState = STATE.INITIALIZING;
+
+            readContacts(options);
+
+            gatewayState = STATE.READY;
+        }
+    }
+
+    protected abstract void readContacts(final ContactInfoFilterOptions options);
+
+    @Override
     public void initializeAsync(final ContactInfoFilterOptions options,
                                 final ContactsDataConsumer dataConsumer) {
         new Thread(new Runnable() {
@@ -60,7 +74,6 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
                 if (null != dataConsumer) {
                     dataConsumer.onContactsRead();
                 }
-
             }
         }).start();
     }
@@ -85,6 +98,7 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         }
     }
 
+    @Nullable
     protected Bitmap getContactPicture(final String contactId) {
         long contactIdLong = Long.parseLong(contactId);
         Uri contactPhotoUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactIdLong);
@@ -92,6 +106,9 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         InputStream photoDataStream = ContactsContract.Contacts.openContactPhotoInputStream(mContentResolver,
                 contactPhotoUri);
 
+        if (null == photoDataStream) {
+            return null;
+        }
         return BitmapFactory.decodeStream(photoDataStream);
     }
 

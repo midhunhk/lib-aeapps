@@ -17,13 +17,18 @@
 
 package com.ae.apps.lib.api.contacts.impl;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
 import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiConstants;
@@ -41,16 +46,16 @@ import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WIT
  */
 public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
 
+    private ContactsApiGatewayImpl(Builder builder) {
+        this.mResources = builder.resources;
+        this.mContentResolver = builder.contentResolver;
+    }
+
     @Override
-    public void initialize(ContactInfoFilterOptions options) {
-        if (STATE.UNINITIALIZED == gatewayState) {
-            gatewayState = STATE.INITIALIZING;
-            Cursor cursor = mContentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-
-            mContacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
-
-            gatewayState = STATE.READY;
-        }
+    protected void readContacts(ContactInfoFilterOptions options) {
+        Cursor cursor = mContentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+        mContacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
     }
 
     @Override
@@ -155,5 +160,23 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
             }
         }
         return contactInfo;
+    }
+
+    /**
+     * Builds an instance of {@link ContactsApiGateway}
+     */
+    public static class Builder {
+        private ContentResolver contentResolver;
+        private Resources resources;
+
+        public Builder(Context context) {
+            this.contentResolver = context.getContentResolver();
+            this.resources = context.getResources();
+        }
+
+        @NonNull
+        public ContactsApiGateway build() {
+            return new ContactsApiGatewayImpl(this);
+        }
     }
 }
