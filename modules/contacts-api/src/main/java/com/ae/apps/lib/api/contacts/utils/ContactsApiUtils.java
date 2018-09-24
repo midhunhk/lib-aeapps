@@ -63,8 +63,9 @@ public class ContactsApiUtils {
                                                        boolean includeContactsWithPhoneNumbers) {
         List<ContactInfo> contactsList = new ArrayList<>();
         if (null != cursor && cursor.getCount() > 0) {
+            ContactInfo contactInfo;
             while (cursor.moveToNext()) {
-                ContactInfo contactInfo = createContactInfo(cursor);
+                contactInfo = createContactInfo(cursor);
                 boolean addContact = !includeContactsWithPhoneNumbers || contactInfo.hasPhoneNumber();
                 if (addContact) {
                     contactsList.add(contactInfo);
@@ -79,8 +80,9 @@ public class ContactsApiUtils {
 
         // Prefetch some column indexes from the cursor
         if (null != phoneCursor) {
+            PhoneNumberInfo phoneNumberInfo;
             while (phoneCursor.moveToNext()) {
-                PhoneNumberInfo phoneNumberInfo = createPhoneNumber(phoneCursor, resources);
+                phoneNumberInfo = createPhoneNumber(phoneCursor, resources);
                 phoneNumbers.add(phoneNumberInfo);
             }
             phoneCursor.close();
@@ -97,15 +99,13 @@ public class ContactsApiUtils {
         String phoneNumber = phoneCursor.getString(phoneNumberIndex);
         int phoneType = phoneCursor.getInt(phoneTypeIndex);
 
-        // Check for duplicate numbers before adding to the phone numbers
-        // Get the label for this number
+        // Getting the label for this number
         if (null != resources) {
             customLabel = phoneCursor.getString(phoneLabelIndex);
             phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(resources, phoneType,
                     customLabel);
         }
 
-        // Save this phone number as a VO
         PhoneNumberInfo phoneNumberInfo = new PhoneNumberInfo();
         phoneNumberInfo.setPhoneNumber(phoneNumber);
         phoneNumberInfo.setPhoneType(phoneLabel);
