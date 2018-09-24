@@ -97,16 +97,16 @@ public class ContactService implements AeContactService {
                     lastContactedTimeString = CommonUtils.formatTimeStamp(lastContactedTime, DATE_FORMAT);
 
                     // Save that data to a VO
-                    ContactInfo contactVo = new ContactInfo();
-                    contactVo.setId(id);
-                    contactVo.setName(name);
+                    ContactInfo contactInfo = new ContactInfo();
+                    contactInfo.setId(id);
+                    contactInfo.setName(name);
 
-                    contactVo.setHasPhoneNumber(hasPhoneNumber);
-                    contactVo.setTimesContacted(timesContacted);
-                    contactVo.setLastContactedTime(lastContactedTimeString);
+                    contactInfo.setHasPhoneNumber(hasPhoneNumber);
+                    contactInfo.setTimesContacted(timesContacted);
+                    contactInfo.setLastContactedTime(lastContactedTimeString);
 
                     // Add the contact to a list
-                    contactsList.add(contactVo);
+                    contactsList.add(contactInfo);
                 }
             }
         }

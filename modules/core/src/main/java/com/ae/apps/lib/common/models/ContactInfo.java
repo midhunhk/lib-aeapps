@@ -17,6 +17,7 @@
 
 package com.ae.apps.lib.common.models;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class ContactInfo implements Comparable<ContactInfo>{
     private String timesContacted;
     private String lastContactedTime;
     private boolean hasPhoneNumber;
+    private transient Bitmap picture;
     private List<PhoneNumberInfo> phoneNumbersList;
 
     public String getId() {
@@ -81,6 +83,14 @@ public class ContactInfo implements Comparable<ContactInfo>{
 
     public void setPhoneNumbersList(List<PhoneNumberInfo> phoneNumbersList) {
         this.phoneNumbersList = phoneNumbersList;
+    }
+
+    public Bitmap getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Bitmap picture) {
+        this.picture = picture;
     }
 
     @Override

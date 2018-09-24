@@ -15,11 +15,23 @@
  *
  */
 
-package com.ae.apps.lib.api.contacts;
+package com.ae.apps.lib.api.contacts.utils;
+
+import android.provider.ContactsContract;
 
 /**
  * Constants for Contacts Api
  */
-public class ContactsApiConstants {
+public interface ContactsApiConstants {
 
+    String COLUMN_ID = "_id";
+    String DATE_FORMAT = "MMM dd, yyyy hh:mm a";
+
+    String[] PROJECTION_ID_RAW_CONTACT_ID = new String[]{
+            ContactsContract.RawContacts._ID, ContactsContract.RawContacts.CONTACT_ID
+    };
+
+    String SELECT_WITH_RAW_CONTACT_ID = ContactsContract.RawContacts._ID + " = ?";
+
+    String SELECT_WITH_CONTACT_ID = ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?";
 }

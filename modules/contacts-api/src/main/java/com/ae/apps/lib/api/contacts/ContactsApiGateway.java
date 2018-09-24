@@ -17,10 +17,65 @@
 
 package com.ae.apps.lib.api.contacts;
 
+import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
+import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
+import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
+import com.ae.apps.lib.common.models.ContactInfo;
+
+import java.util.List;
+
 /**
  * An Abstraction over the Android Contacts API
+ *
+ * Requires the below permission in the manifest
+ * <p>android.permission.READ_CONTACTS</p>
+ *
+ * Usage: First call one of the initialize methods and after the contacts are read,
+ * use any other method to perform an operation on the
  *
  * @since 4.0
  */
 public interface ContactsApiGateway {
+
+    /**
+     * Initialize the ContactsApi to read all contacts based on the options provided
+     *
+     * @param options filter options
+     */
+    void initialize(ContactInfoFilterOptions options);
+
+    /**
+     * Initialize the ContactApi to read all contacts based on the options provided
+     * in a separate thread. The data consumer would  be notified when the
+     * operation is complete
+     *
+     * @param options filter options
+     * @param dataConsumer data consumer
+     */
+    void initializeAsync(ContactInfoFilterOptions options, ContactsDataConsumer dataConsumer);
+
+    /**
+     * Return a list of
+     *
+     * @return list of read contacts
+     * @throws IllegalStateException if the API is not yet initialized
+     */
+    List<ContactInfo> getAllContacts() throws IllegalStateException;
+
+    /**
+     *
+     * @return
+     */
+    long getReadContactsCount();
+
+    ContactInfo getRandomContact();
+
+    ContactInfo getContactInfo(final String contactId);
+
+    ContactInfo getContactInfo(final String contactId, final ContactInfoOptions options);
+
+    String getContactIdFromRawContact(final String rawContactId);
+
+    String getContactIdFromAddress(final String address);
+
 }

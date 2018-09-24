@@ -99,19 +99,19 @@ public abstract class AbstractContactManager implements AeContactManager {
     /**
      * Fetches all the Phone numbers for this contacts.
      *
-     * @param contactVo contactVo
+     * @param contactInfo contactVo
      * @return contact vo
      */
-    private ContactInfo getContactPhoneDetails(final ContactInfo contactVo) {
+    private ContactInfo getContactPhoneDetails(final ContactInfo contactInfo) {
         // Make sure we update the contact only if we didn't populate the
         // phone numbers list already
         // and the contact has phone numbers
-        if (contactVo.getPhoneNumbersList() == null && contactVo.hasPhoneNumber()) {
-            List<PhoneNumberInfo> phoneNumbersList = mContactService.getContactPhoneDetails(contactVo.getId());
+        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
+            List<PhoneNumberInfo> phoneNumbersList = mContactService.getContactPhoneDetails(contactInfo.getId());
 
-            contactVo.setPhoneNumbersList(phoneNumbersList);
+            contactInfo.setPhoneNumbersList(phoneNumbersList);
         }
-        return contactVo;
+        return contactInfo;
     }
 
     @Override
@@ -198,5 +198,6 @@ public abstract class AbstractContactManager implements AeContactManager {
 
         return contactVo;
     }
+
 
 }

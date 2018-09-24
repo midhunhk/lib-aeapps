@@ -48,5 +48,5 @@ public final class SmsApiConstants {
             COLUMN_ID, COLUMN_THREAD_ID, COLUMN_BODY,
             COLUMN_ADDRESS, COLUMN_PERSON, COLUMN_PROTOCOL};
 
-    static final String SELECT_BY_ADDRESS = " address = ? ";
+    static final String SELECT_BY_PERSON = " person = ? ";
 }

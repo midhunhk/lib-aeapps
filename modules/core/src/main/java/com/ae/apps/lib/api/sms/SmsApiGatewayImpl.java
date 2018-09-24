@@ -17,7 +17,6 @@
 
 package com.ae.apps.lib.api.sms;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -27,7 +26,7 @@ import com.ae.apps.lib.common.models.MessageInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ae.apps.lib.api.sms.SmsApiConstants.SELECT_BY_ADDRESS;
+import static com.ae.apps.lib.api.sms.SmsApiConstants.SELECT_BY_PERSON;
 import static com.ae.apps.lib.api.sms.SmsApiConstants.SMS_TABLE_PROJECTION;
 
 /**
@@ -62,12 +61,9 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
         if (!checkIfValidUri(uri)) {
             throw new IllegalArgumentException(uri + " is not a valid URI");
         }
-        // TODO Revisit if lookup by address is correct
-        // https://stackoverflow.com/a/27907211
-        // convert contactId into address?
         Cursor cursor = mContentResolver.query(Uri.parse(uri),
                 SMS_TABLE_PROJECTION,
-                SELECT_BY_ADDRESS, new String[]{contactId}, null);
+                SELECT_BY_PERSON, new String[]{contactId}, null);
         List<MessageInfo> messages = new ArrayList<>();
         if (null != cursor && cursor.moveToFirst()) {
             messages = createMessageInfoList(cursor);
