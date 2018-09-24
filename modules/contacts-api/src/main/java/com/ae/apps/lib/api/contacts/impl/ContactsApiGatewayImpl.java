@@ -128,7 +128,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         return contactId;
     }
 
-    protected void updateWithPhoneDetails(final ContactInfo contactInfo) {
+    private void updateWithPhoneDetails(final ContactInfo contactInfo) {
         if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
             Cursor phoneCursor = mContentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                     null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},

@@ -26,10 +26,10 @@ import java.util.List;
 
 /**
  * An Abstraction over the Android Contacts API
- *
+ * <p>
  * Requires the below permission in the manifest
  * <p>android.permission.READ_CONTACTS</p>
- *
+ * <p>
  * Usage: First call one of the initialize methods and after the contacts are read,
  * use any other method to perform an operation on the
  *
@@ -49,13 +49,17 @@ public interface ContactsApiGateway {
      * in a separate thread. The data consumer would  be notified when the
      * operation is complete
      *
-     * @param options filter options
+     * @param options      filter options
      * @param dataConsumer data consumer
      */
     void initializeAsync(ContactInfoFilterOptions options, ContactsDataConsumer dataConsumer);
 
     /**
-     * Return a list of
+     * Return the list of contacts that were read by the API based on the Options used with the initialize method.
+     * <p>
+     * Make sure one of the below methods before invoking this method
+     * com.ae.apps.lib.api.contacts.ContactsApiGateway#initialize(com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions)
+     * com.ae.apps.lib.api.contacts.ContactsApiGateway#initializeAsync(com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions, com.ae.apps.lib.api.contacts.types.ContactsDataConsumer)
      *
      * @return list of read contacts
      * @throws IllegalStateException if the API is not yet initialized
@@ -63,19 +67,51 @@ public interface ContactsApiGateway {
     List<ContactInfo> getAllContacts() throws IllegalStateException;
 
     /**
+     * Get the count of read contacts
      *
-     * @return
+     * @return the number of contacts that were read
      */
     long getReadContactsCount();
 
-    ContactInfo getRandomContact();
+    /**
+     * Return a Random contact from the contacts that have been read by the API
+     *
+     * @return a random contact from the contacts that are read by the API, null if there are no contacts
+     * @throws IllegalStateException if the API is not yet initialized
+     */
+    ContactInfo getRandomContact() throws IllegalStateException;
 
+    /**
+     * Returns a contact based on the contactId
+     *
+     * @param contactId the contactId
+     * @return a Contact
+     */
     ContactInfo getContactInfo(final String contactId);
 
+    /**
+     * Returns a contact based on the contactId and options
+     *
+     * @param contactId the contactId
+     * @param options   the options
+     * @return a Contact
+     */
     ContactInfo getContactInfo(final String contactId, final ContactInfoOptions options);
 
+    /**
+     * Convert a rawContactId into the corresponding contactId
+     *
+     * @param rawContactId raw contact id
+     * @return contact id
+     */
     String getContactIdFromRawContact(final String rawContactId);
 
+    /**
+     * Convert an address into corresponding contactId
+     *
+     * @param address address
+     * @return contact id
+     */
     String getContactIdFromAddress(final String address);
 
 }
