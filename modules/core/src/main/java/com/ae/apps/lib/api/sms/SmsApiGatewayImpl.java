@@ -49,7 +49,7 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
                 null, null, null);
         List<MessageInfo> messages = new ArrayList<>();
         if (cursor != null && cursor.moveToFirst()) {
-            SmsApiUtils.createMessageInfoList(cursor);
+            messages = SmsApiUtils.createMessageInfoList(cursor);
             cursor.close();
         }
         return messages;
@@ -65,6 +65,7 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
         List<MessageInfo> messages = new ArrayList<>();
         if (null != cursor && cursor.moveToFirst()) {
             messages = SmsApiUtils.createMessageInfoList(cursor);
+            cursor.close();
         }
         return messages;
     }

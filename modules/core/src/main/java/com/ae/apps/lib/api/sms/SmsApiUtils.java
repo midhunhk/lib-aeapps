@@ -12,7 +12,13 @@ import java.util.List;
  */
 class SmsApiUtils {
 
-    static List<MessageInfo> createMessageInfoList(Cursor cursor) {
+    /**
+     * Create a list of MessageInfo from the cursor
+     *
+     * @param cursor cursor
+     * @return list of messages
+     */
+    static List<MessageInfo> createMessageInfoList(final Cursor cursor) {
         List<MessageInfo> messages = new ArrayList<>();
         MessageInfo messageInfo;
         do {
@@ -22,6 +28,12 @@ class SmsApiUtils {
         return messages;
     }
 
+    /**
+     * Create a message info object from the cursor
+     *
+     * @param cursor the cursor
+     * @return a MessageInfo
+     */
     static MessageInfo createMessageInfo(final Cursor cursor) {
         MessageInfo messageInfo = new MessageInfo();
         messageInfo.setId(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_ID)));
