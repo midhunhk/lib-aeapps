@@ -20,46 +20,33 @@ package com.ae.apps.lib.api.contacts.impl;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.support.annotation.Nullable;
 
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
-import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
-import com.ae.apps.lib.api.contacts.utils.ContactsApiConstants;
-import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
 import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.PROJECTION_ID_RAW_CONTACT_ID;
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_RAW_CONTACT_ID;
 
 /**
  * An abstract implementation of ContactsApiGateway
  */
 public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
 
-    protected Resources mResources;
-
-    protected ContentResolver mContentResolver;
-
     protected enum STATE {
         UNINITIALIZED, INITIALIZING, READY
     }
 
+    protected Resources mResources;
+    protected ContentResolver mContentResolver;
     protected transient STATE gatewayState = STATE.UNINITIALIZED;
-
     protected transient List<ContactInfo> mContacts = Collections.emptyList();
 
     @Override
@@ -80,74 +67,22 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
 
     @Override
     public List<ContactInfo> getAllContacts() throws IllegalStateException {
-        if (checkIfApiNotInitialized()) {
-            throw new IllegalStateException("ContactsApiGateway not initialized");
-        }
+        throwExceptionIfNotInitialized();
+
         return new ArrayList<>(mContacts);
     }
 
     @Override
-    public ContactInfo getRandomContact() {
-        ContactInfo contactInfo = null;
-        if (getReadContactsCount() > 0) {
-            Random random = new Random();
-            int contactIndex = random.nextInt(Integer.valueOf(getReadContactsCount() + ""));
-            contactInfo = getContactInfo(mContacts.get(contactIndex).getId(),
-                    ContactInfoOptions.of(true, com.ae.apps.lib.R.drawable.profile_icon_1));
-
-            // Update the contacts list with the updated contact item
-            mContacts.set(contactIndex, contactInfo);
-        }
-        return contactInfo;
-    }
-
-    @Override
-    public String getContactIdFromRawContact(String rawContactId) {
-        String contactId = String.valueOf(0);
-        Cursor cursor = mContentResolver.query(ContactsContract.RawContacts.CONTENT_URI,
-                PROJECTION_ID_RAW_CONTACT_ID,
-                SELECT_WITH_RAW_CONTACT_ID,
-                new String[]{rawContactId}, null);
-
-        if (null != cursor && cursor.moveToFirst()) {
-            int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
-            contactId = cursor.getString(contactIdIndex);
-            cursor.close();
-        }
-
-        return contactId;
-    }
-
-    @Nullable
-    @Override
-    public String getContactIdFromAddress(@Nullable String address) {
-        String contactId = null;
-        Cursor cursor = null;
-        try {
-            if (address != null) {
-                String[] projection = new String[]{ContactsApiConstants.COLUMN_ID};
-                Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
-                if (null != personUri) {
-                    cursor = mContentResolver.query(personUri, projection, null, null, null);
-                    if (null != cursor && cursor.moveToFirst()) {
-                        contactId = cursor.getString(cursor.getColumnIndex(ContactsApiConstants.COLUMN_ID));
-                    }
-                }
-            }
-        } catch (IllegalArgumentException i) {
-            // Maybe a device specific implementation difference
-        } finally {
-            if (null != cursor) {
-                cursor.close();
-            }
-        }
-
-        return contactId;
-    }
-
-    @Override
     public long getReadContactsCount() {
+        throwExceptionIfNotInitialized();
+
         return mContacts.size();
+    }
+
+    protected void throwExceptionIfNotInitialized() {
+        if (checkIfApiNotInitialized()) {
+            throw new IllegalStateException("ContactsApiGateway not initialized");
+        }
     }
 
     protected Bitmap getContactPicture(final String contactId) {
@@ -160,14 +95,6 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         return BitmapFactory.decodeStream(photoDataStream);
     }
 
-    protected void updateWithPhoneDetails(final ContactInfo contactInfo) {
-        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
-            Cursor phoneCursor = mContentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
-                    null);
-            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, mResources));
-        }
-    }
 
     protected boolean checkIfApiInitialized() {
         return gatewayState == STATE.READY;
