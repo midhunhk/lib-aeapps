@@ -33,7 +33,6 @@ public class SmsApiGatewayTest {
 
     @Before
     public void setUp() {
-        System.out.println("setUp is called before each test");
         MockSmsApiGateway mockSmsApiGateway = new MockSmsApiGateway();
         mockSmsApiGateway.mContentResolver = contentResolver;
         apiGateway = mockSmsApiGateway;
