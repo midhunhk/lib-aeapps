@@ -25,7 +25,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,8 +41,13 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
-    //implementation project(':modules:core:')
-    implementation 'com.github.midhunhk.ae-apps-library:core:v4.0.0-alpha.6'
-    implementation 'com.github.midhunhk.ae-apps-library:contacts-api:v4.0.0-alpha.6'
+    def libAeAppsVersion = 'v4.0.0-alpha.6'
+
+    implementation deps.appcompat
+
+    implementation "com.github.midhunhk.ae-apps-library:core:$libAeAppsVersion"
+    implementation "com.github.midhunhk.ae-apps-library:contacts-api:$libAeAppsVersion"
+    implementation "com.github.midhunhk.ae-apps-library:runtime-permissions:$libAeAppsVersion"
+    implementation "com.github.midhunhk.ae-apps-library:multi-contact:$libAeAppsVersion"
+    implementation "com.github.midhunhk.ae-apps-library:utilities:$libAeAppsVersion"
 }

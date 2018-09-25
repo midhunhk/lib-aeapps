@@ -6,7 +6,7 @@ ext {
     compileSdkVersion = 28
     buildToolsVersion = "28.0.1"
 
-    supportLibraryVersion = "28.0.0-rc01"
+    supportLibraryVersion = "28.0.0"
     espressoVersion = "2.2.2"
     gradleBuildToolVersion = "3.1.4"
     androidMavenPluginVersion = "2.1"
