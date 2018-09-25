@@ -46,6 +46,10 @@ dependencies {
     implementation deps.appcompat
 
     api project(':core')
+    api project(':contacts-api')
+    api project(':runtime-permissions')
+    api project(':utilities')
+    api project(':multi-contact')
 
     /*
     implementation "com.github.midhunhk.ae-apps-library:core:$libAeAppsVersion"
