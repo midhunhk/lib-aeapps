@@ -65,7 +65,7 @@ public class DialogUtils {
 	 */
 	public static void showMaterialInfoDialog(final Context context, int titleResourceId, int messageResourceId, 
 			int positiveButtonResourceId) {
-		android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context)
+		androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context)
 		.setCancelable(true)
 		.setTitle(titleResourceId)
 		.setMessage(messageResourceId)

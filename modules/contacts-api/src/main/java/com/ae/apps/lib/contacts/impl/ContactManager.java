@@ -18,15 +18,11 @@
 package com.ae.apps.lib.contacts.impl;
 
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.ae.apps.lib.common.models.ContactInfo;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.ae.apps.lib.contacts.service.ContactService;
 
 /**

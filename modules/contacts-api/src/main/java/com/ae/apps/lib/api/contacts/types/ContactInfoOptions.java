@@ -1,7 +1,6 @@
 package com.ae.apps.lib.api.contacts.types;
 
-import android.graphics.Bitmap;
-import android.support.annotation.IntegerRes;
+import androidx.annotation.IntegerRes;
 
 /**
  * Specifies options for getting ContactInfo

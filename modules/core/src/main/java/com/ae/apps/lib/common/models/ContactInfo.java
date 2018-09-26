@@ -18,7 +18,7 @@
 package com.ae.apps.lib.common.models;
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 

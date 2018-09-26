@@ -20,7 +20,7 @@ package com.ae.apps.lib.contacts.impl;
 import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.MessageInfo;

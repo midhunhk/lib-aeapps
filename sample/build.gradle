@@ -27,7 +27,7 @@ android {
         versionCode 1
         versionName "1.0.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -44,8 +44,9 @@ dependencies {
     def libAeAppsVersion = 'v4.0.0-alpha.6'
 
     implementation deps.appcompat
-    implementation deps.design
     implementation deps.recyclerview
+    implementation deps.design
+    implementation deps.constraintLayout
 
     api project(':core')
     api project(':contacts-api')
@@ -60,5 +61,4 @@ dependencies {
     implementation "com.github.midhunhk.ae-apps-library:multi-contact:$libAeAppsVersion"
     implementation "com.github.midhunhk.ae-apps-library:utilities:$libAeAppsVersion"
     */
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

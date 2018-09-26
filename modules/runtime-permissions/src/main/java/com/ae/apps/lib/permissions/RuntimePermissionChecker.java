@@ -20,7 +20,7 @@ package com.ae.apps.lib.permissions;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.content.PermissionChecker;
+import androidx.core.content.PermissionChecker;
 
 /**
  * A helper class to check and handle RuntimePermissions.

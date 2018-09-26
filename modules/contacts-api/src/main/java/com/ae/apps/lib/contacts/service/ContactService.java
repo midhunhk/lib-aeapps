@@ -24,8 +24,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.MessageInfo;
