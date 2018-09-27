@@ -9,4 +9,29 @@
     tools:context=".features.permissions.PermissionsSampleActivity"
     tools:showIn="@layout/activity_permissions_sample">
 
+    <LinearLayout
+        android:id="@+id/layout_need_permissions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_need_permissions"/>
+
+        <Button
+            android:id="@+id/btn_request_permissions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_btn_request_permissions"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_permissions_granted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_permissions_granted"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package com.ae.apps.lib.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ae.apps.lib.sample.adapters.FeaturesRecyclerViewAdapter;
+import com.ae.apps.lib.sample.features.permissions.PermissionsSampleActivity;
 import com.ae.apps.lib.sample.models.FeatureInfo;
 
 import java.util.ArrayList;
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, features.get(position).getName(), Toast.LENGTH_SHORT).show();
+        FeatureInfo featureInfo = features.get(position);
+        Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
+        if(featureInfo.getId() == 1){
+            startActivity(new Intent(this, PermissionsSampleActivity.class));
+        }
     }
 }

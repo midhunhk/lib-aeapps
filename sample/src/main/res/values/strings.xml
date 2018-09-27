@@ -18,4 +18,7 @@
 <resources>
     <string name="app_name">Sample</string>
     <string name="title_activity_permissions_sample">PermissionsSample</string>
+    <string name="str_need_permissions">Need Contact Permissions</string>
+    <string name="str_btn_request_permissions">Request Permissions</string>
+    <string name="str_permissions_granted">Permissions Granted!</string>
 </resources>
