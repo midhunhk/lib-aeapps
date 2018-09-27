@@ -17,4 +17,5 @@
 
 <resources>
     <string name="app_name">Sample</string>
+    <string name="title_activity_permissions_sample">PermissionsSample</string>
 </resources>

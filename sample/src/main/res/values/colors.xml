@@ -16,13 +16,13 @@
   ~
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="accent_material_dark_1">#80cbc4</color>
-    <color name="primary_material_dark">#212121</color>
-    <color name="primary_dark_material_dark">#000000</color>
-    <color name="background_material_dark">#303030</color>
-    <color name="foreground_material_dark">#ffffff</color>
+    <color name="primary_material_dark" tools:ignore="PrivateResource">#212121</color>
+    <color name="primary_dark_material_dark" tools:ignore="PrivateResource">#000000</color>
+    <color name="background_material_dark" tools:ignore="PrivateResource">#303030</color>
+    <color name="foreground_material_dark" tools:ignore="PrivateResource">#ffffff</color>
 </resources>

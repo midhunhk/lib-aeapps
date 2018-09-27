@@ -9,16 +9,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ae.apps.lib.sample.R;
+import com.ae.apps.lib.sample.models.FeatureInfo;
 
 import java.util.List;
 
 public class FeaturesRecyclerViewAdapter extends RecyclerView.Adapter<FeaturesRecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mData;
+    private List<FeatureInfo> mData;
     private ItemClickListener mListener;
     private LayoutInflater mInflater;
 
-    public FeaturesRecyclerViewAdapter(Context context, List<String> data) {
+    public FeaturesRecyclerViewAdapter(Context context, List<FeatureInfo> data) {
         mInflater = LayoutInflater.from(context);
         mListener = (ItemClickListener) context;
         mData = data;
@@ -33,8 +34,8 @@ public class FeaturesRecyclerViewAdapter extends RecyclerView.Adapter<FeaturesRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String feature = mData.get(i);
-        viewHolder.featureName.setText(feature);
+        FeatureInfo feature = mData.get(i);
+        viewHolder.featureName.setText(feature.getName());
     }
 
     @Override
