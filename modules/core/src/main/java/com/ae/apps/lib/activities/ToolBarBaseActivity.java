@@ -1,3 +1,19 @@
+/*
+ * Copyright 2018 Midhun Harikumar
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.ae.apps.lib.activities;
 
 import android.os.Build;
@@ -7,7 +23,11 @@ import android.view.KeyEvent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+/**
+ * Base Activity if using a NoActionBar theme and to supply a custom toolbar
+ */
 public abstract class ToolBarBaseActivity extends AppCompatActivity {
+    private static final String BRAND_LGE = "LGE";
     Toolbar mToolbar = null;
 
     @Override
@@ -73,7 +93,7 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         // Fix for NPE on LG Devices when pressing hardware menu button
-        if (keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)) {
+        if (keyCode == KeyEvent.KEYCODE_MENU && BRAND_LGE.equals(Build.BRAND)) {
             openOptionsMenu();
             return true;
         }
