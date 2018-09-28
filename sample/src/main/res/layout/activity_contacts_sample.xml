@@ -21,6 +21,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_permissions_sample"/>
+    <include layout="@layout/content_contacts_sample"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

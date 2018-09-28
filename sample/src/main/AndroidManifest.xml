@@ -28,7 +28,7 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity
-            android:name=".features.permissions.PermissionsSampleActivity"
+            android:name=".features.contacts.ContactsSampleActivity"
             android:label="@string/title_activity_permissions_sample"
             android:theme="@style/AppTheme">
         </activity>

@@ -1,35 +1,38 @@
-package com.ae.apps.lib.sample.features.permissions;
+package com.ae.apps.lib.sample.features.contacts;
 
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import com.ae.apps.lib.permissions.PermissionsAwareComponent;
 import com.ae.apps.lib.permissions.RuntimePermissionChecker;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-
 import com.ae.apps.lib.sample.R;
 
-public class PermissionsSampleActivity extends AppCompatActivity
+public class ContactsSampleActivity extends AppCompatActivity
         implements PermissionsAwareComponent {
 
     private RuntimePermissionChecker mPermissionChecker;
     private static final int PERMISSION_CODE = 2000;
 
+    private View mRequestLayout;
+    private View mContactsLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_permissions_sample);
+        setContentView(R.layout.activity_contacts_sample);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mRequestLayout = findViewById(R.id.layout_need_permissions);
+        mContactsLayout = findViewById(R.id.text_permissions_granted);
 
         mPermissionChecker = new RuntimePermissionChecker(this);
         mPermissionChecker.checkPermissions();
@@ -60,15 +63,24 @@ public class PermissionsSampleActivity extends AppCompatActivity
     @Override
     public void onPermissionsRequired() {
         // Show permissions required view with button
+        showPermissionsRequiredView();
+    }
+
+    protected void showPermissionsRequiredView() {
+        mContactsLayout.setVisibility(View.GONE);
+        mRequestLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onPermissionsGranted() {
         // show permission granted view
+        mContactsLayout.setVisibility(View.INVISIBLE);
+        mRequestLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void onPermissionsDenied() {
         // Show permissions required view with button
+        showPermissionsRequiredView();
     }
 }
