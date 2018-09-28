@@ -50,6 +50,8 @@
                 android:id="@+id/img_contact_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="@dimen/unit_xxl"
+                android:minWidth="@dimen/unit_xxl"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/profile_icon_5"
                 app:layout_constraintLeft_toLeftOf="parent"/>
