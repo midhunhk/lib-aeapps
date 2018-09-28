@@ -15,10 +15,72 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/unit_m"
         android:gravity="center"
+        android:textSize="@dimen/text_title2"
         android:text="@string/str_permissions_granted"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_total_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/unit_m"
+        android:gravity="center"
+        android:text="@string/str_loading_contacts"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_contact_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/profile_icon_5"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/unit_s"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_title"
+                app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_phone_num1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/unit_s"
+                android:text="@string/app_name"
+                app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
+                app:layout_constraintTop_toBottomOf="@+id/text_contact_name"/>
+
+            <TextView
+                android:id="@+id/text_times_contacted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/unit_s"
+                android:text="@string/app_name"
+                app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
+                app:layout_constraintTop_toBottomOf="@+id/text_phone_num1"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

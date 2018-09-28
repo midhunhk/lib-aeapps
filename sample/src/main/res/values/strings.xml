@@ -23,8 +23,10 @@
         This activity needs Contact Permissions!
         And some other hoo-haa story to display some long text.
         Really need the permission granted here.
-        Why don't you press the button below.
+        Why don\'t you press the button below.
     </string>
     <string name="str_btn_request_permissions">Request Permissions</string>
     <string name="str_permissions_granted">Permissions have been Granted!</string>
+
+    <string name="str_loading_contacts">Reading Contacts</string>
 </resources>

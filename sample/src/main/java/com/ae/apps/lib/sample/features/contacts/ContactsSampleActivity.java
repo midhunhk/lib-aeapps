@@ -5,24 +5,32 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.ae.apps.lib.api.contacts.ContactsApiGateway;
+import com.ae.apps.lib.api.contacts.impl.ContactsApiGatewayImpl;
+import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
+import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
+import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
+import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.permissions.PermissionsAwareComponent;
 import com.ae.apps.lib.permissions.RuntimePermissionChecker;
+import com.ae.apps.lib.sample.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.ae.apps.lib.sample.R;
 
 public class ContactsSampleActivity extends AppCompatActivity
-        implements PermissionsAwareComponent {
+        implements PermissionsAwareComponent, ContactsDataConsumer {
 
     private RuntimePermissionChecker mPermissionChecker;
     private static final int PERMISSION_CODE = 2000;
 
     private View mRequestLayout;
     private View mContactsLayout;
+
+    private ContactsApiGateway mContactsApiGateway;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +90,36 @@ public class ContactsSampleActivity extends AppCompatActivity
         // show permission granted view
         mContactsLayout.setVisibility(View.VISIBLE);
         mRequestLayout.setVisibility(View.GONE);
+
+        displayContactInfo();
+    }
+
+    private void displayContactInfo() {
+        mContactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
+                .build();
+        mContactsApiGateway.initializeAsync(ContactInfoFilterOptions.of(false), this);
+    }
+
+    @Override
+    public void onContactsRead() {
+        // Read a Random contact with picture and phone number details
+        ContactInfo contactInfo = mContactsApiGateway.getContactInfo(
+                mContactsApiGateway.getRandomContact().getId(),
+                ContactInfoOptions.of(true, true,
+                        com.ae.apps.lib.R.drawable.profile_icon_3));
+
+        TextView totalContacts = findViewById(R.id.text_total_contacts);
+        totalContacts.setText(mContactsApiGateway.getAllContacts().size() + " contacts found");
+
+        ImageView profile = findViewById(R.id.img_contact_profile);
+        profile.setImageBitmap( contactInfo.getPicture() );
+
+        TextView phoneNum1 = findViewById(R.id.text_phone_num1);
+        phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
+
+        TextView timesContacted = findViewById(R.id.text_times_contacted);
+        timesContacted.setText(contactInfo.getTimesContacted());
+
     }
 
     @Override
