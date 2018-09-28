@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.impl.ContactsApiGatewayImpl;
@@ -31,6 +32,7 @@ public class ContactsSampleActivity extends AppCompatActivity
     private View mContactsLayout;
 
     private ContactsApiGateway mContactsApiGateway;
+    private long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,35 +93,44 @@ public class ContactsSampleActivity extends AppCompatActivity
         mContactsLayout.setVisibility(View.VISIBLE);
         mRequestLayout.setVisibility(View.GONE);
 
-        displayContactInfo();
+        loadContacts();
     }
 
-    private void displayContactInfo() {
+    private void loadContacts() {
         mContactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
                 .build();
+        startTime = System.currentTimeMillis();
         mContactsApiGateway.initializeAsync(ContactInfoFilterOptions.of(false), this);
     }
 
     @Override
     public void onContactsRead() {
+        long loadTime = System.currentTimeMillis() - startTime;
+        Toast.makeText(this, "Contacts loaded in " + loadTime + " ms", Toast.LENGTH_SHORT).show();
+        displayContactInfo();
+    }
+
+    private void displayContactInfo() {
         // Read a Random contact with picture and phone number details
         ContactInfo contactInfo = mContactsApiGateway.getContactInfo(
                 mContactsApiGateway.getRandomContact().getId(),
                 ContactInfoOptions.of(true, true,
                         com.ae.apps.lib.R.drawable.profile_icon_3));
 
+        TextView contactName = findViewById(R.id.text_contact_name);
+        contactName.setText(contactInfo.getName());
+
         TextView totalContacts = findViewById(R.id.text_total_contacts);
         totalContacts.setText(mContactsApiGateway.getAllContacts().size() + " contacts found");
 
         ImageView profile = findViewById(R.id.img_contact_profile);
-        profile.setImageBitmap( contactInfo.getPicture() );
+        profile.setImageBitmap(contactInfo.getPicture());
 
         TextView phoneNum1 = findViewById(R.id.text_phone_num1);
         phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
 
         TextView timesContacted = findViewById(R.id.text_times_contacted);
-        timesContacted.setText(contactInfo.getTimesContacted());
-
+        timesContacted.setText("times contacted: " + contactInfo.getTimesContacted());
     }
 
     @Override

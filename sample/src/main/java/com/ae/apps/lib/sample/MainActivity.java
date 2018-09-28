@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        features.add(FeatureInfo.of(1, "Contacts API with Permissions"));
+        features.add(FeatureInfo.of(1, "Contacts API"));
         features.add(FeatureInfo.of(2, "SMS API"));
         features.add(FeatureInfo.of(3, "Multi contact Picker"));
 

@@ -37,6 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.card.MaterialCardView
+        android:padding="@dimen/unit_m"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -57,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/unit_s"
+                android:layout_marginLeft="@dimen/unit_l"
                 android:text="@string/app_name"
                 android:textSize="@dimen/text_title"
                 app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
@@ -67,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/unit_s"
+                android:layout_marginLeft="@dimen/unit_l"
                 android:text="@string/app_name"
                 app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
                 app:layout_constraintTop_toBottomOf="@+id/text_contact_name"/>
@@ -76,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/unit_s"
+                android:layout_marginLeft="@dimen/unit_l"
                 android:text="@string/app_name"
                 app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
                 app:layout_constraintTop_toBottomOf="@+id/text_phone_num1"/>

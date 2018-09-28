@@ -23,7 +23,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.ContactsContract;
+
 import androidx.annotation.Nullable;
 
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
@@ -66,13 +68,21 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
     @Override
     public void initializeAsync(final ContactInfoFilterOptions options,
                                 final ContactsDataConsumer dataConsumer) {
+        final Handler handler = new Handler();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 initialize(options);
 
                 if (null != dataConsumer) {
-                    dataConsumer.onContactsRead();
+                    // do the callback on the original thread
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataConsumer.onContactsRead();
+                        }
+                    });
                 }
             }
         }).start();
