@@ -50,6 +50,14 @@ public class ContactsSampleActivity extends AppCompatActivity
             }
         });
 
+        View refreshContactsBtn = findViewById(R.id.btn_refresh);
+        refreshContactsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayContactInfo();
+            }
+        });
+
         mPermissionChecker = new RuntimePermissionChecker(this);
         mPermissionChecker.checkPermissions();
     }
@@ -121,13 +129,15 @@ public class ContactsSampleActivity extends AppCompatActivity
         contactName.setText(contactInfo.getName());
 
         TextView totalContacts = findViewById(R.id.text_total_contacts);
-        totalContacts.setText(mContactsApiGateway.getAllContacts().size() + " contacts found");
+        totalContacts.setText(mContactsApiGateway.getReadContactsCount() + " contacts found");
 
         ImageView profile = findViewById(R.id.img_contact_profile);
         profile.setImageBitmap(contactInfo.getPicture());
 
-        TextView phoneNum1 = findViewById(R.id.text_phone_num1);
-        phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
+        if (null != contactInfo.getPhoneNumbersList() && contactInfo.getPhoneNumbersList().size() > 0) {
+            TextView phoneNum1 = findViewById(R.id.text_phone_num1);
+            phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
+        }
 
         TextView timesContacted = findViewById(R.id.text_times_contacted);
         timesContacted.setText("times contacted: " + contactInfo.getTimesContacted());

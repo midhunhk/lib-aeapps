@@ -29,4 +29,5 @@
     <string name="str_permissions_granted">Permissions Granted!</string>
 
     <string name="str_loading_contacts">Reading Contacts</string>
+    <string name="str_btn_refresh">Refresh</string>
 </resources>
