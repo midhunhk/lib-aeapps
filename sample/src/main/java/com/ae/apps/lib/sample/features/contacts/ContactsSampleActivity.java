@@ -28,11 +28,17 @@ public class ContactsSampleActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_sample);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         mRequestLayout = findViewById(R.id.layout_need_permissions);
         mContactsLayout = findViewById(R.id.text_permissions_granted);
+
+        View requestPermissionBtn = findViewById(R.id.btn_request_permissions);
+        requestPermissionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestForPermissions();
+            }
+        });
 
         mPermissionChecker = new RuntimePermissionChecker(this);
         mPermissionChecker.checkPermissions();
@@ -74,7 +80,7 @@ public class ContactsSampleActivity extends AppCompatActivity
     @Override
     public void onPermissionsGranted() {
         // show permission granted view
-        mContactsLayout.setVisibility(View.INVISIBLE);
+        mContactsLayout.setVisibility(View.VISIBLE);
         mRequestLayout.setVisibility(View.GONE);
     }
 

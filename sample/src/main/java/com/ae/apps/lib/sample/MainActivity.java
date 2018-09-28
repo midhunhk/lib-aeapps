@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,10 +27,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        features.add(FeatureInfo.of(1, "Runtime Permissions"));
-        features.add(FeatureInfo.of(2, "Contacts API"));
-        features.add(FeatureInfo.of(3, "SMS API"));
-        features.add(FeatureInfo.of(4, "Multi contact Picker"));
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+        features.add(FeatureInfo.of(1, "Contacts API with Permissions"));
+        features.add(FeatureInfo.of(2, "SMS API"));
+        features.add(FeatureInfo.of(3, "Multi contact Picker"));
 
         RecyclerView recyclerView = findViewById(R.id.featuresList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
