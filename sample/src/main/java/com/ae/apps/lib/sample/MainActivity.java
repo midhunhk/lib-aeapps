@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.ae.apps.lib.common.utils.DialogUtils;
 import com.ae.apps.lib.sample.adapters.FeaturesRecyclerViewAdapter;
 import com.ae.apps.lib.sample.features.contacts.ContactsSampleActivity;
 import com.ae.apps.lib.sample.models.FeatureInfo;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity
         FeatureInfo featureInfo = features.get(position);
         if(featureInfo.getId() == 1){
             startActivity(new Intent(this, ContactsSampleActivity.class));
+        } else if (featureInfo.getId() == 4){
+            DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
+                    R.layout.row_feature,
+                    R.string.str_about_title);
         } else {
             Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
         }

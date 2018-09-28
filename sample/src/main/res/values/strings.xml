@@ -18,6 +18,17 @@
 <resources>
     <string name="app_name">libAeApps</string>
 
+    <string name="url_github_source">https://github.com/midhunhk/ae-apps-library</string>
+    <string name="url_travis_build">https://travis-ci.org/midhunhk/ae-apps-library</string>
+
+    <string name="str_about_title">About</string>
+    <string name="str_about_description">
+        libAeApps is an Android library for app developers.
+        This Sample app explores few of the APIs provided by the library
+    </string>
+    <string name="str_about_source_code">Source Code</string>
+    <string name="str_about_build_status">Build Status</string>
+
     <string name="title_activity_permissions_sample">Contacts API</string>
     <string name="str_need_permissions">
         This activity needs Contact Permissions!

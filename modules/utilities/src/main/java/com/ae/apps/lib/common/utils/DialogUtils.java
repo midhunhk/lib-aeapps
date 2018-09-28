@@ -20,64 +20,90 @@ package com.ae.apps.lib.common.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.LayoutInflater;
+
+import androidx.annotation.IntegerRes;
+import androidx.annotation.StringRes;
 
 /**
  * Utility class to show dialogs
- * 
+ *
  * @author Midhun
- * 
  */
 public class DialogUtils {
 
-	/**
-	 * Displays a basic dialog with a button
-	 * 
-	 * Note: Do not pass getBaseContext() and instead this from an activity
-	 * 
-	 * @param context the context
-	 * @param titleResourceId title resource id
-	 * @param messageResourceId message resource id
-	 */
-	public static void showWithMessageAndOkButton(final Context context, int titleResourceId, int messageResourceId,
-			int buttonResourceId) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(context)
-			.setCancelable(true)
-			.setTitle(titleResourceId)
-			.setMessage(messageResourceId)
-			.setPositiveButton(buttonResourceId, new DialogInterface.OnClickListener() {
+    /**
+     * Displays a basic dialog with a button
+     * <p>
+     * Note: Do not pass getBaseContext() and instead this from an activity
+     *
+     * @param context           the context
+     * @param titleResourceId   title resource id
+     * @param messageResourceId message resource id
+     */
+    public static void showWithMessageAndOkButton(final Context context, int titleResourceId, int messageResourceId,
+                                                  int buttonResourceId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                .setCancelable(true)
+                .setTitle(titleResourceId)
+                .setMessage(messageResourceId)
+                .setPositiveButton(buttonResourceId, new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// We shall dismiss the dialog when the ok is clicked
-					dialog.dismiss();
-				}
-			});
-		builder.show();
-	}
-	
-	/**
-	 * To display a Material Dialog box, with title, content and a button
-	 * 
-	 * @param context the context
-	 * @param titleResourceId title resource id
-	 * @param messageResourceId message resource id
-	 * @param positiveButtonResourceId positive button resource id
-	 */
-	public static void showMaterialInfoDialog(final Context context, int titleResourceId, int messageResourceId, 
-			int positiveButtonResourceId) {
-		androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context)
-		.setCancelable(true)
-		.setTitle(titleResourceId)
-		.setMessage(messageResourceId)
-		.setPositiveButton(positiveButtonResourceId, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // We shall dismiss the dialog when the ok is clicked
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+    }
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// We shall dismiss the dialog when the positive button is clicked
-				dialog.dismiss();
-			}
-		});
-	builder.show();
-		
-	}
+    /**
+     * To display a Material Dialog box, with title, content and a button
+     *
+     * @param context                  the context
+     * @param titleResourceId          title resource id
+     * @param messageResourceId        message resource id
+     * @param positiveButtonResourceId positive button resource id
+     */
+    public static void showMaterialInfoDialog(final Context context, int titleResourceId, int messageResourceId,
+                                              int positiveButtonResourceId) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context)
+                .setCancelable(true)
+                .setTitle(titleResourceId)
+                .setMessage(messageResourceId)
+                .setPositiveButton(positiveButtonResourceId, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // We shall dismiss the dialog when the positive button is clicked
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+
+    }
+
+    /**
+     * Shows a dialog with a custom view and ok button
+     *
+     * @param context         the context
+     * @param layoutInflater  to inflate the custom view
+     * @param viewResourceId  view resource id
+     * @param titleResourceId title resource  id
+     */
+    public static void showCustomViewDialog(final Context context, LayoutInflater layoutInflater,
+                                            int viewResourceId, int titleResourceId) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context)
+                .setView(layoutInflater.inflate(viewResourceId, null))
+                .setTitle(titleResourceId)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.show();
+    }
 }
