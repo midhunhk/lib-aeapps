@@ -29,3 +29,10 @@ dependencies {
     testImplementation deps.junit
     testImplementation deps.mockitoCore
 }
+
+android {
+    lintOptions {
+        abortOnError false
+    }
+}
+
