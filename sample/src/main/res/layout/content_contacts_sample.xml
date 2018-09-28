@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/unit_m"
     android:orientation="vertical"
-    android:padding="@dimen/unit_l"
+    android:padding="@dimen/unit_m"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +37,12 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.card.MaterialCardView
-        android:padding="@dimen/unit_m"
+        android:padding="@dimen/unit_s"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/unit_s"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

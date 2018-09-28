@@ -43,9 +43,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemClick(View view, int position) {
         FeatureInfo featureInfo = features.get(position);
-        Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
         if(featureInfo.getId() == 1){
             startActivity(new Intent(this, ContactsSampleActivity.class));
+        } else {
+            Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }

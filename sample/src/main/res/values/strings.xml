@@ -26,7 +26,7 @@
         Why don\'t you press the button below.
     </string>
     <string name="str_btn_request_permissions">Request Permissions</string>
-    <string name="str_permissions_granted">Permissions have been Granted!</string>
+    <string name="str_permissions_granted">Permissions Granted!</string>
 
     <string name="str_loading_contacts">Reading Contacts</string>
 </resources>
