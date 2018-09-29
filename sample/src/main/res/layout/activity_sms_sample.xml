@@ -59,6 +59,13 @@
         android:padding="@dimen/unit_m">
 
         <TextView
+            android:text="@string/str_permissions_granted"
+            android:textSize="@dimen/text_title"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
             android:id="@+id/textSmsAllCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

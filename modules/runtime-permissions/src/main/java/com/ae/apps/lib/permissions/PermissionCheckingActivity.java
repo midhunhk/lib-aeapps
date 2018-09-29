@@ -37,7 +37,6 @@ public abstract class PermissionCheckingActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         mPermissionChecker = new RuntimePermissionChecker(this);
-        mPermissionChecker.checkPermissions();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
