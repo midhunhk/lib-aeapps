@@ -61,4 +61,6 @@ dependencies {
     implementation "com.github.midhunhk.ae-apps-library:multi-contact:$libAeAppsVersion"
     implementation "com.github.midhunhk.ae-apps-library:utilities:$libAeAppsVersion"
     */
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 }

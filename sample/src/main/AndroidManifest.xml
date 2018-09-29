@@ -18,8 +18,12 @@
 <manifest package="com.ae.apps.lib.sample"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" android:required="true" />
+    <uses-permission
+        android:name="android.permission.READ_SMS"
+        android:required="true"/>
+    <uses-permission
+        android:name="android.permission.READ_CONTACTS"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -31,6 +35,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -38,6 +43,8 @@
             android:name=".features.contacts.ContactsSampleActivity"
             android:label="@string/title_activity_permissions_sample"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".features.sms.SmsSampleActivity">
         </activity>
     </application>
 
