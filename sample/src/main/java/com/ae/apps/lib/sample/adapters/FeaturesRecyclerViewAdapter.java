@@ -36,6 +36,7 @@ public class FeaturesRecyclerViewAdapter extends RecyclerView.Adapter<FeaturesRe
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         FeatureInfo feature = mData.get(i);
         viewHolder.featureName.setText(feature.getName());
+        viewHolder.featureDescription.setText(feature.getDescription());
     }
 
     @Override

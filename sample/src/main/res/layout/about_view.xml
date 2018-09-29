@@ -26,22 +26,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/unit_m"
-        android:drawablePadding="@dimen/unit_m"
+        android:drawablePadding="@dimen/unit_l"
         android:drawableTop="@mipmap/ic_launcher"
         android:text="@string/app_description"
         android:textSize="@dimen/text_title"
+        android:padding="@dimen/unit_l"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
+        android:id="@+id/textVersion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="@dimen/unit_l"
         android:text="@string/app_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/unit_l"
+        android:text="@string/url_github_source"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textVersion"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

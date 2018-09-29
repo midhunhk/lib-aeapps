@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         features.add(FeatureInfo.of(1, "Contacts API", "An Abstraction over Android Contacts"));
         features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS Api"));
         features.add(FeatureInfo.of(3, "Multi contact Picker", "Select multiple contacts"));
-        features.add(FeatureInfo.of(4, "About", ""));
+        features.add(FeatureInfo.of(4, "About", "More Information"));
 
         RecyclerView recyclerView = findViewById(R.id.featuresList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
