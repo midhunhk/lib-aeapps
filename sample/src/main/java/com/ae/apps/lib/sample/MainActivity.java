@@ -2,10 +2,13 @@ package com.ae.apps.lib.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ae.apps.lib.common.utils.DialogUtils;
+import com.ae.apps.lib.common.utils.intents.IntentUtils;
 import com.ae.apps.lib.sample.adapters.FeaturesRecyclerViewAdapter;
 import com.ae.apps.lib.sample.features.contacts.ContactsSampleActivity;
 import com.ae.apps.lib.sample.models.FeatureInfo;
@@ -48,11 +51,30 @@ public class MainActivity extends AppCompatActivity
         if (featureInfo.getId() == 1) {
             startActivity(new Intent(this, ContactsSampleActivity.class));
         } else if (featureInfo.getId() == 4) {
-            DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
-                    R.layout.about_view,
-                    R.string.str_about_title);
+
         } else {
             Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
+                    R.layout.about_view,
+                    R.string.str_about_title);
+        } else if (id == R.id.action_build) {
+            startActivity(IntentUtils.getUriIntent(this, getString(R.string.url_travis_build)));
+        } else if (id == R.id.action_source) {
+            startActivity(IntentUtils.getUriIntent(this, getString(R.string.url_github_source)));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
