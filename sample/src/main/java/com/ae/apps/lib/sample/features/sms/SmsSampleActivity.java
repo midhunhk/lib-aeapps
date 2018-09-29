@@ -19,12 +19,14 @@ package com.ae.apps.lib.sample.features.sms;
 import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.ae.apps.lib.api.sms.SmsApiConstants;
 import com.ae.apps.lib.api.sms.SmsApiGateway;
 import com.ae.apps.lib.api.sms.SmsApiGatewayImpl;
 import com.ae.apps.lib.permissions.PermissionCheckingActivity;
+import com.ae.apps.lib.permissions.RuntimePermissionChecker;
 import com.ae.apps.lib.sample.R;
 
 /**
@@ -38,6 +40,14 @@ public class SmsSampleActivity extends PermissionCheckingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_sample);
+
+        Button requestBtn = findViewById(R.id.btn_request_permissions);
+        requestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestForPermissions();
+            }
+        });
     }
 
     @Override

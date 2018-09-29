@@ -32,8 +32,14 @@
     <string name="menu_build_status">Build Status</string>
 
     <string name="title_activity_permissions_sample">Contacts API</string>
-    <string name="str_need_permissions">
+    <string name="str_need_contact_permissions">
         This activity needs Contact Permissions!
+        And some other hoo-haa story to display some long text.
+        Really need the permission granted here.
+        Why don\'t you press the button below.
+    </string>
+    <string name="str_need_sms_permissions">
+        This activity needs SMS Permissions!
         And some other hoo-haa story to display some long text.
         Really need the permission granted here.
         Why don\'t you press the button below.

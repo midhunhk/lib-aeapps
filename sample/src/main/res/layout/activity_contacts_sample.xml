@@ -26,7 +26,7 @@
             android:drawablePadding="@dimen/unit_l"
             android:drawableTop="@mipmap/ic_launcher"
             android:gravity="center"
-            android:text="@string/str_need_permissions"/>
+            android:text="@string/str_need_contact_permissions"/>
 
         <Button
             android:id="@+id/btn_request_permissions"

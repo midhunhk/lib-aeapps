@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity
         features.add(FeatureInfo.of(1, "Contacts API"));
         features.add(FeatureInfo.of(2, "SMS API"));
         features.add(FeatureInfo.of(3, "Multi contact Picker"));
-        features.add(FeatureInfo.of(4, "About Library"));
 
         RecyclerView recyclerView = findViewById(R.id.featuresList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -71,10 +70,13 @@ public class MainActivity extends AppCompatActivity
             DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
                     R.layout.about_view,
                     R.string.menu_about);
+            return true;
         } else if (id == R.id.action_build) {
             startActivity(IntentUtils.getUriIntent(this, getString(R.string.url_travis_build)));
+            return true;
         } else if (id == R.id.action_source) {
             startActivity(IntentUtils.getUriIntent(this, getString(R.string.url_github_source)));
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
