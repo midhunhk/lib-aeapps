@@ -38,9 +38,10 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);*/
 
-        features.add(FeatureInfo.of(1, "Contacts API"));
-        features.add(FeatureInfo.of(2, "SMS API"));
-        features.add(FeatureInfo.of(3, "Multi contact Picker"));
+        features.add(FeatureInfo.of(1, "Contacts API", "An Abstraction over Android Contacts"));
+        features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS Api"));
+        features.add(FeatureInfo.of(3, "Multi contact Picker", "Select multiple contacts"));
+        features.add(FeatureInfo.of(4, "About", ""));
 
         RecyclerView recyclerView = findViewById(R.id.featuresList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,6 +57,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, ContactsSampleActivity.class));
         } else if (featureInfo.getId() == 2) {
             startActivity(new Intent(this, SmsSampleActivity.class));
+        } else if (featureInfo.getId() == 4) {
+            DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
+                    R.layout.about_view,
+                    R.string.menu_about);
         } else {
             Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
         }

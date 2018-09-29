@@ -21,12 +21,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ae.apps.lib.api.sms.SmsApiConstants;
 import com.ae.apps.lib.api.sms.SmsApiGateway;
 import com.ae.apps.lib.api.sms.SmsApiGatewayImpl;
 import com.ae.apps.lib.permissions.PermissionCheckingActivity;
-import com.ae.apps.lib.permissions.RuntimePermissionChecker;
 import com.ae.apps.lib.sample.R;
 
 /**
@@ -67,7 +67,11 @@ public class SmsSampleActivity extends PermissionCheckingActivity {
     }
 
     private void loadSmsData() {
+        long startTime = System.currentTimeMillis();
         mSmsApiGateway = new SmsApiGatewayImpl(this);
+        long loadTime = System.currentTimeMillis() - startTime;
+        Toast.makeText(this, "Sms Api Initialized in " + loadTime + " ms", Toast.LENGTH_SHORT).show();
+
         long allMessages = mSmsApiGateway.getMessageCountForUri(SmsApiConstants.URI_ALL);
         long draftMessages = mSmsApiGateway.getMessageCountForUri(SmsApiConstants.URI_DRAFTS);
         long inboxMessages = mSmsApiGateway.getMessageCountForUri(SmsApiConstants.URI_INBOX);

@@ -46,10 +46,12 @@ public class FeaturesRecyclerViewAdapter extends RecyclerView.Adapter<FeaturesRe
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView featureName;
+        TextView featureDescription;
 
         ViewHolder(View item) {
             super(item);
             featureName = item.findViewById(R.id.textFeatureName);
+            featureDescription = item.findViewById(R.id.textFeatureDescription);
             featureName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
