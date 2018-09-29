@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onItemClick(View view, int position) {
         FeatureInfo featureInfo = features.get(position);
-        if(featureInfo.getId() == 1){
+        if (featureInfo.getId() == 1) {
             startActivity(new Intent(this, ContactsSampleActivity.class));
-        } else if (featureInfo.getId() == 4){
+        } else if (featureInfo.getId() == 4) {
             DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
-                    R.layout.row_feature,
+                    R.layout.about_view,
                     R.string.str_about_title);
         } else {
             Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();

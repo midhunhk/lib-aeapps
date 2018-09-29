@@ -20,61 +20,28 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
+
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/unit_m"
-        android:text="@string/str_about_description"
+        android:drawablePadding="@dimen/unit_m"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/app_description"
         android:textSize="@dimen/text_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
     <TextView
-        android:id="@+id/textSourceCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/unit_m"
-        android:text="@string/str_about_source_code"
+        android:gravity="center"
+        android:text="@string/app_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDescription"/>
 
-    <Button
-        android:id="@+id/btnSourceCode"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/unit_m"
-        android:gravity="center_vertical"
-        android:text="@string/url_github_source"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSourceCode"/>
 
-    <TextView
-        android:id="@+id/textBuildStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/unit_m"
-        android:text="@string/str_about_build_status"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSourceCode"/>
-
-    <Button
-        android:id="@+id/btnBuildStatus"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/unit_m"
-        android:gravity="center_vertical"
-        android:text="@string/url_travis_build"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textBuildStatus"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
