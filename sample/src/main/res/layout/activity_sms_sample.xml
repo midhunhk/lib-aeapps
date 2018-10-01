@@ -18,6 +18,7 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,6 +32,7 @@
         android:padding="@dimen/unit_s">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/smsNoAccessLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,42 +64,127 @@
         <LinearLayout
             android:id="@+id/smsSampleLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/unit_m"
-            android:orientation="vertical"
-            android:padding="@dimen/unit_m">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/unit_m"
                 android:gravity="center"
                 android:text="@string/str_permissions_granted"
-                android:textSize="@dimen/text_title2"/>
+                android:textSize="@dimen/text_title2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                android:id="@+id/textSmsAllCount"
+            <androidx.constraintlayout.widget.ConstraintLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_m"/>
+                android:layout_margin="@dimen/unit_m"
+                android:padding="@dimen/unit_m">
 
-            <TextView
-                android:id="@+id/textSmsDraftsCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_m"/>
+                <TextView
+                    android:id="@+id/textSmsAllCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:text="@string/str_sms_count_zero"
+                    android:textSize="@dimen/text_title2"/>
 
-            <TextView
-                android:id="@+id/textSmsSentCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_m"/>
+                <TextView
+                    android:id="@+id/textSmsAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:text="@string/str_sms_count_all"
+                    android:textSize="@dimen/text_title"
+                    android:layout_marginBottom="@dimen/unit_xl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textSmsAllCount"/>
 
-            <TextView
-                android:id="@+id/textSmsReceivedCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/unit_m"/>
+                <TextView
+                    android:id="@+id/textSmsDraftsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:minWidth="@dimen/unit_xl"
+                    android:text="@string/str_sms_count_zero"
+                    app:layout_constraintEnd_toStartOf="@+id/textSmsSentCount"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textSmsAll"/>
+
+                <TextView
+                    android:id="@+id/textSmsDrafts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:minWidth="@dimen/unit_xl"
+                    android:text="@string/str_sms_count_drafts"
+                    app:layout_constraintEnd_toStartOf="@id/textSmsSent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textSmsDraftsCount"/>
+
+                <TextView
+                    android:id="@+id/textSmsSentCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:minWidth="@dimen/unit_xl"
+                    android:text="@string/str_sms_count_zero"
+                    app:layout_constraintEnd_toStartOf="@id/textSmsReceivedCount"
+                    app:layout_constraintStart_toStartOf="@id/textSmsDraftsCount"
+                    app:layout_constraintTop_toBottomOf="@+id/textSmsAll"/>
+
+                <TextView
+                    android:id="@+id/textSmsSent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:minWidth="@dimen/unit_xl"
+                    android:text="@string/str_sms_count_sent"
+                    app:layout_constraintEnd_toStartOf="@id/textSmsReceived"
+                    app:layout_constraintStart_toEndOf="@id/textSmsDrafts"
+                    app:layout_constraintTop_toBottomOf="@id/textSmsSentCount"/>
+
+                <TextView
+                    android:id="@+id/textSmsReceivedCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:minWidth="@dimen/unit_xl"
+                    android:text="@string/str_sms_count_zero"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/textSmsSentCount"
+                    app:layout_constraintTop_toBottomOf="@+id/textSmsAll"/>
+
+                <TextView
+                    android:id="@+id/textSmsReceived"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:minWidth="@dimen/unit_xl"
+                    android:text="@string/str_sms_count_received"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textSmsSent"
+                    app:layout_constraintTop_toBottomOf="@id/textSmsReceivedCount"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

@@ -78,13 +78,13 @@ public class SmsSampleActivity extends PermissionCheckingActivity {
         long sentMessages = mSmsApiGateway.getMessageCountForUri(SmsApiConstants.URI_SENT);
 
         TextView textAllMessages = findViewById(R.id.textSmsAllCount);
-        textAllMessages.setText(getResources().getString(R.string.str_sms_count_all, String.valueOf(allMessages)));
+        textAllMessages.setText(String.valueOf(allMessages));
         TextView textDraftsMessages = findViewById(R.id.textSmsDraftsCount);
-        textDraftsMessages.setText(getResources().getString(R.string.str_sms_count_all, String.valueOf(draftMessages)));
+        textDraftsMessages.setText(String.valueOf(draftMessages));
         TextView textSentMessages = findViewById(R.id.textSmsSentCount);
-        textSentMessages.setText(getResources().getString(R.string.str_sms_count_all, String.valueOf(sentMessages)));
+        textSentMessages.setText(String.valueOf(sentMessages));
         TextView textRecvMessages = findViewById(R.id.textSmsReceivedCount);
-        textRecvMessages.setText(getResources().getString(R.string.str_sms_count_all, String.valueOf(inboxMessages)));
+        textRecvMessages.setText(String.valueOf(inboxMessages));
     }
 
     @Override

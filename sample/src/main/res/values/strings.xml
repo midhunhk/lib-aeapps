@@ -50,8 +50,9 @@
     <string name="str_loading_contacts">Reading Contacts</string>
     <string name="str_btn_refresh">Refresh</string>
 
-    <string name="str_sms_count_all">Total Messages %s</string>
-    <string name="str_sms_count_drafts">Draft Messages %s</string>
-    <string name="str_sms_count_sent">Sent Messages %s</string>
-    <string name="str_sms_count_received">Received Messages %s</string>
+    <string name="str_sms_count_zero">0</string>
+    <string name="str_sms_count_all">Total Messages</string>
+    <string name="str_sms_count_drafts">Draft</string>
+    <string name="str_sms_count_sent">Sent</string>
+    <string name="str_sms_count_received">Received</string>
 </resources>
