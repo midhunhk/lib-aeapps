@@ -25,4 +25,6 @@
     <color name="primary_dark_material_dark" tools:ignore="PrivateResource">#000000</color>
     <color name="background_material_dark" tools:ignore="PrivateResource">#303030</color>
     <color name="foreground_material_dark" tools:ignore="PrivateResource">#ffffff</color>
+
+    <color name="icon_blue">#0099CC</color>
 </resources>

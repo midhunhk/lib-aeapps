@@ -46,12 +46,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.ae.apps.lib.custom.views.RoundedImageView
                 android:id="@+id/img_contact_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/profile_pic_size"
                 android:minWidth="@dimen/profile_pic_size"
+                android:layout_margin="@dimen/unit_m"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/profile_icon_5"
                 app:layout_constraintLeft_toLeftOf="parent"/>
