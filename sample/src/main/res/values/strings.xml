@@ -54,5 +54,5 @@
     <string name="str_sms_count_all">Total Messages</string>
     <string name="str_sms_count_drafts">Draft</string>
     <string name="str_sms_count_sent">Sent</string>
-    <string name="str_sms_count_received">Received</string>
+    <string name="str_sms_count_received">Inbox</string>
 </resources>
