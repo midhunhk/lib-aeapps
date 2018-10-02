@@ -21,7 +21,6 @@
     <string name="app_description">
         LibAeApps is an Android library for app developers.
         It is developed by ae app labs and consumed by its apps.
-        This Sample app explores few of the APIs provided by the library
     </string>
 
     <string name="url_github_source">https://github.com/midhunhk/ae-apps-library</string>
@@ -31,13 +30,14 @@
     <string name="menu_source_code">Source Code</string>
     <string name="menu_build_status">Build Status</string>
 
-    <string name="title_activity_permissions_sample">Contacts API</string>
+    <string name="title_activity_contacts_sample">Contacts API</string>
     <string name="str_need_contact_permissions">
         This activity needs Contact Permissions!
         And some other hoo-haa story to display some long text.
         Really need the permission granted here.
         Why don\'t you press the button below.
     </string>
+    <string name="title_activity_sms_sample">SMS API</string>
     <string name="str_need_sms_permissions">
         This activity needs SMS Permissions!
         And some other hoo-haa story to display some long text.

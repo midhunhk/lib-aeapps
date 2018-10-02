@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit_m"
                     android:gravity="center"
-                    android:textColor="@color/icon_blue"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:text="@string/str_sms_count_zero"
                     android:textSize="@dimen/text_title2"/>
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/unit_xl"
                     android:gravity="center"
-                    android:textColor="@color/icon_blue"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:padding="@dimen/unit_l"
                     android:text="@string/str_sms_count_all"
