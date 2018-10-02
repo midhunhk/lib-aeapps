@@ -20,7 +20,7 @@
     <string name="app_version">Version 1.0.0</string>
     <string name="app_description">
         LibAeApps is an Android library for app developers.
-        It is developed by ae app labs and consumed by its apps.
+        It is developed by ae app labs.
     </string>
 
     <string name="url_github_source">https://github.com/midhunhk/ae-apps-library</string>
