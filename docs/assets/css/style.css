@@ -190,7 +190,7 @@ textarea {
     bottom: 22px;
     height: 2px;
     width: 0%;
-    background-color: #fff;
+    background-color: #09C;
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -447,7 +447,7 @@ END Service Area
     bottom: 0;
     height: 2px;
     width: 130px;
-    background-color: #333333;
+    background-color: #09C;
     left: calc(50% - 65px);
 }
 
@@ -462,7 +462,7 @@ END Service Area
     bottom: -3px;
     height: 8px;
     width: 8px;
-    background-color: #333333;
+    background-color: #09C;
     left: calc(50% - 4px);
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
