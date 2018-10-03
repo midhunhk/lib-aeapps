@@ -375,7 +375,7 @@ END Slider Area
 2.3 Service Area
 ===========================*/
 
-.service-area {
+.info-area {
     position: relative;
     margin-top: -100px;
     background-color: transparent;
@@ -565,15 +565,6 @@ END Feature Area
 .achivement-area {
     position: relative;
     background: url(../img/bg/ach-bg-img.jpg) center center/cover no-repeat;
-}
-
-.achivement-area:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
 	color: ffffff;
     background-color: #333333;
 }
@@ -1094,7 +1085,6 @@ END Contact Area
 
 /*footer area*/
 .footer-area{
-    height: 80px;
     text-align: center;
     background-color: #333333;
     display: flex;
