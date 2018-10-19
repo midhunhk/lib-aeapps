@@ -1,4 +1,4 @@
-include ':core'
+include ':core', ':billingclient'
 project(':core').projectDir = new File('modules/core')
 include ':contacts-api'
 project(':contacts-api').projectDir = new File('modules/contacts-api')
@@ -12,4 +12,6 @@ include ':runtime-permissions'
 project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
 include ':database-helpers'
 project(':database-helpers').projectDir = new File('modules/database-helpers')
+include ':billing-client'
+project(':billing-client').projectDir = new File('modules/billing-client')
 include ':sample'
