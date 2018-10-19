@@ -34,8 +34,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 /**
- * Base class that implements Google Play Billing Client
+ * Base class that implements Google Play Billing Client, InApp Products
  * https://developer.android.com/google/play/billing/billing_library_overview#java
+ *
+ * @since 4.0
  */
 public abstract class BaseBillingClientFragment extends Fragment implements PurchasesUpdatedListener {
 
@@ -61,6 +63,11 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
      */
     protected abstract void handlePurchaseError(List<Purchase> purchases, int responseCode);
 
+    /**
+     * Callback when user has cancelled the purchase
+     *
+     * @param purchases list of purchases
+     */
     protected abstract void handleUserCancelled(List<Purchase> purchases);
 
     /**
