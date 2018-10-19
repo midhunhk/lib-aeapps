@@ -1,4 +1,4 @@
-include ':core', ':billingclient'
+include ':core'
 project(':core').projectDir = new File('modules/core')
 include ':contacts-api'
 project(':contacts-api').projectDir = new File('modules/contacts-api')
