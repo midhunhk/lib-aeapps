@@ -15,26 +15,7 @@ The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenam
 Juneberry: 
 
 ## Contents
-The following components are available as part of this library as of now.
-
-* Activities
-  * Base Activity for Donations (Google Play In-App Billing v3)
-  * Base Activity for ToolbarActivity
-  * Base Activity for Multiple Contact Picker
-* Fragments
-  * Contact Picker
-  * Permission Checker Base Fragment that checks for Runtime permissions
-* Database  
-  * DataBaseHelper
-  * CopiedDataBaseHelper for using a database file from app's assets folder
-* Managers  
-  * Contact Manager for accessing Android's Contacts API
-  * SMS Manager for accessing Android's SMS API  
-* Utilities and Custom Components
-  * SimpleGraphView draws a pie chart
-  * RoundedImageView shows an image inside a Circle
-  * Mock Contact Data
-  * EmptyRecyclerView provides a way to specify an empty layout
+Detailed information about the architecture of the project is available at [this link](https://github.com/midhunhk/ae-apps-library/wiki/Architecture)
 
 ## Implementations
 Presently the following android app projects make use of this library.

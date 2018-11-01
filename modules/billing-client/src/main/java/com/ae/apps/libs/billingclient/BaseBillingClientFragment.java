@@ -79,6 +79,13 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
     protected abstract void skuDetailsResponse(List<SkuDetails> skuDetails);
 
     /**
+     * Callback when query sku details fails
+     *
+     * @param responseCode the response code
+     */
+    protected abstract void skuDetailsError(int responseCode);
+
+    /**
      * Method invoked on a successful purchase
      *
      * @param purchase purchase details
@@ -119,6 +126,9 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
         mBillingClient.launchBillingFlow(requireActivity(), flowParams);
     }
 
+    /**
+     * Start the service connection
+     */
     private void startServiceConnection() {
         mBillingClient.startConnection(new BillingClientStateListener() {
             @Override
@@ -147,8 +157,12 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
         mBillingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
             @Override
             public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
-                if (responseCode == BillingClient.BillingResponse.OK) {
-                    skuDetailsResponse(skuDetailsList);
+                try {
+                    if (responseCode == BillingClient.BillingResponse.OK) {
+                        skuDetailsResponse(skuDetailsList);
+                    }
+                } catch(IllegalStateException e){
+                    skuDetailsError(responseCode);
                 }
             }
         });
