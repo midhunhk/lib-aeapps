@@ -41,6 +41,11 @@ public class SmsSampleActivity extends PermissionCheckingActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_sample);
 
+        // Uncomment below line to enable this feature
+        // init();
+    }
+
+    private void init() {
         Button requestBtn = findViewById(R.id.btn_request_permissions);
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override

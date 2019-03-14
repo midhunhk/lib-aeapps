@@ -40,7 +40,8 @@
     <string name="title_activity_sms_sample">SMS API</string>
     <string name="str_need_sms_permissions">
         This activity needs SMS Permissions!
-        And some other hoo-haa story to display some long text.
+        But this feature is disabled, due to restrictions from Google Play regarding permissions.
+        To see this feature in action, you need to make code changes and run locally.
         Really need the permission granted here.
         Why don\'t you press the button below.
     </string>

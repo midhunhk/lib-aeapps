@@ -87,7 +87,6 @@
             android:padding="@dimen/unit_s">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/unit_m"
@@ -102,6 +101,7 @@
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:text="@string/str_sms_count_zero"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:textSize="@dimen/text_title2"/>
 
                 <TextView
