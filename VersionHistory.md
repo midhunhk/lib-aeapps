@@ -1,3 +1,7 @@
+## Version 4.1 (Juneberry)
+#### Version 4.1.0 [TBD]
+ - Complete rewrite of library to use modules
+
 ## Version 3.0 (Indian Plum)
 #### Version 3.0.2 [Aug 2018]
  - Remove permission requests from manifest
