@@ -46,15 +46,16 @@ public class FeaturesRecyclerViewAdapter extends RecyclerView.Adapter<FeaturesRe
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        View rowParentLayout;
         TextView featureName;
         TextView featureDescription;
 
         ViewHolder(View item) {
             super(item);
+            rowParentLayout = item.findViewById(R.id.rowParentLayout);
             featureName = item.findViewById(R.id.textFeatureName);
             featureDescription = item.findViewById(R.id.textFeatureDescription);
-            // TODO Change the click listener to the parent view
-            featureName.setOnClickListener(new View.OnClickListener() {
+            rowParentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mListener.onItemClick(view, getAdapterPosition());
