@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    def libAeAppsVersion = 'v4.0.0-alpha.6'
+    def libAeAppsVersion = 'v4.0.1-alpha.1'
 
     implementation deps.appcompat
     implementation deps.recyclerview

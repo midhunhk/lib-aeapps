@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ae.apps.libs.billingclient;
+package com.ae.apps.lib.billingclient;
 
 import android.os.Bundle;
 
