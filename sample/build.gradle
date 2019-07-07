@@ -24,8 +24,8 @@ android {
         applicationId "com.ae.apps.lib.sample"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -66,6 +66,6 @@ dependencies {
     implementation "com.github.midhunhk.ae-apps-library:multi-contact:$libAeAppsVersion"
     implementation "com.github.midhunhk.ae-apps-library:utilities:$libAeAppsVersion"
     */
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
