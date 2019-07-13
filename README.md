@@ -28,39 +28,8 @@ Presently the following android app projects make use of this library.
 To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
 
 ## Using the library
-### 1. Use library from JCenter
-
-```
-repositories {
-  maven { 
-    url  "http://dl.bintray.com/midhunhk/android-libraries"     
-  }    
-}    
-```
-
-```
-dependencies {  
-  implementation 'com.ae.apps:android-libraries:3.0.2'
-}
-```
-
-### 2. Use library from JitPack
-
-Add below code to root gradle.build file  
-```  
-allprojects {  
-  repositories {
-    maven { url 'https://jitpack.io' }  
-  }  
-}
-```  
-Add Dependency  
-
-```  
-dependencies {  
-  implementation 'com.github.midhunhk:ae-apps-library:V3.0.2'  
-}  
-```
+Instructions for using this library are mentioned in the detail here: 
+https://github.com/midhunhk/ae-apps-library/wiki/Distribution
  
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");
