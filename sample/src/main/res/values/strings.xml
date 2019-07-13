@@ -17,7 +17,7 @@
 
 <resources>
     <string name="app_name">libAeApps</string>
-    <string name="app_version">Version 1.0.0</string>
+    <string name="app_version">Version 1.0.1</string>
     <string name="app_description">
         LibAeApps is an Android library for app developers.
         It is developed by ae app labs.
@@ -49,7 +49,7 @@
     <string name="str_permissions_granted">Permissions Granted!</string>
 
     <string name="str_loading_contacts">Reading Contacts</string>
-    <string name="str_btn_refresh">Refresh</string>
+    <string name="str_btn_refresh">Show Random</string>
 
     <string name="str_sms_count_zero">0</string>
     <string name="str_sms_count_all">Total Messages</string>
