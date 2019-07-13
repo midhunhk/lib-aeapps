@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Provides a static list of features
  */
 public class Features {
 
@@ -35,8 +35,9 @@ public class Features {
     public static List<FeatureInfo> getFeatures() {
         List<FeatureInfo> features = new ArrayList<>();
         features.add(FeatureInfo.of(1, "Contacts API", "An Abstraction over Android Contacts", ContactsSampleActivity.class));
-        /* TODO: Comment out when publishing to PlayStore */
-        features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS Api", SmsSampleActivity.class));
+        /* TODO: Comment out when publishing to PlayStore due to SMS API Permission restrictions */
+        // features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS Api", SmsSampleActivity.class));
+
         features.add(FeatureInfo.of(3, "Multi contact Picker", "Select multiple contacts", SpecialFeature.NOT_IMPLEMENTED));
         features.add(FeatureInfo.of(4, "About", "More Information", SpecialFeature.ABOUT));
         return features;
