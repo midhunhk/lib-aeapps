@@ -17,19 +17,25 @@
 
 package com.ae.apps.lib.common.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
+/**
+ *  Some utility methods that work on mobile networks
+ */
 public class MobileNetworkUtils {
 
 	/**
 	 * Call a contact
-	 * 
+	 * Declare the permission "android.permission.CALL_PHONE" in the Manifest to use this method
+	 *
 	 * @param contactNo the contact no
 	 */
+	@SuppressLint("MissingPermission")
 	public static void callContact(Context context, String contactNo) {
 		try {
 			String uri = "tel:" + contactNo;
