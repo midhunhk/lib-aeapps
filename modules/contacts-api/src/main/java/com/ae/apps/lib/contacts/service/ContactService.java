@@ -157,6 +157,7 @@ public class ContactService implements AeContactService {
 
                 // Check for duplicate numbers before adding to the phone numbers
                 if (!ContactUtils.checkIfPhoneNumberExists(phoneNumbers, phoneNumber)) {
+                    phoneNumbers.add(phoneNumber);
                     // Get the label for this number
                     if (null != resources) {
                         customLabel = phoneCursor.getString(phoneLabelIndex);

@@ -40,8 +40,7 @@ public class ContactUtils {
     private static final String CONTENT_CONTACTS_DATA = "content://com.android.contacts/data/";
 
     /**
-     * Checks whether the numberToCheck is present in the supplied list. Adds the number to the list if it doesn't exist
-     * and returns false
+     * Checks whether the numberToCheck is present in the supplied list
      *
      * @param phoneNumbers  phone numbers
      * @param numberToCheck number to check
@@ -49,13 +48,7 @@ public class ContactUtils {
      */
     public static boolean checkIfPhoneNumberExists(final List<String> phoneNumbers, final String numberToCheck) {
         String unformattedNumber = cleanupPhoneNumber(numberToCheck);
-
-        if (phoneNumbers.contains(unformattedNumber)) {
-            return true;
-        } else {
-            phoneNumbers.add(unformattedNumber);
-            return false;
-        }
+        return phoneNumbers.contains(unformattedNumber);
     }
 
     /**
