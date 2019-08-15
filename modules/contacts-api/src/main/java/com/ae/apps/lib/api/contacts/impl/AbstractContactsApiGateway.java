@@ -47,10 +47,10 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         UNINITIALIZED, INITIALIZING, READY
     }
 
-    protected Resources mResources;
-    protected ContentResolver mContentResolver;
+    protected Resources resources;
+    protected ContentResolver contentResolver;
     protected transient STATE gatewayState = STATE.UNINITIALIZED;
-    protected transient List<ContactInfo> mContacts = Collections.emptyList();
+    protected transient List<ContactInfo> contacts = Collections.emptyList();
 
     @Override
     public void initialize(final ContactInfoFilterOptions options) {
@@ -92,14 +92,14 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
     public List<ContactInfo> getAllContacts() throws IllegalStateException {
         throwExceptionIfNotInitialized();
 
-        return new ArrayList<>(mContacts);
+        return new ArrayList<>(contacts);
     }
 
     @Override
     public long getReadContactsCount() {
         throwExceptionIfNotInitialized();
 
-        return mContacts.size();
+        return contacts.size();
     }
 
     protected void throwExceptionIfNotInitialized() {
@@ -113,7 +113,7 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         long contactIdLong = Long.parseLong(contactId);
         Uri contactPhotoUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactIdLong);
 
-        InputStream photoDataStream = ContactsContract.Contacts.openContactPhotoInputStream(mContentResolver,
+        InputStream photoDataStream = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver,
                 contactPhotoUri);
 
         if (null == photoDataStream) {

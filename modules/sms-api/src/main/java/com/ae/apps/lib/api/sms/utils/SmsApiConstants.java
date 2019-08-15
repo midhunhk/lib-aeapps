@@ -21,13 +21,11 @@ import java.util.List;
 
 public interface SmsApiConstants {
 
-    /* public constants */
     String URI_ALL = "content://sms/";
     String URI_SENT = "content://sms/sent";
     String URI_DRAFTS = "content://sms/draft";
     String URI_INBOX = "content://sms/inbox";
 
-    /* internal constants */
     List<String> ALL_URIS = Arrays.asList(URI_ALL, URI_DRAFTS, URI_INBOX, URI_SENT);
 
     String COLUMN_ID = "_id";

@@ -47,15 +47,15 @@ import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WIT
 public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
 
     private ContactsApiGatewayImpl(Builder builder) {
-        this.mResources = builder.resources;
-        this.mContentResolver = builder.contentResolver;
+        this.resources = builder.resources;
+        this.contentResolver = builder.contentResolver;
     }
 
     @Override
     protected void readContacts(ContactInfoFilterOptions options) {
-        Cursor cursor = mContentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, null);
-        mContacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
+        contacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         if (null == contactId) {
             throw new IllegalArgumentException("contactId cannot be null");
         }
-        for (ContactInfo contactInfo : mContacts) {
+        for (ContactInfo contactInfo : contacts) {
             if (contactId.equals(contactInfo.getId())) {
                 return contactInfo;
             }
@@ -79,12 +79,12 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         if (getReadContactsCount() > 0) {
             Random random = new Random();
             int contactIndex = random.nextInt(Integer.valueOf(getReadContactsCount() + ""));
-            contactInfo = getContactInfo(mContacts.get(contactIndex).getId(),
+            contactInfo = getContactInfo(contacts.get(contactIndex).getId(),
                     ContactInfoOptions.of(true,
                             true, com.ae.apps.lib.R.drawable.profile_icon_1));
 
             // Update the contacts list with the updated contact item
-            mContacts.set(contactIndex, contactInfo);
+            contacts.set(contactIndex, contactInfo);
         }
         return contactInfo;
     }
@@ -92,7 +92,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
     @Override
     public String getContactIdFromRawContact(String rawContactId) {
         String contactId = String.valueOf(0);
-        Cursor cursor = mContentResolver.query(ContactsContract.RawContacts.CONTENT_URI,
+        Cursor cursor = contentResolver.query(ContactsContract.RawContacts.CONTENT_URI,
                 PROJECTION_ID_RAW_CONTACT_ID,
                 SELECT_WITH_RAW_CONTACT_ID,
                 new String[]{rawContactId}, null);
@@ -116,7 +116,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
                 String[] projection = new String[]{ContactsApiConstants.COLUMN_ID};
                 Uri personUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
                 if (null != personUri) {
-                    cursor = mContentResolver.query(personUri, projection, null, null, null);
+                    cursor = contentResolver.query(personUri, projection, null, null, null);
                     if (null != cursor && cursor.moveToFirst()) {
                         contactId = cursor.getString(cursor.getColumnIndex(ContactsApiConstants.COLUMN_ID));
                     }
@@ -135,10 +135,10 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
 
     private void updateWithPhoneDetails(final ContactInfo contactInfo) {
         if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
-            Cursor phoneCursor = mContentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                     null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
                     null);
-            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, mResources));
+            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, resources));
         }
     }
 
@@ -151,9 +151,9 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         if (options.isIncludeContactPicture()) {
             Bitmap picture = getContactPicture(contactId);
             if (null == picture) {
-                if (null != mResources && options.getDefaultContactPicture() > 0) {
+                if (null != resources && options.getDefaultContactPicture() > 0) {
                     contactInfo.setPicture(
-                            BitmapFactory.decodeResource(mResources, options.getDefaultContactPicture()));
+                            BitmapFactory.decodeResource(resources, options.getDefaultContactPicture()));
                 }
             } else {
                 contactInfo.setPicture(picture);

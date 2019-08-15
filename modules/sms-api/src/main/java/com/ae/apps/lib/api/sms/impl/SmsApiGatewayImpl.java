@@ -37,14 +37,14 @@ import static com.ae.apps.lib.api.sms.utils.SmsApiConstants.SMS_TABLE_PROJECTION
 public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
 
     public SmsApiGatewayImpl(final Context context) {
-        this.mContentResolver = context.getContentResolver();
+        this.contentResolver = context.getContentResolver();
     }
 
     @Override
     public List<MessageInfo> getMessagesForUri(String uri) {
-        checkInputParams(uri);
+        validateInputParams(uri);
 
-        Cursor cursor = mContentResolver.query(Uri.parse(uri),
+        Cursor cursor = contentResolver.query(Uri.parse(uri),
                 SMS_TABLE_PROJECTION,
                 null, null, null);
         List<MessageInfo> messages = new ArrayList<>();
@@ -57,9 +57,9 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
 
     @Override
     public List<MessageInfo> getMessagesForContact(String uri, String contactId) {
-        checkInputParams(uri);
+        validateInputParams(uri);
 
-        Cursor cursor = mContentResolver.query(Uri.parse(uri),
+        Cursor cursor = contentResolver.query(Uri.parse(uri),
                 SMS_TABLE_PROJECTION,
                 SELECT_BY_PERSON, new String[]{contactId}, null);
         List<MessageInfo> messages = new ArrayList<>();

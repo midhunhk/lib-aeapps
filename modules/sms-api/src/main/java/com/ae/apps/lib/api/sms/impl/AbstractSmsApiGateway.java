@@ -29,11 +29,11 @@ import java.util.List;
  */
 public abstract class AbstractSmsApiGateway implements SmsApiGateway {
 
-    protected ContentResolver mContentResolver;
+    protected ContentResolver contentResolver;
 
     @Override
     public long getMessageCountForContact(String uri, String contactId) {
-        checkInputParams(uri);
+        validateInputParams(uri);
 
         List<MessageInfo> messages = getMessagesForContact(uri, contactId);
         if (null != messages && !messages.isEmpty()) {
@@ -44,7 +44,7 @@ public abstract class AbstractSmsApiGateway implements SmsApiGateway {
 
     @Override
     public long getMessageCountForUri(String uri) {
-        checkInputParams(uri);
+        validateInputParams(uri);
 
         List<MessageInfo> messages = getMessagesForUri(uri);
         if (null != messages && !messages.isEmpty()) {
@@ -53,12 +53,12 @@ public abstract class AbstractSmsApiGateway implements SmsApiGateway {
         return 0;
     }
 
-    protected boolean checkIfValidUri(final String uri) {
+    protected boolean isValidUri(final String uri) {
         return null != uri && SmsApiConstants.ALL_URIS.contains(uri);
     }
 
-    protected void checkInputParams(String uri) {
-        if (!checkIfValidUri(uri)) {
+    protected void validateInputParams(String uri) {
+        if (!isValidUri(uri)) {
             throw new IllegalArgumentException(uri + " is not a valid URI");
         }
     }

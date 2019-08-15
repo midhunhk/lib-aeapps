@@ -27,9 +27,8 @@ dependencies {
     implementation deps.appcompat
 
     api project(':core')
-    api project(':mocks')
-    api project(':utilities')
 
+    testImplementation project(':mocks')
     testImplementation deps.junit
     testImplementation deps.mockitoCore
     androidTestImplementation deps.runner
