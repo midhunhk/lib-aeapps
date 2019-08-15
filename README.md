@@ -28,8 +28,7 @@ Presently the following android app projects make use of this library.
 To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
 
 ## Using the library
-Instructions for using this library are mentioned in the detail here: 
-https://github.com/midhunhk/ae-apps-library/wiki/Distribution
+Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/ae-apps-library/wiki/Distribution)
  
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");
