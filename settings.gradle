@@ -1,17 +1,20 @@
 include ':core'
-project(':core').projectDir = new File('modules/core')
 include ':contacts-api'
-project(':contacts-api').projectDir = new File('modules/contacts-api')
 include ':utilities'
-project(':utilities').projectDir = new File('modules/utilities')
 include ':multi-contact'
-project(':multi-contact').projectDir = new File('modules/multi-contact')
 include ':mocks'
-project(':mocks').projectDir = new File('modules/mocks')
 include ':runtime-permissions'
-project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
 include ':database-helpers'
-project(':database-helpers').projectDir = new File('modules/database-helpers')
 include ':billing-client'
-project(':billing-client').projectDir = new File('modules/billing-client')
+include ':sms-api'
 include ':sample'
+
+project(':core').projectDir = new File('modules/core')
+project(':contacts-api').projectDir = new File('modules/contacts-api')
+project(':utilities').projectDir = new File('modules/utilities')
+project(':multi-contact').projectDir = new File('modules/multi-contact')
+project(':mocks').projectDir = new File('modules/mocks')
+project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
+project(':database-helpers').projectDir = new File('modules/database-helpers')
+project(':billing-client').projectDir = new File('modules/billing-client')
+project(':sms-api').projectDir = new File('modules/sms-api')

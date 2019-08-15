@@ -23,9 +23,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ae.apps.lib.api.sms.SmsApiConstants;
 import com.ae.apps.lib.api.sms.SmsApiGateway;
-import com.ae.apps.lib.api.sms.SmsApiGatewayImpl;
+import com.ae.apps.lib.api.sms.impl.SmsApiGatewayImpl;
+import com.ae.apps.lib.api.sms.utils.SmsApiConstants;
 import com.ae.apps.lib.permissions.PermissionCheckingActivity;
 import com.ae.apps.lib.sample.R;
 

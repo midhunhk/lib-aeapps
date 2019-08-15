@@ -1,5 +1,5 @@
-## Version 4.1 (Juneberry)
-#### Version 4.1.0 [TBD]
+## Version 4.0 (Juneberry)
+#### Version 4.0.2 [TBD]
  - Complete rewrite of library to use modules
 
 ## Version 3.0 (Indian Plum)
