@@ -1,21 +1,21 @@
 # libAeApps
-[![Build Status](https://travis-ci.org/midhunhk/ae-apps-library.svg?branch=fig)](https://travis-ci.org/midhunhk/ae-apps-library) 
+[![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg?branch=fig)](https://travis-ci.org/midhunhk/lib-aeapps) 
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
-[![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/ae-apps-library)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/ae-apps-library/V3.0.2.svg)](https://github.com/midhunhk/ae-apps-library) 
-[![Issues](https://img.shields.io/github/issues/midhunhk/ae-apps-library.svg)](https://github.com/midhunhk/ae-apps-library/issues) 
+[![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/V3.0.2.svg)](https://github.com/midhunhk/lib-aeapps) 
+[![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
 This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
 
 ## Library Name
 The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
 
-The library [codenames](https://github.com/midhunhk/ae-apps-library/wiki/Codenames) are based on fruits, mostly berries.
+The library [codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) are based on fruits, mostly berries.
 
 Juneberry: 
 
 ## Contents
-Detailed information about the architecture of the project is available at [this link](https://github.com/midhunhk/ae-apps-library/wiki/Architecture)
+Detailed information about the architecture of the project is available at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)
 
 ## Implementations
 Presently the following android app projects make use of this library.
@@ -25,10 +25,10 @@ Presently the following android app projects make use of this library.
 * <a href="https://github.com/midhunhk/trip-o-meter">Trip 'O Meter</a>
 
 ## Changelog
-To see the history of changes, see [Changelog](https://github.com/midhunhk/ae-apps-library/blob/master/VersionHistory.md)
+To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-aeapps/blob/master/VersionHistory.md)
 
 ## Using the library
-Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/ae-apps-library/wiki/Distribution)
+Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/lib-aeapps/wiki/Distribution)
  
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");
