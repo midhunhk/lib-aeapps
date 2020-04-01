@@ -29,6 +29,9 @@ To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-a
 
 ## Using the library
 Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/lib-aeapps/wiki/Distribution)
+
+## Migration Guide
+Instructions for migrating from a prior version of the library are at [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)
  
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");

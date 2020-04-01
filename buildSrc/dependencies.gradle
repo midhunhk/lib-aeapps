@@ -2,13 +2,13 @@
 ext {
     // Setup
     minSdkVersion = 16
-    targetSdkVersion = 28
-    compileSdkVersion = 28
-    buildToolsVersion = "28.0.1"
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    buildToolsVersion = "29.0.3"
 
     supportLibraryVersion = "28.0.0"
     espressoVersion = "3.1.0-beta02"
-    gradleBuildToolVersion = '3.4.2'
+    gradleBuildToolVersion = '3.6.2'
     androidMavenPluginVersion = "2.1"
     junitVersion = "4.12"
     mockitoCoreVersion = "2.8.9"
@@ -25,10 +25,10 @@ ext.Plugins = [
 // Dependencies
 ext.deps = [
         // compile
-        design               : "com.google.android.material:material:1.0.0",
-        appcompat            : "androidx.appcompat:appcompat:1.0.2",
+        design               : "com.google.android.material:material:1.1.0",
+        appcompat            : "androidx.appcompat:appcompat:1.1.0",
         supportv4            : "androidx.legacy:legacy-support-v4:1.0.0",
-        recyclerview         : "androidx.recyclerview:recyclerview:1.0.0",
+        recyclerview         : "androidx.recyclerview:recyclerview:1.1.0",
         cardview             : "androidx.cardview:cardview:1.0.0",
         supportAnnotations   : "androidx.annotation:annotation:1.0.0",
         constraintLayout     : 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2',

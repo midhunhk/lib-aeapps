@@ -30,8 +30,8 @@ import androidx.core.content.PermissionChecker;
  */
 public class RuntimePermissionChecker {
 
-    private PermissionsAwareComponent mComponent;
-    private Context mContext;
+    private PermissionsAwareComponent component;
+    private Context context;
 
     /**
      * Initialize an instance of RuntimePermissionChecker
@@ -48,8 +48,8 @@ public class RuntimePermissionChecker {
         if (component.requiredPermissions() == null || component.requiredPermissions().length == 0) {
             throw new IllegalStateException("At least one Permission should be returned by requiredPermissions()");
         }
-        mContext = (Context) component;
-        mComponent = component;
+        context = (Context) component;
+        this.component = component;
     }
 
     /**
@@ -58,13 +58,13 @@ public class RuntimePermissionChecker {
      */
     public void checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkAllPermissions(mComponent.requiredPermissions())) {
-                mComponent.onPermissionsGranted();
+            if (checkAllPermissions(component.requiredPermissions())) {
+                component.onPermissionsGranted();
             } else {
-                mComponent.onPermissionsRequired();
+                component.onPermissionsRequired();
             }
         } else {
-            mComponent.onPermissionsGranted();
+            component.onPermissionsGranted();
         }
     }
 
@@ -79,9 +79,9 @@ public class RuntimePermissionChecker {
      */
     public void handlePermissionsResult(String[] permissions, int[] grantResults) {
         if (grantResults.length > 0 && checkPermissionGrantResults(grantResults)) {
-            mComponent.onPermissionsGranted();
+            component.onPermissionsGranted();
         } else {
-            mComponent.onPermissionsDenied();
+            component.onPermissionsDenied();
         }
     }
 
@@ -96,8 +96,8 @@ public class RuntimePermissionChecker {
 
     private boolean checkAllPermissions(String[] permissions) {
         for (String permissionName : permissions) {
-            if (PackageManager.PERMISSION_GRANTED !=
-                    PermissionChecker.checkSelfPermission(mContext, permissionName)) {
+            if (PermissionChecker.PERMISSION_GRANTED !=
+                    PermissionChecker.checkSelfPermission(context, permissionName)) {
                 return false;
             }
         }

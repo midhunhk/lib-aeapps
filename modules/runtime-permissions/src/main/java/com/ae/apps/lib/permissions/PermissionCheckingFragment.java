@@ -45,36 +45,36 @@ import com.ae.apps.lib.common.utils.CommonUtils;
  */
 public abstract class PermissionCheckingFragment extends Fragment {
 
-    protected LayoutInflater mInflater;
-    protected ViewGroup mContainer;
-    protected Context mContext;
-    private ViewGroup mMainContainer;
-    private String[] mPermissionNames;
+    protected LayoutInflater inflater;
+    protected ViewGroup container;
+    protected Context context;
+    private ViewGroup mainContainer;
+    private String[] permissionNames;
     private static final int PERMISSION_CHECK_REQUEST_CODE = 8000;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = context;
+        this.context = context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mContext = null;
+        context = null;
     }
 
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mInflater = inflater;
-        mContainer = container;
-        mMainContainer = CommonUtils.createParentLayout(mContext);
+        this.inflater = inflater;
+        this.container = container;
+        mainContainer = CommonUtils.createParentLayout(context);
 
-        mPermissionNames = getRequiredPermissions();
+        permissionNames = getRequiredPermissions();
 
         checkPermissions(savedInstanceState);
 
-        return mMainContainer;
+        return mainContainer;
     }
 
     /**
@@ -110,8 +110,8 @@ public abstract class PermissionCheckingFragment extends Fragment {
 
     private void onPermissionGranted(Bundle savedInstanceState){
         View randomContactView = setupViewWithPermission(savedInstanceState);
-        mMainContainer.removeAllViews();
-        mMainContainer.addView(randomContactView);
+        mainContainer.removeAllViews();
+        mainContainer.addView(randomContactView);
     }
 
     private void checkPermissions(Bundle savedInstanceState) {
@@ -122,15 +122,15 @@ public abstract class PermissionCheckingFragment extends Fragment {
             // show a no access view as read contacts permission is required
             View noAccessView = setupViewWithoutPermission();
             if(null != noAccessView) {
-                mMainContainer.addView(noAccessView);
+                mainContainer.addView(noAccessView);
             }
             requestForPermissions();
         }
     }
 
     private boolean checkAllPermissions(){
-        for(String permissionName : mPermissionNames){
-            if(PackageManager.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(mContext, permissionName)){
+        for(String permissionName : permissionNames){
+            if(PackageManager.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(context, permissionName)){
                 return false;
             }
         }
@@ -138,7 +138,7 @@ public abstract class PermissionCheckingFragment extends Fragment {
     }
 
     protected void requestForPermissions() {
-        requestPermissions(mPermissionNames, PERMISSION_CHECK_REQUEST_CODE);
+        requestPermissions(permissionNames, PERMISSION_CHECK_REQUEST_CODE);
     }
 
     @Override

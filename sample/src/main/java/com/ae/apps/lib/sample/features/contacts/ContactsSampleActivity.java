@@ -25,13 +25,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ContactsSampleActivity extends AppCompatActivity
         implements PermissionsAwareComponent, ContactsDataConsumer {
 
-    private RuntimePermissionChecker mPermissionChecker;
+    private RuntimePermissionChecker permissionChecker;
     private static final int PERMISSION_CODE = 2000;
 
-    private View mRequestLayout;
-    private View mContactsLayout;
+    private View requestLayout;
+    private View contactsLayout;
 
-    private ContactsApiGateway mContactsApiGateway;
+    private ContactsApiGateway contactsApiGateway;
     private long startTime;
 
     @Override
@@ -39,8 +39,8 @@ public class ContactsSampleActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts_sample);
 
-        mRequestLayout = findViewById(R.id.layout_need_permissions);
-        mContactsLayout = findViewById(R.id.text_permissions_granted);
+        requestLayout = findViewById(R.id.layout_need_permissions);
+        contactsLayout = findViewById(R.id.text_permissions_granted);
 
         View requestPermissionBtn = findViewById(R.id.btn_request_permissions);
         requestPermissionBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +58,8 @@ public class ContactsSampleActivity extends AppCompatActivity
             }
         });
 
-        mPermissionChecker = new RuntimePermissionChecker(this);
-        mPermissionChecker.checkPermissions();
+        permissionChecker = new RuntimePermissionChecker(this);
+        permissionChecker.checkPermissions();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ContactsSampleActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_CODE) {
-            mPermissionChecker.handlePermissionsResult(permissions, grantResults);
+            permissionChecker.handlePermissionsResult(permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
@@ -91,24 +91,24 @@ public class ContactsSampleActivity extends AppCompatActivity
     }
 
     protected void showPermissionsRequiredView() {
-        mContactsLayout.setVisibility(View.GONE);
-        mRequestLayout.setVisibility(View.VISIBLE);
+        contactsLayout.setVisibility(View.GONE);
+        requestLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onPermissionsGranted() {
         // show permission granted view
-        mContactsLayout.setVisibility(View.VISIBLE);
-        mRequestLayout.setVisibility(View.GONE);
+        contactsLayout.setVisibility(View.VISIBLE);
+        requestLayout.setVisibility(View.GONE);
 
         loadContacts();
     }
 
     private void loadContacts() {
-        mContactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
+        contactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
                 .build();
         startTime = System.currentTimeMillis();
-        mContactsApiGateway.initializeAsync(ContactInfoFilterOptions.of(false), this);
+        contactsApiGateway.initializeAsync(ContactInfoFilterOptions.of(false), this);
     }
 
     @Override
@@ -120,8 +120,8 @@ public class ContactsSampleActivity extends AppCompatActivity
 
     private void displayContactInfo() {
         // Read a Random contact with picture and phone number details
-        ContactInfo contactInfo = mContactsApiGateway.getContactInfo(
-                mContactsApiGateway.getRandomContact().getId(),
+        ContactInfo contactInfo = contactsApiGateway.getContactInfo(
+                contactsApiGateway.getRandomContact().getId(),
                 ContactInfoOptions.of(true, true,
                         com.ae.apps.lib.R.drawable.profile_icon_3));
 
@@ -129,7 +129,7 @@ public class ContactsSampleActivity extends AppCompatActivity
         contactName.setText(contactInfo.getName());
 
         TextView totalContacts = findViewById(R.id.text_total_contacts);
-        totalContacts.setText(mContactsApiGateway.getReadContactsCount() + " contacts found");
+        totalContacts.setText(contactsApiGateway.getReadContactsCount() + " contacts found");
 
         ImageView profile = findViewById(R.id.img_contact_profile);
         profile.setImageBitmap(contactInfo.getPicture());

@@ -54,7 +54,7 @@ public class SmsSampleActivity extends PermissionCheckingActivity {
             }
         });
 
-        mPermissionChecker.checkPermissions();
+        permissionChecker.checkPermissions();
     }
 
     @Override

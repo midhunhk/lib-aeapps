@@ -52,15 +52,15 @@ import java.util.List;
 public abstract class MultiContactBaseActivity extends AppCompatActivity
         implements MultiContactInteractionListener {
 
-    protected List<String> mSelectedContactIds;
-    protected View mCancelButton;
-    protected View mContinueButton;
+    protected List<String> selectedContactIds;
+    protected View cancelButton;
+    protected View continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSelectedContactIds = new ArrayList<>();
+        selectedContactIds = new ArrayList<>();
 
         initViews();
 
@@ -68,13 +68,13 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
     }
 
     private void initViews() {
-        mContinueButton = findViewById(R.id.btnContinueWithSelectedContacts);
-        mCancelButton = findViewById(R.id.btnCancelMultiContactSelection);
+        continueButton = findViewById(R.id.btnContinueWithSelectedContacts);
+        cancelButton = findViewById(R.id.btnCancelMultiContactSelection);
 
-        mContinueButton.setOnClickListener(new View.OnClickListener() {
+        continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mSelectedContactIds.size() > 0) {
+                if (selectedContactIds.size() > 0) {
                     onActivityComplete();
                 } else {
                     Toast.makeText(MultiContactBaseActivity.this, R.string.str_multi_contact_validation, Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
             }
         });
 
-        mCancelButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onActivityCancelled();
@@ -112,7 +112,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
     @NonNull
     private String convertSelectedContactValues() {
         StringBuilder builder = new StringBuilder();
-        for (String contactId : mSelectedContactIds) {
+        for (String contactId : selectedContactIds) {
             builder.append(contactId)
                     .append(MultiContactPickerConstants.CONTACT_ID_SEPARATOR);
         }
@@ -128,12 +128,12 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
 
     @Override
     public void onContactSelected(String contactId) {
-        mSelectedContactIds.add(contactId);
+        selectedContactIds.add(contactId);
     }
 
     @Override
     public void onContactUnselected(String contactId) {
-        mSelectedContactIds.remove(contactId);
+        selectedContactIds.remove(contactId);
     }
 
 }

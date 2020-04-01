@@ -41,7 +41,7 @@ import androidx.fragment.app.Fragment;
  */
 public abstract class BaseBillingClientFragment extends Fragment implements PurchasesUpdatedListener {
 
-    private BillingClient mBillingClient;
+    private BillingClient billingClient;
 
     /**
      * Invoked when the BillingClient has setup correctly
@@ -96,7 +96,7 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBillingClient = BillingClient
+        billingClient = BillingClient
                 .newBuilder(requireActivity())
                 .setListener(this)
                 .build();
@@ -108,8 +108,8 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
     public void onDestroy() {
         super.onDestroy();
 
-        if (null != mBillingClient) {
-            mBillingClient.endConnection();
+        if (null != billingClient) {
+            billingClient.endConnection();
         }
     }
 
@@ -123,14 +123,14 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
                 .setSku(skuId)
                 .setType(BillingClient.SkuType.INAPP)
                 .build();
-        mBillingClient.launchBillingFlow(requireActivity(), flowParams);
+        billingClient.launchBillingFlow(requireActivity(), flowParams);
     }
 
     /**
      * Start the service connection
      */
     private void startServiceConnection() {
-        mBillingClient.startConnection(new BillingClientStateListener() {
+        billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(int responseCode) {
                 if (responseCode == BillingClient.BillingResponse.OK) {
@@ -154,7 +154,7 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
                 .setType(BillingClient.SkuType.INAPP)
                 .build();
 
-        mBillingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
+        billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
             @Override
             public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
                 try {
@@ -176,7 +176,7 @@ public abstract class BaseBillingClientFragment extends Fragment implements Purc
      * @param listener      a callback when the purchase is consumed
      */
     protected void consumeAsync(String purchaseToken, ConsumeResponseListener listener) {
-        mBillingClient.consumeAsync(purchaseToken, listener);
+        billingClient.consumeAsync(purchaseToken, listener);
     }
 
     public void onPurchasesUpdated(int responseCode, List<Purchase> purchases) {

@@ -78,7 +78,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         ContactInfo contactInfo = null;
         if (getReadContactsCount() > 0) {
             Random random = new Random();
-            int contactIndex = random.nextInt(Integer.valueOf(getReadContactsCount() + ""));
+            int contactIndex = random.nextInt(Integer.parseInt(getReadContactsCount() + ""));
             contactInfo = getContactInfo(contacts.get(contactIndex).getId(),
                     ContactInfoOptions.of(true,
                             true, com.ae.apps.lib.R.drawable.profile_icon_1));

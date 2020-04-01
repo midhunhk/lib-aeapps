@@ -30,13 +30,13 @@ public abstract class PermissionCheckingActivity extends AppCompatActivity
 
     private static final int PERMISSION_CODE = 2004;
 
-    protected RuntimePermissionChecker mPermissionChecker;
+    protected RuntimePermissionChecker permissionChecker;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPermissionChecker = new RuntimePermissionChecker(this);
+        permissionChecker = new RuntimePermissionChecker(this);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -47,7 +47,7 @@ public abstract class PermissionCheckingActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_CODE) {
-            mPermissionChecker.handlePermissionsResult(permissions, grantResults);
+            permissionChecker.handlePermissionsResult(permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }

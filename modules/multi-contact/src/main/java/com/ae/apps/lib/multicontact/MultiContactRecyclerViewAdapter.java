@@ -38,14 +38,14 @@ import java.util.Map;
  */
 class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ContactInfo> mValues;
-    private final Map<String, Boolean> mCheckedStatus;
-    private final MultiContactInteractionListener mListener;
+    private final List<ContactInfo> contactInfos;
+    private final Map<String, Boolean> checkedStatus;
+    private final MultiContactInteractionListener interactionListener;
 
     MultiContactRecyclerViewAdapter(final List<ContactInfo> values, MultiContactInteractionListener listener) {
-        mValues = values;
-        mListener = listener;
-        mCheckedStatus = new HashMap<>();
+        contactInfos = values;
+        interactionListener = listener;
+        checkedStatus = new HashMap<>();
     }
 
     @Override
@@ -57,32 +57,32 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mProfileName.setText(mValues.get(position).getName());
-        holder.mProfileImage.setImageResource(com.ae.apps.lib.R.drawable.profile_icon_4);
+        holder.item = contactInfos.get(position);
+        holder.profileName.setText(contactInfos.get(position).getName());
+        holder.profileImage.setImageResource(com.ae.apps.lib.R.drawable.profile_icon_4);
 
-        final String contactId = holder.mItem.getId();
+        final String contactId = holder.item.getId();
 
         // Clear out the previous listener attached to this Recycled ViewHolder
-        holder.mCheckBox.setOnCheckedChangeListener(null);
+        holder.checkBox.setOnCheckedChangeListener(null);
 
         // Set the checked status of this checkbox from our data list
-        if (mCheckedStatus.containsKey(contactId) && mCheckedStatus.get(contactId)) {
-            holder.mCheckBox.setChecked(true);
+        if (checkedStatus.containsKey(contactId) && checkedStatus.get(contactId)) {
+            holder.checkBox.setChecked(true);
         } else {
-            holder.mCheckBox.setChecked(false);
+            holder.checkBox.setChecked(false);
         }
 
-        holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Store the checked status of this data item
-                mCheckedStatus.put(contactId, isChecked);
+                checkedStatus.put(contactId, isChecked);
 
                 if (isChecked) {
-                    mListener.onContactSelected(contactId);
+                    interactionListener.onContactSelected(contactId);
                 } else {
-                    mListener.onContactUnselected(contactId);
+                    interactionListener.onContactUnselected(contactId);
                 }
             }
         });
@@ -91,24 +91,24 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return contactInfos.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        final View mView;
-        final ImageView mProfileImage;
-        final TextView mProfileName;
-        final CheckBox mCheckBox;
-        ContactInfo mItem;
-        boolean mItemSelected;
+        final View view;
+        final ImageView profileImage;
+        final TextView profileName;
+        final CheckBox checkBox;
+        ContactInfo item;
+        boolean itemSelected;
 
         ViewHolder(View view) {
             super(view);
-            mView = view;
-            mItemSelected = false;
-            mProfileImage = view.findViewById(R.id.multiContactPickerProfileImage);
-            mProfileName = view.findViewById(R.id.multiContactPickerProfileName);
-            mCheckBox = view.findViewById(R.id.multiContactPickerCheckBox);
+            this.view = view;
+            itemSelected = false;
+            profileImage = view.findViewById(R.id.multiContactPickerProfileImage);
+            profileName = view.findViewById(R.id.multiContactPickerProfileName);
+            checkBox = view.findViewById(R.id.multiContactPickerCheckBox);
         }
     }
 }
