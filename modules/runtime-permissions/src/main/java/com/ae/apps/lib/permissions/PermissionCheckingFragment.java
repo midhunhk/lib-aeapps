@@ -130,7 +130,7 @@ public abstract class PermissionCheckingFragment extends Fragment {
 
     private boolean checkAllPermissions(){
         for(String permissionName : permissionNames){
-            if(PackageManager.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(context, permissionName)){
+            if(PermissionChecker.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(context, permissionName)){
                 return false;
             }
         }
