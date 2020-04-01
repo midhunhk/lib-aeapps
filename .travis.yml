@@ -4,8 +4,8 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-29.0.3              # Same version as specified in build.gradle
-    - android-29                      # SDK version
+    - build-tools-28.0.3              # Same version as specified in build.gradle
+    - android-28                      # SDK version
     - extra-android-m2repository      
     - extra-google-m2repository 
     - sys-img-armeabi-v7a-android-22  # Android Image
