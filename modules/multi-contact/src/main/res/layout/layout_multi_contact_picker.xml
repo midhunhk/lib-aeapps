@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
+            android:layout_margin="@dimen/unit_s"
             android:gravity="center_vertical|center_horizontal"
             android:text="@android:string/cancel"
             android:textColor="@color/color_almost_white"/>
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
+            android:layout_margin="@dimen/unit_s"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/str_multi_contact_continue"
             android:textColor="@color/color_almost_white"/>

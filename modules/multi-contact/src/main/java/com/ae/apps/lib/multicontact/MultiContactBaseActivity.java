@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,8 +39,8 @@ import java.util.List;
  * that extend this activity.
  * <p>
  * <p>
- * Activities that extend this should implement the abstract methods.
- * The multi contact picker can be invoked with the below sample code
+ * The multi contact picker can be invoked with the below sample code where
+ * <pre>MULTI_CONTACT_PICKER_RESULT</pre> is an int value defined in the calling code
  * <p>
  * <pre>
  *     Intent multiContactPickerIntent = new Intent(getActivity(), MultiContactPickerActivity.class);
@@ -50,13 +51,16 @@ import java.util.List;
  *  Retrieve the selected contactIds separated by @{MultiContactPickerConstants.CONTACT_ID_SEPARATOR}
  *  from the resulting intent
  *  <pre>
- *      resultIntent.getExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
+ *    if(requestCode == MULTI_CONTACT_PICKER_RESULT){
+ *      data.getStringExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
+ *    }
  *  </pre>
  *
- * Use a layout that contains the below layout in 'getLayoutResourceId()'
- * <pre>
- *  <include layout="@layout/layout_multi_contact_picker"/>
- * </pre>
+ *  The implementing class layout should include the below layout and return the layout resource id
+ *  in the method @{getLayoutResourceId()}
+ *  <pre>
+ *    <include layout="@layout/layout_multi_contact_picker"/>
+ *  </pre>
  */
 public abstract class MultiContactBaseActivity extends AppCompatActivity
         implements MultiContactInteractionListener {
@@ -71,10 +75,19 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
 
         selectedContactIds = new ArrayList<>();
 
+        setContentView( getLayoutResourceId() );
+
         initViews();
 
         setUpRecyclerView();
     }
+
+    /**
+     * View used to `setContentView` before the views are initialized
+     *
+     * @return
+     */
+    public abstract @LayoutRes int getLayoutResourceId();
 
     private void initViews() {
         continueButton = findViewById(R.id.btnContinueWithSelectedContacts);
