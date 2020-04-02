@@ -20,11 +20,12 @@ package com.ae.apps.lib.multicontact;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
 
 import com.ae.apps.lib.common.models.ContactInfo;
 
@@ -33,17 +34,25 @@ import java.util.List;
 
 /**
  * Base Activity that supports picking multiple contacts from the address book.
- * This activity is based on ToolBarBaseActivity and leaves customizations to classes
+ * This activity is based on AppCompatActivity and leaves customizations to classes
  * that extend this activity.
  * <p>
  * <p>
- * Activities that extend this should implement the abstract methods and can be invoked with the below sample code
+ * Activities that extend this should implement the abstract methods.
+ * The multi contact picker can be invoked with the below sample code
  * <p>
  * <pre>
  *     Intent multiContactPickerIntent = new Intent(getActivity(), MultiContactPickerActivity.class);
  *     startActivityForResult(multiContactPickerIntent, MULTI_CONTACT_PICKER_RESULT);
  * </pre>
  * <p>
+ *
+ *  Retrieve the selected contactIds separated by @{MultiContactPickerConstants.CONTACT_ID_SEPARATOR}
+ *  from the resulting intent
+ *  <pre>
+ *      resultIntent.getExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
+ *  </pre>
+ *
  * Use a layout that contains the below layout in 'getLayoutResourceId()'
  * <pre>
  *  <include layout="@layout/layout_multi_contact_picker"/>

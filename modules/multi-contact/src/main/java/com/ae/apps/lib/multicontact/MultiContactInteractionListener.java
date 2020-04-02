@@ -27,7 +27,7 @@ import java.util.List;
 interface MultiContactInteractionListener {
 
     /**
-     * the contacts list which is to be displayed in the picker
+     * The list of contacts that are displayed in the multi contact picker to choose from
      *
      * @return contacts list
      */
