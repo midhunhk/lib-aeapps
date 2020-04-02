@@ -17,6 +17,7 @@
 package com.ae.apps.lib.sample.features;
 
 import com.ae.apps.lib.sample.features.contacts.ContactsSampleActivity;
+import com.ae.apps.lib.sample.features.contacts.MultiContactSampleActivity;
 import com.ae.apps.lib.sample.features.sms.SmsSampleActivity;
 import com.ae.apps.lib.sample.models.FeatureInfo;
 
@@ -36,9 +37,9 @@ public class Features {
         List<FeatureInfo> features = new ArrayList<>();
         features.add(FeatureInfo.of(1, "Contacts API", "An Abstraction over Android Contacts", ContactsSampleActivity.class));
         /* TODO: Comment out when publishing to PlayStore due to SMS API Permission restrictions */
-        // features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS Api", SmsSampleActivity.class));
+        features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS API", SmsSampleActivity.class));
+        features.add(FeatureInfo.of(3, "Multi Contact Picker", "Select multiple contacts", MultiContactSampleActivity.class));
 
-        features.add(FeatureInfo.of(3, "Multi contact Picker", "Select multiple contacts", SpecialFeature.NOT_IMPLEMENTED));
         features.add(FeatureInfo.of(4, "About", "More Information", SpecialFeature.ABOUT));
         return features;
     }

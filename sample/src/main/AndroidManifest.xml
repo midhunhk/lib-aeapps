@@ -19,11 +19,10 @@
           xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <!--
     <uses-permission
         android:name="android.permission.READ_SMS"
         android:required="true"/>
-     -->
+
     <uses-permission
         android:name="android.permission.READ_CONTACTS"
         android:required="true"/>
@@ -47,6 +46,14 @@
         <activity
             android:name=".features.contacts.ContactsSampleActivity"
             android:label="@string/title_activity_contacts_sample"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".features.contacts.MultiContactSampleActivity"
+            android:label="@string/title_activity_multi_contact_picker_sample"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".features.contacts.MultiContactPicker"
+            android:label="@string/title_activity_multi_contact_picker_sample"
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".features.sms.SmsSampleActivity"

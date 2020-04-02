@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2019 Midhun Harikumar
+  ~ Copyright (c) 2020 Midhun Harikumar
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 <resources>
     <string name="app_name">libAeApps</string>
-    <string name="app_version">Version 1.0.2</string>
+    <string name="app_version">Version 1.1.0</string>
     <string name="app_description">
         LibAeApps is an Open Source Android library for app developers.
         This app shows some of the reusable features provide by this app.
@@ -45,6 +45,10 @@
         Really need the permission granted here.
         Why don\'t you press the button below.
     </string>
+    <string name="title_activity_multi_contact_picker_sample">Multi Contact Picker</string>
+    <string name="str_multi_contact_pick">Pick Multi Contacts</string>
+    <string name="str_multi_contact_selection_placeholder">Placeholder</string>
+    
     <string name="str_btn_request_permissions">Grant Permissions</string>
     <string name="str_permissions_granted">Permissions Granted!</string>
 
@@ -56,4 +60,8 @@
     <string name="str_sms_count_drafts">Draft</string>
     <string name="str_sms_count_sent">Sent</string>
     <string name="str_sms_count_received">Inbox</string>
+    <string name="str_sms_title">SMS API</string>
+    <string name="str_contacts_title">Contacts API</string>
+
+
 </resources>

@@ -42,7 +42,7 @@ public class SmsSampleActivity extends PermissionCheckingActivity {
         setContentView(R.layout.activity_sms_sample);
 
         // Uncomment below line to enable this feature
-        // init();
+        init();
     }
 
     private void init() {

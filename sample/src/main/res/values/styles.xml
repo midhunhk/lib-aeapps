@@ -18,7 +18,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight">
+    <style name="AppTheme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base">
