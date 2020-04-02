@@ -35,7 +35,7 @@ public class MultiContactPicker extends MultiContactBaseActivity {
         // Assuming that the permissions are taken care by the invoking Activity/App
         contactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
                 .build();
-        contactsApiGateway.initialize(ContactInfoFilterOptions.of(false));
+        contactsApiGateway.initialize(ContactInfoFilterOptions.of(true));
 
         // Sort the contacts based on name
         List<ContactInfo> list = contactsApiGateway.getAllContacts();
@@ -43,10 +43,17 @@ public class MultiContactPicker extends MultiContactBaseActivity {
         Collections.sort(list, new Comparator<ContactInfo>() {
             @Override
             public int compare(ContactInfo o1, ContactInfo o2) {
-
+                if(null == o1.getName() ){
+                    o1.setName("");
+                }
+                if(null == o2.getName()){
+                    o2.setName("");
+                }
                 return o1.getName().compareToIgnoreCase(o2.getName());
             }
         });
+
+
         return list;
     }
 
