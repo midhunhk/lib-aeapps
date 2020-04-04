@@ -22,7 +22,6 @@ import com.ae.apps.lib.sample.R;
 public class MultiContactSampleActivity extends AppCompatActivity
         implements PermissionsAwareComponent, ContactsDataConsumer {
 
-    private RuntimePermissionChecker permissionChecker;
     private static final int PERMISSION_CODE = 2000;
     private static final int MULTI_CONTACT_PICKER_RESULT = 2001;
     private View requestLayout;
@@ -51,12 +50,12 @@ public class MultiContactSampleActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent multiContactPickerIntent = new Intent(getBaseContext(), MultiContactPicker.class);
-                multiContactPickerIntent.putExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS,selectedContactIds);
+                multiContactPickerIntent.putExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS, selectedContactIds);
                 startActivityForResult(multiContactPickerIntent, MULTI_CONTACT_PICKER_RESULT);
             }
         });
 
-        permissionChecker = new RuntimePermissionChecker(this);
+        RuntimePermissionChecker permissionChecker = new RuntimePermissionChecker(this);
         permissionChecker.checkPermissions();
     }
 
@@ -64,14 +63,10 @@ public class MultiContactSampleActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == MULTI_CONTACT_PICKER_RESULT) {
-                try {
-                    selectedContactIds = data.getStringExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
-                    TextView txtContactIds = findViewById(R.id.txt_contact_ids);
-                    txtContactIds.setText(selectedContactIds);
-                } catch (NullPointerException e) {
-                    Toast.makeText(this, "NPE " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+            if (requestCode == MULTI_CONTACT_PICKER_RESULT && data != null) {
+                selectedContactIds = data.getStringExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
+                TextView txtContactIds = findViewById(R.id.txt_contact_ids);
+                txtContactIds.setText(selectedContactIds);
             }
         }
     }

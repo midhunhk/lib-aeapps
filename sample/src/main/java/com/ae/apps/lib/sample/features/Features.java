@@ -30,7 +30,7 @@ import java.util.List;
 public class Features {
 
     public enum SpecialFeature {
-        ABOUT, NOT_IMPLEMENTED
+        ABOUT, BUILD_STATUS, NOT_IMPLEMENTED
     }
 
     public static List<FeatureInfo> getFeatures() {
@@ -41,6 +41,7 @@ public class Features {
         features.add(FeatureInfo.of(3, "Multi Contact Picker", "Select multiple contacts", MultiContactSampleActivity.class));
 
         features.add(FeatureInfo.of(4, "About", "More Information", SpecialFeature.ABOUT));
+        features.add(FeatureInfo.of(5, "Status", "Build Status", SpecialFeature.BUILD_STATUS));
         return features;
     }
 }

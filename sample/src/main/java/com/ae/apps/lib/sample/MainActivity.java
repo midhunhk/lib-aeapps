@@ -1,26 +1,33 @@
 package com.ae.apps.lib.sample;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ae.apps.lib.common.utils.DialogUtils;
 import com.ae.apps.lib.common.utils.intents.IntentUtils;
 import com.ae.apps.lib.sample.adapters.FeaturesRecyclerViewAdapter;
 import com.ae.apps.lib.sample.features.Features;
 import com.ae.apps.lib.sample.models.FeatureInfo;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity
         implements FeaturesRecyclerViewAdapter.ItemClickListener {
@@ -54,9 +61,30 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, featureInfo.getFeatureClass()));
         } else {
             if (featureInfo.getSpecialFeature() == Features.SpecialFeature.ABOUT) {
+                // Dialog Utils from Library
                 DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
                         R.layout.about_view,
                         R.string.menu_about);
+            } else if (featureInfo.getSpecialFeature() == Features.SpecialFeature.BUILD_STATUS) {
+                final SpannableString spannable = new SpannableString(this.getString(R.string.str_status_message));
+                Linkify.addLinks(spannable, Linkify.ALL);
+
+                // Material Alert Dialog from design library
+                final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                        .setTitle(R.string.str_status_title)
+                        .setMessage(spannable)
+                        .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
+                TextView messageView = ((TextView) dialog.findViewById(android.R.id.message));
+                if (messageView != null) {
+                    messageView.setMovementMethod(LinkMovementMethod.getInstance());
+                }
             } else {
                 Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
             }

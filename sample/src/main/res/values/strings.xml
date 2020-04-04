@@ -17,14 +17,14 @@
 
 <resources>
     <string name="app_name">libAeApps</string>
-    <string name="app_version">Version 1.1.0</string>
+    <string name="app_version">Version 1.2.0</string>
     <string name="app_description">
         LibAeApps is an Open Source Android library for app developers.
         This app shows some of the reusable features provide by this app.
     </string>
 
-    <string name="url_github_source">https://github.com/midhunhk/ae-apps-library</string>
-    <string name="url_travis_build">https://travis-ci.org/midhunhk/ae-apps-library</string>
+    <string name="url_github_source">https://github.com/midhunhk/lib-aeapps</string>
+    <string name="url_travis_build">https://travis-ci.org/midhunhk/lib-aeapps</string>
 
     <string name="menu_about">About</string>
     <string name="menu_source_code">Source Code</string>
@@ -65,5 +65,8 @@
     <string name="str_sms_title">SMS API</string>
 
     <string name="str_contacts_title">Contacts API</string>
+
+    <string name="str_status_title">Build Status</string>
+    <string name="str_status_message">Check the build status of the library at https://travis-ci.org/midhunhk/lib-aeapps</string>
 
 </resources>

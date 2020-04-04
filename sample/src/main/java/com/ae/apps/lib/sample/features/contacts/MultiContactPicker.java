@@ -34,7 +34,7 @@ public class MultiContactPicker extends MultiContactBaseActivity {
     @Override
     public List<ContactInfo> contactsList() {
         // Assuming that the permissions are taken care by the invoking Activity/App
-        if(null == contactsApiGateway){
+        if (null == contactsApiGateway) {
             long startTime = System.currentTimeMillis();
             contactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
                     .build();
@@ -49,19 +49,18 @@ public class MultiContactPicker extends MultiContactBaseActivity {
         Collections.sort(list, new Comparator<ContactInfo>() {
             @Override
             public int compare(ContactInfo o1, ContactInfo o2) {
-                if(null == o1.getName() && null == o2.getName()) return 0;
-                if(null == o1.getName() )return -1;
-                if(null == o2.getName()) return 1;
+                if (null == o1.getName() && null == o2.getName()) return 0;
+                if (null == o1.getName()) return -1;
+                if (null == o2.getName()) return 1;
 
                 return o1.getName().compareToIgnoreCase(o2.getName());
             }
         });
 
-
         return list;
     }
 
-    private void customize(){
+    private void customize() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             cancelButton.setBackgroundTintList(getResources().getColorStateList(R.color.multi_contact_cancel_button_tint));
             continueButton.setBackgroundTintList(getResources().getColorStateList(R.color.multi_contact_continue_button_tint));
