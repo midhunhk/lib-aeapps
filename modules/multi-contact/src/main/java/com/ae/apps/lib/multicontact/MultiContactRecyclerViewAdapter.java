@@ -34,8 +34,10 @@ import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Adapter that displays contacts list with a checkbox
@@ -43,7 +45,7 @@ import java.util.Map;
 class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactRecyclerViewAdapter.ViewHolder>
         implements Filterable {
 
-    private final Map<String, Boolean> checkedStatus;
+    private final Set<String> checkedStatus;
     private final MultiContactInteractionListener interactionListener;
     private final List<ContactInfo> contactInfoList;
 
@@ -53,13 +55,11 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         filteredContacts = new ArrayList<>(values);
         contactInfoList = values;
         interactionListener = listener;
-        checkedStatus = new HashMap<>();
+        checkedStatus = new HashSet<>();
     }
 
-    public void setSelectedContacts(final List<String> selectedContacts){
-        for(String selectedContact : selectedContacts){
-            checkedStatus.put(selectedContact, true);
-        }
+    void setSelectedContacts(final List<String> selectedContacts){
+        checkedStatus.addAll(selectedContacts);
     }
 
     @NonNull
@@ -82,7 +82,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         holder.checkBox.setOnCheckedChangeListener(null);
 
         // Set the checked status of this checkbox from our data list
-        if (checkedStatus.containsKey(contactId) && checkedStatus.get(contactId)) {
+        if(checkedStatus.contains(contactId)){
             holder.checkBox.setChecked(true);
         } else {
             holder.checkBox.setChecked(false);
@@ -91,12 +91,11 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Store the checked status of this data item
-                checkedStatus.put(contactId, isChecked);
-
                 if (isChecked) {
+                    checkedStatus.add(contactId);
                     interactionListener.onContactSelected(contactId);
                 } else {
+                    checkedStatus.remove(contactId);
                     interactionListener.onContactUnselected(contactId);
                 }
             }
