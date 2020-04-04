@@ -2,6 +2,7 @@ package com.ae.apps.lib.sample.features.contacts;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.impl.ContactsApiGatewayImpl;
@@ -33,9 +34,14 @@ public class MultiContactPicker extends MultiContactBaseActivity {
     @Override
     public List<ContactInfo> contactsList() {
         // Assuming that the permissions are taken care by the invoking Activity/App
-        contactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
-                .build();
-        contactsApiGateway.initialize(ContactInfoFilterOptions.of(true));
+        if(null == contactsApiGateway){
+            long startTime = System.currentTimeMillis();
+            contactsApiGateway = new ContactsApiGatewayImpl.Builder(this)
+                    .build();
+            contactsApiGateway.initialize(ContactInfoFilterOptions.of(true));
+            long loadTime = System.currentTimeMillis() - startTime;
+            Toast.makeText(this, "Contacts loaded in " + loadTime + " ms", Toast.LENGTH_SHORT).show();
+        }
 
         // Sort the contacts based on name
         List<ContactInfo> list = contactsApiGateway.getAllContacts();
@@ -43,12 +49,10 @@ public class MultiContactPicker extends MultiContactBaseActivity {
         Collections.sort(list, new Comparator<ContactInfo>() {
             @Override
             public int compare(ContactInfo o1, ContactInfo o2) {
-                if(null == o1.getName() ){
-                    o1.setName("");
-                }
-                if(null == o2.getName()){
-                    o2.setName("");
-                }
+                if(null == o1.getName() && null == o2.getName()) return 0;
+                if(null == o1.getName() )return -1;
+                if(null == o2.getName()) return 1;
+
                 return o1.getName().compareToIgnoreCase(o2.getName());
             }
         });

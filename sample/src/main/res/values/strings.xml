@@ -46,7 +46,9 @@
         Why don\'t you press the button below.
     </string>
     <string name="title_activity_multi_contact_picker_sample">Multi Contact Picker</string>
+    <string name="str_multi_contact_title">Multi Contact Picker</string>
     <string name="str_multi_contact_pick">Pick Multi Contacts</string>
+    <string name="str_multi_contact_selection_info">Selected Contact Ids:</string>
     <string name="str_multi_contact_selection_placeholder">Placeholder</string>
     
     <string name="str_btn_request_permissions">Grant Permissions</string>
@@ -61,7 +63,7 @@
     <string name="str_sms_count_sent">Sent</string>
     <string name="str_sms_count_received">Inbox</string>
     <string name="str_sms_title">SMS API</string>
-    <string name="str_contacts_title">Contacts API</string>
 
+    <string name="str_contacts_title">Contacts API</string>
 
 </resources>

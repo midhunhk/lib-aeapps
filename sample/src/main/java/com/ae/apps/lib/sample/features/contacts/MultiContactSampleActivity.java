@@ -28,6 +28,8 @@ public class MultiContactSampleActivity extends AppCompatActivity
     private View requestLayout;
     private View contactsLayout;
 
+    private String selectedContactIds = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class MultiContactSampleActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent multiContactPickerIntent = new Intent(getBaseContext(), MultiContactPicker.class);
+                multiContactPickerIntent.putExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS,selectedContactIds);
                 startActivityForResult(multiContactPickerIntent, MULTI_CONTACT_PICKER_RESULT);
             }
         });
@@ -63,9 +66,9 @@ public class MultiContactSampleActivity extends AppCompatActivity
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == MULTI_CONTACT_PICKER_RESULT) {
                 try {
-                    String result = data.getStringExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
+                    selectedContactIds = data.getStringExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
                     TextView txtContactIds = findViewById(R.id.txt_contact_ids);
-                    txtContactIds.setText(result);
+                    txtContactIds.setText(selectedContactIds);
                 } catch (NullPointerException e) {
                     Toast.makeText(this, "NPE " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

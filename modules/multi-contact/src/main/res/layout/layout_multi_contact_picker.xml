@@ -9,8 +9,17 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/multiContactSearchView"
         android:layout_above="@+id/multiContactPickerButtonGroup"
         app:layoutManager="LinearLayoutManager"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/multiContactSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:iconifiedByDefault="false"
+        app:queryHint="@string/str_multi_contact_search_hint"
+        android:layout_alignParentTop="true"/>
 
     <RelativeLayout
         android:id="@+id/empty_view"

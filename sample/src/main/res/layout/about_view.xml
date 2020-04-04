@@ -32,7 +32,7 @@
         android:drawablePadding="@dimen/unit_m"
         android:drawableTop="@mipmap/ic_launcher"
         android:text="@string/app_description"
-        android:textSize="@dimen/text_title"
+        android:textSize="@dimen/text_title3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

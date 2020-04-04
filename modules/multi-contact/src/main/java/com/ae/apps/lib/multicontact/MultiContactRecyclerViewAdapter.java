@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Midhun Harikumar
+ * Copyright (c) 2020 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,22 @@
 
 package com.ae.apps.lib.multicontact;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.ae.apps.lib.common.models.ContactInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,18 +40,29 @@ import java.util.Map;
 /**
  * Adapter that displays contacts list with a checkbox
  */
-class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactRecyclerViewAdapter.ViewHolder> {
+class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactRecyclerViewAdapter.ViewHolder>
+        implements Filterable {
 
-    private final List<ContactInfo> contactInfos;
     private final Map<String, Boolean> checkedStatus;
     private final MultiContactInteractionListener interactionListener;
+    private final List<ContactInfo> contactInfoList;
+
+    private List<ContactInfo> filteredContacts;
 
     MultiContactRecyclerViewAdapter(final List<ContactInfo> values, MultiContactInteractionListener listener) {
-        contactInfos = values;
+        filteredContacts = new ArrayList<>(values);
+        contactInfoList = values;
         interactionListener = listener;
         checkedStatus = new HashMap<>();
     }
 
+    public void setSelectedContacts(final List<String> selectedContacts){
+        for(String selectedContact : selectedContacts){
+            checkedStatus.put(selectedContact, true);
+        }
+    }
+
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -57,8 +72,8 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        holder.item = contactInfos.get(position);
-        holder.profileName.setText(contactInfos.get(position).getName());
+        holder.item = filteredContacts.get(position);
+        holder.profileName.setText(filteredContacts.get(position).getName());
         holder.profileImage.setImageResource(com.ae.apps.lib.R.drawable.profile_icon_4);
 
         final String contactId = holder.item.getId();
@@ -91,7 +106,48 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
     @Override
     public int getItemCount() {
-        return contactInfos.size();
+        return filteredContacts.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                boolean dataUpdated = false;
+                if (charSequence.length() == 0) {
+                    if (filteredContacts.size() < contactInfoList.size()) {
+                        filteredContacts = new ArrayList<>(contactInfoList);
+                        dataUpdated = true;
+                    }
+                } else {
+                    filteredContacts = filterContactsByName(charSequence.toString().toLowerCase());
+                    dataUpdated = true;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = dataUpdated;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                boolean dataUpdated = Boolean.parseBoolean(filterResults.values.toString());
+                if (dataUpdated) {
+                    notifyDataSetChanged();
+                }
+            }
+        };
+    }
+
+    private List<ContactInfo> filterContactsByName(String queryString) {
+        List<ContactInfo> results = new ArrayList<>();
+        for (ContactInfo contactInfo : contactInfoList) {
+            if (null != contactInfo.getName() && contactInfo.getName().toLowerCase().contains(queryString)) {
+                results.add(contactInfo);
+            }
+        }
+        return results;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Midhun Harikumar
+ * Copyright (c) 2020 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,68 +26,91 @@ import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Base Activity that supports picking multiple contacts from the address book.
  * This activity is based on AppCompatActivity and leaves customizations to classes
- * that extend this activity.
+ * that extend this activity. The contacts list is supplied by the calling class by
+ * implementing the abstract method ${contactsList()}
  * <p>
  * <p>
  * The multi contact picker can be invoked with the below sample code where
- * <pre>MULTI_CONTACT_PICKER_RESULT</pre> is an int value defined in the calling code
+ * <pre>MULTI_CONTACT_PICKER_RESULT</pre> is an int value defined in the calling code.
+ * An optional extra with the name <pre>MultiContactPickerConstants.PRESELECTED_CONTACT_IDS</pre>
+ * can be passed when launching the activity to display preselected contacts
  * <p>
  * <pre>
  *     Intent multiContactPickerIntent = new Intent(getActivity(), MultiContactPickerActivity.class);
+ *     multiContactPickerIntent.putExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS,selectedContactIds);
  *     startActivityForResult(multiContactPickerIntent, MULTI_CONTACT_PICKER_RESULT);
  * </pre>
  * <p>
- *
- *  Retrieve the selected contactIds separated by @{MultiContactPickerConstants.CONTACT_ID_SEPARATOR}
- *  from the resulting intent
- *  <pre>
+ * <p>
+ * Retrieve the selected contactIds separated by @{MultiContactPickerConstants.CONTACT_ID_SEPARATOR}
+ * from the resulting intent
+ * <pre>
  *    if(requestCode == MULTI_CONTACT_PICKER_RESULT){
  *      data.getStringExtra(MultiContactPickerConstants.RESULT_CONTACT_IDS);
  *    }
  *  </pre>
  *
- *  The implementing class layout should include the below layout and return the layout resource id
- *  in the method @{getLayoutResourceId()}
- *  <pre>
- *    <include layout="@layout/layout_multi_contact_picker"/>
- *  </pre>
+ * </pre>
+ * <p>
+ * The implementing class layout should include the below layout and return the layout resource id
+ * in the method @{getLayoutResourceId()}
+ * <pre>
+ * <include layout="@layout/layout_multi_contact_picker"/>
+ * </pre>
  */
 public abstract class MultiContactBaseActivity extends AppCompatActivity
         implements MultiContactInteractionListener {
 
-    protected List<String> selectedContactIds;
+    protected List<String> selectedContactIds = new ArrayList<>();
     protected View cancelButton;
     protected View continueButton;
+    protected SearchView searchView;
+    MultiContactRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        selectedContactIds = new ArrayList<>();
+        retrievePreselectedContactIds();
 
-        setContentView( getLayoutResourceId() );
+        setContentView(getLayoutResourceId());
 
         initViews();
 
         setUpRecyclerView();
     }
 
+    private void retrievePreselectedContactIds() {
+        Intent intent = getIntent();
+        if (null != intent
+                && null != intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS)) {
+            String preSelectedContactIds = intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS);
+            if (preSelectedContactIds.length() > 0) {
+                String[] ids = preSelectedContactIds.split(MultiContactPickerConstants.CONTACT_ID_SEPARATOR);
+                Collections.addAll(selectedContactIds, ids);
+            }
+        }
+    }
+
     /**
      * View used to `setContentView` before the views are initialized
      *
-     * @return
+     * @return resourceId for the main layout
      */
-    public abstract @LayoutRes int getLayoutResourceId();
+    public abstract @LayoutRes
+    int getLayoutResourceId();
 
     private void initViews() {
         continueButton = findViewById(R.id.btnContinueWithSelectedContacts);
@@ -110,6 +133,20 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
                 onActivityCancelled();
             }
         });
+
+        searchView = findViewById(R.id.multiContactSearchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void setUpRecyclerView() {
@@ -117,8 +154,11 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
 
         if (null != recyclerView) {
             List<ContactInfo> contactsList = contactsList();
-            MultiContactRecyclerViewAdapter mViewAdapter = new MultiContactRecyclerViewAdapter(contactsList, this);
-            recyclerView.setAdapter(mViewAdapter);
+            adapter = new MultiContactRecyclerViewAdapter(contactsList, this);
+            recyclerView.setAdapter(adapter);
+            if(selectedContactIds.size() > 0){
+                adapter.setSelectedContacts(selectedContactIds);
+            }
         }
     }
 

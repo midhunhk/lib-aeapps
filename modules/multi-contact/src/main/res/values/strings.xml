@@ -21,4 +21,5 @@
     <string name="str_multi_contact_continue">Continue</string>
     <string name="str_multi_contact_validation">Please select at least one contact</string>
     <string name="str_multi_contact_no_contacts">No Contacts to display</string>
+    <string name="str_multi_contact_search_hint">Search Contacts</string>
 </resources>

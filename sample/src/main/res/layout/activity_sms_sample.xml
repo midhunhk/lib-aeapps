@@ -22,8 +22,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/unit_m"
-    android:padding="@dimen/unit_m"
     tools:context=".features.sms.SmsSampleActivity">
 
     <com.google.android.material.card.MaterialCardView
@@ -68,17 +66,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/unit_m"
-            android:gravity="center"
-            android:text="@string/str_sms_title"
-            android:textSize="@dimen/text_title2"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/primary_material_dark"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@android:color/white">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/str_sms_title"
+                android:textSize="@dimen/text_title2"
+                android:textColor="@color/color_almost_white"
+                android:gravity="center"/>
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/smsSampleLayout"
@@ -114,7 +120,7 @@
                     android:textStyle="bold"
                     android:padding="@dimen/unit_l"
                     android:text="@string/str_sms_count_all"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textSmsAllCount"/>
@@ -127,7 +133,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     android:minWidth="@dimen/unit_xl"
                     android:text="@string/str_sms_count_zero"
                     app:layout_constraintEnd_toStartOf="@+id/textSmsSentCount"
@@ -140,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit_m"
                     android:gravity="center"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     android:minWidth="@dimen/unit_xl"
                     android:text="@string/str_sms_count_drafts"
                     app:layout_constraintEnd_toStartOf="@id/textSmsSent"
@@ -153,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit_m"
                     android:gravity="center"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     android:minWidth="@dimen/unit_xl"
                     android:text="@string/str_sms_count_zero"
                     app:layout_constraintEnd_toStartOf="@id/textSmsReceivedCount"
@@ -166,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit_m"
                     android:gravity="center"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     android:minWidth="@dimen/unit_xl"
                     android:text="@string/str_sms_count_sent"
                     app:layout_constraintEnd_toStartOf="@id/textSmsReceived"
@@ -179,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/unit_m"
                     android:gravity="center"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     android:minWidth="@dimen/unit_xl"
                     android:text="@string/str_sms_count_zero"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +199,7 @@
                     android:layout_margin="@dimen/unit_m"
                     android:gravity="center"
                     android:minWidth="@dimen/unit_xl"
-                    android:textSize="@dimen/text_title"
+                    android:textSize="@dimen/text_title3"
                     android:text="@string/str_sms_count_received"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/textSmsSent"

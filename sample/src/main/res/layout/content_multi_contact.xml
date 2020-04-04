@@ -5,32 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
-        android:id="@+id/multiContactPickerToolbarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary_material_dark"
-            android:minHeight="?attr/actionBarSize"
-            app:titleTextColor="@android:color/white">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/title_activity_multi_contact_picker_sample"
-                android:textSize="@dimen/text_title2"
-                android:textColor="@color/color_almost_white"
-                android:gravity="center"/>
-        </androidx.appcompat.widget.Toolbar>
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/multiContactPickerToolbarLayout">
-
+        android:layout_height="match_parent">
         <include layout="@layout/layout_multi_contact_picker"/>
     </FrameLayout>
 </RelativeLayout>
