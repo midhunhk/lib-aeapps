@@ -17,7 +17,7 @@
 
 <resources>
     <string name="app_name">libAeApps</string>
-    <string name="app_version">Version 1.2.0</string>
+    <string name="app_version">Version 1.3.0</string>
     <string name="app_description">
         LibAeApps is an Open Source Android library for app developers.
         This app shows some of the reusable features provide by this app.
@@ -67,6 +67,6 @@
     <string name="str_contacts_title">Contacts API</string>
 
     <string name="str_status_title">Build Status</string>
-    <string name="str_status_message">Check the build status of the library at https://travis-ci.org/midhunhk/lib-aeapps</string>
+    <string name="str_status_message">Check the library build status : https://travis-ci.org/midhunhk/lib-aeapps</string>
 
 </resources>
