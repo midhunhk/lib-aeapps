@@ -1,7 +1,8 @@
 ## Version 4.0 (Juneberry)
-#### Version 4.0.4 [TBD]
+#### Version 4.0.4 [Apr 2020]
  - Complete rewrite of library and change in architecture
  - Add filter for Multi Contact Picker
+ - Sample app to test and showcase the features
 
 ## Version 3.0 (Indian Plum)
 #### Version 3.0.2 [Aug 2018]
@@ -17,11 +18,11 @@
 ## Version 2.3 (Huckleberry)
 #### Version 2.3.0 [Jul 2018]
  - More ContactUtil methods
- - PermissionCheckingFragment
+ - Added PermissionCheckingFragment
 
 ## Version 2.2 (Grapefruit)
 #### Version 2.2.2 [Nov 2017]
- - flagEndAsync before new purchase flow
+ - Reset flagEndAsync before new purchase flow
  - Downgrade support library version for Message Counter
  
 #### Version 2.2.1 [Nov 2017]
