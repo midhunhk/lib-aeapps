@@ -24,7 +24,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,7 +55,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         checkedStatus = new HashSet<>();
     }
 
-    void setSelectedContacts(final List<String> selectedContacts){
+    void setSelectedContacts(final List<String> selectedContacts) {
         checkedStatus.addAll(selectedContacts);
     }
 
@@ -72,7 +71,6 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.item = filteredContacts.get(position);
         holder.profileName.setText(filteredContacts.get(position).getName());
-        holder.profileImage.setImageResource(com.ae.apps.lib.R.drawable.profile_icon_4);
 
         final String contactId = holder.item.getId();
 
@@ -80,7 +78,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         holder.checkBox.setOnCheckedChangeListener(null);
 
         // Set the checked status of this checkbox from our data list
-        if(checkedStatus.contains(contactId)){
+        if (checkedStatus.contains(contactId)) {
             holder.checkBox.setChecked(true);
         } else {
             holder.checkBox.setChecked(false);
@@ -149,7 +147,6 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final View view;
-        final ImageView profileImage;
         final TextView profileName;
         final CheckBox checkBox;
         ContactInfo item;
@@ -159,7 +156,6 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
             super(view);
             this.view = view;
             itemSelected = false;
-            profileImage = view.findViewById(R.id.multiContactPickerProfileImage);
             profileName = view.findViewById(R.id.multiContactPickerProfileName);
             checkBox = view.findViewById(R.id.multiContactPickerCheckBox);
         }

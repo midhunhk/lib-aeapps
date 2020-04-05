@@ -1,71 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/multiContactPickerToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_multi_contact_title"
+            android:textSize="@dimen/text_title2" />
+    </androidx.appcompat.widget.Toolbar>
 
     <com.ae.apps.lib.custom.views.EmptyRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/btnContinueWithSelectedContacts"
         android:layout_below="@+id/multiContactSearchView"
-        android:layout_above="@+id/multiContactPickerButtonGroup"
-        app:layoutManager="LinearLayoutManager"/>
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/multi_contact_picker_item" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/multiContactSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/multiContactPickerToolbar"
+        android:layout_margin="@dimen/unit_m"
         app:iconifiedByDefault="false"
-        app:queryHint="@string/str_multi_contact_search_hint"
-        android:layout_alignParentTop="true"/>
+        app:queryHint="@string/str_multi_contact_search_hint" />
 
     <RelativeLayout
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/unit_l"
-        android:paddingTop="@dimen/unit_l"
+        android:layout_below="@+id/multiContactSearchView"
         android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/unit_xl"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/unit_xxl"
             android:drawablePadding="@dimen/unit_m"
-            android:gravity="center"
-            android:text="@string/str_multi_contact_no_contacts"/>
+            android:text="@string/str_multi_contact_no_contacts" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/multiContactPickerButtonGroup"
+    <Button
+        android:id="@+id/btnContinueWithSelectedContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/unit_m"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/str_multi_contact_continue"
+        android:textColor="@color/color_almost_white" />
 
-        <Button
-            android:id="@+id/btnCancelMultiContactSelection"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:layout_margin="@dimen/unit_s"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="@android:string/cancel"
-            android:textColor="@color/color_almost_white"/>
-
-        <Button
-            android:id="@+id/btnContinueWithSelectedContacts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:layout_margin="@dimen/unit_s"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="@string/str_multi_contact_continue"
-            android:textColor="@color/color_almost_white"/>
-
-    </LinearLayout>
 </RelativeLayout>

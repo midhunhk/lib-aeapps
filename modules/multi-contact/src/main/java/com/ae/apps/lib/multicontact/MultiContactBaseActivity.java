@@ -27,9 +27,11 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.custom.views.EmptyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,7 +76,6 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
         implements MultiContactInteractionListener {
 
     protected List<String> selectedContactIds = new ArrayList<>();
-    protected View cancelButton;
     protected View continueButton;
     protected SearchView searchView;
     MultiContactRecyclerViewAdapter adapter;
@@ -112,8 +113,15 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
     int getLayoutResourceId();
 
     private void initViews() {
+        Toolbar toolbar = findViewById(R.id.multiContactPickerToolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onActivityCancelled();
+            }
+        });
+
         continueButton = findViewById(R.id.btnContinueWithSelectedContacts);
-        cancelButton = findViewById(R.id.btnCancelMultiContactSelection);
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,13 +131,6 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
                 } else {
                     Toast.makeText(MultiContactBaseActivity.this, R.string.str_multi_contact_validation, Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onActivityCancelled();
             }
         });
 
@@ -155,9 +156,14 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
             List<ContactInfo> contactsList = contactsList();
             adapter = new MultiContactRecyclerViewAdapter(contactsList, this);
             recyclerView.setAdapter(adapter);
-            if(selectedContactIds.size() > 0){
+            if (selectedContactIds.size() > 0) {
                 adapter.setSelectedContacts(selectedContactIds);
             }
+        }
+
+        View emptyView = findViewById(R.id.empty_view);
+        if (recyclerView instanceof EmptyRecyclerView && null != emptyView) {
+            ((EmptyRecyclerView) recyclerView).setEmptyView(emptyView);
         }
     }
 
