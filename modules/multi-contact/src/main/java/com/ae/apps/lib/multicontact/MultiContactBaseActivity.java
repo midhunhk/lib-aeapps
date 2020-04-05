@@ -94,9 +94,8 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
 
     private void retrievePreselectedContactIds() {
         Intent intent = getIntent();
-        if (null != intent
-                && null != intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS)) {
-            String preSelectedContactIds = intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS);
+        String preSelectedContactIds = intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS);
+        if (null != preSelectedContactIds) {
             if (preSelectedContactIds.length() > 0) {
                 String[] ids = preSelectedContactIds.split(MultiContactPickerConstants.CONTACT_ID_SEPARATOR);
                 Collections.addAll(selectedContactIds, ids);

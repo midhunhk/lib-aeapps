@@ -1,21 +1,20 @@
 # libAeApps
-[![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg?branch=fig)](https://travis-ci.org/midhunhk/lib-aeapps) 
+[![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg?branch=fig)](https://travis-ci.org/midhunhk/lib-aeapps)
+[![](https://jitci.com/gh/midhunhk/lib-aeapps/svg)](https://jitci.com/gh/midhunhk/lib-aeapps)
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
 [![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/V3.0.2.svg)](https://github.com/midhunhk/lib-aeapps) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
-This Android library project contains some reusable code that can be used across projects. Depending on the features you use, make sure to declare the permissions in your manifest.xml file. Whenever I come across any piece of code that seems reusable, it will be moved to this library project.
+LibAeApps is an Android library project which provides reusable solutions to some common problems.
+Some solutions require boiler plate code which can become tedious to manage.
 
-## Library Name
-The library name represents **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]". It is short and all my design works come under same name.
-
-The library [codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) are based on fruits, mostly berries.
-
-Juneberry: 
+This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
+[Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.
 
 ## Contents
-Detailed information about the architecture of the project is available at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)
+Detailed information about the architecture of the project is available on the project wiki at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)
+Depending on the features you use, make sure to declare the permissions in your manifest.xml file.
 
 ## Implementations
 Presently the following android app projects make use of this library.
