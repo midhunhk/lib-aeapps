@@ -1,6 +1,7 @@
 ## Version 4.0 (Juneberry)
-#### Version 4.0.2 [TBD]
- - Complete rewrite of library to use modules
+#### Version 4.0.4 [TBD]
+ - Complete rewrite of library and change in architecture
+ - Add filter for Multi Contact Picker
 
 ## Version 3.0 (Indian Plum)
 #### Version 3.0.2 [Aug 2018]
