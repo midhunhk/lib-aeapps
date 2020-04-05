@@ -4,9 +4,7 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-29.0.3              # Same version as specified in build.gradle
-    - android-29                      # SDK version
-    - extra-android-m2repository      
+    - extra-android-m2repository
     - extra-google-m2repository 
     - sys-img-armeabi-v7a-android-22  # Android Image
     
@@ -18,7 +16,9 @@ android:
 
 before_install:
  - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-29"
+ - touch $HOME/.android/repositories.cfg
+ - yes | sdkmanager "platforms;android-29"  # match value in build.gradle
+ - yes | sdkmanager "build-tools;29.0.3"    # match value in build.gradle
 
 script:
   - ./gradlew clean build
