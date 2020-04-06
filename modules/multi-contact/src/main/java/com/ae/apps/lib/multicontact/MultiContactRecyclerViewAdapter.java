@@ -24,7 +24,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,7 +69,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.item = filteredContacts.get(position);
-        holder.profileName.setText(filteredContacts.get(position).getName());
+        holder.checkBox.setText(filteredContacts.get(position).getName());
 
         final String contactId = holder.item.getId();
 
@@ -147,7 +146,6 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final View view;
-        final TextView profileName;
         final CheckBox checkBox;
         ContactInfo item;
         boolean itemSelected;
@@ -156,7 +154,6 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
             super(view);
             this.view = view;
             itemSelected = false;
-            profileName = view.findViewById(R.id.multiContactPickerProfileName);
             checkBox = view.findViewById(R.id.multiContactPickerCheckBox);
         }
     }

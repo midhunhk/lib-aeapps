@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/unit_m"
-    android:paddingStart="@dimen/unit_m"
-    android:paddingRight="@dimen/unit_m"
-    android:paddingEnd="@dimen/unit_m">
+    android:layout_height="wrap_content">
 
     <CheckBox
         android:id="@+id/multiContactPickerCheckBox"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:id="@+id/multiContactPickerProfileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/multiContactPickerCheckBox"
-        android:layout_toEndOf="@+id/multiContactPickerCheckBox"
-        android:gravity="center_vertical"
-        android:padding="@dimen/unit_m"
+        android:padding="@dimen/unit_s"
         android:text="@string/str_multi_contact_contact_placeholder"
-        android:textSize="18sp" />
+        android:layout_margin="@dimen/unit_m" />
 
-</RelativeLayout>
+</FrameLayout>

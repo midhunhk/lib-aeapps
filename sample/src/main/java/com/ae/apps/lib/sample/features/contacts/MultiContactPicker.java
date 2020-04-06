@@ -4,8 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.SearchView;
-
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.impl.ContactsApiGatewayImpl;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
@@ -45,9 +43,8 @@ public class MultiContactPicker extends MultiContactBaseActivity {
             Toast.makeText(this, "Contacts loaded in " + loadTime + " ms", Toast.LENGTH_SHORT).show();
         }
 
-        // Sort the contacts based on name
         List<ContactInfo> list = contactsApiGateway.getAllContacts();
-
+        // Sort the contacts based on name
         Collections.sort(list, new Comparator<ContactInfo>() {
             @Override
             public int compare(ContactInfo o1, ContactInfo o2) {
@@ -63,11 +60,11 @@ public class MultiContactPicker extends MultiContactBaseActivity {
     }
 
     private void customize() {
-        SearchView searchView = findViewById(R.id.multiContactSearchView);
         searchView.setBackgroundColor(getResources().getColor(R.color.color_slate_blue_dark));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            continueButton.setBackgroundTintList(getResources().getColorStateList(R.color.multi_contact_continue_button_tint));
+            continueButton.setBackgroundTintList(
+                    getResources().getColorStateList(R.color.multi_contact_continue_button_tint));
         } else {
             continueButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
