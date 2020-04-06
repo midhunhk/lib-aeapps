@@ -190,7 +190,7 @@ textarea {
     bottom: 22px;
     height: 2px;
     width: 0%;
-    background-color: #09C;
+    background-color: #00d1b2;
     -webkit-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -275,9 +275,9 @@ END Header Area
 .slider-area {
     display: flex;
     align-items: center;
-    height: 700px;
+    height: 600px;
     background: #333333;
-    padding-top: 80px;
+    padding-top: 60px;
 	background-position: center;
 	background-image: url('../img/bg/sharp-angles.png');
 	background-size: cover;
@@ -447,7 +447,7 @@ END Service Area
     bottom: 0;
     height: 2px;
     width: 130px;
-    background-color: #09C;
+    background-color: #00d1b2;
     left: calc(50% - 65px);
 }
 
@@ -462,7 +462,7 @@ END Service Area
     bottom: -3px;
     height: 8px;
     width: 8px;
-    background-color: #09C;
+    background-color: #00d1b2;
     left: calc(50% - 4px);
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -1092,4 +1092,9 @@ END Contact Area
 }
 .footer-area p{
     color: #ffffff;
+}
+
+a,
+a:visited {
+    color: #eaeaea;
 }

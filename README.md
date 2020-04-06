@@ -1,5 +1,5 @@
 # libAeApps
-[![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg?branch=fig)](https://travis-ci.org/midhunhk/lib-aeapps)
+[![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg)](https://travis-ci.org/midhunhk/lib-aeapps)
 [![](https://jitci.com/gh/midhunhk/lib-aeapps/svg)](https://jitci.com/gh/midhunhk/lib-aeapps)
 [![Download](https://api.bintray.com/packages/midhunhk/android-libraries/lib-ae-apps/images/download.svg) ](https://bintray.com/midhunhk/android-libraries/lib-ae-apps/_latestVersion)
 [![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
