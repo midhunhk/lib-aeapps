@@ -10,6 +10,7 @@
         android:gravity="center_vertical"
         android:padding="@dimen/unit_s"
         android:text="@string/str_multi_contact_contact_placeholder"
-        android:layout_margin="@dimen/unit_m" />
+        android:layout_marginStart="@dimen/unit_s"
+        android:layout_marginLeft="@dimen/unit_s"/>
 
 </FrameLayout>
