@@ -1,1 +1,20 @@
-include ':app'
+include ':core'
+include ':contacts-api'
+include ':utilities'
+include ':multi-contact'
+include ':mocks'
+include ':runtime-permissions'
+include ':database-helpers'
+include ':billing-client'
+include ':sms-api'
+include ':sample'
+
+project(':core').projectDir = new File('modules/core')
+project(':contacts-api').projectDir = new File('modules/contacts-api')
+project(':utilities').projectDir = new File('modules/utilities')
+project(':multi-contact').projectDir = new File('modules/multi-contact')
+project(':mocks').projectDir = new File('modules/mocks')
+project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
+project(':database-helpers').projectDir = new File('modules/database-helpers')
+project(':billing-client').projectDir = new File('modules/billing-client')
+project(':sms-api').projectDir = new File('modules/sms-api')

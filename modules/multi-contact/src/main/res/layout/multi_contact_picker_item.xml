@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/multiContactPickerCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/unit_s"
+        android:text="@string/str_multi_contact_contact_placeholder"
+        android:layout_marginStart="@dimen/unit_s"
+        android:layout_marginLeft="@dimen/unit_s"/>
+
+</FrameLayout>

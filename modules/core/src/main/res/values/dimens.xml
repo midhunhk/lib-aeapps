@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="unit_xxs">1dp</dimen>
+    <dimen name="unit_xs">2dp</dimen>
+    <dimen name="unit_s">4dp</dimen>
+    <dimen name="unit_m">8dp</dimen>
+    <dimen name="unit_l">16dp</dimen>
+    <dimen name="unit_xl">32dp</dimen>
+    <dimen name="unit_xxl">48dp</dimen>
+
+    <dimen name="text_hero">56dp</dimen>
+    <dimen name="text_title1">32sp</dimen>
+    <dimen name="text_title2">24sp</dimen>
+    <dimen name="text_title3">16sp</dimen>
+</resources>

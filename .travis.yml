@@ -1,44 +1,24 @@
 language: android
-
-jdk: 
-  - oraclejdk8
-
-# Android settings
+jdk: oraclejdk8
 android:
   components:
     - tools
-
-    # Same version as specified in build.gradle
-    - build-tools-27.0.3
-
-    # SDK version
-    - android-25
-
-    # Additional Components
+    - platform-tools
     - extra-android-m2repository
-
-   # Android Image
-    - sys-img-armeabi-v7a-android-21
-
+    - extra-google-m2repository 
+    - sys-img-armeabi-v7a-android-22  # Android Image
+    
   licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
     - '.+'
-     
-# Run before runnig the build script
-before_script:
-    - wget http://services.gradle.org/distributions/gradle-4.4-bin.zip
-    - unzip gradle-4.4-bin.zip
-    - export GRADLE_HOME=$PWD/gradle-4.4
-    - export PATH=$GRADLE_HOME/bin:$PATH
-#    - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-#    - emulator -avd test -no-skin -no-audio -no-window &
-#    - android-wait-for-emulator
-#    - adb shell input keyevent 82 &
-    
-# Licenses to be accepted
-licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-    
-#script:
-#    - TERM=dumb ./gradlew test assembleDebug
+
+before_install:
+ - chmod +x gradlew
+ - touch $HOME/.android/repositories.cfg
+ - yes | sdkmanager "platforms;android-29"  # match value in build.gradle
+ - yes | sdkmanager "build-tools;29.0.3"    # match value in build.gradle
+
+script:
+  - ./gradlew clean build

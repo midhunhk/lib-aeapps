@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = rootProject.ext.Publish.group_id
+archivesBaseName = 'core'
+
+apply from: '../../buildSrc/android_common.gradle'
+
+dependencies {
+    implementation deps.appcompat
+    implementation deps.recyclerview
+    
+    testImplementation deps.junit
+    testImplementation deps.mockitoCore
+    testImplementation project(':mocks')
+}
+
+// apply from: '../../buildSrc/javadoc_tasks.gradle'

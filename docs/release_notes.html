@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--- Basic Page Needs  -->
+    <meta charset="utf-8">
+    <title>libAeApps || Release Notes</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Meta  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+	
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="assets/img/icon/favicon.ico">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+	<style type="text/css">
+		body{ color: rgba(255,255,255,0.65) !important; }
+		header { color: #eaeaea !important;}
+		hr { border-color: rgba(255,255,255,0.1);}
+		.mx-auto {
+			margin-right: auto !important;
+			margin-left: auto !important;
+		}
+		.d-flex { display: flex !important; }
+		.mb-2 {margin-bottom: 16px !important; }
+		.version-badge{ width: 65px; text-align: center; font-weight: 400 !important; }
+		.bg-purple {background-color: #6f42c1 !important;}
+		.rounded-1 {border-radius: 3px !important;}
+		.mr-2{ margin-right: 8px !important; }
+		.p-1 { padding: 4px !important;}
+		.f3-light { font-size: 20px !important;}
+		.py-4 {
+			padding-top: 20px !important;
+			padding-bottom: 20px !important;
+		}
+		.py-6 {
+			padding-top: 40px !important;
+			padding-bottom: 40px !important;
+		}
+		.my-6 {
+			margin-top: 40px !important;
+			margin-bottom: 40px !important;
+		}
+		#changelog, .changelog-content{ color: rgba(255,255,255,0.65); font-weight: 0; font-size: 12px;}
+		#changelog .major-version{ color: #fff; font-size:14px; font-weight: 400px; border-bottom: 1px #666 solid;}
+		
+		.change-log {margin-left: 74px;}
+
+		.change-badge {
+			background-color: #0366d6;
+			display: inline;
+			flex: 0 0 65px;
+			font-size: 10px;
+			font-weight: 600;
+			border-radius: 3px;
+			margin-right: 8px;
+			padding: 2px 5px;
+			text-transform: uppercase;
+			text-align: center;
+		}
+		
+		.change-badge-new, .change-badge-added {background-color: #28a745;}
+		.change-badge-fixed, .change-badge-improved { background-color: #0366d6;}
+		.change-badge-removed { background-color: #ed6a4e;}
+		
+	</style>
+</head>
+
+<body>
+    
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+    
+    <header id="header">
+        <div class="header-area">
+            <div class="container">
+                <div class="row">
+                    <div class="menu-area">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <div class="logo">
+                                <a href="index.html"><img src="assets/img/icon/logo.png" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-9 hidden-xs hidden-sm">
+                            <div class="main-menu">
+                                <nav class="nav-menu">
+                                    <ul>
+                                        <li class="active"><a href="index.html">Home</a></li>
+                                        <li><a href="https://github.com/midhunhk/ae-apps-library">Github</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xs-12 visible-sm visible-xs">
+                            <div class="mobile_menu"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	<section id="changelog" class="achivement-area mt--50">
+        <div class="container ach-single">
+            <div class="section-title pt--50 text-white">
+                <h2>Release Notes for libAeApps</h2>
+            </div>
+			
+			<div class="row col-md-2 mx-auto">
+			</div>
+
+            <div class="row col-md-8 mx-auto pb--30 changelog-content">
+
+				<!-- v4.0 -->
+				<section class="text-left">
+					<span class="major-version">Version 4.0 - Juneberry</span>
+				</section>
+				<section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">4.0.4</span>
+						<span>April 2020</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-new">New</div>
+							<div class="change-description">New Architecture<a href="https://github.com/midhunhk/ae-apps-library/issues/22">#22</a></div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-new">New</div>
+							<div class="change-description">Search filter for Multi Contact Picker<a href="https://github.com/midhunhk/ae-apps-library/issues/28">#28</a></div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-new">New</div>
+							<div class="change-description">Billing Client</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-new">New</div>
+							<div class="change-description">Sample App to test and showcase the library</div>
+						</li>
+					</ul>
+				</section>
+
+				<!-- v3.0 -->
+				<section class="text-left">
+					<span class="major-version">Version 3.0 - Indian Plum</span>
+				</section>
+                <section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">3.0.2</span>
+						<span>August 2018</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-removed">Removed</div>
+							<div class="change-description">Permission requests from manifest</div>
+						</li>
+					</ul>
+				</section>
+				<section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">3.0.1</span>
+						<span>August 2018</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-fixed">Fixed</div>
+							<div class="change-description">Bug Fix in PermissionChecker<a href="https://github.com/midhunhk/ae-apps-library/issues/23">#23</a></div>
+						</li>
+					</ul>
+				</section>
+				<section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">3.0.0</span>
+						<span>July 2018</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-removed">Removed</div>
+							<div class="change-description">Donations Activity</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-new">New</div>
+							<div class="change-description">Runtime Permission Checker</div>
+						</li>
+					</ul>
+				</section>
+				
+				<!-- v2.3 -->
+				<section class="text-left">
+					<span class="major-version">Version 2.3 - Huckleberry</span>
+				</section>
+                <section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.3.0</span>
+						<span>July 2017</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">Added</div>
+							<div class="change-description">More Contact Util Methods <a href="https://github.com/midhunhk/ae-apps-library/issues/21">#21</a></div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">Added</div>
+							<div class="change-description">Permission Checking Fragment</div>
+						</li>
+					</ul>
+				</section>
+				
+				<!-- v2.2 -->
+				<section class="text-left">
+					<span class="major-version">Version 2.2 - Grapefruit</span>
+				</section>
+                <section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.2.2</span>
+						<span>November 2017</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-improved">Improved</div>
+							<div class="change-description">Clear flagEndAsync before new purchase flow</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-improved">Improved</div>
+							<div class="change-description">Downgrade support library version for Message Counter</div>
+						</li>
+					</ul>
+				</section>
+				<section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.2.1</span>
+						<span>November 2017</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">New</div>
+							<div class="change-description">MultiContactPicker Activity</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">New</div>
+							<div class="change-description">ContactManagerProxy class</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">New</div>
+							<div class="change-description">Animation Resources</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">New</div>
+							<div class="change-description">Reusable Properties</div>
+						</li>
+					</ul>
+				</section>
+				<section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.2.0</span>
+						<span>July 2018</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-fixed">Fixed</div>
+							<div class="change-description">flagStartAsync not getting reset after Donation</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-new">New</div>
+							<div class="change-description">Generate Java docs for library <a href="https://github.com/midhunhk/ae-apps-library/issues/13">#13</a></div>
+						</li>
+					</ul>
+				</section>
+				
+				<!-- v2.1 -->
+				<section class="text-left">
+					<span class="major-version">Version 2.1 - Fig</span>
+				</section>
+                <section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.1.0</span>
+						<span>July 2017</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">Added</div>
+							<div class="change-description">Deploy library to jCenter<a href="https://github.com/midhunhk/ae-apps-library/issues/9">#9</a></div>
+						</li>
+					</ul>
+				</section>
+				
+				<!-- v2.0 -->
+				<section class="text-left">
+					<span class="major-version">Version 2.0 - Elderberry</span>
+				</section>
+                <section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.0.1</span>
+						<span>June 2017</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-improved">Improved</div>
+							<div class="change-description">Contact Manager Implementation</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">Added</div>
+							<div class="change-description">Unit Test Cases</div>
+						</li>
+					</ul>
+				</section>
+				<section class="release-note text-left py-4">
+					<header class="d-flex flex-items-center mb-3">
+						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.0.0</span>
+						<span>May 2017</span>
+					</header>
+					<ul class="change-log">
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-improved">Improved</div>
+							<div class="change-description">Contact Manager Implementation</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">Improved</div>
+							<div class="change-description">Add contacts without contact numbers</div>
+						</li>
+						<li class="d-flex flex-items-start mb-2">
+							<div class="change-badge change-badge-added">Added</div>
+							<div class="change-description">Travis CI Inregration</div>
+						</li>
+					</ul>
+				</section>
+				
+            </div>
+			<div class="row col-md-2 mx-auto">
+			</div>
+        </div>
+		
+		<div class="container ach-single">
+			<div class="row col-md-5 mx-auto">
+			</div>
+            <div class="row col-md-2 mx-auto pb--30">
+				<hr />
+			</div>
+			<div class="row col-md-5 mx-auto">
+			</div>
+		</div>
+    </section>
+	
+    <footer>
+        <div class="footer-area">
+            <div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+						</p>
+					</div>
+				</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.2.0.min.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <script src="assets/js/magnific-popup.min.js"></script>
+    <script src="assets/js/counterup.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

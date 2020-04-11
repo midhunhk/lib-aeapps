@@ -1,0 +1,13 @@
+// The architecture diagram is created with the Moon Shine project with the below data
+// to be used in the "data.js" file
+
+var graphData = [ 
+{text: "core",_id: "node00", xPos: 752,yPos: 242 },
+{text: "contacts-api",_id: "node01", xPos: 330,yPos: 250 , links: [{"_id" : "node00"},{"_id" : "node03"},{"_id" : "node06"}] },
+{text: "database-helpers",_id: "node02", xPos: 1012,yPos: 195 , links: [{"_id" : "node00"}] },
+{text: "mocks",_id: "node03", xPos: 626,yPos: 150 , links: [{"_id" : "node00"}] },
+{text: "multi-contact",_id: "node04", xPos: 581,yPos: 300 , links: [{"_id" : "node00"},{"_id" : "node06"}] },
+{text: "runtime-permissions",_id: "node05", xPos: 1004,yPos: 321 , links: [{"_id" : "node00"},{"_id" : "node06"}] },
+{text: "utilities",_id: "node06", xPos: 643,yPos: 420 },
+{text: "billing-client",_id: "node07", xPos: 330,yPos: 420 }
+];

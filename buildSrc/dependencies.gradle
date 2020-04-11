@@ -1,0 +1,46 @@
+// Variables for entire project
+ext {
+    // Setup
+    minSdkVersion = 16
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    buildToolsVersion = "29.0.3"
+
+    espressoVersion = "3.1.0-beta02"
+    gradleBuildToolVersion = '3.6.2'
+    androidMavenPluginVersion = "2.1"
+    junitVersion = "4.12"
+    mockitoCoreVersion = "2.8.9"
+
+}
+
+// Plugins
+ext.Plugins = [
+        gradle              : "com.android.tools.build:gradle:$gradleBuildToolVersion",
+        bintray             : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2',
+        androidMaven        : "com.github.dcendents:android-maven-gradle-plugin:$androidMavenPluginVersion"
+]
+
+// Dependencies
+ext.deps = [
+        // compile
+        design               : "com.google.android.material:material:1.1.0",
+        appcompat            : "androidx.appcompat:appcompat:1.1.0",
+        supportv4            : "androidx.legacy:legacy-support-v4:1.0.0",
+        recyclerview         : "androidx.recyclerview:recyclerview:1.1.0",
+        cardview             : "androidx.cardview:cardview:1.0.0",
+        supportAnnotations   : "androidx.annotation:annotation:1.0.0",
+        constraintLayout     : 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2',
+        billingClient        : 'com.android.billingclient:billing:1.1',
+
+        // androidTestCompile
+        espressoCore         : "androidx.test.espresso:espresso-core:$espressoVersion",
+        espressoIntents      : "androidx.test.espresso:espresso-intents:$espressoVersion",
+        espressoContrib      : "androidx.test.espresso:espresso-contrib:$espressoVersion",
+        testingSupportLib    : "com.android.support.test:testing-support-lib:0.1",
+        runner               : "androidx.test:runner:1.1.0-beta02",
+
+        // testCompile
+        junit                : "junit:junit:$junitVersion",
+        mockitoCore          : "org.mockito:mockito-core:$mockitoCoreVersion"
+]
