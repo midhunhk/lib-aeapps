@@ -46,12 +46,12 @@ android {
 }
 
 dependencies {
-    def libAeAppsVersion = 'v4.0.1-alpha.1'
+    def libAeAppsVersion = 'v4.0.4'
 
     implementation deps.appcompat
     implementation deps.recyclerview
     implementation deps.design
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
+    implementation deps.constraintLayout
 
     api project(':core')
     api project(':contacts-api')
@@ -67,6 +67,4 @@ dependencies {
     implementation "com.github.midhunhk.lib-aeapps:multi-contact:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:utilities:$libAeAppsVersion"
     */
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0.alpha2'
 }
