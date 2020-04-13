@@ -120,27 +120,30 @@ public class ContactsSampleActivity extends AppCompatActivity
 
     private void displayContactInfo() {
         // Read a Random contact with picture and phone number details
-        ContactInfo contactInfo = contactsApiGateway.getContactInfo(
-                contactsApiGateway.getRandomContact().getId(),
-                ContactInfoOptions.of(true, true,
-                        com.ae.apps.lib.R.drawable.profile_icon_3));
+        final ContactInfo randomContact = contactsApiGateway.getRandomContact();
+        // Handle scenario when there are no contacts on the device
+        if(null != randomContact) {
+            ContactInfo contactInfo = contactsApiGateway.getContactInfo(
+                    randomContact.getId(),
+                    ContactInfoOptions.of(true, true,
+                            com.ae.apps.lib.R.drawable.profile_icon_3));
 
-        TextView contactName = findViewById(R.id.text_contact_name);
-        contactName.setText(contactInfo.getName());
+            TextView contactName = findViewById(R.id.text_contact_name);
+            contactName.setText(contactInfo.getName());
 
+            ImageView profile = findViewById(R.id.img_contact_profile);
+            profile.setImageBitmap(contactInfo.getPicture());
+
+            if (null != contactInfo.getPhoneNumbersList() && contactInfo.getPhoneNumbersList().size() > 0) {
+                TextView phoneNum1 = findViewById(R.id.text_phone_num1);
+                phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
+            }
+
+            TextView timesContacted = findViewById(R.id.text_times_contacted);
+            timesContacted.setText("times contacted: " + contactInfo.getTimesContacted());
+        }
         TextView totalContacts = findViewById(R.id.text_total_contacts);
         totalContacts.setText(contactsApiGateway.getReadContactsCount() + " contacts found");
-
-        ImageView profile = findViewById(R.id.img_contact_profile);
-        profile.setImageBitmap(contactInfo.getPicture());
-
-        if (null != contactInfo.getPhoneNumbersList() && contactInfo.getPhoneNumbersList().size() > 0) {
-            TextView phoneNum1 = findViewById(R.id.text_phone_num1);
-            phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
-        }
-
-        TextView timesContacted = findViewById(R.id.text_times_contacted);
-        timesContacted.setText("times contacted: " + contactInfo.getTimesContacted());
     }
 
     @Override
