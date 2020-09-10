@@ -65,9 +65,10 @@ dependencies {
     def libAeAppsVersion = '4.0.6'
     implementation "com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:sms-api:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:runtime-permissions:$libAeAppsVersion"
-    implementation "com.github.midhunhk.lib-aeapps:multi-contact:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:utilities:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:multi-contact:$libAeAppsVersion"
 
 }
 
