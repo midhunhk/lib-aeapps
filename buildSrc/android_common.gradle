@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Midhun Harikumar
+ * Copyright (c) 2020 Midhun Harikumar
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,13 @@ android {
 
         versionCode rootProject.ext.Publish.versionCode
         versionName rootProject.ext.Publish.versionName
+
+        consumerProguardFiles 'proguard-rules.pro'
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
