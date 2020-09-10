@@ -46,12 +46,13 @@ android {
 }
 dependencies {
 
-    implementation deps.appcompat
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation deps.recyclerview
     implementation deps.design
     implementation deps.constraintLayout
 
     /*
+    // Use these to test library features while in development
     api project(':core')
     api project(':contacts-api')
     api project(':sms-api')
@@ -60,7 +61,8 @@ dependencies {
     api project(':multi-contact')
     */
 
-    def libAeAppsVersion = '4.0.5'
+    // Otherwise use these to build sample features against published API
+    def libAeAppsVersion = '4.0.6'
     implementation "com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:runtime-permissions:$libAeAppsVersion"
