@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- few named colors -->
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
     <color name="color_red">#ff0000</color>
@@ -11,4 +12,23 @@
     <color name="color_slate_blue_dark">#483D8B</color>
     <color name="color_lime_green">#99AF1C</color>
     <color name="color_blue_dark">#253D61</color>
+
+    <!-- Colors with alpha percent values -->
+    <!-- 50 is the lighter end, 900 is the darker end-->
+    <color name="color_white_50_alpha_010">#1Affffff</color>
+    <color name="color_white_50_alpha_020">#33ffffff</color>
+    <color name="color_white_50_alpha_040">#66ffffff</color>
+    <color name="color_white_50_alpha_060">#99ffffff</color>
+    <color name="color_white_50_alpha_080">#CCffffff</color>
+    <color name="color_white_50_alpha_085">#D9ffffff</color>
+    <color name="color_white_50_alpha_090">#e6ffffff</color>
+
+    <color name="color_black_900_alpha_010">#1A000000</color>
+    <color name="color_black_900_alpha_020">#33000000</color>
+    <color name="color_black_900_alpha_040">#66000000</color>
+    <color name="color_black_900_alpha_060">#99000000</color>
+    <color name="color_black_900_alpha_080">#CC000000</color>
+    <color name="color_black_900_alpha_085">#D9000000</color>
+    <color name="color_black_900_alpha_090">#e6000000</color>
+
 </resources>

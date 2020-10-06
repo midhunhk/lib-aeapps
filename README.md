@@ -5,7 +5,7 @@
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v3.0.2-rc.1.svg)](https://github.com/midhunhk/lib-aeapps) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
-LibAeApps is an Android library project which provides reusable solutions to some common problems.
+libAeApps is an Android library project which provides reusable solutions to some common problems.
 Some solutions require boiler plate code which can become tedious to manage.
 
 This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
@@ -26,6 +26,7 @@ Presently the following android app projects make use of this library.
 To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-aeapps/blob/master/VersionHistory.md)
 
 ## Using the library
+With version 4, the library has been split into multiple modules, each of which could be included separately in an android app.
 Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/lib-aeapps/wiki/Distribution)
 
 ## Migration Guide

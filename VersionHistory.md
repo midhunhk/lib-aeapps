@@ -1,4 +1,13 @@
 ## Version 4.0 (Juneberry)
+#### Version 4.0.7 [Apr 2020]
+ - More resources
+
+#### Version 4.0.6 [Apr 2020]
+ - Update proguard for all modules
+
+#### Version 4.0.5 [Sep 2020]
+ - Fixes #31
+
 #### Version 4.0.4 [Apr 2020]
  - Complete rewrite of library and change in architecture
  - Add filter for Multi Contact Picker
