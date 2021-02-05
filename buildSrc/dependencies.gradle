@@ -7,7 +7,7 @@ ext {
     buildToolsVersion = "29.0.3"
 
     espressoVersion = "3.1.0-beta02"
-    gradleBuildToolVersion = '3.6.2'
+    gradleBuildToolVersion = '4.1.2'
     androidMavenPluginVersion = "2.1"
     junitVersion = "4.12"
     mockitoCoreVersion = "2.8.9"
