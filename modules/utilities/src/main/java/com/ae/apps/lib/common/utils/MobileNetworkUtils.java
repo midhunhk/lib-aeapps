@@ -48,6 +48,23 @@ public class MobileNetworkUtils {
 	}
 
 	/**
+	 * Send to the dialer activity
+	 *
+	 * @param context
+	 * @param contactNo
+	 */
+	public static void dialContact(Context context, String contactNo) {
+		try {
+			String uri = "tel:" + contactNo;
+			Intent intent = new Intent(Intent.ACTION_DIAL);
+			intent.setData(Uri.parse(uri));
+			context.startActivity(intent);
+		} catch (Exception e) {
+			// Report no exception
+		}
+	}
+
+	/**
 	 * Text a contact
 	 * 
 	 * @param contactNo contact number
