@@ -1,6 +1,13 @@
+## Version 4.1 (Kiwiberry)
+#### Version 4.1.0 [Feb 2021]
+ - runtime-permissions: AbstractPermissionsAwareActivity
+ - runtime-permissions: Code Cleanup
+ - billing-client: upgrade android billing library
+ - core: more colors
+
 ## Version 4.0 (Juneberry)
 #### Version 4.0.7 [Apr 2020]
- - More resources
+ - core: More resources
 
 #### Version 4.0.6 [Apr 2020]
  - Update proguard for all modules

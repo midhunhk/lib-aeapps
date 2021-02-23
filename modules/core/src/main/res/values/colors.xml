@@ -13,6 +13,11 @@
     <color name="color_lime_green">#99AF1C</color>
     <color name="color_blue_dark">#253D61</color>
 
+    <color name="color_charcoal">#222222</color>
+    <color name="color_radical_red">#ff3366</color>
+    <color name="color_matterhorn_brown">#535353</color>
+    <color name="color_alabaster_white">#f9f9f9</color>
+
     <!-- Colors with alpha percent values -->
     <!-- 50 is the lighter end, 900 is the darker end-->
     <color name="color_white_50_alpha_010">#1Affffff</color>
