@@ -157,6 +157,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
                 contactInfo.setPicture(picture);
             }
         }
+        // Only run the below logic if the user has more than one phone numbers
         if (options.isFilterDuplicatePhoneNumbers()
                 && options.isIncludePhoneDetails()
                 && hasMultiplePhoneNumbers(contactInfo)) {
