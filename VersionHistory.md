@@ -4,6 +4,7 @@
  - runtime-permissions: Code Cleanup
  - billing-client: upgrade android billing library
  - core: more colors
+ - utilities: launchWebPage method
 
 ## Version 4.0 (Juneberry)
 #### Version 4.0.7 [Apr 2020]

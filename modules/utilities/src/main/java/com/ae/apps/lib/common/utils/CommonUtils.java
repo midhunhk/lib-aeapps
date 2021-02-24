@@ -18,8 +18,10 @@
 package com.ae.apps.lib.common.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -132,5 +134,11 @@ public class CommonUtils {
                 ViewGroup.LayoutParams.FILL_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
         layout.setLayoutParams(lp);
         return layout;
+    }
+
+    public static void launchWebPage(final Context context, final String webPageUrl){
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(webPageUrl));
+        context.startActivity(intent);
     }
 }
