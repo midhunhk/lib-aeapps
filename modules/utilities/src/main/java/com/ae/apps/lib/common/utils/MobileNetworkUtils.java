@@ -20,8 +20,6 @@ package com.ae.apps.lib.common.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 
 /**
@@ -79,28 +77,6 @@ public class MobileNetworkUtils {
 		} catch (Exception e) {
 			// Report no exception
 		}
-	}
-
-	/**
-	 * This method checks whether Internet connectivity is available on the device
-	 * 
-	 * @param context the context
-	 * @return true if internet connection available
-	 */
-	public static boolean isInternetAvailable(Context context) {
-		// Request the Connectivity service to the OS
-		ConnectivityManager connectivityManager = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-		NetworkInfo networkInfo = connectivityManager != null ?
-				connectivityManager.getActiveNetworkInfo() : null;
-
-		// Check the current state of the Network Information
-		if (networkInfo == null)
-			return false;
-		if (!networkInfo.isConnected())
-			return false;
-		return networkInfo.isAvailable();
 	}
 
 	/**
