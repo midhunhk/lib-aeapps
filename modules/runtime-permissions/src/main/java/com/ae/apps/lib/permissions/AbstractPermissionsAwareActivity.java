@@ -14,8 +14,7 @@ public abstract class AbstractPermissionsAwareActivity
         implements PermissionsAwareComponent, PermissionsRequestableComponent {
 
     protected static final int PERMISSION_CHECK_REQUEST_CODE = 8000;
-    protected final RuntimePermissionChecker permissionChecker =
-            RuntimePermissionChecker.newInstance(this);
+    private final RuntimePermissionChecker permissionChecker = RuntimePermissionChecker.newInstance(this);
 
     protected void checkPermissions(){
         permissionChecker.checkPermissions();
