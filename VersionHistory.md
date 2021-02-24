@@ -5,6 +5,8 @@
  - billing-client: upgrade android billing library
  - core: more colors
  - utilities: launchWebPage method
+ - contacts-api: Option to filter duplicate phone numbers
+ - contacts-api: Use an LRU Cache for Default Contact Pictures to improve performance
 
 ## Version 4.0 (Juneberry)
 #### Version 4.0.7 [Apr 2020]
