@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -34,7 +35,11 @@ import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiConstants;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
 import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.PROJECTION_ID_RAW_CONTACT_ID;
@@ -79,9 +84,12 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         if (getReadContactsCount() > 0) {
             Random random = new Random();
             int contactIndex = random.nextInt(Integer.parseInt(getReadContactsCount() + ""));
-            contactInfo = getContactInfo(contacts.get(contactIndex).getId(),
-                    ContactInfoOptions.of(true,
-                            true, com.ae.apps.lib.R.drawable.profile_icon_1));
+            final ContactInfoOptions options = new ContactInfoOptions.Builder()
+                    .includePhoneDetails(true)
+                    .includeContactPicture(true)
+                    .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_1)
+                    .build();
+            contactInfo = getContactInfo(contacts.get(contactIndex).getId(), options);
 
             // Update the contacts list with the updated contact item
             contacts.set(contactIndex, contactInfo);
@@ -133,15 +141,6 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         return contactId;
     }
 
-    private void updateWithPhoneDetails(final ContactInfo contactInfo) {
-        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
-            Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
-                    null);
-            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, resources));
-        }
-    }
-
     @Override
     public ContactInfo getContactInfo(String contactId, ContactInfoOptions options) {
         ContactInfo contactInfo = getContactInfo(contactId);
@@ -159,15 +158,43 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
                 contactInfo.setPicture(picture);
             }
         }
+        if (options.isFilterDuplicatePhoneNumbers()
+                && options.isIncludePhoneDetails()
+                && hasMultiplePhoneNumbers(contactInfo)) {
+            // Put the phone numbers into a map with the unformatted phone number as the key
+            Map<String, PhoneNumberInfo> phoneNumbersMap = new HashMap<>();
+            for (PhoneNumberInfo phoneNumberInfo : contactInfo.getPhoneNumbersList()) {
+                if (!phoneNumbersMap.containsKey(phoneNumberInfo.getUnformattedPhoneNumber())) {
+                    phoneNumbersMap.put(phoneNumberInfo.getUnformattedPhoneNumber(), phoneNumberInfo);
+                }
+            }
+            List<PhoneNumberInfo> uniqueList = (List<PhoneNumberInfo>) phoneNumbersMap.values();
+            contactInfo.setPhoneNumbersList(uniqueList);
+        }
         return contactInfo;
+    }
+
+    private boolean hasMultiplePhoneNumbers(ContactInfo contactInfo) {
+        return contactInfo.hasPhoneNumber()
+                && null != contactInfo.getPhoneNumbersList()
+                && contactInfo.getPhoneNumbersList().size() > 1;
+    }
+
+    private void updateWithPhoneDetails(final ContactInfo contactInfo) {
+        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
+            Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
+                    null);
+            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, resources));
+        }
     }
 
     /**
      * Builds an instance of {@link ContactsApiGateway}
      */
     public static class Builder {
-        private ContentResolver contentResolver;
-        private Resources resources;
+        private final ContentResolver contentResolver;
+        private final Resources resources;
 
         public Builder(Context context) {
             this.contentResolver = context.getContentResolver();

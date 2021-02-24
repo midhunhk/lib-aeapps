@@ -27,6 +27,7 @@ public class PhoneNumberInfo {
     private String phoneType;
     private String phoneNumber;
     private String lastTimeContacted;
+    private String unformattedPhoneNumber;
 
     public String getPhoneType() {
         return phoneType;
@@ -52,4 +53,11 @@ public class PhoneNumberInfo {
         this.lastTimeContacted = lastTimeContacted;
     }
 
+    public String getUnformattedPhoneNumber() {
+        return unformattedPhoneNumber;
+    }
+
+    public void setUnformattedPhoneNumber(String unformattedPhoneNumber) {
+        this.unformattedPhoneNumber = unformattedPhoneNumber;
+    }
 }

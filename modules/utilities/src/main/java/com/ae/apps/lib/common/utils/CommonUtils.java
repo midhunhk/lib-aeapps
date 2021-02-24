@@ -160,8 +160,8 @@ public class CommonUtils {
      */
     public static ViewGroup createParentLayout(final Context context){
         FrameLayout layout = new FrameLayout(context);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                ViewGroup.LayoutParams.FILL_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
         layout.setLayoutParams(lp);
         return layout;
     }
@@ -171,4 +171,5 @@ public class CommonUtils {
         intent.setData(Uri.parse(webPageUrl));
         context.startActivity(intent);
     }
+
 }
