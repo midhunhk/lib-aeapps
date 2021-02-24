@@ -36,7 +36,7 @@ public abstract class PermissionCheckingActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        permissionChecker = new RuntimePermissionChecker(this);
+        permissionChecker = RuntimePermissionChecker.newInstance(this);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
