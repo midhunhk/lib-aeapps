@@ -43,7 +43,6 @@ import java.util.Map;
 import java.util.Random;
 
 import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.PROJECTION_ID_RAW_CONTACT_ID;
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
 import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_RAW_CONTACT_ID;
 
 /**
@@ -172,21 +171,6 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
             contactInfo.setPhoneNumbersList(uniqueList);
         }
         return contactInfo;
-    }
-
-    private boolean hasMultiplePhoneNumbers(ContactInfo contactInfo) {
-        return contactInfo.hasPhoneNumber()
-                && null != contactInfo.getPhoneNumbersList()
-                && contactInfo.getPhoneNumbersList().size() > 1;
-    }
-
-    private void updateWithPhoneDetails(final ContactInfo contactInfo) {
-        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
-            Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
-                    null);
-            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, resources));
-        }
     }
 
     /**
