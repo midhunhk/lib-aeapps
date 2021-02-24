@@ -34,6 +34,7 @@ import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
 import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiConstants;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
+import com.ae.apps.lib.api.contacts.utils.DefaultPictureCache;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
@@ -50,9 +51,12 @@ import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WIT
  */
 public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
 
+    private final DefaultPictureCache bitmapCache;
+
     private ContactsApiGatewayImpl(Builder builder) {
         this.resources = builder.resources;
         this.contentResolver = builder.contentResolver;
+        this.bitmapCache = DefaultPictureCache.newInstance();
     }
 
     @Override
@@ -150,8 +154,8 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
             Bitmap picture = getContactPicture(contactId);
             if (null == picture) {
                 if (null != resources && options.getDefaultContactPicture() > 0) {
-                    contactInfo.setPicture(
-                            BitmapFactory.decodeResource(resources, options.getDefaultContactPicture()));
+                    Bitmap decodedBitmap = getDefaultContactPicture(options);
+                    contactInfo.setPicture(decodedBitmap);
                 }
             } else {
                 contactInfo.setPicture(picture);
@@ -172,6 +176,19 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
             contactInfo.setPhoneNumbersList(uniqueList);
         }
         return contactInfo;
+    }
+
+    private Bitmap getDefaultContactPicture(ContactInfoOptions options) {
+        String key = String.valueOf(options.getDefaultContactPicture());
+        // This should improve performance if there are a lot of contacts without a profile picture
+        // Using a cache should allow to reuse already decoded default pictures as Bitmap objects
+        // are big and expensive to create
+        Bitmap decodedBitmap = bitmapCache.retrieve(key);
+        if(null == decodedBitmap){
+            decodedBitmap = BitmapFactory.decodeResource(resources, options.getDefaultContactPicture());
+            bitmapCache.insert(key, decodedBitmap);
+        }
+        return decodedBitmap;
     }
 
     /**
