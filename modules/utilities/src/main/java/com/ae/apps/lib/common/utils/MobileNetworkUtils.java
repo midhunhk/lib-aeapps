@@ -27,6 +27,10 @@ import android.net.Uri;
  */
 public class MobileNetworkUtils {
 
+	public static final String SMSTO = "smsto:";
+	public static final String ADDRESS = "address";
+	public static final String TEL = "tel:";
+
 	/**
 	 * Call a contact
 	 * Declare the permission "android.permission.CALL_PHONE" in the Manifest to use this method
@@ -36,7 +40,7 @@ public class MobileNetworkUtils {
 	@SuppressLint("MissingPermission")
 	public static void callContact(Context context, String contactNo) {
 		try {
-			String uri = "tel:" + contactNo;
+			String uri = TEL + contactNo;
 			Intent intent = new Intent(Intent.ACTION_CALL);
 			intent.setData(Uri.parse(uri));
 			context.startActivity(intent);
@@ -48,12 +52,12 @@ public class MobileNetworkUtils {
 	/**
 	 * Send to the dialer activity
 	 *
-	 * @param context
-	 * @param contactNo
+	 * @param context the context
+	 * @param contactNo the contact number
 	 */
 	public static void dialContact(Context context, String contactNo) {
 		try {
-			String uri = "tel:" + contactNo;
+			String uri = TEL + contactNo;
 			Intent intent = new Intent(Intent.ACTION_DIAL);
 			intent.setData(Uri.parse(uri));
 			context.startActivity(intent);
@@ -69,9 +73,9 @@ public class MobileNetworkUtils {
 	 */
 	public static void textContact(Context context, String contactNo) {
 		try {
-			String uri = "smsto:" + contactNo;
+			String uri = SMSTO + contactNo;
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.putExtra("address", contactNo);
+			intent.putExtra(ADDRESS, contactNo);
 			intent.setData(Uri.parse(uri));
 			context.startActivity(intent);
 		} catch (Exception e) {
