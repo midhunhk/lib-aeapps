@@ -60,5 +60,5 @@ public abstract class AbstractPermissionsAwareActivity
      * Display the content for NoAccess or explain the reason for the permissions
      * and a method to request for permissions
      */
-    abstract void showPermissionsRequiredView();
+    public abstract void showPermissionsRequiredView();
 }
