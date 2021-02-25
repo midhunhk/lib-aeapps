@@ -38,6 +38,7 @@ import com.ae.apps.lib.api.contacts.utils.DefaultPictureCache;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,7 +173,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
                     phoneNumbersMap.put(phoneNumberInfo.getUnformattedPhoneNumber(), phoneNumberInfo);
                 }
             }
-            List<PhoneNumberInfo> uniqueList = (List<PhoneNumberInfo>) phoneNumbersMap.values();
+            List<PhoneNumberInfo> uniqueList = new ArrayList<>( phoneNumbersMap.values() );
             contactInfo.setPhoneNumbersList(uniqueList);
         }
         return contactInfo;
