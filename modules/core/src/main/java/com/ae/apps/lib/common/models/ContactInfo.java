@@ -31,8 +31,6 @@ public class ContactInfo implements Comparable<ContactInfo>{
 
     private String id;
     private String name;
-    private String timesContacted;
-    private String lastContactedTime;
     private boolean hasPhoneNumber;
     private transient Bitmap picture;
     private List<PhoneNumberInfo> phoneNumbersList;
@@ -51,22 +49,6 @@ public class ContactInfo implements Comparable<ContactInfo>{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getTimesContacted() {
-        return timesContacted;
-    }
-
-    public void setTimesContacted(String timesContacted) {
-        this.timesContacted = timesContacted;
-    }
-
-    public String getLastContactedTime() {
-        return lastContactedTime;
-    }
-
-    public void setLastContactedTime(String lastContactedTime) {
-        this.lastContactedTime = lastContactedTime;
     }
 
     public boolean hasPhoneNumber() {

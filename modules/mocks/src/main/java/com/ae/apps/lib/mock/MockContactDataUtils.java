@@ -78,7 +78,6 @@ public class MockContactDataUtils {
 
         contactInfo.setName(randomName);
         contactInfo.setId(String.valueOf(randomVal));
-        contactInfo.setTimesContacted(String.valueOf(randomVal));
         contactInfo.setHasPhoneNumber(true);
         contactInfo.setPhoneNumbersList(phoneNumbersList);
 
