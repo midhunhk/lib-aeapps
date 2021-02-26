@@ -8,6 +8,7 @@
  - contacts-api: Option to filter duplicate phone numbers
  - contacts-api: Use an LRU Cache for Default Contact Pictures to improve performance
  - contacts-api: Removed TIMES_CONTACTED and LAST_TIME_CONTACTED since they have been made obsolete by Google
+ - core: add an implementation for In-App Reviews
 
 ## Version 4.0 (Juneberry)
 #### Version 4.0.7 [Apr 2020]
