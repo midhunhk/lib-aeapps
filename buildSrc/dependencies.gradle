@@ -11,7 +11,7 @@ ext {
     androidMavenPluginVersion = "2.1"
     junitVersion = "4.13.2"
     mockitoCoreVersion = "2.19.0"
-
+    billingVersion = "3.0.0"
 }
 
 // Plugins
@@ -31,7 +31,7 @@ ext.deps = [
         cardview             : "androidx.cardview:cardview:1.0.0",
         supportAnnotations   : "androidx.annotation:annotation:1.0.0",
         constraintLayout     : 'androidx.constraintlayout:constraintlayout:2.0.1',
-        billingClient        : 'com.android.billingclient:billing:1.1',
+        billingClient        : "com.android.billingclient:billing:$billingVersion",
         playCore             : 'com.google.android.play:core:1.9.1',
 
         // androidTestCompile
