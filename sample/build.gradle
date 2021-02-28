@@ -51,24 +51,24 @@ dependencies {
     implementation deps.design
     implementation deps.constraintLayout
 
-    /*
+
     // Use these to test library features while in development
+    /*
     api project(':core')
     api project(':contacts-api')
     api project(':sms-api')
     api project(':runtime-permissions')
     api project(':utilities')
     api project(':multi-contact')
-    */
+*/
 
     // Otherwise use these to build sample features against published API
-    def libAeAppsVersion = '4.0.6'
+    def libAeAppsVersion = '4.1.0-beta.05'
     implementation "com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:sms-api:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:runtime-permissions:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:utilities:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:multi-contact:$libAeAppsVersion"
-
 }
 

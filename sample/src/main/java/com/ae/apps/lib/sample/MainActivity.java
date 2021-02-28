@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ae.apps.lib.common.utils.DialogUtils;
 import com.ae.apps.lib.common.utils.intents.IntentUtils;
+import com.ae.apps.lib.custom.views.EmptyRecyclerView;
 import com.ae.apps.lib.sample.adapters.FeaturesRecyclerViewAdapter;
 import com.ae.apps.lib.sample.features.Features;
 import com.ae.apps.lib.sample.models.FeatureInfo;
@@ -47,9 +48,11 @@ public class MainActivity extends AppCompatActivity
         // Get a static list of Features to be displayed in the Features List
         features = Features.getFeatures();
 
+        View emptyView = findViewById(R.id.empty_view);
         RecyclerView recyclerView = findViewById(R.id.featuresList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FeaturesRecyclerViewAdapter adapter = new FeaturesRecyclerViewAdapter(this, features);
+        ((EmptyRecyclerView) recyclerView).setEmptyView(emptyView);
 
         recyclerView.setAdapter(adapter);
     }

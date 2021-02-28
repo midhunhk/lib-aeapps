@@ -22,11 +22,24 @@
             android:gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.ae.apps.lib.custom.views.EmptyRecyclerView
         android:id="@+id/featuresList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
         tools:listitem="@layout/row_feature" />
+
+    <LinearLayout
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/color_alabaster_white"
+        android:layout_margin="@dimen/unit_m"
+        android:paddingTop="@dimen/unit_l"
+        android:visibility="gone">
+    </LinearLayout>
 
 </RelativeLayout>

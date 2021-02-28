@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.impl.ContactsApiGatewayImpl;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
@@ -18,9 +21,6 @@ import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.permissions.PermissionsAwareComponent;
 import com.ae.apps.lib.permissions.RuntimePermissionChecker;
 import com.ae.apps.lib.sample.R;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class ContactsSampleActivity extends AppCompatActivity
         implements PermissionsAwareComponent, ContactsDataConsumer {
@@ -58,7 +58,7 @@ public class ContactsSampleActivity extends AppCompatActivity
             }
         });
 
-        permissionChecker = new RuntimePermissionChecker(this);
+        permissionChecker = RuntimePermissionChecker.newInstance(this);
         permissionChecker.checkPermissions();
     }
 
@@ -123,10 +123,14 @@ public class ContactsSampleActivity extends AppCompatActivity
         final ContactInfo randomContact = contactsApiGateway.getRandomContact();
         // Handle scenario when there are no contacts on the device
         if(null != randomContact) {
+            ContactInfoOptions options = new ContactInfoOptions.Builder()
+                    .includePhoneDetails(true)
+                    .includeContactPicture(true)
+                    .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_3)
+                    .filterDuplicatePhoneNumbers(true)
+                    .build();
             ContactInfo contactInfo = contactsApiGateway.getContactInfo(
-                    randomContact.getId(),
-                    ContactInfoOptions.of(true, true,
-                            com.ae.apps.lib.R.drawable.profile_icon_3));
+                    randomContact.getId(),options);
 
             TextView contactName = findViewById(R.id.text_contact_name);
             contactName.setText(contactInfo.getName());
@@ -139,11 +143,10 @@ public class ContactsSampleActivity extends AppCompatActivity
                 phoneNum1.setText(contactInfo.getPhoneNumbersList().get(0).getPhoneNumber());
             }
 
-            TextView timesContacted = findViewById(R.id.text_times_contacted);
-            timesContacted.setText("times contacted: " + contactInfo.getTimesContacted());
         }
         TextView totalContacts = findViewById(R.id.text_total_contacts);
-        totalContacts.setText(contactsApiGateway.getReadContactsCount() + " contacts found");
+        String contactsRead = String.valueOf(contactsApiGateway.getReadContactsCount());
+        totalContacts.setText(contactsRead + " contacts found");
     }
 
     @Override
