@@ -1,4 +1,8 @@
-package com.ae.apps.lib.api.sms;
+package com.ae.apps.lib.api.sms.types;
+
+import android.content.Context;
+
+import com.ae.apps.lib.api.sms.SmsApiGateway;
 
 /**
  * A factory interface that can create an instance of SmsApiGateway.
@@ -13,5 +17,5 @@ public interface SmsApiGatewayFactory {
      *
      * @return an instance of SmsApiGateway
      */
-    SmsApiGateway getSmsApiGateway();
+    SmsApiGateway getSmsApiGateway(final Context context);
 }

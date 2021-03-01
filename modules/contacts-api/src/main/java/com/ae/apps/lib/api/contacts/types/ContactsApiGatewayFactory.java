@@ -1,5 +1,7 @@
 package com.ae.apps.lib.api.contacts.types;
 
+import android.content.Context;
+
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 
 /**
@@ -11,8 +13,9 @@ import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 public interface ContactsApiGatewayFactory {
 
     /**
+     * Cretaes an instance of ContactsApiGatewayImpl
      *
      * @return an instance of ContactsApiGateway Implementation
      */
-    ContactsApiGateway getContactsApiGateway();
+    ContactsApiGateway getContactsApiGateway(final Context context);
 }
