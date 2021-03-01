@@ -32,6 +32,23 @@ Instructions for using this library are mentioned at [Distribution](https://gith
 ## Migration Guide
 Instructions for migrating from a prior version of the library are at [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)
  
+## Snapshots
+Step 1. Add the JitPack repository to your build file  
+Add it in your root build.gradle at the end of repositories:
+`
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+`
+Step 2. Add the dependency
+`
+	dependencies {
+	        implementation 'com.github.midhunhk:lib-aeapps:kiwiberry-SNAPSHOT'
+	}
+ `
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
