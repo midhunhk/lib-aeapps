@@ -1,9 +1,9 @@
 ## Version 4.1 (Kiwiberry)
 #### Version 4.1.0 [Feb 2021]
- - runtime-permissions: AbstractPermissionsAwareActivity
- - runtime-permissions: Code Cleanup
- - billing-client: upgrade android billing library
- - core: more colors
+ - runtime-permissions: AbstractPermissionsAwareActivity #32
+ - runtime-permissions: Code Cleanup #33
+ - billing-client: upgrade android billing library #29
+ - core: more color resources
  - utilities: launchWebPage method
  - contacts-api: Option to filter duplicate phone numbers
  - contacts-api: Use an LRU Cache for Default Contact Pictures to improve performance

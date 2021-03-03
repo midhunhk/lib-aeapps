@@ -7,7 +7,7 @@ import androidx.collection.LruCache;
 /**
  * An internal helper class to cache decoded Bitmaps by the ContactsApiGateway
  */
-public class DefaultPictureCache {
+public class DefaultPictureCache implements PictureCache {
 
     private static final int LRU_MAX_SIZE = 8;
     private final LruCache<String, Bitmap> cache;

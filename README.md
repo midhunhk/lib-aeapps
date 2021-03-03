@@ -9,7 +9,8 @@ libAeApps is an Android library project which provides reusable solutions to som
 Some solutions require boiler plate code which can become tedious to manage.
 
 This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
-[Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.
+[Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.  
+The latest codename is *Kiwiberry*
 
 ## Contents
 Detailed information about the architecture of the project is available on the project wiki at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)
@@ -32,23 +33,6 @@ Instructions for using this library are mentioned at [Distribution](https://gith
 ## Migration Guide
 Instructions for migrating from a prior version of the library are at [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)
  
-## Snapshots
-Step 1. Add the JitPack repository to your build file  
-Add it in your root build.gradle at the end of repositories:
-`
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-`
-Step 2. Add the dependency
-`
-	dependencies {
-	        implementation 'com.github.midhunhk:lib-aeapps:kiwiberry-SNAPSHOT'
-	}
- `
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.

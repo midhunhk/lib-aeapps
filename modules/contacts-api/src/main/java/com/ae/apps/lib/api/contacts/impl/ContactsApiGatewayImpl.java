@@ -35,6 +35,7 @@ import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiConstants;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
 import com.ae.apps.lib.api.contacts.utils.DefaultPictureCache;
+import com.ae.apps.lib.api.contacts.utils.PictureCache;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
@@ -52,7 +53,7 @@ import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WIT
  */
 public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
 
-    private final DefaultPictureCache bitmapCache;
+    private final PictureCache bitmapCache;
 
     private ContactsApiGatewayImpl(Builder builder) {
         this.resources = builder.resources;
