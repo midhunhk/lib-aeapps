@@ -6,13 +6,25 @@ archivesBaseName = 'core'
 
 apply from: '../../buildSrc/android_common.gradle'
 
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
 dependencies {
     implementation deps.appcompat
     implementation deps.recyclerview
+    implementation deps.playCore
     
     testImplementation deps.junit
     testImplementation deps.mockitoCore
     testImplementation project(':mocks')
+
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.espresso
+    androidTestImplementation deps.extJunit
+    androidTestImplementation deps.mockitoCore
 }
 
 // apply from: '../../buildSrc/javadoc_tasks.gradle'

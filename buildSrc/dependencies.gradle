@@ -7,11 +7,11 @@ ext {
     buildToolsVersion = "29.0.3"
 
     espressoVersion = "3.1.0-beta02"
-    gradleBuildToolVersion = '3.6.2'
+    gradleBuildToolVersion = '4.1.2'
     androidMavenPluginVersion = "2.1"
-    junitVersion = "4.12"
-    mockitoCoreVersion = "2.8.9"
-
+    junitVersion = "4.13.2"
+    mockitoCoreVersion = "2.19.0"
+    billingVersion = "3.0.0"
 }
 
 // Plugins
@@ -31,7 +31,8 @@ ext.deps = [
         cardview             : "androidx.cardview:cardview:1.0.0",
         supportAnnotations   : "androidx.annotation:annotation:1.0.0",
         constraintLayout     : 'androidx.constraintlayout:constraintlayout:2.0.1',
-        billingClient        : 'com.android.billingclient:billing:1.1',
+        billingClient        : "com.android.billingclient:billing:$billingVersion",
+        playCore             : 'com.google.android.play:core:1.9.1',
 
         // androidTestCompile
         espressoCore         : "androidx.test.espresso:espresso-core:$espressoVersion",
@@ -39,6 +40,8 @@ ext.deps = [
         espressoContrib      : "androidx.test.espresso:espresso-contrib:$espressoVersion",
         testingSupportLib    : "com.android.support.test:testing-support-lib:0.1",
         runner               : "androidx.test:runner:1.1.0-beta02",
+        espresso             : 'androidx.test.espresso:espresso-core:3.3.0',
+        extJunit             : 'androidx.test.ext:junit:1.1.2',
 
         // testCompile
         junit                : "junit:junit:$junitVersion",

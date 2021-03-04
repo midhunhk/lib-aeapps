@@ -20,6 +20,7 @@ package com.ae.apps.lib.api.contacts.impl;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -31,12 +32,15 @@ import androidx.annotation.Nullable;
 import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
 import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
+import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
 import com.ae.apps.lib.common.models.ContactInfo;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
 
 /**
  * An abstract implementation of ContactsApiGateway
@@ -105,6 +109,27 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
     protected void throwExceptionIfNotInitialized() {
         if (checkIfApiNotInitialized()) {
             throw new IllegalStateException("ContactsApiGateway not initialized");
+        }
+    }
+
+    /**
+     * Checks if the contact has more than 1 phone numbers associated with it
+     *
+     * @param contactInfo a valid contactInfo object
+     * @return true if the contact has multiple phone numbers, false otherwise
+     */
+    protected boolean hasMultiplePhoneNumbers(ContactInfo contactInfo) {
+        return contactInfo.hasPhoneNumber()
+                && null != contactInfo.getPhoneNumbersList()
+                && contactInfo.getPhoneNumbersList().size() > 1;
+    }
+
+    protected void updateWithPhoneDetails(final ContactInfo contactInfo) {
+        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
+            Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
+                    null);
+            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, resources));
         }
     }
 

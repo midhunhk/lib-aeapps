@@ -1,6 +1,18 @@
+## Version 4.1 (Kiwiberry)
+#### Version 4.1.0 [Feb 2021]
+ - runtime-permissions: AbstractPermissionsAwareActivity #32
+ - runtime-permissions: Code Cleanup #33
+ - billing-client: upgrade android billing library #29
+ - core: more color resources
+ - utilities: launchWebPage method
+ - contacts-api: Option to filter duplicate phone numbers
+ - contacts-api: Use an LRU Cache for Default Contact Pictures to improve performance
+ - contacts-api: Removed TIMES_CONTACTED and LAST_TIME_CONTACTED since they have been made obsolete by Google
+ - core: add an implementation for In-App Reviews
+
 ## Version 4.0 (Juneberry)
 #### Version 4.0.7 [Apr 2020]
- - More resources
+ - core: More resources
 
 #### Version 4.0.6 [Apr 2020]
  - Update proguard for all modules

@@ -5,6 +5,7 @@ com.ae.apps.lib.api.contacts.types
 com.ae.apps.lib.api.contacts.utils
 com.ae.apps.lib.api.sms
 com.ae.apps.lib.api.sms.impl
+com.ae.apps.lib.api.sms.types
 com.ae.apps.lib.api.sms.utils
 com.ae.apps.lib.billingclient
 com.ae.apps.lib.common.models
@@ -15,6 +16,7 @@ com.ae.apps.lib.db
 com.ae.apps.lib.mock
 com.ae.apps.lib.multicontact
 com.ae.apps.lib.permissions
+com.ae.apps.lib.review
 com.ae.apps.lib.sample
 com.ae.apps.lib.sample.adapters
 com.ae.apps.lib.sample.features

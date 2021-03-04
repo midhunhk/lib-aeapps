@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -33,12 +34,18 @@ import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
 import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiConstants;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
+import com.ae.apps.lib.api.contacts.utils.DefaultPictureCache;
+import com.ae.apps.lib.api.contacts.utils.PictureCache;
 import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.PROJECTION_ID_RAW_CONTACT_ID;
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
 import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_RAW_CONTACT_ID;
 
 /**
@@ -46,9 +53,12 @@ import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WIT
  */
 public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
 
+    private final PictureCache bitmapCache;
+
     private ContactsApiGatewayImpl(Builder builder) {
         this.resources = builder.resources;
         this.contentResolver = builder.contentResolver;
+        this.bitmapCache = DefaultPictureCache.newInstance();
     }
 
     @Override
@@ -79,9 +89,12 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         if (getReadContactsCount() > 0) {
             Random random = new Random();
             int contactIndex = random.nextInt(Integer.parseInt(getReadContactsCount() + ""));
-            contactInfo = getContactInfo(contacts.get(contactIndex).getId(),
-                    ContactInfoOptions.of(true,
-                            true, com.ae.apps.lib.R.drawable.profile_icon_1));
+            final ContactInfoOptions options = new ContactInfoOptions.Builder()
+                    .includePhoneDetails(true)
+                    .includeContactPicture(true)
+                    .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_1)
+                    .build();
+            contactInfo = getContactInfo(contacts.get(contactIndex).getId(), options);
 
             // Update the contacts list with the updated contact item
             contacts.set(contactIndex, contactInfo);
@@ -133,15 +146,6 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
         return contactId;
     }
 
-    private void updateWithPhoneDetails(final ContactInfo contactInfo) {
-        if (contactInfo.getPhoneNumbersList() == null && contactInfo.hasPhoneNumber()) {
-            Cursor phoneCursor = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null, SELECT_WITH_CONTACT_ID, new String[]{contactInfo.getId()},
-                    null);
-            contactInfo.setPhoneNumbersList(ContactsApiUtils.createPhoneNumberList(phoneCursor, resources));
-        }
-    }
-
     @Override
     public ContactInfo getContactInfo(String contactId, ContactInfoOptions options) {
         ContactInfo contactInfo = getContactInfo(contactId);
@@ -152,22 +156,49 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
             Bitmap picture = getContactPicture(contactId);
             if (null == picture) {
                 if (null != resources && options.getDefaultContactPicture() > 0) {
-                    contactInfo.setPicture(
-                            BitmapFactory.decodeResource(resources, options.getDefaultContactPicture()));
+                    Bitmap decodedBitmap = getDefaultContactPicture(options);
+                    contactInfo.setPicture(decodedBitmap);
                 }
             } else {
                 contactInfo.setPicture(picture);
             }
         }
+        // Only run the below logic if the user has more than one phone numbers
+        if (options.isFilterDuplicatePhoneNumbers()
+                && options.isIncludePhoneDetails()
+                && hasMultiplePhoneNumbers(contactInfo)) {
+            // Put the phone numbers into a map with the unformatted phone number as the key
+            Map<String, PhoneNumberInfo> phoneNumbersMap = new HashMap<>();
+            for (PhoneNumberInfo phoneNumberInfo : contactInfo.getPhoneNumbersList()) {
+                if (!phoneNumbersMap.containsKey(phoneNumberInfo.getUnformattedPhoneNumber())) {
+                    phoneNumbersMap.put(phoneNumberInfo.getUnformattedPhoneNumber(), phoneNumberInfo);
+                }
+            }
+            List<PhoneNumberInfo> uniqueList = new ArrayList<>( phoneNumbersMap.values() );
+            contactInfo.setPhoneNumbersList(uniqueList);
+        }
         return contactInfo;
+    }
+
+    private Bitmap getDefaultContactPicture(ContactInfoOptions options) {
+        String key = String.valueOf(options.getDefaultContactPicture());
+        // This should improve performance if there are a lot of contacts without a profile picture
+        // Using a cache should allow to reuse already decoded default pictures as Bitmap objects
+        // are big and expensive to create
+        Bitmap decodedBitmap = bitmapCache.retrieve(key);
+        if(null == decodedBitmap){
+            decodedBitmap = BitmapFactory.decodeResource(resources, options.getDefaultContactPicture());
+            bitmapCache.insert(key, decodedBitmap);
+        }
+        return decodedBitmap;
     }
 
     /**
      * Builds an instance of {@link ContactsApiGateway}
      */
     public static class Builder {
-        private ContentResolver contentResolver;
-        private Resources resources;
+        private final ContentResolver contentResolver;
+        private final Resources resources;
 
         public Builder(Context context) {
             this.contentResolver = context.getContentResolver();

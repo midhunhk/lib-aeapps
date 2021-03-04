@@ -17,8 +17,8 @@
 
 package com.ae.apps.lib.permissions;
 
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -29,8 +29,8 @@ public class RuntimePermissionsCheckerTest {
     @Mock
     private PermissionsAwareComponent component;
 
-    private String[] singlePermission = {"PERMISSION ONE"};
-    private String[] multiplePermissions = {"PERMISSION ONE", "PERMISSION TWO", "PERMISSION THREE"};
+    private final String[] singlePermission = {"PERMISSION ONE"};
+    private final String[] multiplePermissions = {"PERMISSION ONE", "PERMISSION TWO", "PERMISSION THREE"};
 
     @Before
     public void setup() {
@@ -40,33 +40,33 @@ public class RuntimePermissionsCheckerTest {
     @Test
     public void shouldCreateObject_withSinglePermission(){
         Mockito.when(component.requiredPermissions()).thenReturn(singlePermission);
-        RuntimePermissionChecker permissionChecker = new RuntimePermissionChecker(component);
+        RuntimePermissionChecker permissionChecker = RuntimePermissionChecker.newInstance(component);
         Assert.assertNotNull(permissionChecker);
     }
 
     @Test
     public void shouldCreateObject_withMultiplePermission(){
         Mockito.when(component.requiredPermissions()).thenReturn(multiplePermissions);
-        RuntimePermissionChecker permissionChecker = new RuntimePermissionChecker(component);
+        RuntimePermissionChecker permissionChecker = RuntimePermissionChecker.newInstance(component);
         Assert.assertNotNull(permissionChecker);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentException_forNullParameter() {
-        new RuntimePermissionChecker(null);
+        RuntimePermissionChecker.newInstance(null);
     }
 
     @Test(expected = IllegalStateException.class)
     public void shouldThrowIllegalStateException_forNullPermissions() {
         Mockito.when(component.requiredPermissions()).thenReturn(null);
-        new RuntimePermissionChecker(component);
+        RuntimePermissionChecker.newInstance(component);
     }
 
     @Test(expected = IllegalStateException.class)
     public void shouldThrowIllegalStateException_forEmptyPermissions() {
         String[] empty = {};
         Mockito.when(component.requiredPermissions()).thenReturn(empty);
-        new RuntimePermissionChecker(component);
+        RuntimePermissionChecker.newInstance(component);
     }
 
 

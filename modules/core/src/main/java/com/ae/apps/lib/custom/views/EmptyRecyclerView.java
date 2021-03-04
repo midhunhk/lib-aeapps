@@ -1,9 +1,10 @@
 package com.ae.apps.lib.custom.views;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * RecyclerView that supports an entry point to check if the data set is empty
@@ -51,10 +52,15 @@ public class EmptyRecyclerView extends RecyclerView {
 
     void checkIfEmpty() {
         if (emptyView != null && getAdapter() != null) {
-            final boolean emptyViewVisible =
-                    getAdapter().getItemCount() == 0;
-            emptyView.setVisibility(emptyViewVisible ? View.VISIBLE : View.GONE);
-            setVisibility(emptyViewVisible ? View.GONE : View.VISIBLE);
+            // Decide if the EmptyView should be shown based on the item count
+            final boolean showEmptyView = getAdapter().getItemCount() == 0;
+            // Check if the EmptyView is currently visible
+            final boolean isEmptyViewVisible = emptyView.getVisibility() == View.VISIBLE;
+            // Only toggle visibility if not in correct view state
+            if(showEmptyView != isEmptyViewVisible) {
+                emptyView.setVisibility(showEmptyView ? View.VISIBLE : View.GONE);
+                setVisibility(showEmptyView ? View.GONE : View.VISIBLE);
+            }
         }
     }
 

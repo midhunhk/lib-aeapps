@@ -55,7 +55,7 @@ public class MultiContactSampleActivity extends AppCompatActivity
             }
         });
 
-        RuntimePermissionChecker permissionChecker = new RuntimePermissionChecker(this);
+        RuntimePermissionChecker permissionChecker = RuntimePermissionChecker.newInstance(this);
         permissionChecker.checkPermissions();
     }
 

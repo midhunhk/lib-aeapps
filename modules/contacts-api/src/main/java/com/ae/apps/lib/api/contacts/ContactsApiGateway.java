@@ -31,7 +31,7 @@ import java.util.List;
  * <p>android.permission.READ_CONTACTS</p>
  * <p>
  * Usage: First call one of the initialize methods and after the contacts are read,
- * use any other method to perform an operation on the
+ * use any other method to perform an operation using the contacts api
  *
  * @since 4.0
  */

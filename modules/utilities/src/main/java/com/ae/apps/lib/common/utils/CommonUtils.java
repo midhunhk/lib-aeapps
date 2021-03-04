@@ -18,8 +18,10 @@
 package com.ae.apps.lib.common.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -121,6 +123,36 @@ public class CommonUtils {
     }
 
     /**
+     * Alternative method for checking if a package is installed
+     *
+     * @param context the context
+     * @param uri the uri
+     * @return true if package is installed, false otherwise
+     */
+    public static boolean checkIfPackageIsInstalled(final Context context, String uri) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Another alternative method for checking if a package is installed
+     *
+     * @param context the context
+     * @param packageName the package to check
+     * @return true of package is installed, false otherwise
+     */
+    public static boolean isPackageInstalled2(Context context, String packageName) {
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+        return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty();
+    }
+
+    /**
      * Creates a FrameLayout that can be used as a parent container
      *
      * @param context the context
@@ -128,9 +160,16 @@ public class CommonUtils {
      */
     public static ViewGroup createParentLayout(final Context context){
         FrameLayout layout = new FrameLayout(context);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                ViewGroup.LayoutParams.FILL_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,Gravity.CENTER_HORIZONTAL| Gravity.CENTER_VERTICAL);
         layout.setLayoutParams(lp);
         return layout;
     }
+
+    public static void launchWebPage(final Context context, final String webPageUrl){
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(webPageUrl));
+        context.startActivity(intent);
+    }
+
 }

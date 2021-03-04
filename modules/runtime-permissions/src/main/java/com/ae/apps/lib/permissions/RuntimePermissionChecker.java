@@ -30,15 +30,15 @@ import androidx.core.content.PermissionChecker;
  */
 public class RuntimePermissionChecker {
 
-    private PermissionsAwareComponent component;
-    private Context context;
+    private final PermissionsAwareComponent component;
+    private final Context context;
 
     /**
      * Initialize an instance of RuntimePermissionChecker
      *
      * @param component a component that is aware of Runtime Permissions
      */
-    public RuntimePermissionChecker(PermissionsAwareComponent component) {
+    private RuntimePermissionChecker(PermissionsAwareComponent component) {
         if (null == component) {
             throw new IllegalArgumentException("component must not be null");
         }
@@ -50,6 +50,16 @@ public class RuntimePermissionChecker {
         }
         context = (Context) component;
         this.component = component;
+    }
+
+    /**
+     * Get a new instance of RuntimePermissionChecker
+     *
+     * @param component a component
+     * @return an instance of RuntimePermissionChecker
+     */
+    public static RuntimePermissionChecker newInstance(PermissionsAwareComponent component){
+        return new RuntimePermissionChecker(component);
     }
 
     /**

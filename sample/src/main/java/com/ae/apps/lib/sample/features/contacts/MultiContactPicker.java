@@ -1,5 +1,6 @@
 package com.ae.apps.lib.sample.features.contacts;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -59,6 +60,7 @@ public class MultiContactPicker extends MultiContactBaseActivity {
         return list;
     }
 
+    @SuppressLint("UseCompatLoadingForColorStateLists")
     private void customize() {
         searchView.setBackgroundColor(getResources().getColor(R.color.color_slate_blue_dark));
 

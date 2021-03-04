@@ -5,44 +5,79 @@ package com.ae.apps.lib.api.contacts.types;
  */
 public final class ContactInfoOptions {
 
-    private boolean includePhoneDetails;
+    private final boolean includePhoneDetails;
 
-    private boolean includeContactPicture;
+    private final boolean includeContactPicture;
 
-    private int defaultContactPicture;
+    private final int defaultContactPicture;
 
-    public static ContactInfoOptions of(final boolean includePhoneDetails) {
-        ContactInfoOptions options = new ContactInfoOptions();
-        options.includePhoneDetails = includePhoneDetails;
-        return options;
-    }
+    private final boolean filterDuplicatePhoneNumbers;
 
-    public static ContactInfoOptions of(boolean includeContactPicture, int defaultContactPicture) {
-        ContactInfoOptions options = new ContactInfoOptions();
-        options.includeContactPicture = includeContactPicture;
-        options.defaultContactPicture = defaultContactPicture;
-        return options;
-    }
-
-    public static ContactInfoOptions of(final boolean includePhoneDetails,
-                                        boolean includeContactPicture, int defaultContactPicture) {
-        ContactInfoOptions options = new ContactInfoOptions();
-        options.includePhoneDetails = includePhoneDetails;
-        options.includeContactPicture = includeContactPicture;
-        options.defaultContactPicture = defaultContactPicture;
-        return options;
+    private ContactInfoOptions(Builder builder) {
+        this.includePhoneDetails = builder.includePhoneDetails;
+        this.defaultContactPicture = builder.defaultContactPicture;
+        this.includeContactPicture = builder.includeContactPicture;
+        this.filterDuplicatePhoneNumbers = builder.filterDuplicatePhoneNumbers;
     }
 
     public boolean isIncludePhoneDetails() {
         return includePhoneDetails;
     }
 
-    public boolean isIncludeContactPicture() {
-        return includeContactPicture;
-    }
+    public boolean isIncludeContactPicture() { return includeContactPicture;  }
+
+    public boolean isFilterDuplicatePhoneNumbers() { return filterDuplicatePhoneNumbers; }
 
     public int getDefaultContactPicture() {
         return defaultContactPicture;
+    }
+
+    /**
+     * Use ContactInfoOptions.Builder to create an instance of ContactInfoOptions
+     *
+     * Example usage:
+     * <pre>
+     *     ContactInfoOptions options = new ContactInfoOptions.Builder(true)
+     *                     .includeContactPicture(true)
+     *                     .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_1)
+     *                     .build();
+     * </pre>
+     * @since 4.1
+     */
+    public static class Builder {
+        private boolean includePhoneDetails;
+        private boolean includeContactPicture;
+        private int defaultContactPicture;
+        private boolean filterDuplicatePhoneNumbers;
+
+        public Builder(){
+            // Can be used to create an empty Options object as well
+        }
+
+        public Builder includePhoneDetails(boolean includePhoneDetails) {
+            this.includePhoneDetails = includePhoneDetails;
+            return this;
+        }
+
+        public Builder includeContactPicture(boolean includeContactPicture) {
+            this.includeContactPicture = includeContactPicture;
+            return this;
+        }
+
+        public Builder defaultContactPicture(int defaultContactPicture) {
+            this.defaultContactPicture = defaultContactPicture;
+            return this;
+        }
+
+        public Builder filterDuplicatePhoneNumbers(boolean filterDuplicatePhoneNumbers) {
+            this.filterDuplicatePhoneNumbers = filterDuplicatePhoneNumbers;
+            return this;
+        }
+
+        public ContactInfoOptions build() {
+            return new ContactInfoOptions(this);
+        }
+
     }
 
 }

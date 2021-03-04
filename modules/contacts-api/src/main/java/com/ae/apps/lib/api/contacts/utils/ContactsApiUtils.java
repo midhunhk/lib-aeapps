@@ -21,41 +21,35 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds;
 
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.PhoneNumberInfo;
-import com.ae.apps.lib.common.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.DATE_FORMAT;
 
 /**
  * Internal utility methods used by ContactsApiGateway
  */
 public class ContactsApiUtils {
 
+    public static final String NON_DIGITS_REGEX = "[^\\d.]";
+
     public static ContactInfo createContactInfo(final Cursor cursor) {
         ContactInfo contactInfo = new ContactInfo();
         String id = cursor.getString(cursor.getColumnIndex(BaseColumns._ID));
         String hasPhoneNumberText;
-        String lastContactedTimeString;
         boolean hasPhoneNumber;
 
         String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-        String timesContacted = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.TIMES_CONTACTED));
         hasPhoneNumberText = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-        String lastContactedTime = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LAST_TIME_CONTACTED));
-        lastContactedTimeString = CommonUtils.formatTimeStamp(lastContactedTime, DATE_FORMAT);
         hasPhoneNumber = Integer.parseInt(hasPhoneNumberText) > 0;
 
         contactInfo.setId(id);
         contactInfo.setName(name);
 
         contactInfo.setHasPhoneNumber(hasPhoneNumber);
-        contactInfo.setTimesContacted(timesContacted);
-        contactInfo.setLastContactedTime(lastContactedTimeString);
         return contactInfo;
     }
 
@@ -93,22 +87,26 @@ public class ContactsApiUtils {
     private static PhoneNumberInfo createPhoneNumber(Cursor phoneCursor, Resources resources) {
         String phoneLabel = null;
         String customLabel;
-        int phoneNumberIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-        int phoneTypeIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
-        int phoneLabelIndex = phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL);
+        int phoneNumberIndex = phoneCursor.getColumnIndex(CommonDataKinds.Phone.NUMBER);
+        int phoneTypeIndex = phoneCursor.getColumnIndex(CommonDataKinds.Phone.TYPE);
+        int phoneLabelIndex = phoneCursor.getColumnIndex(CommonDataKinds.Phone.LABEL);
         String phoneNumber = phoneCursor.getString(phoneNumberIndex);
         int phoneType = phoneCursor.getInt(phoneTypeIndex);
 
         // Getting the label for this number
         if (null != resources) {
             customLabel = phoneCursor.getString(phoneLabelIndex);
-            phoneLabel = (String) ContactsContract.CommonDataKinds.Phone.getTypeLabel(resources, phoneType,
-                    customLabel);
+            phoneLabel = (String) CommonDataKinds.Phone.getTypeLabel(resources, phoneType, customLabel);
         }
 
         PhoneNumberInfo phoneNumberInfo = new PhoneNumberInfo();
         phoneNumberInfo.setPhoneNumber(phoneNumber);
         phoneNumberInfo.setPhoneType(phoneLabel);
+        if(null != phoneNumber){
+            // Populate the unformatted phone number field by removing all non numeric characters
+            phoneNumberInfo.setUnformattedPhoneNumber(
+                    phoneNumber.replaceAll(NON_DIGITS_REGEX, "") );
+        }
 
         return phoneNumberInfo;
     }

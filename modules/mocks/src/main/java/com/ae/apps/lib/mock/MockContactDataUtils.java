@@ -33,18 +33,18 @@ public class MockContactDataUtils {
     /**
      * Mock names, TODO read from resources
      */
-    private static String mockNamesEN[] = {"James Elliot", "Aiden Perry", "Daisy Forster", "Matt Gibson",
+    private static final String[] mockNamesEN = {"James Elliot", "Aiden Perry", "Daisy Forster", "Matt Gibson",
             "Martin J. Fox", "Catherine", "Scott Burns", "Jesse Whitehurst", "Diana Brown"};
-    private static String mockNamesES[] = {"Bicor Adomo Abrego", "Fortuna Granado Fonseca",
+    private static final String[] mockNamesES = {"Bicor Adomo Abrego", "Fortuna Granado Fonseca",
             "Germana Ruvalcaba", "Sotero Jimnez Razo", "Olimpia Campos Curiel", "Folco Vega Girn",
             "Aidee Padrn Cazares"};
-    private static String mockNamesFR[] = {"Lyle Coulombe", "Saber Rivire", "Algernon Monjeau",
+    private static final String[] mockNamesFR = {"Lyle Coulombe", "Saber Rivire", "Algernon Monjeau",
             "Emmeline Lamy", "Sylvie Mouet", "Carolos Bourgeau", "Ccile Fresne", "Loring Deslauriers"};
 
     /**
      * mock profile images
      */
-    private static int mockProfileImages[] = {R.drawable.profile_icon_1, R.drawable.profile_icon_2,
+    private static final int[] mockProfileImages = {R.drawable.profile_icon_1, R.drawable.profile_icon_2,
             R.drawable.profile_icon_3, R.drawable.profile_icon_4, R.drawable.profile_icon_5, R.drawable.profile_icon_6,
             R.drawable.profile_icon_1, R.drawable.profile_icon_5, R.drawable.profile_icon_3};
 
@@ -58,13 +58,15 @@ public class MockContactDataUtils {
 
         // Create the phone number list and add one
         List<PhoneNumberInfo> phoneNumbersList = new ArrayList<>();
-        PhoneNumberInfo numberVo = new PhoneNumberInfo();
-        numberVo.setPhoneNumber("87 7781 6267");
-        phoneNumbersList.add(numberVo);
+        PhoneNumberInfo numberInfo = new PhoneNumberInfo();
+        numberInfo.setPhoneNumber("87 7781 6267");
+        numberInfo.setUnformattedPhoneNumber("8777816267");
+        phoneNumbersList.add(numberInfo);
 
-        numberVo = new PhoneNumberInfo();
-        numberVo.setPhoneNumber("86 2343 6789");
-        phoneNumbersList.add(numberVo);
+        numberInfo = new PhoneNumberInfo();
+        numberInfo.setPhoneNumber("86 2343 6789");
+        numberInfo.setUnformattedPhoneNumber("8623436789");
+        phoneNumbersList.add(numberInfo);
 
         Random random = new Random();
         int randomVal = random.nextInt(mockNamesEN.length);
@@ -76,7 +78,6 @@ public class MockContactDataUtils {
 
         contactInfo.setName(randomName);
         contactInfo.setId(String.valueOf(randomVal));
-        contactInfo.setTimesContacted(String.valueOf(randomVal));
         contactInfo.setHasPhoneNumber(true);
         contactInfo.setPhoneNumbersList(phoneNumbersList);
 

@@ -2,14 +2,15 @@
 [![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg)](https://travis-ci.org/midhunhk/lib-aeapps)
 [![](https://jitci.com/gh/midhunhk/lib-aeapps/svg)](https://jitci.com/gh/midhunhk/lib-aeapps)
 [![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v3.0.2-rc.1.svg)](https://github.com/midhunhk/lib-aeapps) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v4.0.7.svg)](https://github.com/midhunhk/lib-aeapps) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
 libAeApps is an Android library project which provides reusable solutions to some common problems.
 Some solutions require boiler plate code which can become tedious to manage.
 
 This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
-[Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.
+[Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.  
+The latest codename is *Kiwiberry*
 
 ## Contents
 Detailed information about the architecture of the project is available on the project wiki at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)

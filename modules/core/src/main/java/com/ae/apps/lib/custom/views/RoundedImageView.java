@@ -78,10 +78,7 @@ public class RoundedImageView extends AppCompatImageView {
         }
 
         // Check if image size is at most maxHeight
-        if (imageHeight >= maxHeight) {
-            return maxHeight;
-        }
-        return imageHeight;
+        return Math.min(imageHeight, maxHeight);
     }
 
     /**

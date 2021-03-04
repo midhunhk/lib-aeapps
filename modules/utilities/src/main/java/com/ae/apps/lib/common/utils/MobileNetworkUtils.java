@@ -20,14 +20,16 @@ package com.ae.apps.lib.common.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 
 /**
  *  Some utility methods that work on mobile networks
  */
 public class MobileNetworkUtils {
+
+	public static final String SMSTO = "smsto:";
+	public static final String ADDRESS = "address";
+	public static final String TEL = "tel:";
 
 	/**
 	 * Call a contact
@@ -38,8 +40,25 @@ public class MobileNetworkUtils {
 	@SuppressLint("MissingPermission")
 	public static void callContact(Context context, String contactNo) {
 		try {
-			String uri = "tel:" + contactNo;
+			String uri = TEL + contactNo;
 			Intent intent = new Intent(Intent.ACTION_CALL);
+			intent.setData(Uri.parse(uri));
+			context.startActivity(intent);
+		} catch (Exception e) {
+			// Report no exception
+		}
+	}
+
+	/**
+	 * Send to the dialer activity
+	 *
+	 * @param context the context
+	 * @param contactNo the contact number
+	 */
+	public static void dialContact(Context context, String contactNo) {
+		try {
+			String uri = TEL + contactNo;
+			Intent intent = new Intent(Intent.ACTION_DIAL);
 			intent.setData(Uri.parse(uri));
 			context.startActivity(intent);
 		} catch (Exception e) {
@@ -54,36 +73,14 @@ public class MobileNetworkUtils {
 	 */
 	public static void textContact(Context context, String contactNo) {
 		try {
-			String uri = "smsto:" + contactNo;
+			String uri = SMSTO + contactNo;
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.putExtra("address", contactNo);
+			intent.putExtra(ADDRESS, contactNo);
 			intent.setData(Uri.parse(uri));
 			context.startActivity(intent);
 		} catch (Exception e) {
 			// Report no exception
 		}
-	}
-
-	/**
-	 * This method checks whether Internet connectivity is available on the device
-	 * 
-	 * @param context the context
-	 * @return true if internet connection available
-	 */
-	public static boolean isInternetAvailable(Context context) {
-		// Request the Connectivity service to the OS
-		ConnectivityManager connectivityManager = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-		NetworkInfo networkInfo = connectivityManager != null ?
-				connectivityManager.getActiveNetworkInfo() : null;
-
-		// Check the current state of the Network Information
-		if (networkInfo == null)
-			return false;
-		if (!networkInfo.isConnected())
-			return false;
-		return networkInfo.isAvailable();
 	}
 
 	/**
