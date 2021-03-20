@@ -53,8 +53,8 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
 
     protected Resources resources;
     protected ContentResolver contentResolver;
-    protected transient STATE gatewayState = STATE.UNINITIALIZED;
-    protected transient List<ContactInfo> contacts = Collections.emptyList();
+    protected volatile transient STATE gatewayState = STATE.UNINITIALIZED;
+    protected volatile transient List<ContactInfo> contacts = Collections.emptyList();
 
     @Override
     public void initialize(final ContactInfoFilterOptions options) {
