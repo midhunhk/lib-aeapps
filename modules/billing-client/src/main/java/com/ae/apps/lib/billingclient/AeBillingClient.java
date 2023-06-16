@@ -42,8 +42,8 @@ import java.util.List;
 /**
  * An implementation for Google Play Billing Client to enable purchase of InApp Products
  * <p>
- * https://developer.android.com/google/play/billing/
- * https://developer.android.com/google/play/billing/integrate
+ * <a href="https://developer.android.com/google/play/billing/">...</a>
+ * <a href="https://developer.android.com/google/play/billing/integrate">...</a>
  *
  * @since 4.1
  */

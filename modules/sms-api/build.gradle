@@ -15,12 +15,16 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
-group = rootProject.ext.Publish.group_id
-archivesBaseName = 'sms-api'
+//group = rootProject.ext.Publish.group_id
+//archivesBaseName = 'sms-api'
 
 apply from: '../../buildSrc/android_common.gradle'
+
+android {
+    namespace 'com.ae.apps.lib.sms_api'
+}
 
 dependencies {
     implementation deps.appcompat

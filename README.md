@@ -10,7 +10,7 @@ Some solutions require boiler plate code which can become tedious to manage.
 
 This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
 [Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.  
-The latest codename is *Kiwiberry*
+The latest codename is *Lingonberry*
 
 ## Contents
 Detailed information about the architecture of the project is available on the project wiki at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)

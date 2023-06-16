@@ -16,12 +16,14 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 
-group = rootProject.ext.Publish.group_id
-archivesBaseName = 'multi-contact'
 
 apply from: '../../buildSrc/android_common.gradle'
+apply plugin: 'maven-publish'
+
+android {
+    namespace 'com.ae.apps.lib.multi_contact'
+}
 
 dependencies {
     // Libraries

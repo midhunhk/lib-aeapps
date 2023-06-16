@@ -16,12 +16,16 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
-group = rootProject.ext.Publish.group_id
-archivesBaseName = 'database-helpers'
+//group = rootProject.ext.Publish.group_id
+//archivesBaseName = 'database-helpers'
 
 apply from: '../../buildSrc/android_common.gradle'
+
+android {
+    namespace 'com.ae.apps.lib.database_helpers'
+}
 
 dependencies {
     api project(':core')

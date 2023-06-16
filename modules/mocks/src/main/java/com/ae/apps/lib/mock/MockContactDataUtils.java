@@ -17,7 +17,6 @@
 
 package com.ae.apps.lib.mock;
 
-import com.ae.apps.lib.R;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.common.models.PhoneNumberInfo;
 
@@ -44,9 +43,11 @@ public class MockContactDataUtils {
     /**
      * mock profile images
      */
+/*
     private static final int[] mockProfileImages = {R.drawable.profile_icon_1, R.drawable.profile_icon_2,
             R.drawable.profile_icon_3, R.drawable.profile_icon_4, R.drawable.profile_icon_5, R.drawable.profile_icon_6,
             R.drawable.profile_icon_1, R.drawable.profile_icon_5, R.drawable.profile_icon_3};
+*/
 
     /**
      * Returns a mock contact

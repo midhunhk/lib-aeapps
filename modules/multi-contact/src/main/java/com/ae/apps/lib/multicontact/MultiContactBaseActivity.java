@@ -33,6 +33,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.custom.views.EmptyRecyclerView;
 
+import com.ae.apps.lib.multi_contact.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -150,7 +152,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
     }
 
     private void setUpRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.list);
+        RecyclerView recyclerView = findViewById(com.ae.apps.lib.multi_contact.R.id.list);
 
         if (null != recyclerView) {
             List<ContactInfo> contactsList = contactsList();
@@ -161,7 +163,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
             }
         }
 
-        View emptyView = findViewById(R.id.empty_view);
+        View emptyView = findViewById(com.ae.apps.lib.multi_contact.R.id.empty_view);
         if (recyclerView instanceof EmptyRecyclerView && null != emptyView) {
             ((EmptyRecyclerView) recyclerView).setEmptyView(emptyView);
         }

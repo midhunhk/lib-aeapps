@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ae.apps.lib.common.models.ContactInfo;
+import com.ae.apps.lib.multi_contact.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;

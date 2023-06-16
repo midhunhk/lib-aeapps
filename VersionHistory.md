@@ -1,3 +1,13 @@
+# Version History
+
+## Version 5.0 (Lingonberry)
+#### Version 5.0.0 [Jun 2023]
+ - breaking changes to API (if able to publish)
+ - migrate android gradle plugin version
+ - migrate to publish library
+ - build structure changes
+ - billing-client: migrate billing library #35
+
 ## Version 4.1 (Kiwiberry)
 #### Version 4.1.0 [Feb 2021]
  - runtime-permissions: AbstractPermissionsAwareActivity #32

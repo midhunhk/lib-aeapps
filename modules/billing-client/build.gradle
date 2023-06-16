@@ -15,18 +15,53 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = rootProject.ext.Publish.group_id
-archivesBaseName = 'billing-client'
 
 apply from: '../../buildSrc/android_common.gradle'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'maven-publish'
 
 dependencies {
     implementation deps.appcompat
     implementation deps.billingClient
+    implementation deps.coreKtx
 
     testImplementation deps.junit
     androidTestImplementation deps.runner
     androidTestImplementation deps.espressoCore
 }
+
+android {
+    namespace 'com.ae.apps.lib.billing_client'
+}
+
+// Because the components are created only during the afterEvaluate phase, you must
+// configure your publications using the afterEvaluate() lifecycle method.
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+                // You can then customize attributes of the publication as shown below.
+                groupId = Publish.groupId
+                artifactId = 'billing-client'
+                version = Publish.version
+            }
+        }
+    }
+}
+
+/*publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = Publish.groupId
+            artifactId = 'billing-client'
+            version = Publish.version
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}*/

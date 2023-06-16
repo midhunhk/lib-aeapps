@@ -18,14 +18,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.ae.apps.lib.sample"
         minSdkVersion 16
-        targetSdkVersion 29
+        targetSdkVersion 33
         versionCode 5
-        versionName "1.3.1"
+        versionName "1.3.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -43,10 +43,11 @@ android {
             abortOnError false
         }
     }
+    namespace 'com.ae.apps.lib.sample'
 }
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation deps.recyclerview
     implementation deps.design
     implementation deps.constraintLayout

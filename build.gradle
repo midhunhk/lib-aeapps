@@ -6,22 +6,25 @@ buildscript {
 
     repositories {
 		mavenCentral()
-        jcenter()
         google()
         maven { url "https://jitpack.io" }
     }
 
     dependencies {
         classpath Plugins.gradle
-        classpath Plugins.bintray
-        classpath Plugins.androidMaven
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
+/*android {
+    namespace 'com.ae.apps.lib-aeappps'
+}*/
+
 allprojects {
     repositories {
-        jcenter()
         google()
         maven { url "https://jitpack.io" }
+        mavenCentral()
     }
 }
+

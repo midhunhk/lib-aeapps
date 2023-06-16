@@ -16,12 +16,13 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = rootProject.ext.Publish.group_id
-archivesBaseName = 'mocks'
+apply plugin: 'maven-publish'
 
 apply from: '../../buildSrc/android_common.gradle'
+
+android {
+    namespace 'com.ae.apps.lib.mocks'
+}
 
 dependencies {
     implementation deps.appcompat

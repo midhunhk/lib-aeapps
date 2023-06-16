@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
-group = rootProject.ext.Publish.group_id
-archivesBaseName = 'core'
+//group = rootProject.ext.Publish.group_id
+//archivesBaseName = 'core'
 
 apply from: '../../buildSrc/android_common.gradle'
 
@@ -10,6 +10,7 @@ android {
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    namespace 'com.ae.apps.lib.core'
 }
 
 dependencies {
@@ -26,5 +27,21 @@ dependencies {
     androidTestImplementation deps.extJunit
     androidTestImplementation deps.mockitoCore
 }
+
+/*
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = rootProject.ext.Publish.jitpack_group_id
+            artifactId = rootProject.ext.Publish.jitpack_artifact_id
+            version = rootProject.ext.Publish.version
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}
+ */
 
 // apply from: '../../buildSrc/javadoc_tasks.gradle'
