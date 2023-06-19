@@ -8,7 +8,7 @@ ext {
     kotlin_version = '1.8.0'
 
     espressoVersion = "3.1.0-beta02"
-    gradleBuildToolVersion = '8.0.0'
+    gradleBuildToolVersion = '8.0.2'
     androidMavenPluginVersion = "2.1"
     junitVersion = "4.13.2"
     mockitoCoreVersion = "2.19.0"
