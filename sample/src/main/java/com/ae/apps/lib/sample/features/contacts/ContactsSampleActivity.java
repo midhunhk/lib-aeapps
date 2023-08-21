@@ -1,6 +1,7 @@
 package com.ae.apps.lib.sample.features.contacts;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,20 +44,10 @@ public class ContactsSampleActivity extends AppCompatActivity
         contactsLayout = findViewById(R.id.text_permissions_granted);
 
         View requestPermissionBtn = findViewById(R.id.btn_request_permissions);
-        requestPermissionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requestForPermissions();
-            }
-        });
+        requestPermissionBtn.setOnClickListener(view -> requestForPermissions());
 
         View refreshContactsBtn = findViewById(R.id.btn_refresh);
-        refreshContactsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                displayContactInfo();
-            }
-        });
+        refreshContactsBtn.setOnClickListener(view -> displayContactInfo());
 
         permissionChecker = RuntimePermissionChecker.newInstance(this);
         permissionChecker.checkPermissions();
@@ -118,6 +109,7 @@ public class ContactsSampleActivity extends AppCompatActivity
         displayContactInfo();
     }
 
+    @SuppressLint("SetTextI18n")
     private void displayContactInfo() {
         // Read a Random contact with picture and phone number details
         final ContactInfo randomContact = contactsApiGateway.getRandomContact();
@@ -126,7 +118,7 @@ public class ContactsSampleActivity extends AppCompatActivity
             ContactInfoOptions options = new ContactInfoOptions.Builder()
                     .includePhoneDetails(true)
                     .includeContactPicture(true)
-                    .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_3)
+                    .defaultContactPicture(com.ae.apps.lib.core.R.drawable.profile_icon_3)
                     .filterDuplicatePhoneNumbers(true)
                     .build();
             ContactInfo contactInfo = contactsApiGateway.getContactInfo(
