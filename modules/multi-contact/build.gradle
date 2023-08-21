@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+apply from: rootProject.file("buildSrc/android_common.gradle")
+
+afterEvaluate {
+    publishing {
+        publications {
+            // creates a maven publication called release
+            release(MavenPublication) {
+                from components.release
+
+                groupId = rootProject.ext.Publish.groupId
+                artifactId = "multi_contact"
+                version = rootProject.ext.Publish.version
+            }
+        }
+    }
+}
+
+android {
+    namespace 'com.ae.apps.lib.multi_contact'
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Libraries
+    implementation deps.appcompat
+    implementation deps.recyclerview
+
+    // Modules
+    api project(':core')
+    api project(':utilities')
+    
+    // Test Dependencies
+    testImplementation deps.junit
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.espressoCore
+}
