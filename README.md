@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg)](https://travis-ci.org/midhunhk/lib-aeapps)
 [![](https://jitci.com/gh/midhunhk/lib-aeapps/svg)](https://jitci.com/gh/midhunhk/lib-aeapps)
 [![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v4.0.7.svg)](https://github.com/midhunhk/lib-aeapps) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v4.1.0.svg)](https://github.com/midhunhk/lib-aeapps) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
 lib-AeApps is an Android library project which provides reusable solutions to some common problems.
@@ -17,7 +17,7 @@ Detailed information about the architecture of the project is available on the p
 Depending on the features you use, make sure to declare the permissions in your manifest.xml file.
 
 ## Implementations
-Presently the following android app projects make use of this library.
+Presently the following android app projects make use of this library, and are supported.
 
 * <a href="https://github.com/midhunhk/message-counter">Message Counter</a>
 * <a href="https://github.com/midhunhk/random-contact">Random Contact</a>
@@ -27,12 +27,17 @@ Presently the following android app projects make use of this library.
 To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-aeapps/blob/master/VersionHistory.md)
 
 ## Using the library
-With version 4, the library has been split into multiple modules, each of which could be included separately in an android app.
-Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/lib-aeapps/wiki/Distribution)
+* For version 4, the library has been split into multiple modules, each of which could be included separately in an android app.
+* For Version 5, we migrated to maven-publish plugin and upgraded to AGP
+* Instructions for using this library are mentioned at [Distribution](https://github.com/midhunhk/lib-aeapps/wiki/Distribution)
 
 ## Migration Guide
-Instructions for migrating from a prior version of the library are at [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)
- 
+
+| Version   	| Upgrade to 	| Guide 	|
+|-----------	|------------	|-------	|
+| Before v4 	| v4.1       	| [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)    	|
+| Before v5 	| v5.0       	| TBD    	|
+
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
