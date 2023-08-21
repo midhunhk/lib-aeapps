@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2019 Midhun Harikumar
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.ae.apps.lib.sample"
+        minSdkVersion 16
+        versionCode 5
+        versionName "1.3.2"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
+    namespace 'com.ae.apps.lib.sample'
+}
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation deps.recyclerview
+    implementation deps.design
+    implementation deps.constraintLayout
+
+
+    // Use these to test library features while in development
+    api project(':core')
+    api project(':contacts-api')
+    api project(':sms-api')
+    api project(':runtime-permissions')
+    api project(':utilities')
+    api project(':multi-contact')
+
+    // Otherwise use these to build sample features against published API
+    /*
+    def libAeAppsVersion = '4.1.0-beta.05'
+    implementation "com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:sms-api:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:runtime-permissions:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:utilities:$libAeAppsVersion"
+    implementation "com.github.midhunhk.lib-aeapps:multi-contact:$libAeAppsVersion"
+    */
+
+}
+

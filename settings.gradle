@@ -44,22 +44,23 @@ include ':mocks'
 include ':utilities'
 include ':contacts-api'
 include ':multi-contact'
-//include ':runtime-permissions'
-//include ':database-helpers'
-//include ':billing-client'
-//include ':sms-api'
+include ':runtime-permissions'
+include ':database-helpers'
+include ':billing-client'
+include ':sms-api'
 include ':aeapps'
+
+include ':sample'
 
 project(':core').projectDir = new File('modules/core')
 project(':mocks').projectDir = new File('modules/mocks')
 project(':utilities').projectDir = new File('modules/utilities')
 project(':contacts-api').projectDir = new File('modules/contacts-api')
 project(':multi-contact').projectDir = new File('modules/multi-contact')
-//project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
-//project(':database-helpers').projectDir = new File('modules/database-helpers')
-//project(':billing-client').projectDir = new File('modules/billing-client')
-//project(':sms-api').projectDir = new File('modules/sms-api')
+project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
+project(':database-helpers').projectDir = new File('modules/database-helpers')
+project(':billing-client').projectDir = new File('modules/billing-client')
+project(':sms-api').projectDir = new File('modules/sms-api')
 
 project(':aeapps').projectDir = new File('modules/aeapps')
 
-//include ':sample'

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="bottom|center_horizontal"
+    tools:context=".features.contacts.MultiContactSampleActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_need_permissions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/unit_xl"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/unit_l"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="@string/str_need_contact_permissions"/>
+
+        <Button
+            android:id="@+id/btn_request_permissions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/unit_l"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/str_btn_request_permissions"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/text_permissions_granted"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_material_dark"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@android:color/white">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/str_multi_contact_title"
+                android:textSize="@dimen/text_title2"
+                android:textColor="@color/color_almost_white"
+                android:gravity="center"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <Button
+            android:id="@+id/btn_multi_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/unit_l"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/str_multi_contact_pick"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/unit_m"
+            android:text="@string/str_multi_contact_selection_info"/>
+
+        <TextView
+            android:id="@+id/txt_contact_ids"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/str_multi_contact_selection_placeholder"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

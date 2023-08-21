@@ -13,7 +13,7 @@ afterEvaluate {
                 from components.release
 
                 groupId = rootProject.ext.Publish.groupId
-                artifactId = "aeapps"
+                artifactId = "runtime_permissions"
                 version = rootProject.ext.Publish.version
             }
         }
@@ -21,26 +21,17 @@ afterEvaluate {
 }
 
 android {
-    namespace 'com.ae.apps.lib.aeapps'
-
-    lintOptions {
-        abortOnError false
-    }
+    namespace 'com.ae.apps.lib.runtime_permissions'
 }
 
 dependencies {
     implementation deps.appcompat
 
-    // Integrate all components into this api
     api project(':core')
-    api project(':mocks')
-    api project(':contacts-api')
-    api project(':multi-contact')
-    api project(':database-helpers')
-    api project(':runtime-permissions')
-    api project(':billing-client')
-    api project(':sms-api')
     api project(':utilities')
 
-    testImplementation project(':mocks')
+    testImplementation deps.junit
+    testImplementation deps.mockitoCore
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.espressoCore
 }

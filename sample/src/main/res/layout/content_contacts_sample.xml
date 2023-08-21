@@ -1,0 +1,109 @@
+<LinearLayout
+    android:id="@+id/text_permissions_granted"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_material_dark"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_contacts_title"
+            android:textSize="@dimen/text_title2"
+            android:textColor="@color/color_almost_white"
+            android:gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/text_total_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/unit_m"
+        android:gravity="center"
+        android:text="@string/str_loading_contacts"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:padding="@dimen/unit_s"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/unit_m"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.ae.apps.lib.custom.views.RoundedImageView
+                android:id="@+id/img_contact_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/unit_m"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/app_name"
+                android:minHeight="@dimen/profile_pic_size"
+                android:minWidth="@dimen/profile_pic_size"
+                android:src="@drawable/profile_icon_5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/text_contact_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/unit_s"
+                android:layout_marginLeft="@dimen/unit_l"
+                android:layout_marginStart="@dimen/unit_l"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_title3"
+                android:ellipsize="end"
+                app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_phone_num1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/unit_s"
+                android:layout_marginLeft="@dimen/unit_l"
+                android:layout_marginStart="@dimen/unit_l"
+                android:text="@string/app_name"
+                app:layout_constraintStart_toEndOf="@+id/img_contact_profile"
+                app:layout_constraintTop_toBottomOf="@+id/text_contact_name"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:id="@+id/btn_refresh"
+        android:layout_gravity="center"
+        android:text="@string/str_btn_refresh"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
