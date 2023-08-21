@@ -17,10 +17,11 @@
 
 package com.ae.apps.lib.common.utils;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by user on 6/24/2017.
@@ -38,4 +39,20 @@ public class CommonUtilsTest {
                 CommonUtils.truncateString("abcdefghijklmnopqrstuvwxyz1234"));
     }
 
+    @Test
+    public void formatTimeStamp() {
+        CommonUtils.formatTimeStamp("", "");
+    }
+
+    @Test
+    public void truncateString() {
+        String result = CommonUtils.truncateString(null);
+        Assert.assertEquals("", result);
+
+        result = CommonUtils.truncateString("ABCD");
+        Assert.assertEquals("ABCD", result);
+
+        result = CommonUtils.truncateString("The quick brown fox jumped over the lazy dog!");
+        Assert.assertEquals("The quick brown fox jumped...", result);
+    }
 }

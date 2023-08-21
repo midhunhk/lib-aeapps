@@ -26,6 +26,7 @@ android {
         versionName rootProject.ext.Publish.versionName
 
         consumerProguardFiles 'proguard-rules.pro'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {

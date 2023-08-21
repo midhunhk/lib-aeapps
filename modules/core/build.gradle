@@ -1,19 +1,66 @@
-apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
 
-//group = rootProject.ext.Publish.group_id
-//archivesBaseName = 'core'
+//apply from: '../../buildSrc/android_common.gradle'
 
-apply from: '../../buildSrc/android_common.gradle'
+afterEvaluate {
+    publishing {
+        publications {
+            // creates a maven publication called release
+            release(MavenPublication) {
+                from components.release
+
+                // customize attributes here
+                groupId = rootProject.ext.Publish.group_id
+                artifactId = rootProject.ext.Publish.artifact_id
+                version = rootProject.ext.Publish.version
+
+                /*
+                groupId = rootProject.ext.Publish.jitpack_group_id
+                artifactId = rootProject.ext.Publish.jitpack_artifact_id
+                version = rootProject.ext.Publish.version
+                */
+            }
+        }
+    }
+}
+
+
 
 android {
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
     namespace 'com.ae.apps.lib.core'
+
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 24
+        aarMetadata {
+            minCompileSdk = 33
+        }
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    publishing {
+        singleVariant('release') {
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
+
     implementation deps.appcompat
     implementation deps.recyclerview
     implementation deps.playCore
@@ -27,21 +74,3 @@ dependencies {
     androidTestImplementation deps.extJunit
     androidTestImplementation deps.mockitoCore
 }
-
-/*
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId = rootProject.ext.Publish.jitpack_group_id
-            artifactId = rootProject.ext.Publish.jitpack_artifact_id
-            version = rootProject.ext.Publish.version
-
-            afterEvaluate {
-                from components.release
-            }
-        }
-    }
-}
- */
-
-// apply from: '../../buildSrc/javadoc_tasks.gradle'
