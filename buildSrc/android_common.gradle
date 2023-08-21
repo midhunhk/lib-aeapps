@@ -16,23 +16,31 @@
  */
  
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    
+
+    compileSdk 33
+
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-
-        versionCode rootProject.ext.Publish.versionCode
-        versionName rootProject.ext.Publish.versionName
-
-        consumerProguardFiles 'proguard-rules.pro'
+        minSdk 21
+        aarMetadata {
+            minCompileSdk = 21
+        }
+        consumerProguardFiles "consumer-rules.pro"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    publishing {
+        singleVariant('release') {
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }

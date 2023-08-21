@@ -3,7 +3,22 @@ plugins {
     id 'maven-publish'
 }
 
-apply from: '../../buildSrc/android_common.gradle'
+apply from: rootProject.file("buildSrc/android_common.gradle")
+
+afterEvaluate {
+    publishing {
+        publications {
+            // creates a maven publication called release
+            release(MavenPublication) {
+                from components.release
+
+                groupId = rootProject.ext.Publish.groupId
+                artifactId = "mocks"
+                version = rootProject.ext.Publish.version
+            }
+        }
+    }
+}
 
 android {
     namespace 'com.ae.apps.lib.mocks'
