@@ -9,7 +9,7 @@ ext.Publish = [
         // AGP Publish
         groupId: 'com.ae.apps.lib',
 
-        version : '5.0.0-alpha.01',
+        version : '5.0.0-alpha.02',
         versionCode: 430,
         versionName : '5.0.0'
 ]

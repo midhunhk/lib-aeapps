@@ -13,9 +13,12 @@ afterEvaluate {
                 from components.release
 
                 // customize attributes here
-                groupId = rootProject.ext.Publish.group_id
-                artifactId = rootProject.ext.Publish.artifact_id
-                version = rootProject.ext.Publish.version
+                groupId = 'com.github.midhunhk.lib-aeapps'
+                artifactId = 'lib-aeapps'
+                version = '5.0.0-alpha.02'
+                //groupId = rootProject.ext.Publish.group_id
+                //artifactId = rootProject.ext.Publish.artifact_id
+                //version = rootProject.ext.Publish.version
 
                 /*
                 groupId = rootProject.ext.Publish.jitpack_group_id
@@ -35,9 +38,9 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 24
+        minSdk 21
         aarMetadata {
-            minCompileSdk = 33
+            minCompileSdk = 21
         }
         consumerProguardFiles "consumer-rules.pro"
     }
