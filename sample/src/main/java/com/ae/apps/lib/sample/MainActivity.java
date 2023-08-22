@@ -82,9 +82,6 @@ public class MainActivity extends AppCompatActivity
                     R.layout.about_view,
                     R.string.menu_about);
             return true;
-        } else if (id == R.id.action_build) {
-            startActivity(IntentUtils.getUriIntent(this, getString(R.string.url_travis_build)));
-            return true;
         } else if (id == R.id.action_source) {
             startActivity(IntentUtils.getUriIntent(this, getString(R.string.url_github_source)));
             return true;
