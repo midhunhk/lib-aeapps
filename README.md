@@ -1,5 +1,4 @@
 # lib-AeApps
-[![Build Status](https://travis-ci.org/midhunhk/lib-aeapps.svg)](https://travis-ci.org/midhunhk/lib-aeapps)
 [![](https://jitci.com/gh/midhunhk/lib-aeapps/svg)](https://jitci.com/gh/midhunhk/lib-aeapps)
 [![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v4.1.0.svg)](https://github.com/midhunhk/lib-aeapps) 
