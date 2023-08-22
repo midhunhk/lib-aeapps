@@ -17,6 +17,8 @@
 
 package com.ae.apps.lib.api.contacts.impl;
 
+import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
+
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.res.Resources;
@@ -39,8 +41,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
 
 /**
  * An abstract implementation of ContactsApiGateway
@@ -147,6 +147,10 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         return BitmapFactory.decodeStream(photoDataStream);
     }
 
+    @Override
+    public ContactInfo getContactInfo(String s) {
+        return null;
+    }
 
     protected boolean checkIfApiInitialized() {
         return gatewayState == STATE.READY;

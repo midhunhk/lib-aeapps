@@ -15,7 +15,8 @@
   ~ limitations under the License.
   ~
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest package="com.ae.apps.lib.sample"
+          xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission
@@ -36,7 +37,7 @@
         android:fullBackupContent="false"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

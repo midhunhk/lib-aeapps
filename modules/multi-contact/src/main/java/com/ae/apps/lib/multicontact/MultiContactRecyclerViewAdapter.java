@@ -17,6 +17,7 @@
 
 package com.ae.apps.lib.multicontact;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,11 +79,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         holder.checkBox.setOnCheckedChangeListener(null);
 
         // Set the checked status of this checkbox from our data list
-        if (checkedStatus.contains(contactId)) {
-            holder.checkBox.setChecked(true);
-        } else {
-            holder.checkBox.setChecked(false);
-        }
+        holder.checkBox.setChecked(checkedStatus.contains(contactId));
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -125,6 +122,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
                 return filterResults;
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 boolean dataUpdated = Boolean.parseBoolean(filterResults.values.toString());
@@ -145,7 +143,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         return results;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         final View view;
         final CheckBox checkBox;
         ContactInfo item;

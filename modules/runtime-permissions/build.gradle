@@ -13,7 +13,7 @@ afterEvaluate {
                 from components.release
 
                 groupId = rootProject.ext.Publish.groupId
-                artifactId = "runtime_permissions"
+                artifactId = "runtime-permissions"
                 version = rootProject.ext.Publish.version
             }
         }

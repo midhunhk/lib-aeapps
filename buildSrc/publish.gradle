@@ -5,7 +5,7 @@ ext.Publish = [
         // AGP Publish using Jitpack.io
         //groupId: 'com.ae.apps.lib',
         groupId: 'com.github.midhunhk.lib-aeapps',
-        version : '5.0.0-alpha.12',
+        version : '5.0.0-alpha.14',
         versionCode: 440,
         versionName : '5.0.0'
 ]

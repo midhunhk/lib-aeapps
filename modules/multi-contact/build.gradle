@@ -13,7 +13,7 @@ afterEvaluate {
                 from components.release
 
                 groupId = rootProject.ext.Publish.groupId
-                artifactId = "multi_contact"
+                artifactId = "multi-contact"
                 version = rootProject.ext.Publish.version
             }
         }

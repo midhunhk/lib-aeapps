@@ -16,7 +16,8 @@
  */
 
 /**
- * Boilerplate code and wrappers over SQLiteOpenHelper class
+ * Boilerplate code and wrappers over SQLiteOpenHelper class.
+ * Going forward use room
  *
  * @since 1.0
  * @author midhunhk
