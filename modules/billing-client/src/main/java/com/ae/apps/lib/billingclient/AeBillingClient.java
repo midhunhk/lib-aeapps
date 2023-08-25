@@ -21,9 +21,8 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
@@ -42,17 +41,18 @@ import java.util.List;
 /**
  * An implementation for Google Play Billing Client to enable purchase of InApp Products
  * <p>
- * https://developer.android.com/google/play/billing/
- * https://developer.android.com/google/play/billing/integrate
+ * <a href="https://developer.android.com/google/play/billing/">...</a>
+ * <a href="https://developer.android.com/google/play/billing/integrate">...</a>
  *
  * @since 4.1
  */
-public class AeBillingClient implements PurchasesUpdatedListener, LifecycleObserver {
+public class AeBillingClient implements PurchasesUpdatedListener, DefaultLifecycleObserver {
 
     private BillingClient billingClient;
     private BillingClientHandler handler;
 
     /**
+     * Initialize the billing client
      *
      * @param context use requireActivity() to pass in the base
      * @param handler a handler to handle the result
@@ -73,8 +73,8 @@ public class AeBillingClient implements PurchasesUpdatedListener, LifecycleObser
         startServiceConnection();
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onDestroy() {
+    @Override
+    public void onDestroy(@NonNull LifecycleOwner owner) {
         if (null != billingClient) {
             billingClient.endConnection();
         }

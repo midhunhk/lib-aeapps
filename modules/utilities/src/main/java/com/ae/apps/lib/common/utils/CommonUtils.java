@@ -149,7 +149,11 @@ public class CommonUtils {
     public static boolean isPackageInstalled2(Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = packageManager.getLaunchIntentForPackage(packageName);
-        return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty();
+        if(null != intent) {
+            return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty();
+        } else {
+            return false;
+        }
     }
 
     /**

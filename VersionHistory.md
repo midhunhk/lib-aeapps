@@ -2,7 +2,7 @@
 
 ## Version 5.0 (Lingonberry)
 #### Version 5.0.0 [Jun 2023]
- - breaking changes to API (if able to publish)
+ - breaking changes to API
  - migrate android gradle plugin version
  - migrate to publish library
  - build structure changes

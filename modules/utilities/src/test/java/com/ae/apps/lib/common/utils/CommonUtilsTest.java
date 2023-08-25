@@ -41,7 +41,8 @@ public class CommonUtilsTest {
 
     @Test
     public void formatTimeStamp() {
-        CommonUtils.formatTimeStamp("", "");
+        String result = CommonUtils.formatTimeStamp("", "");
+        Assert.assertNotNull(result);
     }
 
     @Test

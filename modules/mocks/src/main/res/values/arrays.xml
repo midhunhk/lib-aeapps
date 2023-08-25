@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mock_names" translatable="false">
+        <item>James Elliot</item>
+        <item>Aiden Perry</item>
+        <item>Daisy Forster</item>
+        <item>Matt Gibson</item>
+        <item>Martin J. Fox</item>
+        <item>Catherine</item>
+        <item>Scott Burns</item>
+        <item>Jesse White</item>
+        <item>Diana Brown</item>
+    </string-array>
+
+</resources>
