@@ -2,9 +2,9 @@
 
 ## Version 5.0 (Lingonberry)
 #### Version 5.0.0 [Jun 2023]
- - breaking changes to API
  - migrate android gradle plugin version
- - migrate to publish library
+ - migrate to maven publish plugin
+ - migrate to kotlin dsl #38
  - build structure changes
  - billing-client: migrate billing library #35
 
@@ -99,7 +99,7 @@
 ## Version 1.4 (Blueberry)
 #### Version 1.4.0[May 2015]
 - Added ToolBarBaseActivity  
-- Added DonationsBasectivity  
+- Added DonationsBaseActivity  
 - Added appcompat as dependent library  
 
 ## Version 1.3 (Blueberry)

@@ -15,57 +15,56 @@
  *
  */
 
-apply plugin: 'com.android.application'
+plugins {
+    id ("com.android.application")
+}
 
 android {
-    namespace "com.ae.apps.lib.sample"
+    namespace = "com.ae.apps.lib.sample"
 
-    compileSdk 33
+    compileSdk = 33
 
     defaultConfig {
-        applicationId "com.ae.apps.lib.sample"
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 8
-        versionName "1.4.0"
+        applicationId = "com.ae.apps.lib.sample"
+        minSdk = 21
+        targetSdk = 33
+        versionCode = 8
+        versionName = "1.4.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            isMinifyEnabled = false
+            proguardFiles (
+                    getDefaultProguardFile("proguard-android.txt"), 
+                    "proguard-rules.pro")
         }
     }
 
     android {
-        lintOptions {
-            abortOnError false
-        }
     }
 }
 dependencies {
 
-    implementation deps.appcompat
-    implementation deps.recyclerview
-    implementation deps.design
-    implementation deps.constraintLayout
-
+    implementation(Libs.AndroidX.appcompat)
+    implementation(Libs.AndroidX.recyclerview)
+    implementation(Libs.AndroidX.constraintlayout)
+    implementation(Libs.Material.design)
 
     // Use these to test library features while in development
-    api project(':core')
-    api project(':contacts-api')
-    api project(':sms-api')
-    api project(':runtime-permissions')
-    api project(':utilities')
-    api project(':multi-contact')
-
+    api (project(":core"))
+    api (project(":contacts-api"))
+    api (project(":sms-api"))
+    api (project(":runtime-permissions"))
+    api (project(":utilities"))
+    api (project(":multi-contact"))
 
     // Otherwise use these to build sample features against published API
     /*
-    def libAeAppsVersion = '4.1.0-beta.05'
+    def libAeAppsVersion = "4.1.0-beta.05"
     implementation "com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion"
     implementation "com.github.midhunhk.lib-aeapps:sms-api:$libAeAppsVersion"

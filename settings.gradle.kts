@@ -6,7 +6,7 @@ pluginManagement {
      * their transitive dependencies. Gradle pre-configures support for remote
      * repositories such as JCenter, Maven Central, and Ivy. You can also use
      * local repositories or define your own remote repositories. The code below
-     * defines the Gradle Plugin Portal, Google's Maven repository,
+     * defines the Gradle Plugin Portal, Google"s Maven repository,
      * and the Maven Central Repository as the repositories Gradle should use to look for its
      * dependencies.
      */
@@ -15,6 +15,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven (url = "https://jitpack.io")
     }
 }
 dependencyResolutionManagement {
@@ -34,33 +35,33 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven ( url = "https://jitpack.io" )
     }
 }
 rootProject.name = "lib-aeapps"
 
-include ':core'
-include ':mocks'
-include ':utilities'
-include ':contacts-api'
-include ':multi-contact'
-include ':runtime-permissions'
-include ':database-helpers'
-include ':billing-client'
-include ':sms-api'
-include ':aeapps'
+include (":core")
+include (":mocks")
+include (":utilities")
+include (":contacts-api")
+include (":multi-contact")
+include (":runtime-permissions")
+include (":database-helpers")
+include (":billing-client")
+include (":sms-api")
+include (":aeapps")
 
-include ':sample'
+include (":sample")
 
-project(':core').projectDir = new File('modules/core')
-project(':mocks').projectDir = new File('modules/mocks')
-project(':utilities').projectDir = new File('modules/utilities')
-project(':contacts-api').projectDir = new File('modules/contacts-api')
-project(':multi-contact').projectDir = new File('modules/multi-contact')
-project(':runtime-permissions').projectDir = new File('modules/runtime-permissions')
-project(':database-helpers').projectDir = new File('modules/database-helpers')
-project(':billing-client').projectDir = new File('modules/billing-client')
-project(':sms-api').projectDir = new File('modules/sms-api')
+project(":core").projectDir = file("modules/core")
+project(":mocks").projectDir = file("modules/mocks")
+project(":utilities").projectDir = file("modules/utilities")
+project(":contacts-api").projectDir = file("modules/contacts-api")
+project(":multi-contact").projectDir = file("modules/multi-contact")
+project(":runtime-permissions").projectDir = file("modules/runtime-permissions")
+project(":database-helpers").projectDir = file("modules/database-helpers")
+project(":billing-client").projectDir = file("modules/billing-client")
+project(":sms-api").projectDir = file("modules/sms-api")
 
-project(':aeapps').projectDir = new File('modules/aeapps')
+project(":aeapps").projectDir = file("modules/aeapps")
 
