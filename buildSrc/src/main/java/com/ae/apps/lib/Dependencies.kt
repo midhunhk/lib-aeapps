@@ -1,3 +1,5 @@
+package com.ae.apps.lib
+
 object Libs {
 
     object AndroidX {
@@ -13,7 +15,7 @@ object Libs {
     object GooglePlay {
         private const val  billingVersion = "6.0.0"
         const val playCore  = "com.google.android.play:core:1.10.3"
-        const val billingClient = "com.android.billingclient:billing:${billingVersion}"
+        const val billingClient = "com.android.billingclient:billing:$billingVersion"
     }
 
     object Material {
@@ -24,8 +26,8 @@ object Libs {
         private const val junitVersion = "4.13.2"
         private const val mockitoCoreVersion = "2.19.0"
 
-        const val junit ="junit:junit:${junitVersion}"
-        const val mockitoCore = "org.mockito:mockito-core:${mockitoCoreVersion}"
+        const val junit ="junit:junit:$junitVersion"
+        const val mockitoCore = "org.mockito:mockito-core:$mockitoCoreVersion"
         const val runner = "androidx.test:runner:1.5.2"
         const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
         const val extJunit = "androidx.test.ext:junit:1.1.5"

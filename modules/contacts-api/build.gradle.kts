@@ -1,3 +1,7 @@
+import com.ae.apps.lib.ConfigurationData
+import com.ae.apps.lib.Libs
+import com.ae.apps.lib.Publish
+
 plugins {
     id ("com.android.library")
     id ("maven-publish")
