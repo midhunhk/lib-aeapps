@@ -18,6 +18,7 @@ pluginManagement {
         maven (url = "https://jitpack.io")
     }
 }
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
 
     /**

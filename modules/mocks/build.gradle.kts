@@ -58,8 +58,8 @@ afterEvaluate {
 dependencies {
     api (project(":core"))
 
-    implementation(Libs.AndroidX.appcompat)
+    implementation(Libs.AndroidX.APPCOMPAT)
 
-    androidTestImplementation (Libs.Test.runner)
-    androidTestImplementation (Libs.Test.mockitoCore)
+    androidTestImplementation (Libs.Test.TEST_RUNNER)
+    androidTestImplementation (Libs.Test.MOCKITO_CORE)
 }

@@ -65,8 +65,8 @@ kotlin {
 
 dependencies {
     api (project(":core"))
-    implementation (Libs.AndroidX.corektx)
+    implementation(Libs.Kotlin.KTX_CORE)
 
-    testImplementation(Libs.Test.junit)
-    testImplementation(Libs.Test.mockitoCore)
+    testImplementation(Libs.Test.JUNIT)
+    testImplementation(Libs.Test.MOCKITO_CORE)
 }

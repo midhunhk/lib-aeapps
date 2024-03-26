@@ -5,6 +5,7 @@ import com.ae.apps.lib.Publish
 plugins {
     id ("com.android.library")
     id ("maven-publish")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -35,8 +36,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
@@ -56,10 +60,12 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.appcompat)
-    implementation (Libs.GooglePlay.billingClient)
+    implementation (Libs.AndroidX.APPCOMPAT)
+    implementation (Libs.GooglePlay.BILLING_CLIENT)
+    implementation (Libs.Google.GUAVA)
+    implementation (Libs.Kotlin.KTX_CORE)
 
-    testImplementation (Libs.Test.junit)
-    androidTestImplementation (Libs.Test.runner)
-    androidTestImplementation (Libs.Test.espresso)
+    testImplementation (Libs.Test.JUNIT)
+    androidTestImplementation (Libs.Test.TEST_RUNNER)
+    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }

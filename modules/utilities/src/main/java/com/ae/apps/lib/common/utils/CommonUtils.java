@@ -48,7 +48,7 @@ public class CommonUtils {
      */
     public static String formatTimeStamp(String timestamp, String pattern) {
         String timeString = null; //"Never";
-        if (timestamp != null && timestamp.trim().length() > 0) {
+        if (timestamp != null && !timestamp.trim().isEmpty()) {
             long tempLastContacted = Long.parseLong(timestamp);
             if (tempLastContacted > 0) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, Locale.getDefault());

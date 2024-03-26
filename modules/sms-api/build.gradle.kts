@@ -59,12 +59,12 @@ dependencies {
     api (project(":core"))
 
     // Libraries
-    implementation(Libs.AndroidX.appcompat)
+    implementation(Libs.AndroidX.APPCOMPAT)
 
     testImplementation (project(":mocks"))
-    testImplementation (Libs.Test.junit)
-    testImplementation (Libs.Test.mockitoCore)
+    testImplementation (Libs.Test.JUNIT)
+    testImplementation (Libs.Test.MOCKITO_CORE)
 
-    androidTestImplementation (Libs.Test.runner)
-    androidTestImplementation (Libs.Test.espresso)
+    androidTestImplementation (Libs.Test.TEST_RUNNER)
+    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }

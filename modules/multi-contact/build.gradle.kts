@@ -61,12 +61,12 @@ dependencies {
     api (project(":utilities"))
 
     // Libraries
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.recyclerview)
+    implementation(Libs.AndroidX.APPCOMPAT)
+    implementation(Libs.AndroidX.RECYCLER_VIEW)
 
     // Test Dependencies
-    testImplementation (Libs.Test.junit)
+    testImplementation (Libs.Test.JUNIT)
 
-    androidTestImplementation (Libs.Test.runner)
-    androidTestImplementation (Libs.Test.mockitoCore)
+    androidTestImplementation (Libs.Test.TEST_RUNNER)
+    androidTestImplementation (Libs.Test.MOCKITO_CORE)
 }

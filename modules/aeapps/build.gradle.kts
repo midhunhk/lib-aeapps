@@ -56,7 +56,7 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.appcompat)
+    implementation(Libs.AndroidX.APPCOMPAT)
 
     // Integrate all components into this api
     api (project(":core"))

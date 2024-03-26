@@ -40,9 +40,20 @@ public class CommonUtilsTest {
     }
 
     @Test
-    public void formatTimeStamp() {
-        String result = CommonUtils.formatTimeStamp("", "");
-        Assert.assertNotNull(result);
+    public void formatTimeStamp_validTimeStamp() {
+        String timestamp = "1623349200000"; // June 10, 2021, 12:00:00 AM
+        String pattern = "dd/MM/yyyy";
+        String expected = "10/06/2021";
+        String actual = CommonUtils.formatTimeStamp(timestamp, pattern);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testFormatTimeStamp_NegativeTimestamp() {
+        String timestamp = "-1623349200000"; // June 10, 1917, 12:00:00 AM
+        String pattern = "dd/MM/yyyy";
+        String expected = null;
+        String actual = CommonUtils.formatTimeStamp(timestamp, pattern);
+        assertEquals(expected, actual);
     }
 
     @Test

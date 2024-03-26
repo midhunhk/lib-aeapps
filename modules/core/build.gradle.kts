@@ -57,16 +57,16 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.GooglePlay.playCore)
+    implementation(Libs.AndroidX.APPCOMPAT)
+    implementation(Libs.AndroidX.RECYCLER_VIEW)
+    implementation(Libs.GooglePlay.PLAY_CORE)
 
-    testImplementation(Libs.Test.junit)
-    testImplementation(Libs.Test.mockitoCore)
+    testImplementation(Libs.Test.JUNIT)
+    testImplementation(Libs.Test.MOCKITO_CORE)
     testImplementation (project(":mocks"))
 
-    androidTestImplementation (Libs.Test.runner)
-    androidTestImplementation (Libs.Test.espresso)
-    androidTestImplementation (Libs.Test.mockitoCore)
-    androidTestImplementation (Libs.Test.extJunit)
+    androidTestImplementation (Libs.Test.TEST_RUNNER)
+    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
+    androidTestImplementation (Libs.Test.MOCKITO_CORE)
+    androidTestImplementation (Libs.Test.JUNIT_EXT)
 }

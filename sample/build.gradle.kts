@@ -51,10 +51,10 @@ android {
 }
 dependencies {
 
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.constraintlayout)
-    implementation(Libs.Material.design)
+    implementation(Libs.AndroidX.APPCOMPAT)
+    implementation(Libs.AndroidX.RECYCLER_VIEW)
+    implementation(Libs.AndroidX.CONSTRAINT_LAYOUT)
+    implementation(Libs.Material.DESIGN)
 
     // Use these to test library features while in development
     api (project(":core"))
