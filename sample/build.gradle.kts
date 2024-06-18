@@ -24,14 +24,14 @@ plugins {
 android {
     namespace = "com.ae.apps.lib.sample"
 
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.ae.apps.lib.sample"
         minSdk = 21
-        targetSdk = 33
-        versionCode = 8
-        versionName = "1.4.0"
+        targetSdk = 34
+        versionCode = 9
+        versionName = "1.4.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

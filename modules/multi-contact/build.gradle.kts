@@ -1,3 +1,4 @@
+import com.ae.apps.lib.ArtifactId
 import com.ae.apps.lib.ConfigurationData
 import com.ae.apps.lib.Libs
 import com.ae.apps.lib.Publish
@@ -14,9 +15,9 @@ afterEvaluate {
             register<MavenPublication>("release") {
                 from (components["release"])
 
-                groupId = Publish.groupId
-                artifactId = "multi-contact"
-                version = Publish.version
+                groupId = Publish.GROUP_ID
+                artifactId = ArtifactId.MULTI_CONTACT
+                version = Publish.VERSION_STRING
             }
         }
     }

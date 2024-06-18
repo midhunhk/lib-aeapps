@@ -1,3 +1,4 @@
+import com.ae.apps.lib.ArtifactId
 import com.ae.apps.lib.ConfigurationData
 import com.ae.apps.lib.Libs
 import com.ae.apps.lib.Publish
@@ -48,9 +49,9 @@ afterEvaluate {
             register<MavenPublication>("release") {
                 from (components["release"])
 
-                groupId = Publish.groupId
-                artifactId = "core"
-                version = Publish.version
+                groupId = Publish.GROUP_ID
+                artifactId = ArtifactId.CORE
+                version = Publish.VERSION_STRING
             }
         }
     }
@@ -59,7 +60,7 @@ afterEvaluate {
 dependencies {
     implementation(Libs.AndroidX.APPCOMPAT)
     implementation(Libs.AndroidX.RECYCLER_VIEW)
-    implementation(Libs.GooglePlay.PLAY_CORE)
+    implementation(Libs.GooglePlay.IN_APP_REVIEW)
 
     testImplementation(Libs.Test.JUNIT)
     testImplementation(Libs.Test.MOCKITO_CORE)

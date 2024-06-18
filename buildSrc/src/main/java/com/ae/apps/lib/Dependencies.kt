@@ -18,8 +18,8 @@ object Libs {
 
     object GooglePlay {
         private const val  BILLING_VERSION = "6.2.0"
-        const val PLAY_CORE  = "com.google.android.play:core:1.10.3"
         const val BILLING_CLIENT = "com.android.billingclient:billing:$BILLING_VERSION"
+        const val IN_APP_REVIEW = "com.google.android.play:review:2.0.1"
     }
 
     object Material {
