@@ -40,10 +40,9 @@ abstract class CopiedDataBaseHelper(
     version: Int
 ) : SQLiteOpenHelper(context, databaseName, factory, version) {
     private var mDataBase: SQLiteDatabase? = null
-    private val mAssetManager: AssetManager
+    private val mAssetManager: AssetManager = context.assets
 
     init {
-        mAssetManager = context.assets
         databasePath = context.getDatabasePath(databaseName).toString()
     }
 
