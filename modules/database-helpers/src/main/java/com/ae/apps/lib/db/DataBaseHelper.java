@@ -30,8 +30,9 @@ import android.database.sqlite.SQLiteOpenHelper;
  * @author Midhun
  * @see android.database.sqlite.SQLiteOpenHelper
  * @deprecated Use Room database from JetPack for new projects.
- * This class is maintained for backwards compatability
+ * This class is maintained for backwards compatibility
  */
+@Deprecated
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private final SQLiteDatabase mDataBase;
