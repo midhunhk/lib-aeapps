@@ -74,20 +74,12 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
                                 final ContactsDataConsumer dataConsumer) {
         final Handler handler = new Handler();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initialize(options);
+        new Thread(() -> {
+            initialize(options);
 
-                if (null != dataConsumer) {
-                    // do the callback on the original thread
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dataConsumer.onContactsRead();
-                        }
-                    });
-                }
+            if (null != dataConsumer) {
+                // do the callback on the original thread
+                handler.post(dataConsumer::onContactsRead);
             }
         }).start();
     }

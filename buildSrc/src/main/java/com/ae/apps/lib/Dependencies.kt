@@ -3,13 +3,17 @@ package com.ae.apps.lib
 object Libs {
 
     object AndroidX {
-        const val APPCOMPAT = "androidx.appcompat:appcompat:1.6.1"
-        const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:1.3.0"
+        private const val APPCOMPAT_VERSION = "1.7.0"
+        const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
+        const val APPCOMPAT_RESOURCES = "androidx.appcompat:appcompat-resources:$APPCOMPAT_VERSION"
+        const val FRAGMENT = "androidx.fragment:fragment:1.8.0"
+        const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:1.3.2"
+        const val PREFERENCE = "androidx.preference:preference:1.2.1"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.4"
     }
 
     object Kotlin{
-        const val KTX_CORE = "androidx.core:core-ktx:1.10.1"
+        const val KTX_CORE = "androidx.core:core-ktx:1.13.1"
     }
 
     object Google {

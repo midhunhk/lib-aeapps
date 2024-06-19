@@ -60,6 +60,7 @@ afterEvaluate {
 dependencies {
     implementation(Libs.AndroidX.APPCOMPAT)
     implementation(Libs.AndroidX.RECYCLER_VIEW)
+    implementation(Libs.AndroidX.PREFERENCE)
     implementation(Libs.GooglePlay.IN_APP_REVIEW)
 
     testImplementation(Libs.Test.JUNIT)

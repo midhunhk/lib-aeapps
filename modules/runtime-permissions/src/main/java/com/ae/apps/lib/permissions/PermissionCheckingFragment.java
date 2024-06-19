@@ -20,24 +20,22 @@ package com.ae.apps.lib.permissions;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.PermissionChecker;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.PermissionChecker;
+import androidx.fragment.app.Fragment;
 
 import com.ae.apps.lib.common.utils.CommonUtils;
 
 
 /**
  * An abstract Fragment that can check for Runtime Permissions if your app target is above Lollipop
- *
  * Use {@link RuntimePermissionChecker} if you need to extend any other component
- *
  * The onCreateView method is used to check for the permission and returns an empty
  * FrameLayout to the Activity that hosts this fragment.
- *
  * Based on the permission check result, the below methods would be invoked and can return
  * the appropriate View for that scenario
  *  {@link PermissionCheckingFragment#setupViewWithPermission} If permission is granted
@@ -53,7 +51,7 @@ public abstract class PermissionCheckingFragment extends Fragment {
     private static final int PERMISSION_CHECK_REQUEST_CODE = 8000;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
     }
@@ -137,6 +135,7 @@ public abstract class PermissionCheckingFragment extends Fragment {
         return true;
     }
 
+    // TODO: https://developer.android.com/training/permissions/requesting#java
     protected void requestForPermissions() {
         requestPermissions(permissionNames, PERMISSION_CHECK_REQUEST_CODE);
     }

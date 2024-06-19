@@ -62,6 +62,7 @@ dependencies {
 
     // Libraries
     implementation(Libs.AndroidX.APPCOMPAT)
+    implementation(Libs.AndroidX.FRAGMENT)
 
     // Test Dependencies
     testImplementation (Libs.Test.JUNIT)

@@ -3,19 +3,15 @@ package com.ae.apps.lib.review;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 
-import androidx.annotation.NonNull;
-
+import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.OnCompleteListener;
-import com.google.android.play.core.tasks.Task;
 
 /**
  * An implementation for managing In-App Reviews
- *
  * Usage:
  * Invoke this method whenever there is a user event considered as a positive interaction
  * Typical example would be each time the user launches the app
@@ -35,23 +31,18 @@ public class AppReviewImpl implements AppReview {
     protected static final String PREF_KEY_TIMES_PROMPTED = "key_review_times_prompted";
     static final int DEFAULT_REVIEW_THRESHOLD = 5;
 
-    private static AppReview instance;
-
-   protected  SharedPreferences preferences;
+    protected SharedPreferences preferences;
 
     private AppReviewImpl() {
 
     }
 
+    private static final class InstanceHolder {
+        static final AppReview instance = new AppReviewImpl();
+    }
+
     public static AppReview getInstance() {
-        if (instance == null) {
-            synchronized (AppReviewImpl.class) {
-                if (instance == null) {
-                    instance = new AppReviewImpl();
-                }
-            }
-        }
-        return instance;
+        return InstanceHolder.instance;
     }
 
     @Override
@@ -107,14 +98,11 @@ public class AppReviewImpl implements AppReview {
         if (showReview) {
             final ReviewManager reviewManager = ReviewManagerFactory.create(activity);
             final Task<ReviewInfo> request = reviewManager.requestReviewFlow();
-            request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
-                @Override
-                public void onComplete(@NonNull Task<ReviewInfo> task) {
-                    if (task.isSuccessful()) {
-                        ReviewInfo reviewInfo = task.getResult();
+            request.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
 
-                        launchReviewFlow(reviewInfo, reviewManager, activity);
-                    }
+                    launchReviewFlow(reviewInfo, reviewManager, activity);
                 }
             });
         }
@@ -127,11 +115,8 @@ public class AppReviewImpl implements AppReview {
                 .apply();
 
         Task<Void> flow = reviewManager.launchReviewFlow(activity, reviewInfo);
-        flow.addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                // Flow has finished, but we do not get an indication from the API
-            }
+        flow.addOnCompleteListener(task -> {
+            // Flow has finished, but we do not get an indication from the API
         });
     }
 }
