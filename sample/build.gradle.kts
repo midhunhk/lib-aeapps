@@ -30,8 +30,8 @@ android {
         applicationId = "com.ae.apps.lib.sample"
         minSdk = 21
         targetSdk = 34
-        versionCode = 9
-        versionName = "1.4.1"
+        versionCode = 10
+        versionName = "1.4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
