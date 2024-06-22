@@ -29,7 +29,7 @@ public class MockSmsApiGateway extends AbstractSmsApiGateway {
 
     public static final int MESSAGE_INFO_COUNT = 5;
 
-    public void setContentResoler(final ContentResolver contentResolver){
+    public void setContentResolver(final ContentResolver contentResolver){
         this.contentResolver = contentResolver;
     }
 

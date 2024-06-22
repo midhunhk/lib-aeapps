@@ -12,10 +12,6 @@ object Libs {
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.4"
     }
 
-    object Kotlin{
-        const val KTX_CORE = "androidx.core:core-ktx:1.13.1"
-    }
-
     object Google {
         const val GUAVA = "com.google.guava:guava:31.0.1-android"
     }
@@ -24,6 +20,11 @@ object Libs {
         private const val  BILLING_VERSION = "6.2.0"
         const val BILLING_CLIENT = "com.android.billingclient:billing:$BILLING_VERSION"
         const val IN_APP_REVIEW = "com.google.android.play:review:2.0.1"
+
+        object Kotlin{
+            const val IN_APP_REVIEW = "com.google.android.play:review-ktx:2.0.1"
+            const val IN_APP_UPDATE = "com.google.android.play:app-update-ktx:2.1.0"
+        }
     }
 
     object Material {

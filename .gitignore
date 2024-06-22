@@ -16,6 +16,7 @@ build/
 gradle/
 app/AeAppsLibrary.iml
 sample/release/
+.kotlin/sessions/
 
 # Local configuration file (sdk path, etc)
 local.properties

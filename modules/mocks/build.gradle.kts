@@ -6,6 +6,7 @@ import com.ae.apps.lib.Publish
 plugins {
     id ("com.android.library")
     id ("maven-publish")
+    id ("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -36,8 +37,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -56,10 +57,19 @@ afterEvaluate {
     }
 }
 
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+
+    jvmToolchain(17)
+}
+
 dependencies {
     api (project(":core"))
 
     implementation(Libs.AndroidX.APPCOMPAT)
+    implementation("androidx.core:core-ktx:1.13.1")
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.MOCKITO_CORE)

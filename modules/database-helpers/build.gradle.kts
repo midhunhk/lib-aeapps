@@ -66,7 +66,6 @@ kotlin {
 
 dependencies {
     api (project(":core"))
-    implementation(Libs.Kotlin.KTX_CORE)
 
     testImplementation(Libs.Test.JUNIT)
     testImplementation(Libs.Test.MOCKITO_CORE)

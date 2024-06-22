@@ -2,7 +2,7 @@ package com.ae.apps.lib
 
 object Publish {
     const val GROUP_ID = "com.github.midhunhk.lib-aeapps"
-    const val VERSION_STRING = "5.0.0-alpha.20"
+    const val VERSION_STRING = "5.0.0-alpha.21"
 }
 
 object ArtifactId {

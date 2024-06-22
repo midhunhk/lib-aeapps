@@ -64,7 +64,6 @@ dependencies {
     implementation (Libs.AndroidX.APPCOMPAT)
     implementation (Libs.GooglePlay.BILLING_CLIENT)
     implementation (Libs.Google.GUAVA)
-    implementation (Libs.Kotlin.KTX_CORE)
 
     testImplementation (Libs.Test.JUNIT)
     androidTestImplementation (Libs.Test.TEST_RUNNER)
