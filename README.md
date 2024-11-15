@@ -16,7 +16,7 @@ Detailed information about the architecture of the project is available on the p
 Depending on the features you use, make sure to declare the permissions in your manifest.xml file.
 
 ## Implementations
-Presently the following android app projects make use of this library, and are supported.
+Presently the following android app projects make use of this library, and are supported by this library.
 
 * <a href="https://github.com/midhunhk/message-counter">Message Counter</a>
 * <a href="https://github.com/midhunhk/random-contact">Random Contact</a>
@@ -35,7 +35,6 @@ To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-a
 | Version   	| Upgrade to 	| Guide 	|
 |-----------	|------------	|-------	|
 | Before v4 	| v4.1       	| [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)    	|
-| Before v5 	| v5.0       	| TBD    	|
 
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");

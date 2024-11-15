@@ -1,12 +1,13 @@
 # Version History
 
 ## Version 5.0 (Lingonberry)
-#### Version 5.0.0 [Jun 2023]
- - migrate android gradle plugin version
- - migrate to maven publish plugin
- - migrate to kotlin dsl #38
- - build structure changes
- - billing-client: migrate billing library #35
+#### Version 5.0.0 [Nov 2024]
+- billing-client: migrate billing library #35
+- lib: migrate to maven publish plugin #36
+- lib: migrate android gradle plugin version #37
+- lib: migrate to kotlin dsl #38
+- lib: build structure changes
+- lib: use JDK 17
 
 ## Version 4.1 (Kiwiberry)
 #### Version 4.1.0 [Feb 2021]
@@ -25,15 +26,15 @@
  - core: More resources
 
 #### Version 4.0.6 [Apr 2020]
- - Update proguard for all modules
+ - lib: Update proguard for all modules
 
 #### Version 4.0.5 [Sep 2020]
- - Fixes #31
+ - core: proguard change to fix critical bug #31 
 
 #### Version 4.0.4 [Apr 2020]
- - Complete rewrite of library and change in architecture
- - Add filter for Multi Contact Picker
- - Sample app to test and showcase the features
+ - lib: Complete rewrite of library and change in architecture
+ - multi-contact: Add filter for Multi Contact Picker
+ - sample: Sample app to test and showcase the features
 
 ## Version 3.0 (Indian Plum)
 #### Version 3.0.2 [Aug 2018]
