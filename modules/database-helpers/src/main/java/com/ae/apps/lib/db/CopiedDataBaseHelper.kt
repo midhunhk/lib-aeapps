@@ -161,7 +161,7 @@ abstract class CopiedDataBaseHelper(
      * @return cursor
      */
     protected fun query(
-        table: String?,
+        table: String,
         columns: Array<String?>?,
         selection: String?,
         selectionArgs: Array<String?>?,

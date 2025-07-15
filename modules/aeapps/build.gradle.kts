@@ -71,4 +71,5 @@ dependencies {
     api (project(":utilities"))
 
     testImplementation (project(":mocks"))
+    testImplementation(Libs.Test.TEST_NG)
 }

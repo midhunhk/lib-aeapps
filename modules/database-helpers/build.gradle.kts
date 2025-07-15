@@ -58,10 +58,10 @@ afterEvaluate {
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(ConfigurationData.javaLangVersion))
     }
 
-    jvmToolchain(17)
+    jvmToolchain(ConfigurationData.javaLangVersion)
 }
 
 dependencies {

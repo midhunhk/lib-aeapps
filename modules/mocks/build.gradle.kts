@@ -59,17 +59,17 @@ afterEvaluate {
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(ConfigurationData.javaLangVersion))
     }
 
-    jvmToolchain(17)
+    jvmToolchain(ConfigurationData.javaLangVersion)
 }
 
 dependencies {
     api (project(":core"))
 
     implementation(Libs.AndroidX.APPCOMPAT)
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation(Libs.AndroidX.CORE_KTX)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.MOCKITO_CORE)
