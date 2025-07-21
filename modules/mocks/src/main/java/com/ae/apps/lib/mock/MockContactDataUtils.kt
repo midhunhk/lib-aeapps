@@ -16,65 +16,37 @@
  */
 package com.ae.apps.lib.mock
 
+import android.content.Context
 import com.ae.apps.lib.common.models.ContactInfo
 import com.ae.apps.lib.common.models.PhoneNumberInfo
+import com.ae.apps.lib.mocks.R
 import java.util.Random
 
 object MockContactDataUtils {
-    private const val LOCALE_FR = "fr"
-    private const val LOCALE_ES = "es"
 
-    /**
-     * Mock names, TODO read from resources
-     */
-    private val mockNamesEN = arrayOf(
-        "James Elliot", "Aiden Perry", "Daisy Forster", "Matt Gibson",
-        "Martin J. Fox", "Catherine", "Scott Burns", "Jesse Whitehurst", "Diana Brown"
-    )
-    private val mockNamesES = arrayOf(
-        "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
-        "Germana Ruvalcaba", "Sotero Jimnez Razo", "Olimpia Campos Curiel", "Folco Vega Girn",
-        "Aidee Padrn Cazares"
-    )
-    private val mockNamesFR = arrayOf(
-        "Lyle Coulombe", "Saber Rivire", "Algernon Monjeau",
-        "Emmeline Lamy", "Sylvie Mouet", "Carolos Bourgeau", "Ccile Fresne", "Loring Deslauriers"
-    )
-
-    /**
-     * mock profile images
-     */
-    /*
-    private static final int[] mockProfileImages = {R.drawable.profile_icon_1, R.drawable.profile_icon_2,
-            R.drawable.profile_icon_3, R.drawable.profile_icon_4, R.drawable.profile_icon_5, R.drawable.profile_icon_6,
-            R.drawable.profile_icon_1, R.drawable.profile_icon_5, R.drawable.profile_icon_3};
-*/
-    val mockContact: ContactInfo
-        /**
-         * Returns a mock contact
-         *
-         * @return ContactVo contactVo
-         */
-        get() {
+    fun getMockContact(context: Context): ContactInfo {
             val contactInfo = ContactInfo()
 
             // Create the phone number list and add one
             val phoneNumbersList: MutableList<PhoneNumberInfo> = ArrayList()
+
             var numberInfo = PhoneNumberInfo()
             numberInfo.phoneNumber = "87 7781 6267"
             numberInfo.unformattedPhoneNumber = "8777816267"
             phoneNumbersList.add(numberInfo)
+
             numberInfo = PhoneNumberInfo()
             numberInfo.phoneNumber = "86 2343 6789"
             numberInfo.unformattedPhoneNumber = "8623436789"
             phoneNumbersList.add(numberInfo)
-            val random = Random()
-            val randomVal = random.nextInt(mockNamesEN.size)
-            val randomName = mockNamesEN[randomVal]
 
-            // set mock details for this contact
-            // contactInfo.setMockUser(true);
-            // contactInfo.setMockProfileImageResource(mockProfileImages[randomVal]);
+            // Get mock names from resources
+            val mockNames = context.resources.getStringArray(R.array.mock_names)
+
+            val random = Random()
+            val randomVal = random.nextInt(mockNames.size)
+            val randomName = mockNames[randomVal]
+
             contactInfo.name = randomName
             contactInfo.id = randomVal.toString()
             contactInfo.setHasPhoneNumber(true)

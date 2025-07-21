@@ -36,6 +36,11 @@ android {
             )
         }
     }
+    testOptions {
+        unitTests.all {
+
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -70,6 +75,10 @@ dependencies {
 
     implementation(Libs.AndroidX.APPCOMPAT)
     implementation(Libs.AndroidX.CORE_KTX)
+
+    testImplementation(Libs.Test.MOCKITO_CORE)
+    testImplementation(Libs.Test.JUNITJUPITER.JUNIT5)
+    testImplementation(Libs.Test.JUNITJUPITER.MOCKITO_EXT)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.MOCKITO_CORE)

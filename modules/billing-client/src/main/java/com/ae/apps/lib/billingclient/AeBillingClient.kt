@@ -47,7 +47,7 @@ import com.android.billingclient.api.QueryPurchasesParams
  * @since 4.1 (First Implementation)
  * @since 5.0 (PBLv8 Migration)
  */
-class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
+open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
 
     private lateinit var billingClient: BillingClient
     private lateinit var handler: BillingClientHandler
@@ -110,7 +110,7 @@ class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
      * @param productDetails the productDetails
      * @return BillingClient.BillingResponseCode
      */
-    protected fun launchBillingFlow(activity: Activity, productDetails: ProductDetails): Int {
+    fun launchBillingFlow(activity: Activity, productDetails: ProductDetails): Int {
         val productDetailsParamsList = listOf(
             BillingFlowParams.ProductDetailsParams.newBuilder()
                 .setProductDetails(productDetails)
@@ -324,7 +324,6 @@ class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
         }
 
         // Query for SUBS products (if your app supports subscriptions)
-
         billingClient.queryPurchasesAsync(
             QueryPurchasesParams.newBuilder().setProductType(ProductType.SUBS).build()
         ) { billingResultSubs, activeSubs ->

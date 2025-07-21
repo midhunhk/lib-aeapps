@@ -34,6 +34,7 @@ object Libs {
 
     object Test {
         private const val JUNIT_VERSION = "4.13.2"
+        private const val JUNIT5_VERSION = "5.13.4"
         private const val MOCKITO_CORE_VERSION = "2.19.0"
 
         const val JUNIT ="junit:junit:$JUNIT_VERSION"
@@ -44,5 +45,13 @@ object Libs {
         const val RULES = "androidx.test:rules:1.6.1"
         const val ROBO_ELECTRIC = "org.robolectric:robolectric:4.13"
         const val TEST_NG = "org.testng:testng:6.9.6"
+
+        // junit5
+        object JUNITJUPITER {
+            const val JUNIT5 = "org.junit.jupiter:junit-jupiter:$JUNIT5_VERSION"
+            const val API = "org.junit.jupiter:junit-jupiter-api:$JUNIT5_VERSION"
+            const val PARAMS = "org.junit.jupiter:junit-jupiter-params:$JUNIT5_VERSION"
+            const val MOCKITO_EXT = "org.mockito:mockito-junit-jupiter:5.10.0"
+        }
     }
 }

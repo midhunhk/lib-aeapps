@@ -65,7 +65,13 @@ dependencies {
     implementation (Libs.GooglePlay.BILLING_CLIENT)
     implementation (Libs.Google.GUAVA)
 
-    testImplementation (Libs.Test.JUNIT)
+    testImplementation (Libs.Test.JUNITJUPITER.JUNIT5)
+    testImplementation (Libs.Test.JUNITJUPITER.MOCKITO_EXT)
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.0.0")
+
+    // kotlin-test for JUnit 4
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.2.0")
+
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }
