@@ -10,12 +10,12 @@ plugins {
 }
 android {
     namespace = "com.ae.apps.lib.utilities"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = ConfigurationData.SDK_COMPILE_VERSION
 
     defaultConfig {
-        minSdk = ConfigurationData.minSdk
+        minSdk = ConfigurationData.MIN_SDK_VERSION
         aarMetadata {
-            minCompileSdk = ConfigurationData.minSdk
+            minCompileSdk = ConfigurationData.MIN_SDK_VERSION
         }
         consumerProguardFiles ("consumer-rules.pro")
         // testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")
@@ -64,7 +64,7 @@ dependencies {
     testImplementation (Libs.Test.ROBO_ELECTRIC)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.MOCKITO_CORE)
+    androidTestImplementation (Libs.Test.MOCKITO.MOCKITO_CORE)
     androidTestImplementation (Libs.Test.RULES)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }

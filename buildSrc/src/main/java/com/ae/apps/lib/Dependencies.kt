@@ -6,6 +6,7 @@ object Libs {
         private const val APPCOMPAT_VERSION = "1.7.1"
         const val CORE_KTX = "androidx.core:core-ktx:1.16.0"
         const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
+        @Suppress("unused")
         const val APPCOMPAT_RESOURCES = "androidx.appcompat:appcompat-resources:$APPCOMPAT_VERSION"
         const val FRAGMENT = "androidx.fragment:fragment:1.8.8"
         const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:1.4.0"
@@ -22,8 +23,11 @@ object Libs {
         const val BILLING_CLIENT = "com.android.billingclient:billing:$BILLING_VERSION"
         const val IN_APP_REVIEW = "com.google.android.play:review:2.0.1"
 
+        @Suppress("unused")
         object Kotlin {
+            @Suppress("unused")
             const val IN_APP_REVIEW = "com.google.android.play:review-ktx:2.0.1"
+            @Suppress("unused")
             const val IN_APP_UPDATE = "com.google.android.play:app-update-ktx:2.1.0"
         }
     }
@@ -34,11 +38,10 @@ object Libs {
 
     object Test {
         private const val JUNIT_VERSION = "4.13.2"
-        private const val JUNIT5_VERSION = "5.13.4"
-        private const val MOCKITO_CORE_VERSION = "2.19.0"
+        private const val JUNIT5_VERSION = "5.10.2"
+        private const val MOCKITO_CORE_VERSION = "5.18.0"
 
         const val JUNIT ="junit:junit:$JUNIT_VERSION"
-        const val MOCKITO_CORE = "org.mockito:mockito-core:$MOCKITO_CORE_VERSION"
         const val TEST_RUNNER = "androidx.test:runner:1.6.2"
         const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:3.6.1"
         const val JUNIT_EXT = "androidx.test.ext:junit:1.2.1"
@@ -50,8 +53,15 @@ object Libs {
         object JUNITJUPITER {
             const val JUNIT5 = "org.junit.jupiter:junit-jupiter:$JUNIT5_VERSION"
             const val API = "org.junit.jupiter:junit-jupiter-api:$JUNIT5_VERSION"
+            const val ENGINE = "org.junit.jupiter:junit-jupiter-engine:$JUNIT5_VERSION"
+            const val LAUNCHER = "org.junit.platform:junit-platform-launcher:1.10.2"
             const val PARAMS = "org.junit.jupiter:junit-jupiter-params:$JUNIT5_VERSION"
-            const val MOCKITO_EXT = "org.mockito:mockito-junit-jupiter:5.10.0"
+        }
+
+        object MOCKITO {
+            const val MOCKITO_CORE = "org.mockito:mockito-core:$MOCKITO_CORE_VERSION"
+            const val MOCKITO_JUNIT = "org.mockito:mockito-junit-jupiter:$MOCKITO_CORE_VERSION"
+            const val MOCKITO_KOTLIN = "org.mockito.kotlin:mockito-kotlin:3.2.0"
         }
     }
 }

@@ -11,12 +11,12 @@ plugins {
 
 android {
     namespace = "com.ae.apps.lib.billing_client"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = ConfigurationData.SDK_COMPILE_VERSION
 
     defaultConfig {
-        minSdk = ConfigurationData.minSdk
+        minSdk = ConfigurationData.MIN_SDK_VERSION
         aarMetadata {
-            minCompileSdk = ConfigurationData.minSdk
+            minCompileSdk = ConfigurationData.MIN_SDK_VERSION
         }
         consumerProguardFiles ("consumer-rules.pro")
         // testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")
@@ -40,9 +40,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    tasks.withType<Test>().configureEach {
+        useJUnitPlatform()
     }
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(ConfigurationData.JAVA_LANG_VERSION))
+    }
+
+    jvmToolchain(ConfigurationData.JAVA_LANG_VERSION)
 }
 
 afterEvaluate {
@@ -65,12 +73,11 @@ dependencies {
     implementation (Libs.GooglePlay.BILLING_CLIENT)
     implementation (Libs.Google.GUAVA)
 
-    testImplementation (Libs.Test.JUNITJUPITER.JUNIT5)
-    testImplementation (Libs.Test.JUNITJUPITER.MOCKITO_EXT)
-    testImplementation("org.mockito.kotlin:mockito-kotlin:6.0.0")
-
-    // kotlin-test for JUnit 4
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.2.0")
+    testImplementation (Libs.Test.JUNITJUPITER.API)
+    testRuntimeOnly(Libs.Test.JUNITJUPITER.ENGINE)
+    testRuntimeOnly(Libs.Test.JUNITJUPITER.LAUNCHER)
+    testImplementation(Libs.Test.MOCKITO.MOCKITO_JUNIT)
+    testImplementation(Libs.Test.MOCKITO.MOCKITO_KOTLIN)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)

@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.ae.apps.lib.aeapps"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = ConfigurationData.SDK_COMPILE_VERSION
 
     defaultConfig {
-        minSdk = ConfigurationData.minSdk
+        minSdk = ConfigurationData.MIN_SDK_VERSION
         aarMetadata {
-            minCompileSdk = ConfigurationData.minSdk
+            minCompileSdk = ConfigurationData.MIN_SDK_VERSION
         }
         consumerProguardFiles ("consumer-rules.pro")
         // testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")

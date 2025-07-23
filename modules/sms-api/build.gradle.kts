@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.ae.apps.lib.sms_api"
-    compileSdk = ConfigurationData.compileSdk
+    compileSdk = ConfigurationData.SDK_COMPILE_VERSION
 
     defaultConfig {
-        minSdk = ConfigurationData.minSdk
+        minSdk = ConfigurationData.MIN_SDK_VERSION
         aarMetadata {
-            minCompileSdk = ConfigurationData.minSdk
+            minCompileSdk = ConfigurationData.MIN_SDK_VERSION
         }
         consumerProguardFiles ("consumer-rules.pro")
         // testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")
@@ -64,7 +64,7 @@ dependencies {
 
     testImplementation (project(":mocks"))
     testImplementation (Libs.Test.JUNIT)
-    testImplementation (Libs.Test.MOCKITO_CORE)
+    testImplementation (Libs.Test.MOCKITO.MOCKITO_CORE)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)

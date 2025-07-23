@@ -3,18 +3,17 @@ package com.ae.apps.lib.mock
 import android.content.Context
 import android.content.res.Resources
 import com.ae.apps.lib.common.models.ContactInfo
-import com.ae.apps.lib.mocks.R // Assuming your R class is accessible
-import org.junit.jupiter.api.Assertions.* // For JUnit 5 assertions
+import com.ae.apps.lib.mocks.R
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.junit.jupiter.MockitoExtension
-import kotlin.jvm.java
 
-@ExtendWith(MockitoExtension::class) // Initializes mocks for JUnit 5
 class MockContactDataUtilsTest {
 
     @Mock
