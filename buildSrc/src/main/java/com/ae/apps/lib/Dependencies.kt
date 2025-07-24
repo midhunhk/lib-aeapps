@@ -49,16 +49,17 @@ object Libs {
         const val ROBO_ELECTRIC = "org.robolectric:robolectric:4.13"
         const val TEST_NG = "org.testng:testng:6.9.6"
 
-        // junit5
-        object JUNITJUPITER {
+        object JunitJupiter {
+            @Suppress("unused")
             const val JUNIT5 = "org.junit.jupiter:junit-jupiter:$JUNIT5_VERSION"
             const val API = "org.junit.jupiter:junit-jupiter-api:$JUNIT5_VERSION"
             const val ENGINE = "org.junit.jupiter:junit-jupiter-engine:$JUNIT5_VERSION"
             const val LAUNCHER = "org.junit.platform:junit-platform-launcher:1.10.2"
+            @Suppress("unused")
             const val PARAMS = "org.junit.jupiter:junit-jupiter-params:$JUNIT5_VERSION"
         }
 
-        object MOCKITO {
+        object Mockito {
             const val MOCKITO_CORE = "org.mockito:mockito-core:$MOCKITO_CORE_VERSION"
             const val MOCKITO_JUNIT = "org.mockito:mockito-junit-jupiter:$MOCKITO_CORE_VERSION"
             const val MOCKITO_KOTLIN = "org.mockito.kotlin:mockito-kotlin:3.2.0"

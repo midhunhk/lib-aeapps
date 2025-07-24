@@ -63,12 +63,5 @@ dependencies {
     implementation(Libs.AndroidX.PREFERENCE)
     implementation(Libs.GooglePlay.IN_APP_REVIEW)
 
-    testImplementation(Libs.Test.JUNIT)
-    testImplementation(Libs.Test.MOCKITO.MOCKITO_CORE)
     testImplementation (project(":mocks"))
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
-    androidTestImplementation (Libs.Test.MOCKITO.MOCKITO_CORE)
-    androidTestImplementation (Libs.Test.JUNIT_EXT)
 }

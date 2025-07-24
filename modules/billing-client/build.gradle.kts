@@ -73,11 +73,11 @@ dependencies {
     implementation (Libs.GooglePlay.BILLING_CLIENT)
     implementation (Libs.Google.GUAVA)
 
-    testImplementation (Libs.Test.JUNITJUPITER.API)
-    testRuntimeOnly(Libs.Test.JUNITJUPITER.ENGINE)
-    testRuntimeOnly(Libs.Test.JUNITJUPITER.LAUNCHER)
-    testImplementation(Libs.Test.MOCKITO.MOCKITO_JUNIT)
-    testImplementation(Libs.Test.MOCKITO.MOCKITO_KOTLIN)
+    testImplementation (Libs.Test.JunitJupiter.API)
+    testRuntimeOnly(Libs.Test.JunitJupiter.ENGINE)
+    testRuntimeOnly(Libs.Test.JunitJupiter.LAUNCHER)
+    testImplementation(Libs.Test.Mockito.MOCKITO_JUNIT)
+    testImplementation(Libs.Test.Mockito.MOCKITO_KOTLIN)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)

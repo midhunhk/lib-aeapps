@@ -66,7 +66,7 @@ dependencies {
 
     // Test Dependencies
     testImplementation (Libs.Test.JUNIT)
-    testImplementation (Libs.Test.MOCKITO.MOCKITO_CORE)
+    testImplementation (Libs.Test.Mockito.MOCKITO_CORE)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)

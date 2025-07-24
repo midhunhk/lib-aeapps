@@ -83,7 +83,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     checkedStatus.add(contactId);
                     interactionListener.onContactSelected(contactId);
@@ -107,7 +107,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 boolean dataUpdated = false;
-                if (charSequence.length() == 0) {
+                if (charSequence.isEmpty()) {
                     if (filteredContacts.size() < contactInfoList.size()) {
                         filteredContacts = new ArrayList<>(contactInfoList);
                         dataUpdated = true;

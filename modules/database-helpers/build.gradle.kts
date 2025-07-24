@@ -1,6 +1,5 @@
 import com.ae.apps.lib.ArtifactId
 import com.ae.apps.lib.ConfigurationData
-import com.ae.apps.lib.Libs
 import com.ae.apps.lib.Publish
 
 plugins {
@@ -66,7 +65,4 @@ kotlin {
 
 dependencies {
     api (project(":core"))
-
-    testImplementation(Libs.Test.JUNIT)
-    testImplementation(Libs.Test.MOCKITO.MOCKITO_CORE)
 }

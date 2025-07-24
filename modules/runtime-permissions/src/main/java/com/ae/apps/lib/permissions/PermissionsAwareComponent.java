@@ -41,7 +41,6 @@ public interface PermissionsAwareComponent {
 
     /**
      *  Callback that is invoked when permissions are required
-     *
      *  This API is introduced so that the implementing Component can show a view or
      *  message to the user about the need for the permissions
      *

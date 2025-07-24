@@ -99,7 +99,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
         Intent intent = getIntent();
         String preSelectedContactIds = intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS);
         if (null != preSelectedContactIds) {
-            if (preSelectedContactIds.length() > 0) {
+            if (!preSelectedContactIds.isEmpty()) {
                 String[] ids = preSelectedContactIds.split(MultiContactPickerConstants.CONTACT_ID_SEPARATOR);
                 Collections.addAll(selectedContactIds, ids);
             }
@@ -128,7 +128,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedContactIds.size() > 0) {
+                if (!selectedContactIds.isEmpty()) {
                     onActivityComplete();
                 } else {
                     Toast.makeText(MultiContactBaseActivity.this, R.string.str_multi_contact_validation, Toast.LENGTH_SHORT).show();
@@ -158,7 +158,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
             List<ContactInfo> contactsList = contactsList();
             adapter = new MultiContactRecyclerViewAdapter(contactsList, this);
             recyclerView.setAdapter(adapter);
-            if (selectedContactIds.size() > 0) {
+            if (!selectedContactIds.isEmpty()) {
                 adapter.setSelectedContacts(selectedContactIds);
             }
         }

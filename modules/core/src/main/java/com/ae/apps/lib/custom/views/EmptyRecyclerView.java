@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
  *
  * <pre>
  * References
- * http://stackoverflow.com/a/27801394/39540
- * https://gist.github.com/adelnizamutdinov/31c8f054d1af4588dc5c
+ * <a href="http://stackoverflow.com/a/27801394/39540">From Stackoverflow</a>
+ * <a href="https://gist.github.com/adelnizamutdinov/31c8f054d1af4588dc5c">Gist</a>
  * </pre>
  */
 public class EmptyRecyclerView extends RecyclerView {

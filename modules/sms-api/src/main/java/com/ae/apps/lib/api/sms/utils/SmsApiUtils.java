@@ -52,12 +52,31 @@ public class SmsApiUtils {
      */
     public static MessageInfo createMessageInfo(final Cursor cursor) {
         MessageInfo messageInfo = new MessageInfo();
-        messageInfo.setId(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_ID)));
-        messageInfo.setThreadId(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_THREAD_ID)));
-        messageInfo.setAddress(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_ADDRESS)));
-        messageInfo.setBody(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_BODY)));
-        messageInfo.setPerson(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_PERSON)));
-        //messageInfo.setDate(Long.parseLong(cursor.getString(cursor.getColumnIndex(SmsApiConstants.COLUMN_DATE))));
+
+        int idColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_ID);
+        if (idColumnIndex >= 0) {
+            messageInfo.setId(cursor.getString(idColumnIndex));
+        }
+        int threadIdColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_THREAD_ID);
+        if (threadIdColumnIndex >= 0) {
+            messageInfo.setThreadId(cursor.getString(threadIdColumnIndex));
+        }
+        int addressColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_ADDRESS);
+        if (addressColumnIndex >= 0) {
+            messageInfo.setAddress(cursor.getString(addressColumnIndex));
+        }
+        int bodyColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_BODY);
+        if (bodyColumnIndex >= 0) {
+            messageInfo.setBody(cursor.getString(bodyColumnIndex));
+        }
+        int dateColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_DATE);
+        if (dateColumnIndex >= 0) {
+            messageInfo.setDate(cursor.getLong(dateColumnIndex));
+        }
+        int personColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_PERSON);
+        if (personColumnIndex >= 0) {
+            messageInfo.setPerson(cursor.getString(personColumnIndex));
+        }
         return messageInfo;
     }
 }

@@ -64,7 +64,7 @@ dependencies {
     testImplementation (Libs.Test.ROBO_ELECTRIC)
 
     androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.MOCKITO.MOCKITO_CORE)
+    androidTestImplementation (Libs.Test.Mockito.MOCKITO_CORE)
     androidTestImplementation (Libs.Test.RULES)
     androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }
