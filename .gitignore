@@ -13,14 +13,12 @@
 bin/
 gen/
 build/
-gradle/
 app/AeAppsLibrary.iml
 sample/release/
-.kotlin/sessions/
+.kotlin/
 
 # Local configuration file (sdk path, etc)
 local.properties
-.gitignore
 genrelease.cmd
 genJavaDoc.cmd
 

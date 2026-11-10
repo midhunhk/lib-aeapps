@@ -107,7 +107,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 boolean dataUpdated = false;
-                if (charSequence.isEmpty()) {
+                if (charSequence.length() == 0) {
                     if (filteredContacts.size() < contactInfoList.size()) {
                         filteredContacts = new ArrayList<>(contactInfoList);
                         dataUpdated = true;

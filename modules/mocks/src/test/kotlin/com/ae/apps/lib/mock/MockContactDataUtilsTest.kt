@@ -12,8 +12,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.Mock
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.`when`
+import org.mockito.junit.jupiter.MockitoExtension
 
+@ExtendWith(MockitoExtension::class)
 class MockContactDataUtilsTest {
 
     @Mock
