@@ -101,6 +101,12 @@ public class SimpleGraphView extends View {
     }
 
     private void drawData(Canvas canvas) {
+        if (null == mDegreeValues || null == mColors) {
+            // Created without data, e.g. inflated from XML
+            return;
+        }
+        // Start from the top on every draw pass, otherwise the slices drift on each redraw
+        mTotalDegree = 0;
         for (int i = 0; i < mDegreeValues.length; i++) {
             if (i == 0) {
                 mChartPaint.setColor(mColors[i % mColors.length]);

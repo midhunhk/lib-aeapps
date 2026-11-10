@@ -1,7 +1,6 @@
 # lib-AeApps
-[![](https://jitci.com/gh/midhunhk/lib-aeapps/svg)](https://jitci.com/gh/midhunhk/lib-aeapps)
-[![Release](https://jitpack.io/v/midhunhk/ae-apps-library.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/lib-aeapps/v4.1.0.svg)](https://github.com/midhunhk/lib-aeapps) 
+[![CI](https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml/badge.svg)](https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml)
+[![Release](https://jitpack.io/v/midhunhk/lib-aeapps.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
 lib-AeApps is an Android library project which provides reusable solutions to some common problems.
@@ -23,7 +22,7 @@ Presently the following android app projects make use of this library, and are s
 * <a href="https://github.com/midhunhk/trip-o-meter">Trip 'O Meter</a>
 
 ## Changelog
-To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-aeapps/blob/master/VersionHistory.md)
+To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-aeapps/blob/main/VersionHistory.md)
 
 ## Using the library
 * For version 4, the library has been split into multiple modules, each of which could be included separately in an android app.

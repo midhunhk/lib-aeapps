@@ -295,6 +295,34 @@ all pass on this machine (47 tests, 0 failures; lint 0 errors).
 
 Exit: a consumer with *only* the lib-aeapps dependencies declared can compile against each module.
 
+**Status 2026-11-10: code and packaging items done locally (second analysis pass); not yet
+committed.** Full build passes: 57 unit tests, lint 0 errors, release build, local publish.
+POMs checked in Maven Local — exposed libraries are now `compile` scope and each module has a
+`-sources.jar`.
+
+Fixed from the findings tables: P1, P2, P5, B1 (the always-true bug only), B2, B3, B4, B5, B6,
+B7, B8 (partial grant only), B9, B11, and the README/CONTRIBUTING links and changelog heading
+from D-1/D-2.
+
+New in the second pass, also fixed:
+
+- `SimpleGraphView` never reset its running angle, so the pie was drawn wrongly on every redraw
+  after the first, and it crashed when created through its XML constructors.
+- `RoundedImageView` cast every drawable to `BitmapDrawable` and crashed on vectors.
+- `getContactPicture` never closed its input stream.
+- `IntentUtils.getUriIntent` built an Intent with no action.
+
+Found in the second pass, **not** fixed (need a decision or are larger than a bug fix):
+
+- `SimpleGraphView.drawLabels` advances `x` by the line height instead of `y`, so legend labels
+  overlap. The intended layout is unclear from the code.
+- `RoundedImageView.onDraw` allocates three bitmaps on every draw pass.
+- `SmsApiUtilsTest` has a hand-rolled `assertThrows` and an unchecked cast warning.
+
+Still open in Phase 1: collapsing the three `isPackageInstalled` variants and documenting
+`<queries>`; a README dependency snippet (blocked on confirming the JitPack version format);
+and the consumer smoke test against Maven Local from a separate project.
+
 ### Phase 2 — Should-fix before 5.0.0
 
 | Task | Refs | Effort |

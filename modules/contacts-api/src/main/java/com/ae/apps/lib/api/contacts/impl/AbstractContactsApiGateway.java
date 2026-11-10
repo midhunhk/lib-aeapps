@@ -27,6 +27,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract;
 
 import androidx.annotation.Nullable;
@@ -37,6 +38,7 @@ import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
 import com.ae.apps.lib.common.models.ContactInfo;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,8 +74,9 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
     @Override
     public void initializeAsync(final ContactInfoFilterOptions options,
                                 final ContactsDataConsumer dataConsumer) {
-        final Handler handler = new Handler();
-
+        // Deliver the callback on the calling thread if it has a Looper, else on the main thread
+        final Looper callerLooper = Looper.myLooper();
+        final Handler handler = new Handler(null != callerLooper ? callerLooper : Looper.getMainLooper());
         new Thread(() -> {
             initialize(options);
 
@@ -136,7 +139,15 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         if (null == photoDataStream) {
             return null;
         }
-        return BitmapFactory.decodeStream(photoDataStream);
+        try {
+            return BitmapFactory.decodeStream(photoDataStream);
+        } finally {
+            try {
+                photoDataStream.close();
+            } catch (IOException e) {
+                // Nothing useful to do if the stream fails to close
+            }
+        }
     }
 
     @Override

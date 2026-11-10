@@ -65,8 +65,14 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
     @Override
     protected void readContacts(ContactInfoFilterOptions options) {
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-        contacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
+                ContactsApiConstants.PROJECTION_CONTACTS, null, null, null);
+        try {
+            contacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
+        } finally {
+            if (null != cursor) {
+                cursor.close();
+            }
+        }
     }
 
     @Override
@@ -111,10 +117,15 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
                 SELECT_WITH_RAW_CONTACT_ID,
                 new String[]{rawContactId}, null);
 
-        if (null != cursor && cursor.moveToFirst()) {
-            int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
-            contactId = cursor.getString(contactIdIndex);
-            cursor.close();
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
+                    contactId = cursor.getString(contactIdIndex);
+                }
+            } finally {
+                cursor.close();
+            }
         }
 
         return contactId;
@@ -151,6 +162,10 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
     @Override
     public ContactInfo getContactInfo(String contactId, ContactInfoOptions options) {
         ContactInfo contactInfo = getContactInfo(contactId);
+        if (null == contactInfo) {
+            // No contact with this id was read by the gateway
+            return null;
+        }
         if (options.isIncludePhoneDetails()) {
             updateWithPhoneDetails(contactInfo);
         }

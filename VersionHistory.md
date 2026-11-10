@@ -1,7 +1,21 @@
 # Version History
 
 ## Version 5.0 (Lingonberry)
-#### Version 5.0.0 [Nov 2024]
+#### Version 5.0.0 [Unreleased — latest pre-release is 5.0.0-beta.03]
+- lib: published artifacts now expose AppCompat, RecyclerView, Fragment and Play Billing as compile dependencies where they are part of the public API
+- lib: publish a sources jar for every module
+- lib: GitHub Actions CI (unit tests, lint, release build)
+- lib: compileSdk 36
+- billing-client: Play Billing Library 8; removed unused Guava dependency
+- contacts-api: fix cursor and stream leaks, read only the columns needed, return null instead of crashing for an unknown contact id
+- contacts-api: `initializeAsync` no longer crashes when called from a thread without a Looper
+- sms-api: fix cursor leak on empty results; `MessageInfo` date, type and protocol are now populated
+- utilities: `CommonUtils.isPackageInstalled` now checks the package passed in (it always returned true)
+- utilities: `IntentUtils.getUriIntent` sets `ACTION_VIEW`
+- multi-contact: fix search crash below Android 15 and a threading race while filtering
+- runtime-permissions: `PermissionCheckingFragment` requires every requested permission to be granted, not just the first
+- database-helpers: `CopiedDataBaseHelper` keeps its path per instance, so two helpers no longer overwrite each other
+- core: `SimpleGraphView` no longer drifts on redraw or crashes when inflated from XML; `RoundedImageView` no longer crashes on non-bitmap drawables
 - billing-client: migrate billing library #35
 - lib: migrate to maven publish plugin #36
 - lib: migrate android gradle plugin version #37

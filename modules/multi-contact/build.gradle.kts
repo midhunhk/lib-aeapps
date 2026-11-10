@@ -38,6 +38,7 @@ android {
 
     publishing {
         singleVariant("release") {
+            withSourcesJar()
         }
     }
 
@@ -62,8 +63,9 @@ dependencies {
     api (project(":utilities"))
 
     // Libraries
-    implementation(Libs.AndroidX.APPCOMPAT)
-    implementation(Libs.AndroidX.RECYCLER_VIEW)
+    // Exposed in the public API of this module
+    api(Libs.AndroidX.APPCOMPAT)
+    api(Libs.AndroidX.RECYCLER_VIEW)
 
     // Test Dependencies
     testImplementation (Libs.Test.JUNIT)

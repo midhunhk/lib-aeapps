@@ -145,7 +145,9 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                if (null != adapter) {
+                    adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });

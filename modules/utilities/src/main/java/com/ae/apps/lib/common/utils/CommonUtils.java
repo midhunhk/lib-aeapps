@@ -115,7 +115,7 @@ public class CommonUtils {
      */
     public static boolean isPackageInstalled(String packageName, final Context context) {
         try {
-            context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            context.getPackageManager().getPackageInfo(packageName, 0);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             return false;

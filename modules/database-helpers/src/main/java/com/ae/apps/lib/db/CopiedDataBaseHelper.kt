@@ -42,9 +42,7 @@ abstract class CopiedDataBaseHelper(
     private var mDataBase: SQLiteDatabase? = null
     private val mAssetManager: AssetManager = context.assets
 
-    init {
-        databasePath = context.getDatabasePath(databaseName).toString()
-    }
+    private val databasePath: String = context.getDatabasePath(databaseName).path
 
     /**
      * Creates the database
@@ -58,10 +56,12 @@ abstract class CopiedDataBaseHelper(
             // By calling this method an empty database will be created into the default system path
             // of your application so we are gonna be able to overwrite that database with our database.
             this.readableDatabase
+            // Release the handle on the empty file before it is overwritten
+            close()
             try {
                 copyDataBase()
             } catch (e: IOException) {
-                throw Error("Error copying database")
+                throw Error("Error copying database", e)
             }
         }
     }
@@ -75,7 +75,7 @@ abstract class CopiedDataBaseHelper(
         var checkDB: SQLiteDatabase? = null
         try {
             val myPath = databasePath
-            checkDB = SQLiteDatabase.openDatabase(myPath!!, null, SQLiteDatabase.OPEN_READONLY)
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY)
         } catch (e: SQLiteException) {
             // database does't exist yet.
         }
@@ -89,26 +89,12 @@ abstract class CopiedDataBaseHelper(
      */
     @Throws(IOException::class)
     protected fun copyDataBase() {
-        // Open your local db as the input stream
-        val myInput = mAssetManager.open(databaseName)
-
-        // Path to the just created empty db
-        val outFileName = databasePath
-
-        // Open the empty db as the output stream
-        val myOutput: OutputStream = FileOutputStream(outFileName)
-
-        // transfer bytes from the input file to the output file
-        val buffer = ByteArray(1024)
-        var length: Int
-        while (myInput.read(buffer).also { length = it } > 0) {
-            myOutput.write(buffer, 0, length)
+        // Copy the bundled database over the empty one, closing both streams even on failure
+        mAssetManager.open(databaseName).use { input ->
+            FileOutputStream(databasePath).use { output ->
+                input.copyTo(output)
+            }
         }
-
-        // Close the streams
-        myOutput.flush()
-        myOutput.close()
-        myInput.close()
     }
 
     /**
@@ -120,7 +106,7 @@ abstract class CopiedDataBaseHelper(
     fun openDataBase() {
         // Open the database
         val myPath = databasePath
-        mDataBase = SQLiteDatabase.openDatabase(myPath!!, null, SQLiteDatabase.OPEN_READONLY)
+        mDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY)
     }
 
     /**
@@ -172,7 +158,4 @@ abstract class CopiedDataBaseHelper(
         return mDataBase!!.query(table, columns, selection, selectionArgs, groupBy, having, orderBy)
     }
 
-    companion object {
-        private var databasePath: String? = null
-    }
 }

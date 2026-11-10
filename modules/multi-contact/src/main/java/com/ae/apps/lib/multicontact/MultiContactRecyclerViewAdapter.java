@@ -35,6 +35,7 @@ import com.ae.apps.lib.multi_contact.R;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -106,29 +107,26 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                boolean dataUpdated = false;
-                if (charSequence.length() == 0) {
-                    if (filteredContacts.size() < contactInfoList.size()) {
-                        filteredContacts = new ArrayList<>(contactInfoList);
-                        dataUpdated = true;
-                    }
+                // Runs on a worker thread: build a new list and hand it over, never touch adapter state here
+                final List<ContactInfo> results;
+                if (null == charSequence || charSequence.length() == 0) {
+                    results = new ArrayList<>(contactInfoList);
                 } else {
-                    filteredContacts = filterContactsByName(charSequence.toString().toLowerCase());
-                    dataUpdated = true;
+                    results = filterContactsByName(charSequence.toString().toLowerCase(Locale.getDefault()));
                 }
-
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = dataUpdated;
+                filterResults.values = results;
+                filterResults.count = results.size();
                 return filterResults;
             }
 
             @SuppressLint("NotifyDataSetChanged")
+            @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                boolean dataUpdated = Boolean.parseBoolean(filterResults.values.toString());
-                if (dataUpdated) {
-                    notifyDataSetChanged();
-                }
+                // Runs on the main thread
+                filteredContacts = (List<ContactInfo>) filterResults.values;
+                notifyDataSetChanged();
             }
         };
     }
@@ -136,7 +134,7 @@ class MultiContactRecyclerViewAdapter extends RecyclerView.Adapter<MultiContactR
     private List<ContactInfo> filterContactsByName(String queryString) {
         List<ContactInfo> results = new ArrayList<>();
         for (ContactInfo contactInfo : contactInfoList) {
-            if (null != contactInfo.getName() && contactInfo.getName().toLowerCase().contains(queryString)) {
+            if (null != contactInfo.getName() && contactInfo.getName().toLowerCase(Locale.getDefault()).contains(queryString)) {
                 results.add(contactInfo);
             }
         }

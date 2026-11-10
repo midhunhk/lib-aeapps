@@ -48,7 +48,15 @@ public class RoundedImageView extends AppCompatImageView {
         if (getWidth() == 0 || getHeight() == 0) {
             return;
         }
+        if (!(drawable instanceof BitmapDrawable)) {
+            // Only bitmaps can be cropped; draw anything else (e.g. a vector) as a regular ImageView
+            super.onDraw(canvas);
+            return;
+        }
         Bitmap originalBitmap = ((BitmapDrawable) drawable).getBitmap();
+        if (null == originalBitmap) {
+            return;
+        }
         Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
         int imageRadius = getImageRadiusSize();

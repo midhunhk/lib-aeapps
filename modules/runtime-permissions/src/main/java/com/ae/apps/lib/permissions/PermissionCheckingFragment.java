@@ -135,6 +135,18 @@ public abstract class PermissionCheckingFragment extends Fragment {
         return true;
     }
 
+    private boolean allPermissionsGranted(@NonNull int[] grantResults) {
+        if (grantResults.length == 0) {
+            return false;
+        }
+        for (int grantResult : grantResults) {
+            if (PackageManager.PERMISSION_GRANTED != grantResult) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // TODO: https://developer.android.com/training/permissions/requesting#java
     protected void requestForPermissions() {
         requestPermissions(permissionNames, PERMISSION_CHECK_REQUEST_CODE);
@@ -144,7 +156,7 @@ public abstract class PermissionCheckingFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_CHECK_REQUEST_CODE: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (allPermissionsGranted(grantResults)) {
                     onPermissionGranted(null);
                 } else {
                     onPermissionNotGranted(requestCode, permissions, grantResults);

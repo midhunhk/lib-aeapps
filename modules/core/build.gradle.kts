@@ -24,6 +24,7 @@ android {
 
     publishing {
         singleVariant("release") {
+            withSourcesJar()
         }
     }
 
@@ -58,8 +59,9 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.APPCOMPAT)
-    implementation(Libs.AndroidX.RECYCLER_VIEW)
+    // Exposed in the public API of this module
+    api(Libs.AndroidX.APPCOMPAT)
+    api(Libs.AndroidX.RECYCLER_VIEW)
     implementation(Libs.AndroidX.PREFERENCE)
     implementation(Libs.GooglePlay.IN_APP_REVIEW)
 

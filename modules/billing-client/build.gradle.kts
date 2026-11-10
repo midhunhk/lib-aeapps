@@ -24,6 +24,7 @@ android {
 
     publishing {
         singleVariant("release") {
+            withSourcesJar()
         }
     }
 
@@ -69,9 +70,9 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation (Libs.AndroidX.APPCOMPAT)
-    implementation (Libs.GooglePlay.BILLING_CLIENT)
-    implementation (Libs.Google.GUAVA)
+    // Exposed in the public API of this module
+    api (Libs.AndroidX.APPCOMPAT)
+    api (Libs.GooglePlay.BILLING_CLIENT)
 
     testImplementation (Libs.Test.JunitJupiter.API)
     testRuntimeOnly(Libs.Test.JunitJupiter.ENGINE)

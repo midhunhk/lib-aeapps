@@ -77,6 +77,14 @@ public class SmsApiUtils {
         if (personColumnIndex >= 0) {
             messageInfo.setPerson(cursor.getString(personColumnIndex));
         }
+        int typeColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_TYPE);
+        if (typeColumnIndex >= 0) {
+            messageInfo.setType(cursor.getString(typeColumnIndex));
+        }
+        int protocolColumnIndex = cursor.getColumnIndex(SmsApiConstants.COLUMN_PROTOCOL);
+        if (protocolColumnIndex >= 0) {
+            messageInfo.setProtocol(cursor.getString(protocolColumnIndex));
+        }
         return messageInfo;
     }
 }

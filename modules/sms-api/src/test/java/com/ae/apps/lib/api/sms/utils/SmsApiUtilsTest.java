@@ -200,6 +200,8 @@ public class SmsApiUtilsTest {
         when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_BODY)).thenReturn(3);
         when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_DATE)).thenReturn(4);
         when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_PERSON)).thenReturn(5);
+        when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_TYPE)).thenReturn(6);
+        when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_PROTOCOL)).thenReturn(7);
 
         // Mock getString and getLong for those indices
         when(mockCursor.getString(0)).thenReturn(expectedId);
@@ -208,6 +210,8 @@ public class SmsApiUtilsTest {
         when(mockCursor.getString(3)).thenReturn(expectedBody);
         when(mockCursor.getLong(4)).thenReturn(expectedDate);
         when(mockCursor.getString(5)).thenReturn(expectedPerson);
+        when(mockCursor.getString(6)).thenReturn("2");
+        when(mockCursor.getString(7)).thenReturn("0");
 
         // Act
         MessageInfo result = SmsApiUtils.createMessageInfo(mockCursor);
@@ -220,6 +224,8 @@ public class SmsApiUtilsTest {
         Assert.assertEquals(expectedBody, result.getBody());
         Assert.assertEquals(expectedDate, result.getDate());
         Assert.assertEquals(expectedPerson, result.getPerson());
+        Assert.assertEquals("2", result.getType());
+        Assert.assertEquals("0", result.getProtocol());
 
         // Verify interactions (optional, but good for completeness)
         verify(mockCursor).getColumnIndex(SmsApiConstants.COLUMN_ID);
@@ -256,6 +262,8 @@ public class SmsApiUtilsTest {
         when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_BODY)).thenReturn(1);     // Body exists at index 1
         when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_DATE)).thenReturn(-1);        // Date missing
         when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_PERSON)).thenReturn(-1);     // Person missing
+        when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_TYPE)).thenReturn(-1);       // Type missing
+        when(mockCursor.getColumnIndex(SmsApiConstants.COLUMN_PROTOCOL)).thenReturn(-1);   // Protocol missing
 
         // Mock getString for existing columns
         when(mockCursor.getString(0)).thenReturn(expectedId);

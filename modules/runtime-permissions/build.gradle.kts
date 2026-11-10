@@ -23,6 +23,7 @@ android {
 
     publishing {
         singleVariant("release") {
+            withSourcesJar()
         }
     }
 
@@ -61,8 +62,9 @@ dependencies {
     api (project(":utilities"))
 
     // Libraries
-    implementation(Libs.AndroidX.APPCOMPAT)
-    implementation(Libs.AndroidX.FRAGMENT)
+    // Exposed in the public API of this module
+    api(Libs.AndroidX.APPCOMPAT)
+    api(Libs.AndroidX.FRAGMENT)
 
     // Test Dependencies
     testImplementation (Libs.Test.JUNIT)
