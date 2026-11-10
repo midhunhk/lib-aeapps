@@ -277,10 +277,9 @@ implementation("com.github.midhunhk.lib-aeapps:contacts-api:<version>")
 implementation("com.github.midhunhk.lib-aeapps:aeapps:<version>")
 ```
 
-> **Verify before documenting publicly:** tags carry a `v` prefix (`v5.0.0-beta.03`) while
-> `VERSION_STRING` does not (`5.0.0-beta.03`). The old commented snippet in the sample used the
-> un-prefixed form. Confirm on the project's jitpack.io page which form JitPack actually resolves
-> for this repository and write that exact string into the README.
+> **Use the tag name, including the `v`, as `<version>`** — for example `v5.0.0-beta.04`.
+> `VERSION_STRING` in `Publish.kt` has no prefix, but JitPack serves artifacts under the git tag
+> name. Random Contact resolves the library this way (`v5.0.0-beta.02`).
 
 ---
 
@@ -326,8 +325,8 @@ Steps 1–6 happen on the codename branch.
 1. **Confirm the branch is green.** CI passing on the latest commit, or locally:
    `testDebugUnitTest`, `lintDebug`, `assembleRelease`.
 
-2. **Bump `VERSION_STRING`** in `Publish.kt`. The tree is currently two commits past
-   `v5.0.0-beta.03` but still says `5.0.0-beta.03`, so the next tag needs a bump first.
+2. **Bump `VERSION_STRING`** in `Publish.kt`. (As of 2026-11-10 it is `5.0.0-beta.04`, which
+   has not been tagged yet.)
 
 3. **Dry-run the publication locally** and look at what was produced:
 

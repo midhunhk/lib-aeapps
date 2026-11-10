@@ -319,6 +319,17 @@ Found in the second pass, **not** fixed (need a decision or are larger than a bu
 - `RoundedImageView.onDraw` allocates three bitmaps on every draw pass.
 - `SmsApiUtilsTest` has a hand-rolled `assertThrows` and an unchecked cast warning.
 
+**Production crash fixed 2026-11-10 (not yet committed, tagged or released).** Random Contact
+reported `IllegalStateException` from `AbstractContactsApiGateway.throwExceptionIfNotInitialized`.
+Cause: `initialize()` checked and changed its state non-atomically, so a second
+`initialize`/`initializeAsync` arriving during the first read returned at once and its callback
+fired before the contacts were loaded. Initialization is now serialized, callbacks fire only
+when ready, a failed read can be retried, and `ContactsDataConsumer.onContactsReadFailed` was
+added. `VERSION_STRING` is bumped to `5.0.0-beta.04` for this fix. Two app-side changes are
+still needed in Random Contact: remove the duplicate `showFragment` call in
+`MainActivity.onPermissionsGranted`, and initialize the gateway in `MultiContactPickerActivity`
+before reading from it (that path still throws after process death).
+
 Still open in Phase 1: collapsing the three `isPackageInstalled` variants and documenting
 `<queries>`; a README dependency snippet (blocked on confirming the JitPack version format);
 and the consumer smoke test against Maven Local from a separate project.

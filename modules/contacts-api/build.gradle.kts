@@ -36,6 +36,10 @@ android {
             )
         }
     }
+    testOptions {
+        // Let android.util.Log and similar framework calls be no-ops in JVM unit tests
+        unitTests.isReturnDefaultValues = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
