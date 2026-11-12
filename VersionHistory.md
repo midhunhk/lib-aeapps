@@ -7,7 +7,7 @@
 - lib: published artifacts now expose AppCompat, RecyclerView, Fragment and Play Billing as compile dependencies where they are part of the public API
 - lib: publish a sources jar for every module
 - lib: GitHub Actions CI (unit tests, lint, release build)
-- lib: compileSdk 36
+- lib: compileSdk 37
 - billing-client: Play Billing Library 8; removed unused Guava dependency
 - contacts-api: fix cursor and stream leaks, read only the columns needed, return null instead of crashing for an unknown contact id
 - contacts-api: `initializeAsync` no longer crashes when called from a thread without a Looper
@@ -20,10 +20,11 @@
 - core: `SimpleGraphView` no longer drifts on redraw or crashes when inflated from XML; `RoundedImageView` no longer crashes on non-bitmap drawables
 - billing-client: migrate billing library #35
 - lib: migrate to maven publish plugin #36
-- lib: migrate android gradle plugin version #37
+- lib: migrate android Gradle plugin version #37
 - lib: migrate to kotlin dsl #38
 - lib: build structure changes
 - lib: use JDK 17
+- agp: upgrade to 9.4.1
 
 ## Version 4.1 (Kiwiberry)
 #### Version 4.1.0 [Feb 2021]

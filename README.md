@@ -4,7 +4,7 @@
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
 
 lib-AeApps is an Android library project which provides reusable solutions to some common problems.
-Some situations require boiler plate code which can become tedious to manage.
+Some situations require boilerplate code which can become tedious to manage.
 
 This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
 [Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.  

@@ -24,12 +24,12 @@ plugins {
 android {
     namespace = "com.ae.apps.lib.sample"
 
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.ae.apps.lib.sample"
         minSdk = 21
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 12
         versionName = "1.4.4"
 
