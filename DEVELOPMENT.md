@@ -4,7 +4,7 @@ Written 2026-11-10 against `lingonberry` at `b6b14fd`.
 
 This page describes how the repository is laid out, how the build is wired, and the steps that
 are specific to this project when cutting a release. It describes the project **as it is today**;
-planned changes live in [RELEASE_PLAN.md](RELEASE_PLAN.md). Where the two disagree, this page is
+planned changes live in [RELEASE-PLAN-v5.md](guides/RELEASE-PLAN-v5.md). Where the two disagree, this page is
 the "now" and the plan is the "next".
 
 ---
@@ -53,7 +53,10 @@ lib-aeapps/
 │
 ├── README.md
 ├── VersionHistory.md          Markdown changelog (the one the README links to)
-├── RELEASE_PLAN.md            5.0 analysis and plan
+├── guides/                    Versioned planning and migration documents
+│   ├── RELEASE-PLAN-v5.md     5.0 analysis and plan
+│   ├── MIGRATION-v4.md        Client migration guide, 3.x → 4.1
+│   └── MIGRATION-v5.md        Client migration guide, 4.1 → 5.0
 └── LICENSE                    Apache 2.0
 ```
 
@@ -423,7 +426,7 @@ coordinate disappears — do it only at a major version and call it out in the m
 
 ## 7. Known gaps
 
-Tracked in detail in [RELEASE_PLAN.md](RELEASE_PLAN.md); listed here so this guide is not read
+Tracked in detail in [RELEASE-PLAN-v5.md](guides/RELEASE-PLAN-v5.md); listed here so this guide is not read
 as a description of a finished setup.
 
 - Release steps are entirely manual; nothing checks that the tag matches `VERSION_STRING`.

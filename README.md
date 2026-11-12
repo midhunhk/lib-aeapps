@@ -33,7 +33,8 @@ To see the history of changes, see [Changelog](https://github.com/midhunhk/lib-a
 
 | Version   	| Upgrade to 	| Guide 	|
 |-----------	|------------	|-------	|
-| Before v4 	| v4.1       	| [Migration Guide](https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide)    	|
+| Before v4 	| v4.1       	| [Migration Guide](guides/MIGRATION-v4.md)    	|
+| v4.1      	| v5.0       	| [Migration Guide](guides/MIGRATION-v5.md)    	|
 
 ## License
 Licensed under the Apache License, Version 2.0 (the "License");

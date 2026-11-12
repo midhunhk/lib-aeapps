@@ -70,7 +70,7 @@ from memory rather than a lookup.
 | `sample` | (app) | Java | 691 | 0 | Demo app for contacts, multi-contact, SMS |
 
 Group: `com.github.midhunhk.lib-aeapps` · Version: `5.0.0-beta.03`
-([Publish.kt](buildSrc/src/main/java/com/ae/apps/lib/Publish.kt))
+([Publish.kt](../buildSrc/src/main/java/com/ae/apps/lib/Publish.kt))
 
 ### 3.2 Dependency graph
 
@@ -111,7 +111,7 @@ Observations on the shape:
 | Gradle wrapper | 8.13 | Minimum for AGP 8.11 |
 | compileSdk / minSdk | 36 / 21 | See decision D1 on minSdk |
 | Java target | 17 | Fine for AGP 8+ consumers |
-| Dependency management | Constants in [buildSrc/.../Dependencies.kt](buildSrc/src/main/java/com/ae/apps/lib/Dependencies.kt) | No version catalog; any edit invalidates the whole build |
+| Dependency management | Constants in [buildSrc/.../Dependencies.kt](../buildSrc/src/main/java/com/ae/apps/lib/Dependencies.kt) | No version catalog; any edit invalidates the whole build |
 | Module build scripts | ~60 near-identical lines × 10 | Publishing, SDK and compile options are copy-pasted |
 | CI | None | Travis removed Aug 2023; no `.github/workflows`; README still shows a JitCI badge |
 | Static analysis | None configured | No lint baseline, detekt, ktlint, or API-compatibility check |
@@ -133,7 +133,7 @@ Command: `./gradlew testDebugUnitTest --continue` → **BUILD FAILED** (3m 14s, 
 | `core`, `multi-contact`, `database-helpers`, `aeapps`, `sample` | 0 | — | No tests |
 
 **The failure:**
-[MockContactDataUtilsTest.kt](modules/mocks/src/test/kotlin/com/ae/apps/lib/mock/MockContactDataUtilsTest.kt)
+[MockContactDataUtilsTest.kt](../modules/mocks/src/test/kotlin/com/ae/apps/lib/mock/MockContactDataUtilsTest.kt)
 uses `@Mock lateinit var` fields but the class has no `@ExtendWith(MockitoExtension::class)`, so
 the mocks are never created and `setUp` throws `UninitializedPropertyAccessException`. This is a
 test bug, not a library bug.
@@ -166,14 +166,14 @@ Severity: **A** = fix before 5.0.0 · **B** = should fix before 5.0.0 · **C** =
 | P5 | B | Unused dependency: Guava 31.0.1 in `billing-client` — no source file imports it. It adds a large transitive dependency for nothing. |
 | P6 | B | `aeapps` umbrella exposes `mocks` as `api`. Decide whether mocks belong in a production umbrella (decision D3). |
 | P7 | C | `proguard-rules.pro` in each module holds a generic "keep everything public" template, but `isMinifyEnabled = false`, so it never runs. `consumer-rules.pro` files are empty, which is correct for this code (no reflection). The unused rule files can be deleted. |
-| P8 | C | Stray file [modules/build.gradle](modules/build.gradle) (Groovy, namespace typo `lib-aeappps`) is not part of any project. `AeAppsLib.iml` is tracked despite `*.iml` being ignored. |
+| P8 | C | Stray file `modules/build.gradle` (deleted in Phase 0) (Groovy, namespace typo `lib-aeappps`) is not part of any project. `AeAppsLib.iml` is tracked despite `*.iml` being ignored. |
 | P9 | C | `.gitignore` ignores `gradle/` (the wrapper is tracked only because it was force-added) and lists `.gitignore` itself. **This will silently hide a new `gradle/libs.versions.toml`** — fix before starting the version-catalog work. |
 
 ### 5.2 Correctness bugs in library code
 
 | # | Sev | Module | Finding |
 |---|---|---|---|
-| B1 | A | `utilities` | [CommonUtils.isPackageInstalled](modules/utilities/src/main/java/com/ae/apps/lib/common/utils/CommonUtils.java) looks up `context.getPackageName()` instead of the `packageName` argument, so it **always returns true**. There are also three overlapping variants (`isPackageInstalled`, `checkIfPackageIsInstalled`, `isPackageInstalled2`); on Android 11+ all of them need a `<queries>` declaration in the consumer manifest, which is undocumented. |
+| B1 | A | `utilities` | [CommonUtils.isPackageInstalled](../modules/utilities/src/main/java/com/ae/apps/lib/common/utils/CommonUtils.java) looks up `context.getPackageName()` instead of the `packageName` argument, so it **always returns true**. There are also three overlapping variants (`isPackageInstalled`, `checkIfPackageIsInstalled`, `isPackageInstalled2`); on Android 11+ all of them need a `<queries>` declaration in the consumer manifest, which is undocumented. |
 | B2 | A | `contacts-api` | `ContactsApiGatewayImpl.getContactInfo(id, options)` dereferences the lookup result without a null check — an unknown ID throws `NullPointerException`. `getContactInfo(id)` also does not check that the gateway is initialised. |
 | B3 | A | `contacts-api` | Cursor leaks: `readContacts` never closes its cursor; `getContactIdFromRawContact` only closes it when a row is found. `readContacts` also queries with a `null` projection (all columns) when it needs three. |
 | B4 | A | `sms-api` | `SmsApiGatewayImpl` closes its cursor only when `moveToFirst()` succeeds — empty result sets leak. |
@@ -223,11 +223,11 @@ Severity: **A** = fix before 5.0.0 · **B** = should fix before 5.0.0 · **C** =
 
 | # | Sev | Finding |
 |---|---|---|
-| D-1 | A | [README.md](README.md): JitPack badge points at the old repo name `ae-apps-library`; "commits since" badge is pinned to `v4.1.0`; Changelog link uses the `master` branch (default is `main`); JitCI badge is for a service no longer in use. No Gradle snippet showing how to add the dependency — it defers entirely to the wiki. |
-| D-2 | A | [VersionHistory.md](VersionHistory.md) lists "Version 5.0.0 [Nov 2024]" although only betas have shipped, and omits the Billing v8 migration, compileSdk 36 and the July 2025 changes. |
-| D-3 | B | No v4 → v5 migration guide (the README table stops at v4.1). Breaking changes include the billing handler interface (SKU → ProductDetails), JDK 17 and coordinate changes. |
+| D-1 | A | [README.md](../README.md): JitPack badge points at the old repo name `ae-apps-library`; "commits since" badge is pinned to `v4.1.0`; Changelog link uses the `master` branch (default is `main`); JitCI badge is for a service no longer in use. No Gradle snippet showing how to add the dependency — it defers entirely to the wiki. |
+| D-2 | A | [VersionHistory.md](../VersionHistory.md) lists "Version 5.0.0 [Nov 2024]" although only betas have shipped, and omits the Billing v8 migration, compileSdk 36 and the July 2025 changes. |
+| D-3 | B | No v4 → v5 migration guide (the README table stops at v4.1). Breaking changes include the billing handler interface (SKU → ProductDetails), JDK 17 and coordinate changes. **Done 2026-11-12:** [MIGRATION-v5.md](MIGRATION-v5.md), linked from the README. |
 | D-4 | B | `docs/api/` is a committed Javadoc dump (~220 files) from an older version: it documents `SMSManager`, `ContactManager`, `AeContactService` and `com.ae.apps.libs.*`, none of which exist now. |
-| D-5 | C | [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) links to `ae-apps-library`. [sample/Readme.md](sample/Readme.md) has an empty "Features Provided" heading. Licence headers vary by year and are missing from some files. |
+| D-5 | C | [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) links to `ae-apps-library`. [sample/Readme.md](../sample/Readme.md) has an empty "Features Provided" heading. Licence headers vary by year and are missing from some files. |
 
 ---
 
