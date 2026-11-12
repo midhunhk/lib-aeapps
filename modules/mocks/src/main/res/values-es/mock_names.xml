@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mock_names" translatable="false">
+        <item>Javier Fernández</item>
+        <item>Sofía García</item>
+        <item>Alejandro Martínez</item>
+        <item>Isabella Rodríguez</item>
+        <item>Mateo López</item>
+        <item>Valentina Sánchez</item>
+        <item>Daniel Pérez</item>
+        <item>Camila Gómez</item>
+        <item>Sebastián Romero</item>
+    </string-array>
+</resources>

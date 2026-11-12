@@ -27,6 +27,12 @@ public interface ContactsApiConstants {
     String COLUMN_ID = "_id";
     String DATE_FORMAT = "MMM dd, yyyy hh:mm a";
 
+    String[] PROJECTION_CONTACTS = new String[]{
+            ContactsContract.Contacts._ID,
+            ContactsContract.Contacts.DISPLAY_NAME,
+            ContactsContract.Contacts.HAS_PHONE_NUMBER
+    };
+
     String[] PROJECTION_ID_RAW_CONTACT_ID = new String[]{
             ContactsContract.RawContacts._ID, ContactsContract.RawContacts.CONTACT_ID
     };

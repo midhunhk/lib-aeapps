@@ -48,7 +48,7 @@ public class CommonUtils {
      */
     public static String formatTimeStamp(String timestamp, String pattern) {
         String timeString = null; //"Never";
-        if (timestamp != null && timestamp.trim().length() > 0) {
+        if (timestamp != null && !timestamp.trim().isEmpty()) {
             long tempLastContacted = Long.parseLong(timestamp);
             if (tempLastContacted > 0) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
@@ -115,7 +115,7 @@ public class CommonUtils {
      */
     public static boolean isPackageInstalled(String packageName, final Context context) {
         try {
-            context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            context.getPackageManager().getPackageInfo(packageName, 0);
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             return false;
@@ -149,7 +149,11 @@ public class CommonUtils {
     public static boolean isPackageInstalled2(Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = packageManager.getLaunchIntentForPackage(packageName);
-        return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty();
+        if(null != intent) {
+            return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty();
+        } else {
+            return false;
+        }
     }
 
     /**

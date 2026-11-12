@@ -17,6 +17,10 @@
 
 package com.ae.apps.lib.api.contacts.impl;
 
+import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.PROJECTION_ID_RAW_CONTACT_ID;
+import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_RAW_CONTACT_ID;
+
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
@@ -45,9 +49,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.PROJECTION_ID_RAW_CONTACT_ID;
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_RAW_CONTACT_ID;
-
 /**
  * An implementation of ContactsApiGateway
  */
@@ -64,8 +65,14 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
     @Override
     protected void readContacts(ContactInfoFilterOptions options) {
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-        contacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
+                ContactsApiConstants.PROJECTION_CONTACTS, null, null, null);
+        try {
+            contacts = ContactsApiUtils.createContactsList(cursor, options.isIncludeContactsWithPhoneNumbers());
+        } finally {
+            if (null != cursor) {
+                cursor.close();
+            }
+        }
     }
 
     @Override
@@ -92,7 +99,7 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
             final ContactInfoOptions options = new ContactInfoOptions.Builder()
                     .includePhoneDetails(true)
                     .includeContactPicture(true)
-                    .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_1)
+            //        .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_1)
                     .build();
             contactInfo = getContactInfo(contacts.get(contactIndex).getId(), options);
 
@@ -110,15 +117,21 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
                 SELECT_WITH_RAW_CONTACT_ID,
                 new String[]{rawContactId}, null);
 
-        if (null != cursor && cursor.moveToFirst()) {
-            int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
-            contactId = cursor.getString(contactIdIndex);
-            cursor.close();
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    int contactIdIndex = cursor.getColumnIndex(ContactsContract.RawContacts.CONTACT_ID);
+                    contactId = cursor.getString(contactIdIndex);
+                }
+            } finally {
+                cursor.close();
+            }
         }
 
         return contactId;
     }
 
+    @SuppressLint("Range")
     @Nullable
     @Override
     public String getContactIdFromAddress(@Nullable String address) {
@@ -149,6 +162,10 @@ public class ContactsApiGatewayImpl extends AbstractContactsApiGateway {
     @Override
     public ContactInfo getContactInfo(String contactId, ContactInfoOptions options) {
         ContactInfo contactInfo = getContactInfo(contactId);
+        if (null == contactInfo) {
+            // No contact with this id was read by the gateway
+            return null;
+        }
         if (options.isIncludePhoneDetails()) {
             updateWithPhoneDetails(contactInfo);
         }

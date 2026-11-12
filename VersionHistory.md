@@ -1,3 +1,31 @@
+# Version History
+
+## Version 5.0 (Lingonberry)
+#### Version 5.0.1 [Nov 2026]
+- contacts-api: fix `IllegalStateException` ("ContactsApiGateway not initialized") when `initialize`/`initializeAsync` is called again while contacts are still being read; later callers now wait for the read in progress and callbacks are only delivered once the gateway is ready
+- contacts-api: a failed read no longer leaves the gateway stuck; it can be retried, and `ContactsDataConsumer.onContactsReadFailed` reports the error for `initializeAsync`
+- lib: published artifacts now expose AppCompat, RecyclerView, Fragment and Play Billing as compile dependencies where they are part of the public API
+- lib: publish a sources jar for every module
+- lib: GitHub Actions CI (unit tests, lint, release build)
+- lib: compileSdk 37
+- billing-client: Play Billing Library 8; removed unused Guava dependency
+- contacts-api: fix cursor and stream leaks, read only the columns needed, return null instead of crashing for an unknown contact id
+- contacts-api: `initializeAsync` no longer crashes when called from a thread without a Looper
+- sms-api: fix cursor leak on empty results; `MessageInfo` date, type and protocol are now populated
+- utilities: `CommonUtils.isPackageInstalled` now checks the package passed in (it always returned true)
+- utilities: `IntentUtils.getUriIntent` sets `ACTION_VIEW`
+- multi-contact: fix search crash below Android 15 and a threading race while filtering
+- runtime-permissions: `PermissionCheckingFragment` requires every requested permission to be granted, not just the first
+- database-helpers: `CopiedDataBaseHelper` keeps its path per instance, so two helpers no longer overwrite each other
+- core: `SimpleGraphView` no longer drifts on redraw or crashes when inflated from XML; `RoundedImageView` no longer crashes on non-bitmap drawables
+- billing-client: migrate billing library #35
+- lib: migrate to maven publish plugin #36
+- lib: migrate android Gradle plugin version #37
+- lib: migrate to kotlin dsl #38
+- lib: build structure changes
+- lib: use JDK 17
+- agp: upgrade to 9.4.1
+
 ## Version 4.1 (Kiwiberry)
 #### Version 4.1.0 [Feb 2021]
  - runtime-permissions: AbstractPermissionsAwareActivity #32
@@ -15,15 +43,15 @@
  - core: More resources
 
 #### Version 4.0.6 [Apr 2020]
- - Update proguard for all modules
+ - lib: Update proguard for all modules
 
 #### Version 4.0.5 [Sep 2020]
- - Fixes #31
+ - core: proguard change to fix critical bug #31 
 
 #### Version 4.0.4 [Apr 2020]
- - Complete rewrite of library and change in architecture
- - Add filter for Multi Contact Picker
- - Sample app to test and showcase the features
+ - lib: Complete rewrite of library and change in architecture
+ - multi-contact: Add filter for Multi Contact Picker
+ - sample: Sample app to test and showcase the features
 
 ## Version 3.0 (Indian Plum)
 #### Version 3.0.2 [Aug 2018]
@@ -89,7 +117,7 @@
 ## Version 1.4 (Blueberry)
 #### Version 1.4.0[May 2015]
 - Added ToolBarBaseActivity  
-- Added DonationsBasectivity  
+- Added DonationsBaseActivity  
 - Added appcompat as dependent library  
 
 ## Version 1.3 (Blueberry)

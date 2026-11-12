@@ -48,9 +48,14 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
                 SMS_TABLE_PROJECTION,
                 null, null, null);
         List<MessageInfo> messages = new ArrayList<>();
-        if (cursor != null && cursor.moveToFirst()) {
-            messages = SmsApiUtils.createMessageInfoList(cursor);
-            cursor.close();
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    messages = SmsApiUtils.createMessageInfoList(cursor);
+                }
+            } finally {
+                cursor.close();
+            }
         }
         return messages;
     }
@@ -63,9 +68,14 @@ public class SmsApiGatewayImpl extends AbstractSmsApiGateway {
                 SMS_TABLE_PROJECTION,
                 SELECT_BY_PERSON, new String[]{contactId}, null);
         List<MessageInfo> messages = new ArrayList<>();
-        if (null != cursor && cursor.moveToFirst()) {
-            messages = SmsApiUtils.createMessageInfoList(cursor);
-            cursor.close();
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    messages = SmsApiUtils.createMessageInfoList(cursor);
+                }
+            } finally {
+                cursor.close();
+            }
         }
         return messages;
     }

@@ -17,6 +17,7 @@
 
 package com.ae.apps.lib.api.contacts.utils;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.provider.BaseColumns;
@@ -36,13 +37,14 @@ public class ContactsApiUtils {
 
     public static final String NON_DIGITS_REGEX = "[^\\d.]";
 
+    @SuppressLint("Range")
     public static ContactInfo createContactInfo(final Cursor cursor) {
         ContactInfo contactInfo = new ContactInfo();
-        String id = cursor.getString(cursor.getColumnIndex(BaseColumns._ID));
+        @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(BaseColumns._ID));
         String hasPhoneNumberText;
         boolean hasPhoneNumber;
 
-        String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         hasPhoneNumberText = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
         hasPhoneNumber = Integer.parseInt(hasPhoneNumberText) > 0;
 

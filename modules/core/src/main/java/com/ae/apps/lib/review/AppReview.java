@@ -6,8 +6,8 @@ import android.content.Context;
 /**
  *
  *
- * See https://developer.android.com/guide/playcore/in-app-review
- * See https://developer.android.com/guide/playcore/in-app-review/kotlin-java
+ * See <a href="https://developer.android.com/guide/playcore/in-app-review">...</a>
+ * See <a href="https://developer.android.com/guide/playcore/in-app-review/kotlin-java">...</a>
  * @since 4.1
  */
 public interface AppReview {

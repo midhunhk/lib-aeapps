@@ -33,6 +33,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ae.apps.lib.common.models.ContactInfo;
 import com.ae.apps.lib.custom.views.EmptyRecyclerView;
 
+import com.ae.apps.lib.multi_contact.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -97,7 +99,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
         Intent intent = getIntent();
         String preSelectedContactIds = intent.getStringExtra(MultiContactPickerConstants.PRESELECTED_CONTACT_IDS);
         if (null != preSelectedContactIds) {
-            if (preSelectedContactIds.length() > 0) {
+            if (!preSelectedContactIds.isEmpty()) {
                 String[] ids = preSelectedContactIds.split(MultiContactPickerConstants.CONTACT_ID_SEPARATOR);
                 Collections.addAll(selectedContactIds, ids);
             }
@@ -126,7 +128,7 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedContactIds.size() > 0) {
+                if (!selectedContactIds.isEmpty()) {
                     onActivityComplete();
                 } else {
                     Toast.makeText(MultiContactBaseActivity.this, R.string.str_multi_contact_validation, Toast.LENGTH_SHORT).show();
@@ -143,25 +145,27 @@ public abstract class MultiContactBaseActivity extends AppCompatActivity
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                if (null != adapter) {
+                    adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });
     }
 
     private void setUpRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.list);
+        RecyclerView recyclerView = findViewById(com.ae.apps.lib.multi_contact.R.id.list);
 
         if (null != recyclerView) {
             List<ContactInfo> contactsList = contactsList();
             adapter = new MultiContactRecyclerViewAdapter(contactsList, this);
             recyclerView.setAdapter(adapter);
-            if (selectedContactIds.size() > 0) {
+            if (!selectedContactIds.isEmpty()) {
                 adapter.setSelectedContacts(selectedContactIds);
             }
         }
 
-        View emptyView = findViewById(R.id.empty_view);
+        View emptyView = findViewById(com.ae.apps.lib.multi_contact.R.id.empty_view);
         if (recyclerView instanceof EmptyRecyclerView && null != emptyView) {
             ((EmptyRecyclerView) recyclerView).setEmptyView(emptyView);
         }

@@ -80,7 +80,6 @@ public class RuntimePermissionChecker {
 
     /**
      * Does the validation whether all permissions were granted
-     *
      * Since the callback for requestPermissions comes to the component,
      * this method needs to be explicitly invoked to check the result
      *

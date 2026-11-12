@@ -17,6 +17,8 @@
 
 package com.ae.apps.lib.api.contacts.impl;
 
+import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
+
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.res.Resources;
@@ -25,7 +27,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -35,17 +39,19 @@ import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
 import com.ae.apps.lib.api.contacts.utils.ContactsApiUtils;
 import com.ae.apps.lib.common.models.ContactInfo;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static com.ae.apps.lib.api.contacts.utils.ContactsApiConstants.SELECT_WITH_CONTACT_ID;
+import java.util.concurrent.Executor;
 
 /**
  * An abstract implementation of ContactsApiGateway
  */
 public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
+
+    private static final String TAG = "ContactsApiGateway";
 
     protected enum STATE {
         UNINITIALIZED, INITIALIZING, READY
@@ -56,40 +62,78 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
     protected volatile transient STATE gatewayState = STATE.UNINITIALIZED;
     protected volatile transient List<ContactInfo> contacts = Collections.emptyList();
 
+    /**
+     * Guards the state transitions so that only one thread reads contacts at a time and
+     * every other caller waits for that read to finish.
+     */
+    private final Object initializationLock = new Object();
+
+    /**
+     * Reads the contacts unless they have already been read.
+     * <p>
+     * Safe to call from several threads: when a read is already in progress the caller blocks
+     * until it finishes, so the gateway is always ready when this method returns normally.
+     * If reading fails the exception is propagated and the gateway goes back to being
+     * uninitialized, so that a later call can try again.
+     */
     @Override
     public void initialize(final ContactInfoFilterOptions options) {
-        if (STATE.UNINITIALIZED == gatewayState) {
+        synchronized (initializationLock) {
+            if (STATE.READY == gatewayState) {
+                return;
+            }
             gatewayState = STATE.INITIALIZING;
-
-            readContacts(options);
-
-            gatewayState = STATE.READY;
+            try {
+                readContacts(options);
+                gatewayState = STATE.READY;
+            } finally {
+                if (STATE.READY != gatewayState) {
+                    // The read failed; allow a retry rather than staying stuck in INITIALIZING
+                    gatewayState = STATE.UNINITIALIZED;
+                }
+            }
         }
     }
 
     protected abstract void readContacts(final ContactInfoFilterOptions options);
 
+    /**
+     * Reads the contacts on a background thread and then notifies the consumer.
+     * <p>
+     * {@link ContactsDataConsumer#onContactsRead()} is only invoked once the gateway is ready,
+     * including when another call was already reading the contacts. If reading fails,
+     * {@link ContactsDataConsumer#onContactsReadFailed(Exception)} is invoked instead.
+     */
     @Override
     public void initializeAsync(final ContactInfoFilterOptions options,
                                 final ContactsDataConsumer dataConsumer) {
-        final Handler handler = new Handler();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        final Executor callbackExecutor = createCallbackExecutor();
+        new Thread(() -> {
+            try {
                 initialize(options);
-
+            } catch (final RuntimeException e) {
+                Log.e(TAG, "Unable to read contacts", e);
                 if (null != dataConsumer) {
-                    // do the callback on the original thread
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dataConsumer.onContactsRead();
-                        }
-                    });
+                    callbackExecutor.execute(() -> dataConsumer.onContactsReadFailed(e));
                 }
+                return;
             }
-        }).start();
+
+            if (null != dataConsumer) {
+                callbackExecutor.execute(dataConsumer::onContactsRead);
+            }
+        }, "ContactsApiGateway-init").start();
+    }
+
+    /**
+     * Creates the executor used to deliver {@link ContactsDataConsumer} callbacks. Invoked on the
+     * thread that calls {@link #initializeAsync}; callbacks are delivered on that thread if it
+     * has a Looper, otherwise on the main thread.
+     */
+    protected Executor createCallbackExecutor() {
+        final Looper callerLooper = Looper.myLooper();
+        final Handler handler = new Handler(null != callerLooper ? callerLooper : Looper.getMainLooper());
+        return handler::post;
     }
 
     @Override
@@ -144,9 +188,21 @@ public abstract class AbstractContactsApiGateway implements ContactsApiGateway {
         if (null == photoDataStream) {
             return null;
         }
-        return BitmapFactory.decodeStream(photoDataStream);
+        try {
+            return BitmapFactory.decodeStream(photoDataStream);
+        } finally {
+            try {
+                photoDataStream.close();
+            } catch (IOException e) {
+                // Nothing useful to do if the stream fails to close
+            }
+        }
     }
 
+    @Override
+    public ContactInfo getContactInfo(String s) {
+        return null;
+    }
 
     protected boolean checkIfApiInitialized() {
         return gatewayState == STATE.READY;

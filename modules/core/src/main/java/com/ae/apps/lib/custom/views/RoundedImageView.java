@@ -21,7 +21,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  *
  * @author based on the stackoverflow question at
  * <p>
- * http://stackoverflow.com/questions/16208365/create-a-circular-image-view-in-android
+ * <a href="http://stackoverflow.com/questions/16208365/create-a-circular-image-view-in-android">...</a>
  */
 public class RoundedImageView extends AppCompatImageView {
 
@@ -48,7 +48,15 @@ public class RoundedImageView extends AppCompatImageView {
         if (getWidth() == 0 || getHeight() == 0) {
             return;
         }
+        if (!(drawable instanceof BitmapDrawable)) {
+            // Only bitmaps can be cropped; draw anything else (e.g. a vector) as a regular ImageView
+            super.onDraw(canvas);
+            return;
+        }
         Bitmap originalBitmap = ((BitmapDrawable) drawable).getBitmap();
+        if (null == originalBitmap) {
+            return;
+        }
         Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
         int imageRadius = getImageRadiusSize();
@@ -72,7 +80,7 @@ public class RoundedImageView extends AppCompatImageView {
         // getMaxHeight() is min api 16
         // int maxHeight = (getMaxHeight() > 0) ? getMaxHeight() : imageHeight;
 
-        // Check if image height is atleast minheight
+        // Check if image height is at least min height
         if (imageHeight <= minHeight) {
             return minHeight;
         }
@@ -108,8 +116,8 @@ public class RoundedImageView extends AppCompatImageView {
 
         // TODO : remove hardcoding here
         paint.setColor(getResources().getColor(android.R.color.white));
-        float cx = scaledBitmap.getWidth() / 2;
-        float cy = scaledBitmap.getHeight() / 2;
+        float cx = (float) scaledBitmap.getWidth() / 2;
+        float cy = (float) scaledBitmap.getHeight() / 2;
         canvas.drawCircle(cx + 0.7f, cy + 0.7f, cx + 0.1f, paint);
         paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
         canvas.drawBitmap(scaledBitmap, rect, rect, paint);
