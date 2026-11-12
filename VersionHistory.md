@@ -1,7 +1,7 @@
 # Version History
 
 ## Version 5.0 (Lingonberry)
-#### Version 5.0.0 [Unreleased — next pre-release is 5.0.0-beta.04]
+#### Version 5.0.1 [Nov 2026]
 - contacts-api: fix `IllegalStateException` ("ContactsApiGateway not initialized") when `initialize`/`initializeAsync` is called again while contacts are still being read; later callers now wait for the read in progress and callbacks are only delivered once the gateway is ready
 - contacts-api: a failed read no longer leaves the gateway stuck; it can be retried, and `ContactsDataConsumer.onContactsReadFailed` reports the error for `initializeAsync`
 - lib: published artifacts now expose AppCompat, RecyclerView, Fragment and Play Billing as compile dependencies where they are part of the public API
