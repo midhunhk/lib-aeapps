@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":billing-client/main":[],":core/main":[],":sms-api/main":[],":runtime-permissions/main":[],":contacts-api/main":[],":database-helpers/main":[],":multi-contact/main":[],":mocks/main":[],":utilities/main":[]}'

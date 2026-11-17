@@ -40,12 +40,15 @@ lib-aeapps/
 │
 ├── sample/                    Demo application (not published)
 │
-├── docs/                      GitHub Pages site (hand-maintained HTML)
-│   ├── index.html             Landing page
-│   ├── release_notes.html     HTML changelog — stops at 4.1.0
-│   ├── api/                   Committed Javadoc from an older version
-│   ├── assets/                CSS/JS for the site
-│   └── resources/v4/          Screenshots and architecture notes
+├── docs/                      GitHub Pages site (see section 3.5)
+│   ├── index.html             Landing page (hand-written)
+│   ├── release_notes.html     Generated from VersionHistory.md
+│   ├── api/                   Generated API reference (Dokka)
+│   ├── assets/                site.css, logo and favicon
+│   └── resources/v4/          Screenshots and icons
+│
+├── scripts/
+│   └── release_notes.py       Builds docs/release_notes.html (run by updateSite)
 │
 ├── .github/
 │   ├── workflows/ci.yml       Unit tests, lint, release build, local publish
@@ -222,8 +225,46 @@ this in the workflow).
 
 [.github/workflows/ci.yml](.github/workflows/ci.yml) runs on every push to any branch, on pull
 requests to `main`, and on manual dispatch. It runs unit tests, lint, the release build and a
-publish to Maven Local, and uploads test and lint reports if anything fails. It does not publish
+publish to Maven Local, and uploads test and lint reports if anything fails. It also builds the
+API reference to catch broken Dokka configuration, but does not commit it. It does not publish
 anywhere and does not create tags or releases.
+
+### 3.5 Documentation site
+
+`docs/` is served by GitHub Pages. Update it for a release with one command:
+
+```bash
+./gradlew updateSite
+```
+
+It runs three tasks, each also usable on its own (all in the `documentation` group):
+
+| Task | What it updates | From |
+|---|---|---|
+| `updateApiDocs` | `docs/api/` — regenerated with Dokka; pages for removed classes are deleted | KDoc and Javadoc in the library modules |
+| `updateReleaseNotes` | `docs/release_notes.html` | `VersionHistory.md`, via `scripts/release_notes.py` |
+| `updateSiteVersion` | The version in the `docs/index.html` dependency snippet | `Publish.VERSION_STRING`, with a `v` prefix |
+
+`updateReleaseNotes` needs Python 3 on the `PATH` (`python` on Windows, `python3` elsewhere).
+Pass `-PpythonExecutable=/path/to/python` to use a different one. Never edit
+`docs/release_notes.html` by hand; it is overwritten.
+
+Everything else in `docs/index.html` is hand-written; its styles are in
+`docs/assets/css/site.css` (no framework, light and dark themes).
+
+Dokka is configured in the root [build.gradle.kts](build.gradle.kts). It documents the nine
+library modules (not `sample` or the empty `aeapps` umbrella), Java and Kotlin together, public
+and protected members only, and hides members inherited from Android framework classes. The root
+script also works around two Dokka limitations with this project: Java-only Android modules get
+a source set registered by hand, and Kotlin modules have their duplicate `release` source set
+suppressed. If a new library module is added, add it to the root `dokka(project(...))` list.
+
+To preview the site locally, serve `docs/` over HTTP (opening the files directly does not load
+the stylesheet in some browsers):
+
+```bash
+python -m http.server 8765 --directory docs
+```
 
 ---
 
@@ -318,7 +359,8 @@ version or codename and are not updated automatically:
 | [README.md](README.md) | Codename line, "commits since" badge tag, migration table | Hand |
 | [sample/build.gradle.kts](sample/build.gradle.kts) | Sample `versionCode` / `versionName` (currently 12 / 1.4.4) — independent of the library version | Hand |
 | `sample/src/main/res/values/strings.xml` `app_version` | Sample "about" text — currently says 1.4.0, out of step with `versionName` | Hand |
-| [docs/release_notes.html](docs/release_notes.html) | HTML changelog on the Pages site — stops at 4.1.0 | Hand |
+| [docs/release_notes.html](docs/release_notes.html) | HTML changelog on the Pages site | `./gradlew updateSite` |
+| [docs/index.html](docs/index.html) | Version in the dependency snippet | `./gradlew updateSite` |
 | GitHub wiki (Distribution, Migration Guide, Codenames) | Usage instructions | Hand, outside the repo |
 
 ### 5.3 Release checklist
@@ -347,9 +389,10 @@ Steps 1–6 happen on the codename branch.
    (add `mavenLocal()` to its repositories) and build it. Project dependencies hide packaging
    mistakes that only show up through the published POM.
 
-5. **Update the changelog** in `VersionHistory.md`. For a stable release also update the README
-   codename/badges, `docs/release_notes.html`, and the sample's version if the sample is being
-   re-released.
+5. **Update the changelog** in `VersionHistory.md`, then run `./gradlew updateSite` to refresh
+   the API reference, the release notes page and the site's version (section 3.5). For a stable
+   release also update the README codename/badges, and the sample's version if the sample is
+   being re-released.
 
 6. **Commit** the version bump and changelog together, and push the branch. Wait for CI.
 
@@ -433,5 +476,6 @@ as a description of a finished setup.
 - No sources/Javadoc jars and no POM metadata in the publications.
 - Build logic is duplicated across ten module scripts; dependency versions live in `buildSrc`
   rather than a version catalog.
-- The Pages site (`docs/`) and the wiki are maintained by hand and are behind the code.
+- The site in `docs/` is only refreshed when someone runs `./gradlew updateSite`, so the API
+  reference can fall behind the code between releases. The wiki is maintained by hand and is behind the code.
 - The CI workflow has been added but had not yet run on GitHub at the time of writing.

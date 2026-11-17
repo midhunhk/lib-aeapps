@@ -1,7 +1,8 @@
 # lib-AeApps
 [![CI](https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml/badge.svg)](https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml)
 [![Release](https://jitpack.io/v/midhunhk/lib-aeapps.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
-[![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues) 
+[![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues)
+[![Codename](https://img.shields.io/badge/codename-lingonberry-5a10fb)](https://github.com/midhunhk/lib-aeapps/wiki/Codenames)
 
 lib-AeApps is an Android library project which provides reusable solutions to some common problems.
 Some situations require boilerplate code which can become tedious to manage.

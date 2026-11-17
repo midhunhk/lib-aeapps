@@ -1,274 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!--- Basic Page Needs  -->
     <meta charset="utf-8">
-    <title>libAeApps || Android Library</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Mobile Specific Meta  -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    <link rel="stylesheet" href="assets/css/magnificpopup.css">
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="assets/img/icon/favicon.ico">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>lib-aeapps · Android library</title>
+    <meta name="description" content="lib-aeapps is a modular Android library with reusable building blocks for contacts, SMS, runtime permissions, Play Billing, in-app reviews and more.">
+    <meta name="theme-color" content="#1e0757">
+    <link rel="icon" href="assets/img/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
-
 <body>
-    
-    <div id="preloader">
-        <div class="spinner"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html" aria-label="lib-aeapps home">
+            <img src="assets/img/icon/lib_ae_apps.svg" alt="lib-aeapps" width="169" height="32">
+        </a>
+        <nav class="site-nav" aria-label="Main">
+            <a href="#get-started">Get started</a>
+            <a href="#modules">Modules</a>
+            <a href="api/index.html">API</a>
+            <a href="release_notes.html">Release notes</a>
+            <a href="https://github.com/midhunhk/lib-aeapps">GitHub</a>
+        </nav>
     </div>
-    
-    <header id="header">
-        <div class="header-area">
-            <div class="container">
-                <div class="row">
-                    <div class="menu-area">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                            <div class="logo">
-                                <a href="index.html"><img src="assets/img/icon/lib_ae_apps.svg" /></a>
-                            </div>
-                        </div>
-                        <div class="col-md-9 hidden-xs hidden-sm">
-                            <div class="main-menu">
-                                <nav class="nav-menu">
-                                    <ul>
-                                        <li class="active"><a href="#home">Home</a></li>
-                                        <li><a href="#info">Information</a></li>
-										<li><a href="#sample">Sample App</a></li>
-										<li><a href="release_notes.html">Release Notes</a></li>
-                                        <li><a href="https://github.com/midhunhk/lib-aeapps">Github</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xs-12 visible-sm visible-xs">
-                            <div class="mobile_menu"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <section id="home" class="slider-area">
+</header>
+
+<main id="main">
+    <section class="hero">
         <div class="container">
-            <div class="col-md-6 col-sm-6 hidden-xs">
-                
+            <h1>Reusable building blocks for Android apps</h1>
+            <p class="lead">
+                lib-aeapps packages the boilerplate behind contacts, SMS, runtime permissions,
+                Google Play Billing and in-app reviews into small modules. Use one, or use them all.
+            </p>
+            <div class="hero-meta">
+                <span>Latest release</span>
+                <a href="https://jitpack.io/#midhunhk/lib-aeapps">
+                    <img src="https://jitpack.io/v/midhunhk/lib-aeapps.svg" alt="Latest version on JitPack">
+                </a>
+                <a href="https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml">
+                    <img src="https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml/badge.svg" alt="CI status">
+                </a>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="row">
-                    <div class="slider-inner text-right">
-						Latest Version <br />
-                        <img src="https://jitpack.io/v/midhunhk/lib-aeapps.svg" /> <br />
-                        <img src="https://travis-ci.org/midhunhk/lib-aeapps.svg" alt="Travis Build Status" />
-                    </div>
-                </div>
+            <div class="button-row">
+                <a class="button button-primary" href="#get-started">Get started</a>
+                <a class="button button-ghost" href="api/index.html">API reference</a>
+                <a class="button button-ghost" href="https://github.com/midhunhk/lib-aeapps">View on GitHub</a>
             </div>
-        </div>
-    </section>
-    
-    <section id="info" class="info-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="service-single">
-						<a href="api/index.html">
-							<img src="assets/img/service/undraw_hacker_mindset_gjwq.png" alt="API Javadocs">
-							<h2>API Docs</h2>
-							<p class="text-info">For more technical information about the API and documentation also commonly called the JavaDocs.</p>
-						</a>
-					</div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 col-6">
-                    <div class="service-single">
-						<a href="https://github.com/midhunhk/lib-aeapps/wiki">
-							<img src="assets/img/service/undraw_knowledge_g5gf.png" alt="Project Wiki">
-							<h2>Wiki</h2>
-							<p>The always up to date wiki page for the library with always updated general information and guidess.</p>
-						</a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 col-6">
-                    <div class="service-single">
-						<a href="https://github.com/midhunhk/lib-aeapps/wiki/Migration-Guide">
-							<img src="assets/img/service/undraw_project_completed_w0oq.png" alt="Migration Guide">
-							<h2>Migration Guide</h2>
-							<p>Guide to help developers migrate to the latest version of the library, from a previous versions.</p>
-						</a>
-                    </div>
-                </div>
-            </div>
-			<div class="row">
-				&nbsp;
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="section-title">
-					<h2>About libAeApps</h2>
-					<p class="pl-5 pr-5">
-						LibAeApps is an Android library project which provides reusable solutions to some common problems. <br />
-                        Some solutions require boiler plate code which can become tedious to manage.
-					</p>
-					</div>
-				</div>
-			</div>
-            
-            <div class="row d-flex flex-center">
-				<div class="col-md-2">
-				</div>
-                <div class="col-md-8 col-sm-12 col-xs-12">
-                    <div>
-						<h3>Features</h3> <br/>
-						<p>A modern Android app library that targets the latest Android APIs.</p>
-                        <p>Contains common reusable code which can be used in any Android project.</p>
-                        <p>Uses AndroidX libraries.</p>
-                        <p>Developed by Ae App Labs.</p>
-						<p>Functionalities are separated into different modules.</p>
-                    </div>
-                </div>
-				<div class="col-md-2">
-				</div>
-            </div>
-			
-			<div class="row d-flex flex-center hidden-xs">
-				<div class="col-md-12 col-sm-12" style="text-align:center">
-					<h3>Module Dependencies</h3> <br/>
-					<img src="resources/v4/architecture/modules-dependencies.png" alt="architecture of modules">
-				</div>
-			</div>
         </div>
     </section>
 
-	<section id="sample" class="achivement-area">
-        <div class="container ach-single">
-            <div class="section-title pt--50 text-white">
-                <h2>Sample App</h2>
-				<div class="icon">
-					<img src="resources/v4/icons/labs_sample_app_144_square.png" />
-				</div>
-				<p>
-                    A sample Android app that showcases some of the features of this library is published to the Google Play Store.   
-                </p>
-                <br />
-                <p>
-                    Note: The SMS API has been removed when publishing to the Play Store inirder to comply with Play Store policies.
-                </p>
+    <section class="section" id="get-started">
+        <div class="container">
+            <h2>Get started</h2>
+            <p class="intro">
+                The library is published on JitPack. Add the repository once, then add the modules you need.
+                Requires <code>minSdk</code> 21 and JDK 17.
+            </p>
+
+            <div class="code-block">
+                <span class="label">settings.gradle.kts</span>
+                <button class="copy-button" type="button" data-copy="settings-snippet">Copy</button>
+                <pre><code id="settings-snippet">dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}</code></pre>
             </div>
-            <div class="row d-flex flex-center pb--30">
-                <div class="col-md-4 col-sm-4 hidden-xs">
-                    <div class="about-left-img">
-                        <img alt="Sample App" src="resources/v4/screenshots/01-home.png"/> 
-                    </div>
-                </div>
-				<div class="col-md-4 col-sm-4 hidden-xs">
-                    <div class="about-left-img">
-                        <img alt="Sample App" src="resources/v4/screenshots/03-contacts.png" />
-                    </div>
-                </div>
-				<div class="col-md-4 col-sm-4 hidden-xs">
-                    <div class="about-left-img">
-                        <img alt="Sample App" src="resources/v4/screenshots/04-sms.png"/>
-                    </div>
-                </div>
+
+            <div class="code-block">
+                <span class="label">app/build.gradle.kts</span>
+                <button class="copy-button" type="button" data-copy="deps-snippet">Copy</button>
+                <pre><code id="deps-snippet">val libAeAppsVersion = "v5.0.1"
+
+// Pick individual modules…
+implementation("com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion")
+implementation("com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion")
+
+// …or everything at once
+implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code></pre>
             </div>
-            <div class="col-md-12 mt-1 mb-1 flex-center">
-                <a href="https://play.google.com/store/apps/details?id=com.ae.apps.lib.sample&amp;pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1">
-                    <img alt="Get it on Google Play" width="200px" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">
+            <p class="note">
+                Use the release tag, including the leading <code>v</code>, as the version.
+                Library modules do not declare permissions; add the ones you use
+                (for example <code>READ_CONTACTS</code>) to your app's manifest.
+            </p>
+        </div>
+    </section>
+
+    <section class="section section-alt" id="modules">
+        <div class="container">
+            <h2>Modules</h2>
+            <p class="intro">
+                Each module is a separate artifact. Modules bring in the ones they depend on, so adding
+                <code>contacts-api</code> also adds <code>core</code> and <code>utilities</code>.
+            </p>
+
+            <div class="grid grid-3">
+                <article class="card">
+                    <span class="artifact">core</span>
+                    <h3>Core</h3>
+                    <p>Shared models, custom views, a toolbar base activity, in-app reviews and common resources.</p>
+                </article>
+                <article class="card">
+                    <span class="artifact">utilities</span>
+                    <h3>Utilities</h3>
+                    <p>Helpers for intents, dialogs, phone calls, texts, package checks and formatting.</p>
+                </article>
+                <article class="card">
+                    <span class="artifact">contacts-api</span>
+                    <h3>Contacts API</h3>
+                    <p>Read and cache device contacts, look up phone numbers and pictures, pick a random contact.</p>
+                    <p class="depends">Uses <code>core</code>, <code>utilities</code></p>
+                </article>
+                <article class="card">
+                    <span class="artifact">sms-api</span>
+                    <h3>SMS API</h3>
+                    <p>Count and read messages by folder or by contact through a simple gateway.</p>
+                    <p class="depends">Uses <code>core</code></p>
+                </article>
+                <article class="card">
+                    <span class="artifact">runtime-permissions</span>
+                    <h3>Runtime permissions</h3>
+                    <p>Base activities, a fragment and a checker that handle requesting and reacting to permissions.</p>
+                    <p class="depends">Uses <code>core</code>, <code>utilities</code></p>
+                </article>
+                <article class="card">
+                    <span class="artifact">multi-contact</span>
+                    <h3>Multi-contact picker</h3>
+                    <p>A searchable screen for selecting several contacts, plus a single-contact picker fragment.</p>
+                    <p class="depends">Uses <code>core</code>, <code>utilities</code></p>
+                </article>
+                <article class="card">
+                    <span class="artifact">billing-client</span>
+                    <h3>Billing client</h3>
+                    <p>A lifecycle-aware wrapper around Google Play Billing Library 8 for one-time products.</p>
+                </article>
+                <article class="card">
+                    <span class="artifact">database-helpers</span>
+                    <h3>Database helpers</h3>
+                    <p>SQLite helpers, including one that ships a prebuilt database from assets.</p>
+                    <p class="depends">Uses <code>core</code></p>
+                </article>
+                <article class="card">
+                    <span class="artifact">mocks</span>
+                    <h3>Mocks</h3>
+                    <p>Fake contacts and messages for demos and unit tests. Best added as a test or debug dependency.</p>
+                    <p class="depends">Uses <code>core</code></p>
+                </article>
+            </div>
+
+            <figure class="diagram">
+                <svg viewBox="0 0 760 250" role="img" aria-labelledby="diagram-title">
+                    <title id="diagram-title">Module dependencies: six feature modules depend on core, three of them also on utilities; billing-client stands alone.</title>
+                    <defs>
+                        <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                            <path class="arrow" d="M0,0 L10,5 L0,10 z"/>
+                        </marker>
+                    </defs>
+
+                    <!-- edges: from each feature module to the modules it depends on -->
+                    <g class="edges">
+                        <line class="edge" x1="66" y1="64" x2="214" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="66" y1="64" x2="426" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="190" y1="64" x2="230" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="190" y1="64" x2="446" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="314" y1="64" x2="246" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="314" y1="64" x2="466" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="438" y1="64" x2="262" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="562" y1="64" x2="278" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="686" y1="64" x2="294" y2="168" marker-end="url(#arrowhead)"/>
+                    </g>
+
+                    <g class="node"><rect x="10" y="24" width="112" height="40" rx="8"/><text x="66" y="44">contacts-api</text></g>
+                    <g class="node"><rect x="134" y="24" width="112" height="40" rx="8"/><text x="190" y="44">multi-contact</text></g>
+                    <g class="node"><rect x="258" y="24" width="112" height="40" rx="8"/><text x="314" y="44">permissions</text></g>
+                    <g class="node"><rect x="382" y="24" width="112" height="40" rx="8"/><text x="438" y="44">sms-api</text></g>
+                    <g class="node"><rect x="506" y="24" width="112" height="40" rx="8"/><text x="562" y="44">db-helpers</text></g>
+                    <g class="node"><rect x="630" y="24" width="112" height="40" rx="8"/><text x="686" y="44">mocks</text></g>
+
+                    <g class="node base"><rect x="190" y="170" width="120" height="40" rx="8"/><text x="250" y="190">core</text></g>
+                    <g class="node base"><rect x="396" y="170" width="120" height="40" rx="8"/><text x="456" y="190">utilities</text></g>
+                    <g class="node"><rect x="610" y="170" width="132" height="40" rx="8"/><text x="676" y="190">billing-client</text></g>
+                    <text class="caption-text" x="676" y="232" text-anchor="middle">no module dependencies</text>
+                </svg>
+                <figcaption>
+                    Arrows point from a module to the modules it depends on. The <code>aeapps</code> artifact bundles all nine.
+                    “permissions” is <code>runtime-permissions</code> and “db-helpers” is <code>database-helpers</code>.
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section" id="docs">
+        <div class="container">
+            <h2>Documentation</h2>
+            <p class="intro">Reference material and guides for upgrading from earlier versions.</p>
+            <div class="grid">
+                <a class="card" href="api/index.html">
+                    <h3>API reference</h3>
+                    <p>Generated documentation for every public class in the library, Java and Kotlin alike.</p>
+                </a>
+                <a class="card" href="https://github.com/midhunhk/lib-aeapps/blob/main/guides/MIGRATION-v5.md">
+                    <h3>Migrating to 5.0</h3>
+                    <p>Build requirements, Play Billing 8, renamed resources and behaviour changes since 4.1.</p>
+                </a>
+                <a class="card" href="https://github.com/midhunhk/lib-aeapps/blob/main/guides/MIGRATION-v4.md">
+                    <h3>Migrating to 4.x</h3>
+                    <p>Moving from the single 3.x artifact to the modular 4.x library.</p>
+                </a>
+                <a class="card" href="release_notes.html">
+                    <h3>Release notes</h3>
+                    <p>What changed in each version, from 1.1 to today.</p>
                 </a>
             </div>
         </div>
     </section>
-   
-    <section id="license" class="contact-area ptb--50" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>License</h2>
-                <p>This project's source code is licensed under the Apache License, Version 2.0</p>
-                <p>You can get a copy of the license <a href="https://www.apache.org/licenses/LICENSE-2.0">here</a>.</p>
+
+    <section class="section section-alt" id="sample">
+        <div class="container sample">
+            <div>
+                <div class="sample-header">
+                    <img src="resources/v4/icons/labs_sample_app_144_square.png" alt="" width="56" height="56">
+                    <h2>Sample app</h2>
+                </div>
+                <p>
+                    A sample app on Google Play shows the contacts API, the multi-contact picker and more, built on
+                    the library. Its source lives in the <a href="https://github.com/midhunhk/lib-aeapps/tree/main/sample"><code>sample</code></a> folder.
+                </p>
+                <p class="note">
+                    The Play Store build leaves out the SMS feature, because Google Play restricts the
+                    <code>READ_SMS</code> permission. Build the sample from source to try it.
+                </p>
+                <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.ae.apps.lib.sample">
+                    <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">
+                </a>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    
-                </div>
+            <div class="screenshots">
+                <img src="resources/v4/screenshots/01-home.png" alt="Sample app home screen listing library features" loading="lazy" width="1080" height="2220">
+                <img src="resources/v4/screenshots/03-contacts.png" alt="Contacts API showing a random contact" loading="lazy" width="1080" height="2220">
+                <img src="resources/v4/screenshots/04-sms.png" alt="SMS API showing message counts" loading="lazy" width="1080" height="2220">
             </div>
         </div>
     </section>
-    
-    <footer>
-        <div class="footer-area">
-            <div class="container">
-			
-				<div class="row ptb--10">
-					<div class="col-md-4 col-sm-8 col-xs-12">
-						<img src="resources/v4/icons/app_labs_icon_white.png" alt="image" style="height:90px" class="">
-						<p><b>libAeApps by ae app labs</b></p>
-					</div>
-					<div class="col-md-2 col-sm-4 col-xs-6">
-					</div>
-					<div class="col-md-3 col-sm-2 col-xs-12" style="text-align: left !important;">
-						<p><b>Links</b></p>
-						<p>
-							<ul>
-								<li><a href="https://github.com/midhunhk/lib-aeapps">Source Code</a></li>
-								<li><a href="https://github.com/midhunhk/lib-aeapps/wiki">Wiki</a></li>
-								<li><a href="https://github.com/midhunhk/lib-aeapps/issues">Issues</a></li>
-								<li><a href="https://github.com/midhunhk/lib-aeapps/wiki/Codenames">Codenames</a></li>
-							</ul>
-						</p>
-					</div>
-					<div class="col-md-3 col-sm-2 col-xs-12" style="text-align: left !important;">
-						<p><b>More Links</b></p>
-						<p>
-							<ul>
-								<li><a href="api/index.html">API Reference</a></li>
-								<li><a href="https://github.com/midhunhk/lib-aeapps/wiki/Facts">Facts</a></li>
-							</ul>
-						</p>
-					</div>
-				</div>
-				<div class="row">
-					<br />
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-						</p>
-					</div>
-				</div>
-            </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="labs">
+            <img src="resources/v4/icons/app_labs_icon_white.png" alt="" width="48" height="48">
+            <p>lib-aeapps by Ae App Labs.<br>Licensed under the
+                <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
         </div>
-    </footer>
+        <div>
+            <h2>Project</h2>
+            <ul>
+                <li><a href="https://github.com/midhunhk/lib-aeapps">Source code</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/issues">Issues</a></li>
+                <li><a href="release_notes.html">Release notes</a></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Docs</h2>
+            <ul>
+                <li><a href="api/index.html">API reference</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/wiki">Wiki</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/wiki/Codenames">Codenames</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery-3.2.0.min.js"></script>
-    <script src="assets/js/jquery-ui.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/jquery.waypoints.min.js"></script>
-    
-    <script src="assets/js/theme.js"></script>
+<script>
+    document.querySelectorAll('.copy-button').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var text = document.getElementById(button.dataset.copy).textContent;
+            navigator.clipboard.writeText(text).then(function () {
+                button.textContent = 'Copied';
+                setTimeout(function () { button.textContent = 'Copy'; }, 1500);
+            }, function () {
+                button.textContent = 'Select and copy';
+            });
+        });
+    });
+</script>
 </body>
-
 </html>
