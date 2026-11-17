@@ -1,413 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!--- Basic Page Needs  -->
     <meta charset="utf-8">
-    <title>libAeApps || Release Notes</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Mobile Specific Meta  -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-	
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="assets/img/icon/favicon.ico">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-	<style type="text/css">
-		body{ color: rgba(255,255,255,0.65) !important; }
-		header { color: #eaeaea !important;}
-		hr { border-color: rgba(255,255,255,0.1);}
-		.mx-auto {
-			margin-right: auto !important;
-			margin-left: auto !important;
-		}
-		.d-flex { display: flex !important; }
-		.mb-2 {margin-bottom: 16px !important; }
-		.version-badge{ width: 65px; text-align: center; font-weight: 400 !important; }
-		.bg-purple {background-color: #6f42c1 !important;}
-		.rounded-1 {border-radius: 3px !important;}
-		.mr-2{ margin-right: 8px !important; }
-		.p-1 { padding: 4px !important;}
-		.f3-light { font-size: 20px !important;}
-		.py-4 {
-			padding-top: 20px !important;
-			padding-bottom: 20px !important;
-		}
-		.py-6 {
-			padding-top: 40px !important;
-			padding-bottom: 40px !important;
-		}
-		.my-6 {
-			margin-top: 40px !important;
-			margin-bottom: 40px !important;
-		}
-		#changelog, .changelog-content{ color: rgba(255,255,255,0.65); font-weight: 0; font-size: 12px;}
-		#changelog .major-version{ color: #fff; font-size:14px; font-weight: 400px; border-bottom: 1px #666 solid;}
-		
-		.change-log {margin-left: 74px;}
-
-		.change-badge {
-			background-color: #0366d6;
-			display: inline;
-			flex: 0 0 65px;
-			font-size: 10px;
-			font-weight: 600;
-			border-radius: 3px;
-			margin-right: 8px;
-			padding: 2px 5px;
-			text-transform: uppercase;
-			text-align: center;
-		}
-		
-		.change-badge-new, .change-badge-added {background-color: #28a745;}
-		.change-badge-fixed, .change-badge-improved { background-color: #0366d6;}
-		.change-badge-removed { background-color: #ed6a4e;}
-		
-	</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Release notes · lib-aeapps</title>
+    <meta name="description" content="Release notes for every version of the lib-aeapps Android library.">
+    <meta name="theme-color" content="#1e0757">
+    <link rel="icon" href="assets/img/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
+<body class="release-page">
+<a class="skip-link" href="#main">Skip to content</a>
 
-<body>
-    
-    <div id="preloader">
-        <div class="spinner"></div>
+<!-- Generated from VersionHistory.md by scripts/release_notes.py. Do not edit by hand. -->
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html" aria-label="lib-aeapps home">
+            <img src="assets/img/icon/lib_ae_apps.svg" alt="lib-aeapps" width="169" height="32">
+        </a>
+        <nav class="site-nav" aria-label="Main">
+            <a href="index.html#get-started">Get started</a>
+            <a href="index.html#modules">Modules</a>
+            <a href="api/index.html">API</a>
+            <a href="release_notes.html" aria-current="page">Release notes</a>
+            <a href="https://github.com/midhunhk/lib-aeapps">GitHub</a>
+        </nav>
     </div>
-    
-    <header id="header">
-        <div class="header-area">
-            <div class="container">
-                <div class="row">
-                    <div class="menu-area">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                            <div class="logo">
-                                <a href="index.html"><img src="assets/img/icon/lib_ae_apps.svg" /></a>
-                            </div>
-                        </div>
-                        <div class="col-md-9 hidden-xs hidden-sm">
-                            <div class="main-menu">
-                                <nav class="nav-menu">
-                                    <ul>
-                                        <li class="active"><a href="index.html">Home</a></li>
-                                        <li><a href="https://github.com/midhunhk/ae-apps-library">Github</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-xs-12 visible-sm visible-xs">
-                            <div class="mobile_menu"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+</header>
+
+<main id="main">
+    <section class="hero">
+        <div class="container">
+            <h1>Release notes</h1>
+            <p class="lead">Every version of lib-aeapps, newest first. Development versions are named after fruits.</p>
         </div>
-    </header>
-
-	<section id="changelog" class="achivement-area mt--50">
-        <div class="container ach-single">
-            <div class="section-title pt--50 text-white">
-                <h2>Release Notes for libAeApps</h2>
-            </div>
-			
-			<div class="row col-md-2 mx-auto">
-			</div>
-
-            <div class="row col-md-8 mx-auto pb--30 changelog-content">
-
-				<!-- v4.1 -->
-				<section class="text-left">
-					<span class="major-version">Version 4.1 - Kiwiberry</span>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">4.1.0</span>
-						<span>March 2021</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">runtime-permissions</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">upgrade android billing library<a href="https://github.com/midhunhk/ae-apps-library/issues/29">#29</a></div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">contacts-api</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">In-App Reviews Imlementation</div>
-						</li>
-					</ul>
-				</section>
-				
-				<!-- v4.0 -->
-				<section class="text-left">
-					<span class="major-version">Version 4.0 - Juneberry</span>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">4.0.4</span>
-						<span>April 2020</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">New Architecture<a href="https://github.com/midhunhk/ae-apps-library/issues/22">#22</a></div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">Search filter for Multi Contact Picker<a href="https://github.com/midhunhk/ae-apps-library/issues/28">#28</a></div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">Billing Client</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">Sample App to test and showcase the library</div>
-						</li>
-					</ul>
-				</section>
-
-				<!-- v3.0 -->
-				<section class="text-left">
-					<span class="major-version">Version 3.0 - Indian Plum</span>
-				</section>
-                <section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">3.0.2</span>
-						<span>August 2018</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-removed">Removed</div>
-							<div class="change-description">Permission requests from manifest</div>
-						</li>
-					</ul>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">3.0.1</span>
-						<span>August 2018</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-fixed">Fixed</div>
-							<div class="change-description">Bug Fix in PermissionChecker<a href="https://github.com/midhunhk/ae-apps-library/issues/23">#23</a></div>
-						</li>
-					</ul>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">3.0.0</span>
-						<span>July 2018</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-removed">Removed</div>
-							<div class="change-description">Donations Activity</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">Runtime Permission Checker</div>
-						</li>
-					</ul>
-				</section>
-				
-				<!-- v2.3 -->
-				<section class="text-left">
-					<span class="major-version">Version 2.3 - Huckleberry</span>
-				</section>
-                <section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.3.0</span>
-						<span>July 2017</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">Added</div>
-							<div class="change-description">More Contact Util Methods <a href="https://github.com/midhunhk/ae-apps-library/issues/21">#21</a></div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">Added</div>
-							<div class="change-description">Permission Checking Fragment</div>
-						</li>
-					</ul>
-				</section>
-				
-				<!-- v2.2 -->
-				<section class="text-left">
-					<span class="major-version">Version 2.2 - Grapefruit</span>
-				</section>
-                <section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.2.2</span>
-						<span>November 2017</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">Clear flagEndAsync before new purchase flow</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">Downgrade support library version for Message Counter</div>
-						</li>
-					</ul>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.2.1</span>
-						<span>November 2017</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">New</div>
-							<div class="change-description">MultiContactPicker Activity</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">New</div>
-							<div class="change-description">ContactManagerProxy class</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">New</div>
-							<div class="change-description">Animation Resources</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">New</div>
-							<div class="change-description">Reusable Properties</div>
-						</li>
-					</ul>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.2.0</span>
-						<span>July 2018</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-fixed">Fixed</div>
-							<div class="change-description">flagStartAsync not getting reset after Donation</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-new">New</div>
-							<div class="change-description">Generate Java docs for library <a href="https://github.com/midhunhk/ae-apps-library/issues/13">#13</a></div>
-						</li>
-					</ul>
-				</section>
-				
-				<!-- v2.1 -->
-				<section class="text-left">
-					<span class="major-version">Version 2.1 - Fig</span>
-				</section>
-                <section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.1.0</span>
-						<span>July 2017</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">Added</div>
-							<div class="change-description">Deploy library to jCenter<a href="https://github.com/midhunhk/ae-apps-library/issues/9">#9</a></div>
-						</li>
-					</ul>
-				</section>
-				
-				<!-- v2.0 -->
-				<section class="text-left">
-					<span class="major-version">Version 2.0 - Elderberry</span>
-				</section>
-                <section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.0.1</span>
-						<span>June 2017</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">Contact Manager Implementation</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">Added</div>
-							<div class="change-description">Unit Test Cases</div>
-						</li>
-					</ul>
-				</section>
-				<section class="release-note text-left py-4">
-					<header class="d-flex flex-items-center mb-3">
-						<span class="version-badge d-inline-block bg-purple rounded-1 mr-2 text-bold">2.0.0</span>
-						<span>May 2017</span>
-					</header>
-					<ul class="change-log">
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-improved">Improved</div>
-							<div class="change-description">Contact Manager Implementation</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">Improved</div>
-							<div class="change-description">Add contacts without contact numbers</div>
-						</li>
-						<li class="d-flex flex-items-start mb-2">
-							<div class="change-badge change-badge-added">Added</div>
-							<div class="change-description">Travis CI Inregration</div>
-						</li>
-					</ul>
-				</section>
-				
-            </div>
-			<div class="row col-md-2 mx-auto">
-			</div>
-        </div>
-		
-		<div class="container ach-single">
-			<div class="row col-md-5 mx-auto">
-			</div>
-            <div class="row col-md-2 mx-auto pb--30">
-				<hr />
-			</div>
-			<div class="row col-md-5 mx-auto">
-			</div>
-		</div>
     </section>
-	
-    <footer>
-        <div class="footer-area">
-            <div class="container">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-						</p>
-					</div>
-				</div>
-            </div>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="major" id="v5.0">Version 5.0 <span class="codename">Lingonberry</span></h2>
+            <section class="release">
+                <div class="release-version">5.0.1<span class="release-date">Nov 2026</span></div>
+                <ul>
+                    <li><span class="module-tag">contacts-api</span>fix <code>IllegalStateException</code> (&quot;ContactsApiGateway not initialized&quot;) when <code>initialize</code>/<code>initializeAsync</code> is called again while contacts are still being read; later callers now wait for the read in progress and callbacks are only delivered once the gateway is ready</li>
+                    <li><span class="module-tag">contacts-api</span>a failed read no longer leaves the gateway stuck; it can be retried, and <code>ContactsDataConsumer.onContactsReadFailed</code> reports the error for <code>initializeAsync</code></li>
+                    <li><span class="module-tag">lib</span>published artifacts now expose AppCompat, RecyclerView, Fragment and Play Billing as compile dependencies where they are part of the public API</li>
+                    <li><span class="module-tag">lib</span>publish a sources jar for every module</li>
+                    <li><span class="module-tag">lib</span>GitHub Actions CI (unit tests, lint, release build)</li>
+                    <li><span class="module-tag">lib</span>compileSdk 37</li>
+                    <li><span class="module-tag">billing-client</span>Play Billing Library 8; removed unused Guava dependency</li>
+                    <li><span class="module-tag">contacts-api</span>fix cursor and stream leaks, read only the columns needed, return null instead of crashing for an unknown contact id</li>
+                    <li><span class="module-tag">contacts-api</span><code>initializeAsync</code> no longer crashes when called from a thread without a Looper</li>
+                    <li><span class="module-tag">sms-api</span>fix cursor leak on empty results; <code>MessageInfo</code> date, type and protocol are now populated</li>
+                    <li><span class="module-tag">utilities</span><code>CommonUtils.isPackageInstalled</code> now checks the package passed in (it always returned true)</li>
+                    <li><span class="module-tag">utilities</span><code>IntentUtils.getUriIntent</code> sets <code>ACTION_VIEW</code></li>
+                    <li><span class="module-tag">multi-contact</span>fix search crash below Android 15 and a threading race while filtering</li>
+                    <li><span class="module-tag">runtime-permissions</span><code>PermissionCheckingFragment</code> requires every requested permission to be granted, not just the first</li>
+                    <li><span class="module-tag">database-helpers</span><code>CopiedDataBaseHelper</code> keeps its path per instance, so two helpers no longer overwrite each other</li>
+                    <li><span class="module-tag">core</span><code>SimpleGraphView</code> no longer drifts on redraw or crashes when inflated from XML; <code>RoundedImageView</code> no longer crashes on non-bitmap drawables</li>
+                    <li><span class="module-tag">billing-client</span>migrate billing library <a href="https://github.com/midhunhk/lib-aeapps/issues/35">#35</a></li>
+                    <li><span class="module-tag">lib</span>migrate to maven publish plugin <a href="https://github.com/midhunhk/lib-aeapps/issues/36">#36</a></li>
+                    <li><span class="module-tag">lib</span>migrate android Gradle plugin version <a href="https://github.com/midhunhk/lib-aeapps/issues/37">#37</a></li>
+                    <li><span class="module-tag">lib</span>migrate to kotlin dsl <a href="https://github.com/midhunhk/lib-aeapps/issues/38">#38</a></li>
+                    <li><span class="module-tag">lib</span>build structure changes</li>
+                    <li><span class="module-tag">lib</span>use JDK 17</li>
+                    <li><span class="module-tag">agp</span>upgrade to 9.4.1</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v4.1">Version 4.1 <span class="codename">Kiwiberry</span></h2>
+            <section class="release">
+                <div class="release-version">4.1.0<span class="release-date">Feb 2021</span></div>
+                <ul>
+                    <li><span class="module-tag">runtime-permissions</span>AbstractPermissionsAwareActivity <a href="https://github.com/midhunhk/lib-aeapps/issues/32">#32</a></li>
+                    <li><span class="module-tag">runtime-permissions</span>Code Cleanup <a href="https://github.com/midhunhk/lib-aeapps/issues/33">#33</a></li>
+                    <li><span class="module-tag">billing-client</span>upgrade android billing library <a href="https://github.com/midhunhk/lib-aeapps/issues/29">#29</a></li>
+                    <li><span class="module-tag">core</span>more color resources</li>
+                    <li><span class="module-tag">utilities</span>launchWebPage method</li>
+                    <li><span class="module-tag">contacts-api</span>Option to filter duplicate phone numbers</li>
+                    <li><span class="module-tag">contacts-api</span>Use an LRU Cache for Default Contact Pictures to improve performance</li>
+                    <li><span class="module-tag">contacts-api</span>Removed TIMES_CONTACTED and LAST_TIME_CONTACTED since they have been made obsolete by Google</li>
+                    <li><span class="module-tag">core</span>add an implementation for In-App Reviews</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v4.0">Version 4.0 <span class="codename">Juneberry</span></h2>
+            <section class="release">
+                <div class="release-version">4.0.7<span class="release-date">Apr 2020</span></div>
+                <ul>
+                    <li><span class="module-tag">core</span>More resources</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">4.0.6<span class="release-date">Apr 2020</span></div>
+                <ul>
+                    <li><span class="module-tag">lib</span>Update proguard for all modules</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">4.0.5<span class="release-date">Sep 2020</span></div>
+                <ul>
+                    <li><span class="module-tag">core</span>proguard change to fix critical bug <a href="https://github.com/midhunhk/lib-aeapps/issues/31">#31</a></li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">4.0.4<span class="release-date">Apr 2020</span></div>
+                <ul>
+                    <li><span class="module-tag">lib</span>Complete rewrite of library and change in architecture</li>
+                    <li><span class="module-tag">multi-contact</span>Add filter for Multi Contact Picker</li>
+                    <li><span class="module-tag">sample</span>Sample app to test and showcase the features</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v3.0">Version 3.0 <span class="codename">Indian Plum</span></h2>
+            <section class="release">
+                <div class="release-version">3.0.2<span class="release-date">Aug 2018</span></div>
+                <ul>
+                    <li>Remove permission requests from manifest</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">3.0.1<span class="release-date">Aug 2018</span></div>
+                <ul>
+                    <li>Bug Fixes</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">3.0.0<span class="release-date">Jul 2018</span></div>
+                <ul>
+                    <li>Remove DonationsActivity</li>
+                    <li>Add Runtime Permission Checker</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v2.3">Version 2.3 <span class="codename">Huckleberry</span></h2>
+            <section class="release">
+                <div class="release-version">2.3.0<span class="release-date">Jul 2018</span></div>
+                <ul>
+                    <li>More ContactUtil methods</li>
+                    <li>Added PermissionCheckingFragment</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v2.2">Version 2.2 <span class="codename">Grapefruit</span></h2>
+            <section class="release">
+                <div class="release-version">2.2.2<span class="release-date">Nov 2017</span></div>
+                <ul>
+                    <li>Reset flagEndAsync before new purchase flow</li>
+                    <li>Downgrade support library version for Message Counter</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">2.2.1<span class="release-date">Nov 2017</span></div>
+                <ul>
+                    <li>Add MultiContactPicker Activity</li>
+                    <li>Add ContactManagerProxy class</li>
+                    <li>Add animation resources</li>
+                    <li>Add reusable properties</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">2.2.0<span class="release-date">Oct 2017</span></div>
+                <ul>
+                    <li>Fix flagStartAsync not getting reset after Donation</li>
+                    <li>Generate Java docs for library</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v2.1">Version 2.1 <span class="codename">Fig</span></h2>
+            <section class="release">
+                <div class="release-version">2.1.0<span class="release-date">July 2017</span></div>
+                <ul>
+                    <li>Deploy library to jcenter</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v2.0">Version 2.0 <span class="codename">Elderberry</span></h2>
+            <section class="release">
+                <div class="release-version">2.0.1<span class="release-date">June 2017</span></div>
+                <ul>
+                    <li>Refactor ContactManager implementation</li>
+                    <li>Unit test cases</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">2.0.0<span class="release-date">May 2017</span></div>
+                <ul>
+                    <li>Updates to ContactManager</li>
+                    <li>Add contacts without contact numbers</li>
+                    <li>Integration with Travis CI</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v1.5">Version 1.5 <span class="codename">Damson</span></h2>
+            <section class="release">
+                <div class="release-version">1.5.3<span class="release-date">Feb 2017</span></div>
+                <ul>
+                    <li>Added ContactPickerFragment</li>
+                    <li>Updated ContactVO</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">1.5.2<span class="release-date">Jan 2017</span></div>
+                <ul>
+                    <li>Added delete operation in DatabaseHelper</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v1.5">Version 1.5 <span class="codename">Cranberry</span></h2>
+            <section class="release">
+                <div class="release-version">1.5.1<span class="release-date">Nov 2016</span></div>
+                <ul>
+                    <li>Convert project to Android Studio Gradle format</li>
+                </ul>
+            </section>
+            <section class="release">
+                <div class="release-version">1.5.0<span class="release-date">Dec 2015</span></div>
+                <ul>
+                    <li>Remove duplicate phone numbers for contacts</li>
+                    <li>Added come common views, colors and dimensions</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v1.4">Version 1.4 <span class="codename">Blueberry</span></h2>
+            <section class="release">
+                <div class="release-version">1.4.0<span class="release-date">May 2015</span></div>
+                <ul>
+                    <li>Added ToolBarBaseActivity</li>
+                    <li>Added DonationsBaseActivity</li>
+                    <li>Added appcompat as dependent library</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v1.3">Version 1.3 <span class="codename">Blueberry</span></h2>
+            <section class="release">
+                <div class="release-version">1.3.0<span class="release-date">Apr 2015</span></div>
+                <ul>
+                    <li>Added In-App billing aidl and utils</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v1.2">Version 1.2 <span class="codename">Blueberry</span></h2>
+            <section class="release">
+                <div class="release-version">1.2.0<span class="release-date">May 2013</span></div>
+                <ul>
+                    <li>Added MockContactDataUtils</li>
+                    <li>Initial project added to Git</li>
+                </ul>
+            </section>
+            <h2 class="major" id="v1.1">Version 1.1 <span class="codename">Apricot</span></h2>
+            <section class="release">
+                <div class="release-version">1.1.0<span class="release-date">Apr 2014</span></div>
+                <ul>
+                    <li>Initial project added to VCS</li>
+                </ul>
+            </section>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery-3.2.0.min.js"></script>
-    <script src="assets/js/jquery-ui.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/jquery.waypoints.min.js"></script>
-    
-    <script src="assets/js/theme.js"></script>
+<footer class="site-footer">
+    <div class="container">
+        <div class="labs">
+            <img src="resources/v4/icons/app_labs_icon_white.png" alt="" width="48" height="48">
+            <p>lib-aeapps by Ae App Labs.<br>Licensed under the
+                <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+        </div>
+        <div>
+            <h2>Project</h2>
+            <ul>
+                <li><a href="https://github.com/midhunhk/lib-aeapps">Source code</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/issues">Issues</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/blob/main/VersionHistory.md">VersionHistory.md</a></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Docs</h2>
+            <ul>
+                <li><a href="api/index.html">API reference</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/wiki">Wiki</a></li>
+                <li><a href="https://github.com/midhunhk/lib-aeapps/wiki/Codenames">Codenames</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 </body>
-
 </html>

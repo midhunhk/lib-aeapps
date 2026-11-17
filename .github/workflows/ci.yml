@@ -38,6 +38,9 @@ jobs:
       - name: Assemble and publish to Maven Local
         run: ./gradlew assembleRelease publishReleasePublicationToMavenLocal
 
+      - name: API reference builds
+        run: ./gradlew :dokkaGenerate
+
       - name: Upload reports
         if: failure()
         uses: actions/upload-artifact@v4

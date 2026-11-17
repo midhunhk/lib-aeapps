@@ -5,6 +5,7 @@ import com.ae.apps.lib.Publish
 plugins {
     id ("com.android.library")
     id ("maven-publish")
+    id ("org.jetbrains.dokka")
     id ("org.jetbrains.kotlin.android")
 }
 

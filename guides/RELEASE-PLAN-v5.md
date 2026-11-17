@@ -226,7 +226,7 @@ Severity: **A** = fix before 5.0.0 · **B** = should fix before 5.0.0 · **C** =
 | D-1 | A | [README.md](../README.md): JitPack badge points at the old repo name `ae-apps-library`; "commits since" badge is pinned to `v4.1.0`; Changelog link uses the `master` branch (default is `main`); JitCI badge is for a service no longer in use. No Gradle snippet showing how to add the dependency — it defers entirely to the wiki. |
 | D-2 | A | [VersionHistory.md](../VersionHistory.md) lists "Version 5.0.0 [Nov 2024]" although only betas have shipped, and omits the Billing v8 migration, compileSdk 36 and the July 2025 changes. |
 | D-3 | B | No v4 → v5 migration guide (the README table stops at v4.1). Breaking changes include the billing handler interface (SKU → ProductDetails), JDK 17 and coordinate changes. **Done 2026-11-12:** [MIGRATION-v5.md](MIGRATION-v5.md), linked from the README. |
-| D-4 | B | `docs/api/` is a committed Javadoc dump (~220 files) from an older version: it documents `SMSManager`, `ContactManager`, `AeContactService` and `com.ae.apps.libs.*`, none of which exist now. |
+| D-4 | B | `docs/api/` is a committed Javadoc dump (~220 files) from an older version: it documents `SMSManager`, `ContactManager`, `AeContactService` and `com.ae.apps.libs.*`, none of which exist now. **Done 2026-11-16:** regenerated with Dokka (Java and Kotlin, public and protected API), Pages site and release notes rebuilt; see DEVELOPMENT.md section 3.5. |
 | D-5 | C | [.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) links to `ae-apps-library`. [sample/Readme.md](../sample/Readme.md) has an empty "Features Provided" heading. Licence headers vary by year and are missing from some files. |
 
 ---
