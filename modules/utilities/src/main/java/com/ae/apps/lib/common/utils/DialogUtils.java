@@ -22,9 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 
-import androidx.annotation.IntegerRes;
-import androidx.annotation.StringRes;
-
 /**
  * Utility class to show dialogs
  *

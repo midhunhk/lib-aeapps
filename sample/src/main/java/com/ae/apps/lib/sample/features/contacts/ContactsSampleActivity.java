@@ -126,7 +126,7 @@ public class ContactsSampleActivity extends AppCompatActivity
             ContactInfoOptions options = new ContactInfoOptions.Builder()
                     .includePhoneDetails(true)
                     .includeContactPicture(true)
-                    .defaultContactPicture(com.ae.apps.lib.R.drawable.profile_icon_3)
+                    .defaultContactPicture(com.ae.apps.lib.core.R.drawable.profile_icon_3)
                     .filterDuplicatePhoneNumbers(true)
                     .build();
             ContactInfo contactInfo = contactsApiGateway.getContactInfo(

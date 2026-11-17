@@ -20,6 +20,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -28,23 +31,25 @@ import androidx.fragment.app.Fragment;
  */
 public abstract class ContactPickerFragment extends Fragment {
 
-    private static final int CONTACT_PICKER_RESULT = 2020;
+    private final ActivityResultLauncher<Intent> contactPickerResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == Activity.RESULT_OK) {
+                    final Intent data = result.getData();
+                    if(data != null) {
+                        onContactPicked(data.getData());
+                    }
+                }
+            }
+    );
 
     /**
      * Start the contact picking process
+     * @noinspection unused
      */
     public void pickContact() {
-        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(intent, CONTACT_PICKER_RESULT);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == CONTACT_PICKER_RESULT) {
-            onContactPicked(data.getData());
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+        final Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        contactPickerResultLauncher.launch(intent);
     }
 
     /**

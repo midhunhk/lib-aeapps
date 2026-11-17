@@ -39,7 +39,8 @@ public interface SmsApiConstants {
 
     String[] SMS_TABLE_PROJECTION = {
             COLUMN_ID, COLUMN_THREAD_ID, COLUMN_BODY,
-            COLUMN_ADDRESS, COLUMN_PERSON, COLUMN_PROTOCOL};
+            COLUMN_ADDRESS, COLUMN_PERSON, COLUMN_DATE,
+            COLUMN_TYPE, COLUMN_PROTOCOL};
 
     String SELECT_BY_PERSON = " person = ? ";
 }

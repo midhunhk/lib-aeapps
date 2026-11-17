@@ -1,6 +1,5 @@
 package com.ae.apps.lib.permissions;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -16,13 +15,23 @@ public abstract class AbstractPermissionsAwareActivity
     protected static final int PERMISSION_CHECK_REQUEST_CODE = 8000;
     private final RuntimePermissionChecker permissionChecker = RuntimePermissionChecker.newInstance(this);
 
+    /** @noinspection unused*/
     protected void checkPermissions(){
         permissionChecker.checkPermissions();
     }
 
     @Override
     public void invokeRequestPermissions() {
-        requestPermissionsForAPI();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissionsForAPI();
+        } else {
+            // For versions before Android Build.VERSION_CODES_FULL.M, permissions are granted at install time.
+            // If the permission is in the manifest, the app has it.
+            // You can directly call the method that uses the permission.
+            // No specific action needed here to *request* them.
+            // The onPermissionsGranted() or equivalent method can be called directly.
+            onPermissionsGranted();
+        }
     }
 
     @Override
@@ -40,7 +49,7 @@ public abstract class AbstractPermissionsAwareActivity
         showPermissionsRequiredView();
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+    @androidx.annotation.RequiresApi(Build.VERSION_CODES.M)
     protected void requestPermissionsForAPI(){
         requestPermissions(requiredPermissions(), PERMISSION_CHECK_REQUEST_CODE);
     }

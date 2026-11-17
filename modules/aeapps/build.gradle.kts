@@ -1,0 +1,76 @@
+import com.ae.apps.lib.ArtifactId
+import com.ae.apps.lib.ConfigurationData
+import com.ae.apps.lib.Libs
+import com.ae.apps.lib.Publish
+
+plugins {
+    id ("com.android.library")
+    id ("maven-publish")
+}
+
+android {
+    namespace = "com.ae.apps.lib.aeapps"
+    compileSdk = ConfigurationData.SDK_COMPILE_VERSION
+
+    defaultConfig {
+        minSdk = ConfigurationData.MIN_SDK_VERSION
+        aarMetadata {
+            minCompileSdk = ConfigurationData.MIN_SDK_VERSION
+        }
+        consumerProguardFiles ("consumer-rules.pro")
+        // testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles (
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // creates a maven publication called release
+            register<MavenPublication>("release") {
+                from (components["release"])
+
+                groupId = Publish.GROUP_ID
+                artifactId = ArtifactId.AEAPPS
+                version = Publish.VERSION_STRING
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation(Libs.AndroidX.APPCOMPAT)
+
+    // Integrate all components into this api
+    api (project(":core"))
+    api (project(":mocks"))
+    api (project(":contacts-api"))
+    api (project(":multi-contact"))
+    api (project(":database-helpers"))
+    api (project(":runtime-permissions"))
+    api (project(":billing-client"))
+    api (project(":sms-api"))
+    api (project(":utilities"))
+
+    testImplementation (project(":mocks"))
+    testImplementation(Libs.Test.TEST_NG)
+}

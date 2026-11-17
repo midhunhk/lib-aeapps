@@ -79,8 +79,10 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
     protected void displayHomeAsUp() {
         // Show the back arrow in toolbar to go back
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (null != getSupportActionBar()) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

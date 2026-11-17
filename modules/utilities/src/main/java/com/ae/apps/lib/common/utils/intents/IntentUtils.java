@@ -57,7 +57,7 @@ public class IntentUtils {
      * @return intent
      */
     public static Intent getUriIntent(final Context context, final String url) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         return intent;
     }

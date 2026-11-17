@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mock_names" translatable="false">
+        <item>Léo Dubois</item>
+        <item>Chloé Moreau</item>
+        <item>Lucas Petit</item>
+        <item>Manon Girard</item>
+        <item>Arthur Lefevre</item>
+        <item>Camille Roux</item>
+        <item>Gabriel Bonnet</item>
+        <item>Louise Chevalier</item>
+        <item>Raphaël Lambert</item>
+    </string-array>
+</resources>

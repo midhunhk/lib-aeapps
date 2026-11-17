@@ -36,7 +36,7 @@ public class SmsApiGatewayTest {
     @Before
     public void setUp() {
         MockSmsApiGateway mockSmsApiGateway = new MockSmsApiGateway();
-        mockSmsApiGateway.setContentResoler(contentResolver);
+        mockSmsApiGateway.setContentResolver(contentResolver);
         apiGateway = mockSmsApiGateway;
     }
 
