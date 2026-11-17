@@ -243,6 +243,7 @@ These change the shape of the plan, so they are called out rather than assumed.
 | **D4** | JitPack only, or Maven Central as well? | **JitPack for 5.0.0**; treat Central as post-release (needs a verified namespace, signing, and the POM metadata from P3). |
 | **D5** | What happens to `database-helpers`? | **Ship as-is but deprecate the whole module** in 5.0 with a pointer to Room, fix only B9, and remove it in 6.0. |
 | **D6** | Do Message Counter, Random Contact and Trip 'O Meter all move to 5.0? | Their usage determines which "internal" classes can safely be hidden under A1 — worth a quick grep in each app before Phase 2. |
+| **D7** | Keep `core` and `utilities` as separate modules? | **Decided 2026-11-16: keep both, trim the dependencies between modules in 5.1.** See "Planned for 5.1" in Phase 3. Splitting `core` into models and UI waits for 6.0. |
 
 ---
 
@@ -357,6 +358,38 @@ Then: tag `v5.0.0-rc.01`, migrate one real app to it, and release `v5.0.0` after
 
 ### Phase 3 — Nice to have (5.1 and later)
 
+**Planned for 5.1 — module dependency clean-up (D7)**
+
+Analysis of 2026-11-16: `core` holds shared models, custom views, `ToolBarBaseActivity`, in-app
+review and resources; `utilities` holds stand-alone static helpers with no dependency on other
+library modules. The declared dependencies between modules do not match what the code uses:
+
+| Module | Declares | Uses from `core` | Uses from `utilities` |
+|---|---|---|---|
+| `contacts-api` | `core`, `utilities` | models | nothing |
+| `multi-contact` | `core`, `utilities` | `ContactInfo`, `EmptyRecyclerView` | nothing |
+| `runtime-permissions` | `core`, `utilities` | nothing | `CommonUtils.createParentLayout` only |
+| `database-helpers` | `core` | nothing | — |
+| `sms-api`, `mocks` | `core` | models | — |
+
+Changes:
+
+| Task | Effort |
+|---|---|
+| Remove the `utilities` dependency from `contacts-api` and `multi-contact` | S |
+| Inline `createParentLayout` into `runtime-permissions`; remove its `utilities` and `core` dependencies | S |
+| Remove the `core` dependency from `database-helpers` | S |
+| Check each module still compiles with only what it declares; update the dependency graph in this plan, `DEVELOPMENT.md` section 2.2 and the diagram on `docs/index.html` | S |
+| Add a 5.1 note to `MIGRATION-v5.md` and `VersionHistory.md`: apps that relied on getting `utilities` (or `core`) indirectly through these modules must now declare it | S |
+
+Imports do not change, because Java packages do not depend on which module a class lives in.
+Random Contact declares `utilities` itself and Message Counter and Trip O Meter use the `aeapps`
+bundle, so none of the three apps is affected.
+
+Not in 5.1: splitting `core` into a dependency-free `models` module and a `ui` module, so
+`sms-api` and `mocks` stop pulling in AppCompat, RecyclerView, Preference and Play In-App Review.
+That changes artifact coordinates, so it is planned for **6.0**.
+
 **Build and tooling**
 
 - Version catalog (`gradle/libs.versions.toml`) replacing `Dependencies.kt`, plus Renovate or Dependabot.
@@ -374,7 +407,7 @@ Then: tag `v5.0.0-rc.01`, migrate one real app to it, and release `v5.0.0` after
 - Contacts and SMS: `suspend`/`Flow` variants alongside the callback API, error reporting, and SMS lookup by address rather than `person`.
 - Models: Kotlin data classes (or at least nullability annotations and proper `equals`/`hashCode`), `Parcelable` where useful.
 - Billing: subscriptions and offer tokens, a sealed result type in place of the 12-method handler interface, a test fake.
-- Split `core` into `models` and `ui` so data-only modules stop pulling UI and Play dependencies.
+- Split `core` into `models` and `ui` so data-only modules stop pulling UI and Play dependencies (6.0, see D7).
 - Gradual Java → Kotlin migration, starting with `utilities` and the constants interfaces.
 
 **Sample app**
