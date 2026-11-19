@@ -1,5 +1,13 @@
 # Version History
 
+## Version 5.1 (Mulberry)
+#### Version 5.1.0 [Nov 2026]
+- lib: remove module dependencies that the code does not use: 
+  - `contacts-api` and `multi-contact` no longer depend on `utilities`
+  - `runtime-permissions` no longer depends on `core` or `utilities`
+  - `database-helpers` no longer depends on `core`. 
+  - Apps that used `core` or `utilities` classes only through these modules must now add them as dependencies
+
 ## Version 5.0 (Lingonberry)
 #### Version 5.0.1 [Nov 2026]
 - contacts-api: fix `IllegalStateException` ("ContactsApiGateway not initialized") when `initialize`/`initializeAsync` is called again while contacts are still being read; later callers now wait for the read in progress and callbacks are only delivered once the gateway is ready

@@ -66,5 +66,5 @@ kotlin {
 }
 
 dependencies {
-    api (project(":core"))
+    // Android framework only; no other library modules
 }

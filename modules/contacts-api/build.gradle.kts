@@ -66,7 +66,6 @@ dependencies {
     implementation(Libs.AndroidX.APPCOMPAT)
 
     api (project(":core"))
-    api (project(":utilities"))
 
     testImplementation (project(":mocks"))
     testImplementation(Libs.Test.JUNIT)

@@ -89,6 +89,9 @@ aeapps ──► all nine modules (api)
 sample ──► core, contacts-api, sms-api, runtime-permissions, utilities, multi-contact
 ```
 
+As of 5.1 (D7) the graph is smaller: only `contacts-api`, `multi-contact`, `sms-api` and `mocks`
+depend on `core`, and no library module depends on `utilities`. See `DEVELOPMENT.md` section 2.2.
+
 Observations on the shape:
 
 - The graph is shallow and acyclic in `main` scope, which is good. `core` declares
@@ -358,7 +361,8 @@ Then: tag `v5.0.0-rc.01`, migrate one real app to it, and release `v5.0.0` after
 
 ### Phase 3 — Nice to have (5.1 and later)
 
-**Planned for 5.1 — module dependency clean-up (D7)**
+**Planned for 5.1 — module dependency clean-up (D7)** — **done 2026-11-18 on `mulberry`**
+(version `5.1.0`)
 
 Analysis of 2026-11-16: `core` holds shared models, custom views, `ToolBarBaseActivity`, in-app
 review and resources; `utilities` holds stand-alone static helpers with no dependency on other

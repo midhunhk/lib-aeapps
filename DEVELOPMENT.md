@@ -102,23 +102,32 @@ Two naming details worth knowing:
 ### 2.2 Dependencies between modules
 
 ```
-core  ◄── mocks
-  ▲  ◄── database-helpers
+core  ◄── contacts-api
+  ▲  ◄── multi-contact
   ├──── sms-api
-  ├──── contacts-api ──────► utilities
-  ├──── multi-contact ─────► utilities
-  └──── runtime-permissions ► utilities
+  └──── mocks
 
-billing-client   (no module dependencies)
-utilities        (no module dependencies)
+utilities            (no module dependencies)
+runtime-permissions  (no module dependencies)
+database-helpers     (no module dependencies)
+billing-client       (no module dependencies)
 
 aeapps ──► all nine (api)
 sample ──► core, contacts-api, sms-api, runtime-permissions, utilities, multi-contact
 ```
 
+This is the graph from 5.1. In 5.0, `contacts-api`, `multi-contact` and `runtime-permissions`
+also depended on `utilities`, and `runtime-permissions` and `database-helpers` on `core`; those
+dependencies were unused and were removed.
+
 All module-to-module edges are `api`, so they appear as compile-scope dependencies in the
-published POMs and a consumer of `contacts-api` gets `core` and `utilities` automatically.
-Third-party libraries are currently `implementation` — see P1 in the release plan.
+published POMs and a consumer of `contacts-api` gets `core` automatically. Third-party libraries
+that appear in a module's public API are `api` as well; the rest are `implementation`.
+
+**What goes where.** `core` holds what other modules are built on: the shared models, custom
+views, `ToolBarBaseActivity`, in-app review and shared resources. `utilities` holds stand-alone
+static helpers that apps call directly. A library module should depend on `utilities` only if
+it uses one of those helpers, and on `core` only if it uses a model, view or resource from it.
 
 ### 2.3 Inside a module
 
@@ -321,7 +330,7 @@ implementation("com.github.midhunhk.lib-aeapps:contacts-api:<version>")
 implementation("com.github.midhunhk.lib-aeapps:aeapps:<version>")
 ```
 
-> **Use the tag name, including the `v`, as `<version>`** — for example `v5.0.0-beta.04`.
+> **Use the tag name, including the `v`, as `<version>`** — for example `v5.1.0`.
 > `VERSION_STRING` in `Publish.kt` has no prefix, but JitPack serves artifacts under the git tag
 > name. Random Contact resolves the library this way (`v5.0.0-beta.02`).
 
@@ -370,8 +379,7 @@ Steps 1–6 happen on the codename branch.
 1. **Confirm the branch is green.** CI passing on the latest commit, or locally:
    `testDebugUnitTest`, `lintDebug`, `assembleRelease`.
 
-2. **Bump `VERSION_STRING`** in `Publish.kt`. (As of 2026-11-10 it is `5.0.0-beta.04`, which
-   has not been tagged yet.)
+2. **Bump `VERSION_STRING`** in `Publish.kt`.
 
 3. **Dry-run the publication locally** and look at what was produced:
 

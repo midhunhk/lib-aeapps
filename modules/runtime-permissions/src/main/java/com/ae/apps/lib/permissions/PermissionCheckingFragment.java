@@ -20,15 +20,15 @@ package com.ae.apps.lib.permissions;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
-
-import com.ae.apps.lib.common.utils.CommonUtils;
 
 
 /**
@@ -66,7 +66,7 @@ public abstract class PermissionCheckingFragment extends Fragment {
     public final View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         this.container = container;
-        mainContainer = CommonUtils.createParentLayout(context);
+        mainContainer = createParentLayout(context);
 
         permissionNames = getRequiredPermissions();
 
@@ -133,6 +133,16 @@ public abstract class PermissionCheckingFragment extends Fragment {
             }
         }
         return true;
+    }
+
+    /**
+     * Creates the full-screen container that the granted or not-granted view is placed in
+     */
+    private static ViewGroup createParentLayout(final Context context) {
+        FrameLayout layout = new FrameLayout(context);
+        layout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL));
+        return layout;
     }
 
     private boolean allPermissionsGranted(@NonNull int[] grantResults) {
