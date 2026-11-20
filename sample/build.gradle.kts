@@ -30,14 +30,26 @@ android {
         applicationId = "com.ae.apps.lib.sample"
         minSdk = 21
         targetSdk = 37
-        versionCode = 12
-        versionName = "1.4.4"
+        versionCode = 14
+        versionName = "1.5.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        // Feature flag for the developer-only "Generate Contacts" screen. It is off by default and
+        // only switched on for debug builds below, so builds published to the Play Store never show
+        // it. The screen, its manifest entry and the WRITE_CONTACTS permission live in src/debug,
+        // so release builds do not contain them at all.
+        buildConfigField("boolean", "FEATURE_CONTACT_GENERATOR", "false")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
+        debug {
+            buildConfigField("boolean", "FEATURE_CONTACT_GENERATOR", "true")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles (

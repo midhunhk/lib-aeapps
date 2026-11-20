@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings for developer-only screens, compiled into debug builds only -->
+<resources>
+    <string name="title_activity_contact_generator">Generate Contacts</string>
+    <string name="str_need_write_contact_permissions">
+        This developer tool needs permission to read and write contacts
+        so it can add test contacts to this emulator.
+    </string>
+    <string name="str_contact_generator_info">
+        Adds random test contacts to this emulator, for trying out the Contacts API
+        and Multi Contact Picker samples. Only contacts created here are removed.
+    </string>
+    <string name="str_btn_generate_contacts">Create %1$d Contacts</string>
+    <string name="str_btn_remove_generated_contacts">Remove Generated Contacts</string>
+    <string name="str_generating_contacts">Creating contacts…</string>
+    <string name="str_generated_contacts">Created %1$d contacts in %2$d ms</string>
+    <string name="str_generate_failed">Stopped after %1$d contacts: %2$s</string>
+    <string name="str_removing_contacts">Removing generated contacts…</string>
+    <string name="str_removed_contacts">Removed %1$d generated contacts</string>
+    <string name="str_remove_failed">Could not remove contacts: %1$s</string>
+</resources>

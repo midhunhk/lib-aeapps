@@ -16,9 +16,11 @@
 
 package com.ae.apps.lib.sample.features;
 
+import com.ae.apps.lib.sample.BuildConfig;
 import com.ae.apps.lib.sample.features.contacts.ContactsSampleActivity;
 import com.ae.apps.lib.sample.features.contacts.MultiContactSampleActivity;
 import com.ae.apps.lib.sample.models.FeatureInfo;
+import com.ae.apps.lib.sample.utils.DeviceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +31,15 @@ import java.util.List;
 public class Features {
 
     public enum SpecialFeature {
-        ABOUT, BUILD_STATUS, NOT_IMPLEMENTED
+        ABOUT, BUILD_STATUS, NOT_IMPLEMENTED, CONTACT_GENERATOR
     }
+
+    /**
+     * Developer-only screen that fills an emulator with test contacts. Its class is in the debug
+     * source set, so it is started by name rather than referenced directly.
+     */
+    public static final String CONTACT_GENERATOR_CLASS =
+            "com.ae.apps.lib.sample.features.dev.ContactGeneratorActivity";
 
     public static List<FeatureInfo> getFeatures() {
         List<FeatureInfo> features = new ArrayList<>();
@@ -39,6 +48,12 @@ public class Features {
 
         // features.add(FeatureInfo.of(2, "SMS API", "An Abstraction over Android SMS API", SmsSampleActivity.class));
         features.add(FeatureInfo.of(3, "Multi Contact Picker", "Select multiple contacts", MultiContactSampleActivity.class));
+
+        // Feature flag: on for debug builds only (see sample/build.gradle.kts), and only on an emulator
+        if (BuildConfig.FEATURE_CONTACT_GENERATOR && DeviceUtils.isEmulator()) {
+            features.add(FeatureInfo.of(5, "Generate Contacts", "Developer tool: add 100 random contacts to this emulator",
+                    SpecialFeature.CONTACT_GENERATOR));
+        }
 
         features.add(FeatureInfo.of(4, "About", "More Information", SpecialFeature.ABOUT));
         return features;
