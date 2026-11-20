@@ -28,3 +28,8 @@ genJavaDoc.cmd
 .project
 .gradle
 .idea
+
+# Generated documentation, built and deployed by .github/workflows/pages.yml
+# (run ./gradlew updateSite to generate them locally for preview)
+docs/api/
+docs/release_notes.html

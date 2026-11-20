@@ -400,7 +400,7 @@ That changes artifact coordinates, so it is planned for **6.0**.
 - A convention plugin (`build-logic`) for library modules, replacing `buildSrc` and the ten duplicated scripts (G1). If time allows this is worth pulling into Phase 1, because it turns P1–P4 into single-file changes.
 - Binary compatibility validation (Kotlin BCV or Metalava) so API changes show up in review.
 - Kover or JaCoCo coverage reporting; detekt/ktlint; a lint baseline with `warningsAsErrors`.
-- Dokka-generated API docs published to GitHub Pages from CI, replacing the committed HTML.
+- Dokka-generated API docs published to GitHub Pages from CI, replacing the committed HTML. **Done 2026-11-19:** `.github/workflows/pages.yml` builds and deploys the site on release tags; `docs/api` and `docs/release_notes.html` are no longer committed.
 - Release automation: a tag-triggered workflow that builds, creates the GitHub release and warms the JitPack build.
 - Maven Central publishing (D4).
 
