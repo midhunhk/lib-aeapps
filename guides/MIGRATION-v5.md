@@ -2,7 +2,8 @@
 
 This guide is for apps that use **4.1.x (Kiwiberry)** and are moving to **5.0.x (Lingonberry)**.
 If you are already on a 5.0 alpha or beta, skip to
-[section 6](#6-from-a-50-pre-release).
+[section 6](#6-from-a-50-pre-release). Moving from 5.0 to 5.1 is covered in
+[section 8](#8-from-50-to-51).
 
 Version 5.0 is mostly a rebuild of how the library is built and published, after the Bintray
 and JCenter shutdown made the 4.x publishing setup unusable. Most modules keep their 4.1 API.
@@ -62,7 +63,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 // app/build.gradle(.kts)
-val libAeAppsVersion = "v5.0.1"
+val libAeAppsVersion = "v5.1.0"
 
 implementation("com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion")
 implementation("com.github.midhunhk.lib-aeapps:contacts-api:$libAeAppsVersion")
@@ -72,7 +73,7 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")
 
 - **Remove `jcenter()`** from your repositories if it is still there. It is read-only and the
   library is no longer published to it.
-- **Use the git tag name, including the `v`**, as the version (`v5.0.1`). This is the form
+- **Use the git tag name, including the `v`**, as the version (`v5.1.0`). This is the form
   JitPack serves the 5.0 artifacts under.
 - Artifact IDs are unchanged: `core`, `utilities`, `contacts-api`, `sms-api`,
   `runtime-permissions`, `multi-contact`, `database-helpers`, `billing-client`, `mocks`,
@@ -361,11 +362,41 @@ Moving to `v5.0.1` brings:
 
 - [ ] `minSdk` ≥ 21, JDK 17, AGP 8 or newer
 - [ ] `jcenter()` removed; JitPack repository present
-- [ ] Version set to `v5.0.1`
+- [ ] Version set to `v5.1.0` (and see [section 8](#8-from-50-to-51))
 - [ ] Fully qualified `com.ae.apps.lib.R` (and other library `R`) references updated
 - [ ] `billing-client`: handler re-implemented, purchases consumed or acknowledged,
       `queryPurchasesAsync()` called on resume
 - [ ] `mocks` / `CopiedDataBaseHelper` call sites updated, if used
 - [ ] `com.google.android.play:core` replaced with split Play libraries, if used
 - [ ] `isPackageInstalled` callers checked, and `<queries>` added for Android 11+
-- [ ] No `initialize()` on the main thread while `initializeAsync()` may be running
+- [ ] No `initialize()` on the main thread while `initializeAsync()` may be running
+
+---
+
+## 8. From 5.0 to 5.1
+
+5.1 removes dependencies between library modules that the code did not use. Class names,
+packages and resources are unchanged; only what each module brings in with it changes.
+
+| Module | 5.0 brought in | 5.1 brings in |
+|---|---|---|
+| `contacts-api` | `core`, `utilities` | `core` |
+| `multi-contact` | `core`, `utilities` | `core` |
+| `runtime-permissions` | `core`, `utilities` | no library modules |
+| `database-helpers` | `core` | no library modules |
+| `core`, `utilities`, `sms-api`, `mocks`, `billing-client`, `aeapps` | unchanged | unchanged |
+
+**What to do:** if your app uses classes from `utilities` (such as `CommonUtils`, `DialogUtils`,
+`ContactUtils` or `IntentUtils`) or from `core` (such as `ContactInfo`, the custom views,
+`ToolBarBaseActivity` or `AppReviewImpl`) but declares only one of the modules above, add the
+module explicitly:
+
+```kotlin
+implementation("com.github.midhunhk.lib-aeapps:utilities:$libAeAppsVersion")
+implementation("com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion")
+```
+
+The build tells you if this applies: it fails with unresolved `com.ae.apps.lib.common.utils.*`
+or `com.ae.apps.lib.*` imports. Apps that use the `aeapps` artifact are not affected.
+
+`CommonUtils.createParentLayout` stays in `utilities`; `runtime-permissions` now has its own copy.

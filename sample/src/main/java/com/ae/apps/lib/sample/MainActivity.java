@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity
                 DialogUtils.showCustomViewDialog(this, getLayoutInflater(),
                         R.layout.about_view,
                         R.string.menu_about);
+            } else if (featureInfo.getSpecialFeature() == Features.SpecialFeature.CONTACT_GENERATOR) {
+                startActivity(new Intent().setClassName(this, Features.CONTACT_GENERATOR_CLASS));
             } else {
                 Toast.makeText(this, featureInfo.getName(), Toast.LENGTH_SHORT).show();
             }

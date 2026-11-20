@@ -59,9 +59,6 @@ afterEvaluate {
 }
 
 dependencies {
-    api (project(":core"))
-    api (project(":utilities"))
-
     // Libraries
     // Exposed in the public API of this module
     api(Libs.AndroidX.APPCOMPAT)

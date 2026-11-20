@@ -75,7 +75,7 @@
             <div class="code-block">
                 <span class="label">app/build.gradle.kts</span>
                 <button class="copy-button" type="button" data-copy="deps-snippet">Copy</button>
-                <pre><code id="deps-snippet">val libAeAppsVersion = "v5.0.1"
+                <pre><code id="deps-snippet">val libAeAppsVersion = "v5.1.0"
 
 // Pick individual modules…
 implementation("com.github.midhunhk.lib-aeapps:core:$libAeAppsVersion")
@@ -97,7 +97,7 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
             <h2>Modules</h2>
             <p class="intro">
                 Each module is a separate artifact. Modules bring in the ones they depend on, so adding
-                <code>contacts-api</code> also adds <code>core</code> and <code>utilities</code>.
+                <code>contacts-api</code> also adds <code>core</code>.
             </p>
 
             <div class="grid grid-3">
@@ -115,7 +115,7 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
                     <span class="artifact">contacts-api</span>
                     <h3>Contacts API</h3>
                     <p>Read and cache device contacts, look up phone numbers and pictures, pick a random contact.</p>
-                    <p class="depends">Uses <code>core</code>, <code>utilities</code></p>
+                    <p class="depends">Uses <code>core</code></p>
                 </article>
                 <article class="card">
                     <span class="artifact">sms-api</span>
@@ -127,13 +127,12 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
                     <span class="artifact">runtime-permissions</span>
                     <h3>Runtime permissions</h3>
                     <p>Base activities, a fragment and a checker that handle requesting and reacting to permissions.</p>
-                    <p class="depends">Uses <code>core</code>, <code>utilities</code></p>
                 </article>
                 <article class="card">
                     <span class="artifact">multi-contact</span>
                     <h3>Multi-contact picker</h3>
                     <p>A searchable screen for selecting several contacts, plus a single-contact picker fragment.</p>
-                    <p class="depends">Uses <code>core</code>, <code>utilities</code></p>
+                    <p class="depends">Uses <code>core</code></p>
                 </article>
                 <article class="card">
                     <span class="artifact">billing-client</span>
@@ -144,7 +143,6 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
                     <span class="artifact">database-helpers</span>
                     <h3>Database helpers</h3>
                     <p>SQLite helpers, including one that ships a prebuilt database from assets.</p>
-                    <p class="depends">Uses <code>core</code></p>
                 </article>
                 <article class="card">
                     <span class="artifact">mocks</span>
@@ -156,37 +154,34 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
 
             <figure class="diagram">
                 <svg viewBox="0 0 760 250" role="img" aria-labelledby="diagram-title">
-                    <title id="diagram-title">Module dependencies: six feature modules depend on core, three of them also on utilities; billing-client stands alone.</title>
+                    <title id="diagram-title">Module dependencies: contacts-api, multi-contact, sms-api and mocks depend on core; utilities, runtime-permissions, database-helpers and billing-client have no module dependencies.</title>
                     <defs>
                         <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                             <path class="arrow" d="M0,0 L10,5 L0,10 z"/>
                         </marker>
                     </defs>
 
-                    <!-- edges: from each feature module to the modules it depends on -->
+                    <!-- edges: from each feature module to the module it depends on -->
                     <g class="edges">
-                        <line class="edge" x1="66" y1="64" x2="214" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="66" y1="64" x2="426" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="190" y1="64" x2="230" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="190" y1="64" x2="446" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="314" y1="64" x2="246" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="314" y1="64" x2="466" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="438" y1="64" x2="262" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="562" y1="64" x2="278" y2="168" marker-end="url(#arrowhead)"/>
-                        <line class="edge" x1="686" y1="64" x2="294" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="80" y1="64" x2="254" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="216" y1="64" x2="274" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="352" y1="64" x2="294" y2="168" marker-end="url(#arrowhead)"/>
+                        <line class="edge" x1="488" y1="64" x2="314" y2="168" marker-end="url(#arrowhead)"/>
                     </g>
 
-                    <g class="node"><rect x="10" y="24" width="112" height="40" rx="8"/><text x="66" y="44">contacts-api</text></g>
-                    <g class="node"><rect x="134" y="24" width="112" height="40" rx="8"/><text x="190" y="44">multi-contact</text></g>
-                    <g class="node"><rect x="258" y="24" width="112" height="40" rx="8"/><text x="314" y="44">permissions</text></g>
-                    <g class="node"><rect x="382" y="24" width="112" height="40" rx="8"/><text x="438" y="44">sms-api</text></g>
-                    <g class="node"><rect x="506" y="24" width="112" height="40" rx="8"/><text x="562" y="44">db-helpers</text></g>
-                    <g class="node"><rect x="630" y="24" width="112" height="40" rx="8"/><text x="686" y="44">mocks</text></g>
+                    <g class="node"><rect x="20" y="24" width="120" height="40" rx="8"/><text x="80" y="44">contacts-api</text></g>
+                    <g class="node"><rect x="156" y="24" width="120" height="40" rx="8"/><text x="216" y="44">multi-contact</text></g>
+                    <g class="node"><rect x="292" y="24" width="120" height="40" rx="8"/><text x="352" y="44">sms-api</text></g>
+                    <g class="node"><rect x="428" y="24" width="120" height="40" rx="8"/><text x="488" y="44">mocks</text></g>
 
-                    <g class="node base"><rect x="190" y="170" width="120" height="40" rx="8"/><text x="250" y="190">core</text></g>
-                    <g class="node base"><rect x="396" y="170" width="120" height="40" rx="8"/><text x="456" y="190">utilities</text></g>
-                    <g class="node"><rect x="610" y="170" width="132" height="40" rx="8"/><text x="676" y="190">billing-client</text></g>
-                    <text class="caption-text" x="676" y="232" text-anchor="middle">no module dependencies</text>
+                    <g class="node base"><rect x="224" y="170" width="120" height="40" rx="8"/><text x="284" y="190">core</text></g>
+
+                    <!-- modules with no module dependencies -->
+                    <g class="node base"><rect x="590" y="24" width="150" height="36" rx="8"/><text x="665" y="42">utilities</text></g>
+                    <g class="node"><rect x="590" y="72" width="150" height="36" rx="8"/><text x="665" y="90">permissions</text></g>
+                    <g class="node"><rect x="590" y="120" width="150" height="36" rx="8"/><text x="665" y="138">db-helpers</text></g>
+                    <g class="node"><rect x="590" y="168" width="150" height="36" rx="8"/><text x="665" y="186">billing-client</text></g>
+                    <text class="caption-text" x="665" y="230" text-anchor="middle">no module dependencies</text>
                 </svg>
                 <figcaption>
                     Arrows point from a module to the modules it depends on. The <code>aeapps</code> artifact bundles all nine.

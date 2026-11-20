@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Debug-only additions to the sample app. These are merged into debug builds only,
+  so the WRITE_CONTACTS permission and the developer screens never reach the Play Store.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <application>
+        <activity
+            android:name=".features.dev.ContactGeneratorActivity"
+            android:exported="false"
+            android:label="@string/title_activity_contact_generator"
+            android:theme="@style/AppTheme" />
+    </application>
+
+</manifest>

@@ -1,0 +1,68 @@
+name: Docs site
+
+# Builds the documentation site from docs/ and deploys it to GitHub Pages.
+#
+# docs/index.html, docs/assets and docs/resources are committed. The API reference
+# (docs/api) and the release notes page (docs/release_notes.html) are not: they are
+# generated here by ./gradlew updateSite, which also sets the version shown in the
+# landing page's dependency snippet from Publish.VERSION_STRING.
+#
+# Runs when a release tag is pushed, and on demand from the Actions tab (for example after
+# editing docs/index.html between releases). See "Documentation site" in DEVELOPMENT.md.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; let an in-progress deployment finish rather than cancel it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v5
+
+      # gradlew is committed without the executable bit
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Generate API reference, release notes and site version
+        run: ./gradlew updateSite
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
