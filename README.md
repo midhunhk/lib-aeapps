@@ -2,14 +2,14 @@
 [![CI](https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml/badge.svg)](https://github.com/midhunhk/lib-aeapps/actions/workflows/ci.yml)
 [![Release](https://jitpack.io/v/midhunhk/lib-aeapps.svg)](https://jitpack.io/#midhunhk/lib-aeapps)
 [![Issues](https://img.shields.io/github/issues/midhunhk/lib-aeapps.svg)](https://github.com/midhunhk/lib-aeapps/issues)
-[![Codename](https://img.shields.io/badge/codename-mulberry-5a10fb)](https://github.com/midhunhk/lib-aeapps/wiki/Codenames)
+[![Codename](https://img.shields.io/badge/codename-nannyberry-5a10fb)](https://github.com/midhunhk/lib-aeapps/wiki/Codenames)
 
 lib-AeApps is an Android library project which provides reusable solutions to some common problems.
 Some situations require boilerplate code which can become tedious to manage.
 
 This is named after **Artistik Expressionz** since all my apps follow the package structure "com.ae.apps.[appname]".
 [Codenames](https://github.com/midhunhk/lib-aeapps/wiki/Codenames) for development versions are based on fruits, mostly berries.  
-The latest codename is *Mulberry*
+The latest codename is *Nannyberry*
 
 ## Contents
 Detailed information about the architecture of the project is available on the project wiki at [this link](https://github.com/midhunhk/lib-aeapps/wiki/Architecture)

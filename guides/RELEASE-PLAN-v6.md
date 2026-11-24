@@ -1,6 +1,10 @@
 # lib-aeapps 6.0 — Analysis and Release Plan
 
-Status: **draft for review** · Written 2026-11-19 · Baseline: `mulberry` at `2c58cc1` (5.1.0)
+Status: **in progress on `nannyberry`** · Written 2026-11-19 · Baseline: `mulberry` at `2c58cc1` (5.1.0)
+
+Tracking issue: [#78](https://github.com/midhunhk/lib-aeapps/issues/78), with one issue per task
+(#52–#77, plus #40 for contact labels) on the
+[Nannyberry milestone](https://github.com/midhunhk/lib-aeapps/milestone/11).
 
 This page proposes what should change in the next major version and why. 6.0 is allowed to break
 API and artifact contracts, so it is the place for the clean-ups that 5.x deliberately deferred,
@@ -130,6 +134,7 @@ Severity: **A** = must have for 6.0 · **B** = should have · **C** = nice to ha
 | A7 | B | **Billing handler with 13 methods.** Every app must implement all of them. | A sealed `PurchaseResult`/`BillingEvent` stream (`Flow`); subscriptions and offer tokens; a fake client for tests. |
 | A8 | B | **Static utility classes with duplicates.** Three "is package installed" methods, two `launchWebPage` methods, a pie chart view (`SimpleGraphView`) and a 2015 LG menu-key workaround in `ToolBarBaseActivity`. | Kotlin extension functions; remove duplicates and obsolete workarounds; move `SimpleGraphView` and `ColorThemes` out or delete them (decision D9). |
 | A9 | C | **Constants exposed as interfaces** (`ContactsApiConstants`, `SmsApiConstants`, `MultiContactPickerConstants`). | `object`s or `internal` constants. |
+| A10 | B | **No access to contact labels.** Google Contacts labels are contact groups (`ContactsContract.Groups`), but the library only reads phone-number type labels. A Random Contact user asked to pick from an existing label (random-contact#38, tracked here as #40). | Add labels to `ContactsRepository`: list labels with member counts, get the contacts in a label, labels on the contact model. Needs only `READ_CONTACTS`. Two queries (groups and memberships) joined in code; handle system, deleted and same-name groups. |
 
 ### 4.3 Platform
 
@@ -164,7 +169,7 @@ Severity: **A** = must have for 6.0 · **B** = should have · **C** = nice to ha
 | `ui` | `core` (views, resources) | `EmptyRecyclerView`, `RoundedImageView`, inset helpers, shared resources | AppCompat, RecyclerView |
 | `review` | `core` (in-app review) | In-app review flow with configurable thresholds | Play Review, `preferences` |
 | `utilities` | `utilities` | Kotlin extensions; safe intents (S1, S4, S5, S9) | — |
-| `contacts` | `contacts-api` | `ContactsRepository` (A1) | `models`, coroutines |
+| `contacts` | `contacts-api` | `ContactsRepository` (A1), including contact labels (A10) | `models`, coroutines |
 | `contacts-picker` | `multi-contact` | `ActivityResultContract` picker (A4) | `models`, `ui`, `contacts` |
 | `permissions` | `runtime-permissions` | `PermissionRequester` (A3) | Activity, Fragment |
 | `billing` | `billing-client` | Billing with verification and sealed results (S2, A7) | Play Billing, coroutines |
@@ -274,6 +279,7 @@ codename branch; each phase ends with a green build and a pre-release tag.
 | Task | Refs | Effort |
 |---|---|---|
 | `ContactsRepository` with `suspend`/`Flow` | A1 | L |
+| Contact labels (Google Contacts groups) in `ContactsRepository` — #40 | A10 | M |
 | `PermissionRequester` on Activity Result APIs; remove base classes | A3 | M |
 | Typed `ActivityResultContract` contact picker; edge-to-edge and predictive back | A4, P1, P2 | L |
 
@@ -310,7 +316,7 @@ codename branch; each phase ends with a green build and a pre-release tag.
 
 | App | Main work |
 |---|---|
-| Random Contact | Replace its random-contact gateway with `ContactsRepository`; picker contract; drop Anko and the preferences wrapper |
+| Random Contact | Replace its random-contact gateway with `ContactsRepository`; offer Google Contacts labels as a source of random contacts (random-contact#38); picker contract; drop Anko and the preferences wrapper |
 | Trip O Meter | Stays on 5.x (D12, D14). To move to 6.0 it first needs converting to Kotlin and replacing `DataBaseHelper` with Room (D5). |
 | Message Counter | None. It is dormant on Google Play and keeps its current library version. |
 

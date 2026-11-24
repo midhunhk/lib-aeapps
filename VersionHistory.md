@@ -1,5 +1,9 @@
 # Version History
 
+## Version 6.0 (Nannyberry)
+#### Version 6.0.0 [Unreleased]
+- lib: start of the 6.0 development line; see `guides/RELEASE-PLAN-v6.md` for the planned changes
+
 ## Version 5.1 (Mulberry)
 #### Version 5.1.0 [Nov 2026]
 - lib: remove module dependencies that the code does not use: 
