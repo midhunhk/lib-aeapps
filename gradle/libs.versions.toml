@@ -10,8 +10,8 @@ jvmTarget = "17"
 
 # Plugins
 agp = "9.5.2"
-kotlin = "2.2.10"
-dokka = "2.2.0"
+kotlin = "2.4.21"
+dokka = "2.3.0"
 kover = "0.9.11"
 binary-compatibility-validator = "0.18.2"
 
