@@ -81,7 +81,7 @@ marked **verify**. Re-check them against current documentation when the work sta
 |---|---|---|
 | D1 | Raise minSdk 21 → 23 | Not applied; `ConfigurationData.MIN_SDK_VERSION` is still 21 |
 | D3 | Remove `mocks` from the `aeapps` umbrella | Not applied; release APKs of umbrella users ship mock data |
-| D5 | Remove `database-helpers` in 6.0 | Pending — this release |
+| D5 | Remove `database-helpers` in 6.0 | Done on `nannyberry` (#57) |
 | D7 | Split `core` into models and UI in 6.0 | Pending — this release |
 
 ### 3.3 How the apps use the library
@@ -268,7 +268,7 @@ codename branch; each phase ends with a green build and a pre-release tag.
 
 | Task | Refs | Effort |
 |---|---|---|
-| Remove `database-helpers` | D5, S3 | S |
+| Remove `database-helpers` — done (#57) | D5, S3 | S |
 | Split `core` into `models`, `ui` and `review`; rename artifacts if D11 agrees | D7, D11 | M |
 | Remove `mocks` from `aeapps`; introduce `testing` with fakes | D3, S7 | M |
 | Delete obsolete code: LG key workaround, duplicate helpers, D9 removals | A8, P2 | S |

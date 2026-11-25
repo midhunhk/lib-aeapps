@@ -140,11 +140,6 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
                     <p>A lifecycle-aware wrapper around Google Play Billing Library 8 for one-time products.</p>
                 </article>
                 <article class="card">
-                    <span class="artifact">database-helpers</span>
-                    <h3>Database helpers</h3>
-                    <p>SQLite helpers, including one that ships a prebuilt database from assets.</p>
-                </article>
-                <article class="card">
                     <span class="artifact">mocks</span>
                     <h3>Mocks</h3>
                     <p>Fake contacts and messages for demos and unit tests. Best added as a test or debug dependency.</p>
@@ -154,7 +149,7 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
 
             <figure class="diagram">
                 <svg viewBox="0 0 760 250" role="img" aria-labelledby="diagram-title">
-                    <title id="diagram-title">Module dependencies: contacts-api, multi-contact, sms-api and mocks depend on core; utilities, runtime-permissions, database-helpers and billing-client have no module dependencies.</title>
+                    <title id="diagram-title">Module dependencies: contacts-api, multi-contact, sms-api and mocks depend on core; utilities, runtime-permissions and billing-client have no module dependencies.</title>
                     <defs>
                         <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                             <path class="arrow" d="M0,0 L10,5 L0,10 z"/>
@@ -179,13 +174,12 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:$libAeAppsVersion")</code>
                     <!-- modules with no module dependencies -->
                     <g class="node base"><rect x="590" y="24" width="150" height="36" rx="8"/><text x="665" y="42">utilities</text></g>
                     <g class="node"><rect x="590" y="72" width="150" height="36" rx="8"/><text x="665" y="90">permissions</text></g>
-                    <g class="node"><rect x="590" y="120" width="150" height="36" rx="8"/><text x="665" y="138">db-helpers</text></g>
-                    <g class="node"><rect x="590" y="168" width="150" height="36" rx="8"/><text x="665" y="186">billing-client</text></g>
-                    <text class="caption-text" x="665" y="230" text-anchor="middle">no module dependencies</text>
+                    <g class="node"><rect x="590" y="120" width="150" height="36" rx="8"/><text x="665" y="138">billing-client</text></g>
+                    <text class="caption-text" x="665" y="182" text-anchor="middle">no module dependencies</text>
                 </svg>
                 <figcaption>
-                    Arrows point from a module to the modules it depends on. The <code>aeapps</code> artifact bundles all nine.
-                    “permissions” is <code>runtime-permissions</code> and “db-helpers” is <code>database-helpers</code>.
+                    Arrows point from a module to the modules it depends on. The <code>aeapps</code> artifact bundles all eight.
+                    “permissions” is <code>runtime-permissions</code>.
                 </figcaption>
             </figure>
         </div>

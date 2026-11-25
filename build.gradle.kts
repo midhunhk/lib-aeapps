@@ -27,7 +27,6 @@ dependencies {
         ":sms-api",
         ":runtime-permissions",
         ":multi-contact",
-        ":database-helpers",
         ":billing-client",
         ":mocks",
     ).forEach { module ->

@@ -14,7 +14,6 @@ dependencies {
     api(project(":mocks"))
     api(project(":contacts-api"))
     api(project(":multi-contact"))
-    api(project(":database-helpers"))
     api(project(":runtime-permissions"))
     api(project(":billing-client"))
     api(project(":sms-api"))

@@ -33,7 +33,6 @@ lib-aeapps/
 │   ├── sms-api/
 │   ├── runtime-permissions/
 │   ├── multi-contact/
-│   ├── database-helpers/
 │   ├── billing-client/
 │   ├── mocks/
 │   └── aeapps/                Umbrella artifact, no code of its own
@@ -83,10 +82,9 @@ The Gradle project names are flat (`:core`, `:sms-api`, …) even though the dir
 | `:sms-api` | `sms-api` | `com.ae.apps.lib.sms_api` | Java | `SmsApiGateway` and implementation |
 | `:runtime-permissions` | `runtime-permissions` | `com.ae.apps.lib.runtime_permissions` | Java | Permission-aware base Activity/Fragment, `RuntimePermissionChecker` |
 | `:multi-contact` | `multi-contact` | `com.ae.apps.lib.multi_contact` | Java | Multi-select contact picker base Activity, layouts |
-| `:database-helpers` | `database-helpers` | `com.ae.apps.lib.database_helpers` | Java + Kotlin | `DataBaseHelper` (deprecated), `CopiedDataBaseHelper` |
 | `:billing-client` | `billing-client` | `com.ae.apps.lib.billing_client` | Kotlin | `AeBillingClient` over Play Billing 8 |
 | `:mocks` | `mocks` | `com.ae.apps.lib.mocks` | Kotlin | Fake contacts and messages, mock names in en/es/fr |
-| `:aeapps` | `aeapps` | `com.ae.apps.lib.aeapps` | — | `api` dependency on all nine modules above |
+| `:aeapps` | `aeapps` | `com.ae.apps.lib.aeapps` | — | `api` dependency on all eight modules above |
 | `:sample` | not published | `com.ae.apps.lib.sample` | Java | Demo app |
 
 Two naming details worth knowing:
@@ -110,16 +108,16 @@ core  ◄── contacts-api
 
 utilities            (no module dependencies)
 runtime-permissions  (no module dependencies)
-database-helpers     (no module dependencies)
 billing-client       (no module dependencies)
 
-aeapps ──► all nine (api)
+aeapps ──► all eight (api)
 sample ──► core, contacts-api, sms-api, runtime-permissions, utilities, multi-contact
 ```
 
 This is the graph from 5.1. In 5.0, `contacts-api`, `multi-contact` and `runtime-permissions`
 also depended on `utilities`, and `runtime-permissions` and `database-helpers` on `core`; those
-dependencies were unused and were removed.
+dependencies were unused and were removed. 6.0 removed the `database-helpers` module (#57); use
+Room instead.
 
 All module-to-module edges are `api`, so they appear as compile-scope dependencies in the
 published POMs and a consumer of `contacts-api` gets `core` automatically. Third-party libraries
@@ -177,7 +175,7 @@ it (for example `mockito-kotlin` for Kotlin tests, or `project(":mocks")`). See 
 
 | Has unit tests | No unit tests yet |
 |---|---|
-| `contacts-api`, `sms-api`, `runtime-permissions`, `utilities`, `billing-client`, `mocks` | `core`, `multi-contact`, `database-helpers`, `aeapps`, `sample` |
+| `contacts-api`, `sms-api`, `runtime-permissions`, `utilities`, `billing-client`, `mocks` | `core`, `multi-contact`, `aeapps`, `sample` |
 
 There are no instrumented tests (`src/androidTest`) yet; a smoke test for the picker and
 permission flows is planned with the 6.0 API rewrite.
@@ -399,7 +397,7 @@ component, set up by the convention plugin:
 ```
 groupId    = aeapps.group (com.github.midhunhk.lib-aeapps)
 artifactId = the project name: core | utilities | contacts-api | sms-api | runtime-permissions |
-             multi-contact | database-helpers | billing-client | mocks | aeapps
+             multi-contact | billing-client | mocks | aeapps
 version    = aeapps.version
 ```
 
