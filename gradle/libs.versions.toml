@@ -1,0 +1,67 @@
+# Every dependency and plugin version used by the build. See "Where each setting lives" in
+# DEVELOPMENT.md. The library's own version and group are in gradle.properties.
+
+[versions]
+# Android SDK levels and Java/Kotlin bytecode level for all modules
+compileSdk = "37"
+minSdk = "21"
+targetSdk = "37"
+jvmTarget = "17"
+
+# Plugins
+agp = "9.5.2"
+kotlin = "2.2.10"
+dokka = "2.2.0"
+kover = "0.9.11"
+
+# AndroidX
+androidx-appcompat = "1.7.1"
+androidx-core = "1.16.0"
+androidx-fragment = "1.8.8"
+androidx-recyclerview = "1.4.0"
+androidx-preference = "1.2.1"
+androidx-constraintlayout = "2.2.1"
+material = "1.11.0"
+
+# Google Play
+play-billing = "8.0.0"
+play-review = "2.0.1"
+
+# Tests. JUnit 6 is the continuation of JUnit 5 (Jupiter): same APIs, requires Java 17.
+junit = "6.1.3"
+mockito = "5.24.0"
+mockito-kotlin = "6.4.0"
+
+[libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "androidx-fragment" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidx-recyclerview" }
+androidx-preference = { module = "androidx.preference:preference", version.ref = "androidx-preference" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+
+play-billing = { module = "com.android.billingclient:billing", version.ref = "play-billing" }
+play-review = { module = "com.google.android.play:review", version.ref = "play-review" }
+
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+
+# Gradle plugins as libraries, for compiling the convention plugins in build-logic
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+
+# Convention plugins from build-logic (no version: they are part of this build)
+aeapps-android-library = { id = "aeapps.android.library" }
