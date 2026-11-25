@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.binary.compatibility.validator) apply false
+    alias(libs.plugins.ktlint) apply false
 
     // Applied here to combine every library module into one API reference and one coverage report
     alias(libs.plugins.dokka)

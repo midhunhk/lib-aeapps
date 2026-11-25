@@ -222,7 +222,8 @@ Things that are easy to miss:
 |---|---|
 | Gradle | 9.6.0 |
 | Android Gradle Plugin | 9.5.2 |
-| Kotlin | 2.2.10 |
+| Kotlin | 2.4.21 |
+| ktlint | 1.8.0 (Gradle plugin 14.2.0) |
 | compileSdk | 37 |
 | minSdk | 26 (Android 8.0), from 6.0 (#56) |
 | Java source/target | 17 |
@@ -245,6 +246,10 @@ upgrade them together and check the AGP release notes for the pairing.
 ```
 
 ```bash
+./gradlew ktlintCheck
+```
+
+```bash
 ./gradlew assembleRelease
 ```
 
@@ -263,7 +268,7 @@ this in the workflow).
 ### 3.4 Continuous integration
 
 [.github/workflows/ci.yml](.github/workflows/ci.yml) runs on every push to any branch, on pull
-requests to `main`, and on manual dispatch. It runs unit tests, lint, the release build and a
+requests to `main`, and on manual dispatch. It runs unit tests, lint, ktlint, the release build and a
 publish to Maven Local, and uploads test and lint reports if anything fails. It starts with
 `apiCheck`, which fails if a module's public API changed without an updated dump (section 3.7). It builds a
 coverage report on every run, shows the overall line coverage in the run's summary and uploads
@@ -396,6 +401,42 @@ with its JVM signature.
   and declare its return type, so nothing becomes API by accident. Java code is unaffected;
   there, only `public` and `protected` members appear in the dump.
 - The validator is applied by the convention plugin; its version is in the catalog.
+
+### 3.8 Static analysis
+
+Two checks run in CI and fail the build on new findings. Both are applied by the convention
+plugin (the sample app sets the same lint options in its own build script).
+
+```bash
+./gradlew lintDebug --continue
+```
+
+```bash
+./gradlew ktlintCheck
+```
+
+```bash
+./gradlew ktlintFormat
+```
+
+```bash
+./gradlew updateLintBaseline
+```
+
+- **Android lint** treats every warning as an error. Findings that existed when this was turned
+  on are recorded in each module's `lint-baseline.xml` and ignored; anything new fails the build.
+  Fix new findings rather than adding them to the baseline. When you fix a baselined finding,
+  run `updateLintBaseline` and commit the smaller baseline. The settings are in
+  `build-logic/convention/src/main/kotlin/LintConvention.kt`.
+- **Checks that are switched off:** `GradleDependency`, `NewerVersionAvailable` and
+  `AndroidGradlePluginVersion` (newer versions are Dependabot's job, and they would fail builds
+  whenever a library ships a release), and `ObsoleteLintCustomCheck` (a third-party library's
+  lint checks being out of date is not something this project can fix).
+- **ktlint** checks Kotlin formatting and style, including `.gradle.kts` files, with the
+  `android_studio` code style set in `.editorconfig`. `ktlintFormat` fixes most findings; the rest
+  (wildcard imports, long lines) need a manual change. Java code is not checked.
+- **detekt** is not used: its stable release does not support current Kotlin versions. Revisit
+  when detekt 2 is stable.
 
 ---
 

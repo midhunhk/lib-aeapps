@@ -2,12 +2,20 @@ package com.ae.apps.lib.billingclient
 
 import android.app.Activity
 import com.ae.apps.lib.billingclient.AeBillingClient.BillingClientHandler
-import com.android.billingclient.api.*
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.ProductDetails
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.contains
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.mockito.kotlin.*
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.isNull
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class AeBillingClientTest {
 
@@ -32,9 +40,12 @@ class AeBillingClientTest {
         billingClient = AeBillingClient()
         billingClient.apply {
             // Manually inject internal fields (use reflection or design for better testability)
-            val productDetailsMapField = AeBillingClient::class.java.getDeclaredField("productDetailsMap")
+            val productDetailsMapField = AeBillingClient::class.java.getDeclaredField(
+                "productDetailsMap"
+            )
             productDetailsMapField.isAccessible = true
-            val productDetailsMap = mutableMapOf<String, ProductDetails>("test_product" to productDetails)
+            val productDetailsMap =
+                mutableMapOf<String, ProductDetails>("test_product" to productDetails)
             productDetailsMapField.set(this, productDetailsMap)
 
             val handlerField = AeBillingClient::class.java.getDeclaredField("handler")
@@ -43,11 +54,15 @@ class AeBillingClientTest {
 
             val billingClientField = AeBillingClient::class.java.getDeclaredField("billingClient")
             billingClientField.isAccessible = true
-            billingClientField.set(this, mock<BillingClient> {
-                on { launchBillingFlow(eq(mockActivity), any()) } doReturn BillingResult.newBuilder()
-                    .setResponseCode(BillingClient.BillingResponseCode.OK)
-                    .build()
-            })
+            billingClientField.set(
+                this,
+                mock<BillingClient> {
+                    on { launchBillingFlow(eq(mockActivity), any()) } doReturn
+                        BillingResult.newBuilder()
+                            .setResponseCode(BillingClient.BillingResponseCode.OK)
+                            .build()
+                }
+            )
         }
     }
 
@@ -59,7 +74,10 @@ class AeBillingClientTest {
 
     @Test
     fun `launchBillingFlowForProductId should return ITEM_UNAVAILABLE when product is missing`() {
-        val result = billingClient.launchBillingFlowForProductId(mockActivity, "nonexistent_product")
+        val result = billingClient.launchBillingFlowForProductId(
+            mockActivity,
+            "nonexistent_product"
+        )
         assertEquals(BillingClient.BillingResponseCode.ITEM_UNAVAILABLE, result)
         verify(handler).handlePurchaseError(
             isNull(),

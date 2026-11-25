@@ -15,6 +15,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.gradle.DokkaExtension
 import org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 /**
  * Configuration shared by every published library module (`id("aeapps.android.library")`).
@@ -30,6 +31,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
  *   group and version come from `aeapps.group` and `aeapps.version` in gradle.properties.
  * - Tests: JUnit 6 (Jupiter) and Mockito on the JUnit Platform.
  * - Coverage: Kover.
+ * - Static analysis: Android lint fails on any warning not recorded in the module's
+ *   `lint-baseline.xml`; ktlint checks Kotlin formatting and style (rules in `.editorconfig`).
  * - Public API: the binary-compatibility validator. `apiDump` records the public API in
  *   `api/<module>.api`; `apiCheck` (part of `check`) fails if it changes without a new dump.
  * - API reference: Dokka, documenting public and protected members only, without members
@@ -49,6 +52,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             apply("org.jetbrains.dokka")
             apply("org.jetbrains.kotlinx.kover")
             apply("org.jetbrains.kotlinx.binary-compatibility-validator")
+            apply("org.jlleitschuh.gradle.ktlint")
         }
 
         extensions.configure<LibraryExtension> {
@@ -82,6 +86,14 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 sourceCompatibility = JavaVersion.toVersion(javaLevel)
                 targetCompatibility = JavaVersion.toVersion(javaLevel)
             }
+
+            lint {
+                configureLint(project)
+            }
+        }
+
+        extensions.configure<KtlintExtension> {
+            version.set(libs.version("ktlint"))
         }
 
         extensions.configure<KotlinAndroidProjectExtension> {

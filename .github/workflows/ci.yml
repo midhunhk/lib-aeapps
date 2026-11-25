@@ -54,6 +54,9 @@ jobs:
       - name: Lint
         run: ./gradlew lintDebug --continue
 
+      - name: Kotlin style (ktlint)
+        run: ./gradlew ktlintCheck --continue
+
       - name: Assemble and publish to Maven Local
         run: ./gradlew assembleRelease publishReleasePublicationToMavenLocal
 

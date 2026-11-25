@@ -1,0 +1,10 @@
+# Formatting rules for Kotlin, checked by ktlint in every library module
+# (./gradlew ktlintCheck, fix with ./gradlew ktlintFormat). See "Static analysis" in DEVELOPMENT.md.
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+
+[*.{kt,kts}]
+ktlint_code_style = android_studio

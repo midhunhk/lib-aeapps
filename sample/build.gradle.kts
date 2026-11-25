@@ -45,6 +45,19 @@ android {
         buildConfig = true
     }
 
+    // Same lint rules as the library modules (build-logic/.../LintConvention.kt)
+    lint {
+        warningsAsErrors = true
+        abortOnError = true
+        baseline = file("lint-baseline.xml")
+        disable += setOf(
+            "GradleDependency",
+            "NewerVersionAvailable",
+            "AndroidGradlePluginVersion",
+            "ObsoleteLintCustomCheck",
+        )
+    }
+
     buildTypes {
         debug {
             buildConfigField("boolean", "FEATURE_CONTACT_GENERATOR", "true")

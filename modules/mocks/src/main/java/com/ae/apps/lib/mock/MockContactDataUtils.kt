@@ -25,32 +25,32 @@ import java.util.Random
 public object MockContactDataUtils {
 
     public fun getMockContact(context: Context): ContactInfo {
-            val contactInfo = ContactInfo()
+        val contactInfo = ContactInfo()
 
-            // Create the phone number list and add one
-            val phoneNumbersList: MutableList<PhoneNumberInfo> = ArrayList()
+        // Create the phone number list and add one
+        val phoneNumbersList: MutableList<PhoneNumberInfo> = ArrayList()
 
-            var numberInfo = PhoneNumberInfo()
-            numberInfo.phoneNumber = "87 7781 6267"
-            numberInfo.unformattedPhoneNumber = "8777816267"
-            phoneNumbersList.add(numberInfo)
+        var numberInfo = PhoneNumberInfo()
+        numberInfo.phoneNumber = "87 7781 6267"
+        numberInfo.unformattedPhoneNumber = "8777816267"
+        phoneNumbersList.add(numberInfo)
 
-            numberInfo = PhoneNumberInfo()
-            numberInfo.phoneNumber = "86 2343 6789"
-            numberInfo.unformattedPhoneNumber = "8623436789"
-            phoneNumbersList.add(numberInfo)
+        numberInfo = PhoneNumberInfo()
+        numberInfo.phoneNumber = "86 2343 6789"
+        numberInfo.unformattedPhoneNumber = "8623436789"
+        phoneNumbersList.add(numberInfo)
 
-            // Get mock names from resources
-            val mockNames = context.resources.getStringArray(R.array.mock_names)
+        // Get mock names from resources
+        val mockNames = context.resources.getStringArray(R.array.mock_names)
 
-            val random = Random()
-            val randomVal = random.nextInt(mockNames.size)
-            val randomName = mockNames[randomVal]
+        val random = Random()
+        val randomVal = random.nextInt(mockNames.size)
+        val randomName = mockNames[randomVal]
 
-            contactInfo.name = randomName
-            contactInfo.id = randomVal.toString()
-            contactInfo.setHasPhoneNumber(true)
-            contactInfo.phoneNumbersList = phoneNumbersList
-            return contactInfo
-        }
+        contactInfo.name = randomName
+        contactInfo.id = randomVal.toString()
+        contactInfo.setHasPhoneNumber(true)
+        contactInfo.phoneNumbersList = phoneNumbersList
+        return contactInfo
+    }
 }

@@ -47,7 +47,9 @@ import com.android.billingclient.api.QueryPurchasesParams
  * @since 4.1 (First Implementation)
  * @since 5.0 (PBLv8 Migration)
  */
-public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
+public open class AeBillingClient :
+    PurchasesUpdatedListener,
+    DefaultLifecycleObserver {
 
     private lateinit var billingClient: BillingClient
     private lateinit var handler: BillingClientHandler
@@ -97,7 +99,11 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
     public fun launchBillingFlowForProductId(activity: Activity, productId: String): Int {
         val productDetails = productDetailsMap[productId]
         if (productDetails == null) {
-            handler.handlePurchaseError(null, BillingResponseCode.ITEM_UNAVAILABLE, "Product ID $productId details not found. Ensure queryProductDetailsAsync was successful.")
+            handler.handlePurchaseError(
+                null,
+                BillingResponseCode.ITEM_UNAVAILABLE,
+                "Product ID $productId details not found. Ensure queryProductDetailsAsync was successful."
+            )
             return BillingResponseCode.ITEM_UNAVAILABLE
         }
         return launchBillingFlow(activity, productDetails)
@@ -170,7 +176,8 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
      * This replaces querySkuDetailsAsync from older PBL versions.
      */
     private fun queryProductDetails() {
-        val productIds = handler.getProductIds() // Assuming handler provides a list of product IDs (SKUs)
+        // The handler provides the product IDs (formerly SKUs) to query
+        val productIds = handler.getProductIds()
         if (productIds.isEmpty()) {
             // No SKUs to query, perhaps notify handler or log
             handler.productDetailsResponse(emptyList()) // Notify with empty list
@@ -188,7 +195,10 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
             .setProductList(productList)
             .build()
 
-        billingClient.queryProductDetailsAsync(queryProductDetailsParams) { billingResult, queryProductDetailsResult ->
+        billingClient.queryProductDetailsAsync(queryProductDetailsParams) {
+                billingResult,
+                queryProductDetailsResult
+            ->
             val productDetailsList = queryProductDetailsResult.productDetailsList
 
             if (billingResult.responseCode == BillingResponseCode.OK) {
@@ -199,7 +209,10 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
                 handler.productDetailsResponse(productDetailsList)
             } else {
                 // Handle error in fetching product details
-                Log.e("AeBillingClient", "queryProductDetailsAsync error: ${billingResult.responseCode}, ${billingResult.debugMessage}")
+                Log.e(
+                    "AeBillingClient",
+                    "queryProductDetailsAsync error: ${billingResult.responseCode}, ${billingResult.debugMessage}"
+                )
                 handler.productDetailsResponse(emptyList())
             }
         }
@@ -255,11 +268,13 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
             if (billingResult.responseCode == BillingResponseCode.OK) {
                 handler.onPurchaseAcknowledged(purchase.purchaseToken)
             } else {
-                handler.onAcknowledgePurchaseError(purchase.purchaseToken, billingResult.responseCode)
+                handler.onAcknowledgePurchaseError(
+                    purchase.purchaseToken,
+                    billingResult.responseCode
+                )
             }
         }
     }
-
 
     override fun onPurchasesUpdated(billingResult: BillingResult, purchases: List<Purchase>?) {
         when (billingResult.responseCode) {
@@ -274,12 +289,18 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
                     }
                 } else {
                     // Purchases list is null, though OK response. Should not happen often.
-                    handler.handlePurchaseError(null, billingResult.responseCode, "OK response with null purchases.")
+                    handler.handlePurchaseError(
+                        null,
+                        billingResult.responseCode,
+                        "OK response with null purchases."
+                    )
                 }
             }
+
             BillingResponseCode.USER_CANCELED -> {
                 handler.handleUserCancelled(purchases)
             }
+
             BillingResponseCode.ITEM_ALREADY_OWNED -> {
                 // This is important. Query existing purchases to ensure user has access.
                 // Potentially tell the handler about this state.
@@ -287,6 +308,7 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
                 // You might want to query purchases again here if you don't do it on every onResume
                 queryPurchasesAsync()
             }
+
             BillingResponseCode.SERVICE_DISCONNECTED,
             BillingResponseCode.SERVICE_UNAVAILABLE,
             BillingResponseCode.BILLING_UNAVAILABLE,
@@ -295,10 +317,19 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
             BillingResponseCode.FEATURE_NOT_SUPPORTED,
             BillingResponseCode.ITEM_UNAVAILABLE,
             BillingResponseCode.NETWORK_ERROR -> { // Added specific error codes
-                handler.handlePurchaseError(purchases, billingResult.responseCode, billingResult.debugMessage)
+                handler.handlePurchaseError(
+                    purchases,
+                    billingResult.responseCode,
+                    billingResult.debugMessage
+                )
             }
+
             else -> { // Other codes not explicitly handled
-                handler.handlePurchaseError(purchases, billingResult.responseCode, billingResult.debugMessage)
+                handler.handlePurchaseError(
+                    purchases,
+                    billingResult.responseCode,
+                    billingResult.debugMessage
+                )
             }
         }
     }
@@ -363,7 +394,11 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
          * @param responseCode responseCode from BillingResponseCode
          * @param debugMessage Optional debug message from BillingResult
          */
-        public fun handlePurchaseError(purchases: List<Purchase>?, responseCode: Int, debugMessage: String? = null)
+        public fun handlePurchaseError(
+            purchases: List<Purchase>?,
+            responseCode: Int,
+            debugMessage: String? = null
+        )
 
         /**
          * Callback when user has cancelled the purchase flow.
@@ -431,5 +466,5 @@ public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleOb
          * @param responseCode The error code.
          */
         public fun onQueryPurchasesError(productType: String, responseCode: Int)
-        }
+    }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.5.2" type="baseline" client="gradle" dependencies="false" name="AGP (9.5.2)" variant="all" version="9.5.2">
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/profile_icon_1.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/profile_icon_1.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/profile_icon_2.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/profile_icon_2.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/profile_icon_3.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/profile_icon_3.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/profile_icon_4.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/profile_icon_4.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/profile_icon_5.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/profile_icon_5.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/profile_icon_6.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/profile_icon_6.png"/>
+    </issue>
+
+</issues>

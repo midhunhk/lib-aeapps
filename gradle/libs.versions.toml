@@ -14,6 +14,9 @@ kotlin = "2.4.21"
 dokka = "2.3.0"
 kover = "0.9.11"
 binary-compatibility-validator = "0.18.2"
+ktlint-gradle = "14.2.0"
+# ktlint itself (the rules engine run by the ktlint Gradle plugin)
+ktlint = "1.8.0"
 
 # AndroidX
 androidx-appcompat = "1.8.0"
@@ -56,6 +59,7 @@ mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint-gradle" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -64,6 +68,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 
 # Convention plugins from build-logic (no version: they are part of this build)
 aeapps-android-library = { id = "aeapps.android.library" }

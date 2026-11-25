@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.mockito.Mock
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 
@@ -49,11 +49,15 @@ class MockContactDataUtilsTest {
         // Assert: Basic checks for a valid contact
         assertNotNull(contactInfo, "ContactInfo object should not be null.")
 
-        contactInfo?.let { // Use safe call for further assertions
+        contactInfo?.let {
+            // Use safe call for further assertions
             assertNotNull(it.name, "Contact name should not be null.")
             assertTrue(it.name.isNotBlank(), "Contact name should not be blank.")
             // Check if the name is one of the names we mocked
-            assertTrue(sampleMockNames.contains(it.name), "Contact name should be one of the mock names.")
+            assertTrue(
+                sampleMockNames.contains(it.name),
+                "Contact name should be one of the mock names."
+            )
 
             assertNotNull(it.id, "Contact ID should not be null.")
             assertTrue(it.id.isNotBlank(), "Contact ID should not be blank.")
@@ -64,7 +68,11 @@ class MockContactDataUtilsTest {
             assertFalse(it.phoneNumbersList.isEmpty(), "Phone numbers list should not be empty.")
 
             // Verify the known phone numbers from your MockContactDataUtils implementation
-            assertEquals(2, it.phoneNumbersList.size, "Should have 2 phone numbers as per implementation.")
+            assertEquals(
+                2,
+                it.phoneNumbersList.size,
+                "Should have 2 phone numbers as per implementation."
+            )
 
             val firstPhoneNumber = it.phoneNumbersList[0]
             assertEquals("87 7781 6267", firstPhoneNumber.phoneNumber)
@@ -76,4 +84,3 @@ class MockContactDataUtilsTest {
         }
     }
 }
-
