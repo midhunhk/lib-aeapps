@@ -271,6 +271,26 @@ the HTML and XML report as the `coverage` artifact. It also builds the
 API reference to catch broken Dokka configuration, but does not commit it. It does not publish
 anywhere and does not create tags or releases.
 
+**Pinned actions.** Every action in the workflows is pinned to a full commit SHA, with its
+version as a comment (`actions/checkout@fbc6f39… # v5.1.0`). A tag such as `@v5` can be moved
+to different code; a SHA cannot. Don't hand-edit the pins; Dependabot updates the SHA and the
+comment together.
+
+**Dependency updates.** [.github/dependabot.yml](.github/dependabot.yml) checks every Monday
+for newer versions of the libraries and plugins in `gradle/libs.versions.toml` and of the
+GitHub Actions, and opens pull requests against the current development branch
+(`target-branch`, currently `nannyberry`):
+
+- Minor and patch updates are grouped: build plugins (AGP, Kotlin, Dokka, Kover, the API
+  validator), AndroidX and Material, Google Play, test libraries, and Actions. Each group is one
+  pull request.
+- A major update of anything gets its own pull request, because it may need code changes.
+- CI runs on each update branch. Review the changelog of anything that is not a patch release
+  before merging, and run `./gradlew apiCheck` if a dependency in a module's public API changed.
+
+Dependabot reads its configuration from the default branch, so changes to `dependabot.yml`
+take effect only once they reach `main`.
+
 ### 3.5 Documentation site
 
 `docs/` is the source of the GitHub Pages site. Only the hand-written parts are committed:
@@ -533,8 +553,9 @@ Additional steps for a **stable** release (`x.y.0` with no suffix):
     `main`.
 12. Update the wiki pages (Distribution, Migration Guide, Codenames).
 13. Move the dependent apps (Message Counter, Random Contact, Trip 'O Meter) to the new version.
-14. Start the next line: create the next codename branch and set `aeapps.version` to the next
-    `-alpha.01`.
+14. Start the next line: create the next codename branch, set `aeapps.version` to the next
+    `-alpha.01`, and change both `target-branch` entries in `.github/dependabot.yml` to the new
+    branch (this only takes effect once merged into `main`).
 
 ### 5.4 Pre-release stages
 

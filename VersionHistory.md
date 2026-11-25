@@ -4,6 +4,7 @@
 #### Version 6.0.0 [Unreleased]
 - lib: start of the 6.0 development line; see `guides/RELEASE-PLAN-v6.md` for the planned changes
 - agp: upgrade to 9.5.2
+- ci: GitHub Actions pinned to commit SHAs; Dependabot opens weekly update pull requests for Gradle dependencies and Actions (#54)
 - database-helpers: module removed, including `DataBaseHelper` (deprecated since 5.0) and `CopiedDataBaseHelper`; use Room instead (#57)
 - lib: public API of every module recorded in `api/<module>.api` and checked in CI; Kotlin explicit API mode enabled (#53)
 - lib: build configuration moved to a version catalog (`gradle/libs.versions.toml`) and a convention plugin (`build-logic`); `buildSrc` removed, and the library version is now `aeapps.version` in `gradle.properties` (#52)

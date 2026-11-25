@@ -1,0 +1,62 @@
+# Automated dependency updates. See "Dependency updates" in DEVELOPMENT.md.
+#
+# Dependabot reads this file from the default branch (main) only, so changes take effect once
+# they are merged there. Update pull requests target the current development branch: change
+# target-branch when a new codename branch starts (release checklist, step 14).
+
+version: 2
+
+updates:
+  # Libraries and plugins in gradle/libs.versions.toml (also used by build-logic)
+  - package-ecosystem: gradle
+    directory: "/"
+    target-branch: nannyberry
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    # Minor and patch updates arrive as one pull request per group; a major update of anything
+    # gets its own pull request, since it may need code changes
+    groups:
+      build-plugins:
+        patterns:
+          - "com.android.tools.build:*"
+          - "com.android.application"
+          - "com.android.library"
+          - "org.jetbrains.kotlin*"
+          - "org.jetbrains.dokka*"
+          - "org.jetbrains.kotlinx.kover*"
+          - "org.jetbrains.kotlinx.binary-compatibility-validator*"
+        update-types: [minor, patch]
+      androidx:
+        patterns:
+          - "androidx.*"
+          - "com.google.android.material:*"
+        update-types: [minor, patch]
+      google-play:
+        patterns:
+          - "com.android.billingclient:*"
+          - "com.google.android.play:*"
+        update-types: [minor, patch]
+      test:
+        patterns:
+          - "org.junit*"
+          - "org.mockito*"
+        update-types: [minor, patch]
+
+  # Actions in .github/workflows, pinned to commit SHAs; Dependabot updates the SHA and the
+  # version comment together
+  - package-ecosystem: github-actions
+    directory: "/"
+    target-branch: nannyberry
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns: ["*"]
+        update-types: [minor, patch]
