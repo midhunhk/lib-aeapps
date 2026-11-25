@@ -47,7 +47,7 @@ import com.android.billingclient.api.QueryPurchasesParams
  * @since 4.1 (First Implementation)
  * @since 5.0 (PBLv8 Migration)
  */
-open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
+public open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver {
 
     private lateinit var billingClient: BillingClient
     private lateinit var handler: BillingClientHandler
@@ -62,7 +62,7 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
      * @param context use requireActivity() to pass in the base
      * @param handler a handler to handle the result
      */
-    fun initialize(context: AppCompatActivity, handler: BillingClientHandler?) {
+    public fun initialize(context: AppCompatActivity, handler: BillingClientHandler?) {
         requireNotNull(handler) { "BillingClientHandler cannot be null" }
         this.handler = handler
         context.lifecycle.addObserver(this)
@@ -94,7 +94,7 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
      * @return BillingClient.BillingResponseCode from launchBillingFlow.
      *         Returns BillingResponseCode.ITEM_UNAVAILABLE if product details are not found.
      */
-    fun launchBillingFlowForProductId(activity: Activity, productId: String): Int {
+    public fun launchBillingFlowForProductId(activity: Activity, productId: String): Int {
         val productDetails = productDetailsMap[productId]
         if (productDetails == null) {
             handler.handlePurchaseError(null, BillingResponseCode.ITEM_UNAVAILABLE, "Product ID $productId details not found. Ensure queryProductDetailsAsync was successful.")
@@ -110,7 +110,7 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
      * @param productDetails the productDetails
      * @return BillingClient.BillingResponseCode
      */
-    fun launchBillingFlow(activity: Activity, productDetails: ProductDetails): Int {
+    public fun launchBillingFlow(activity: Activity, productDetails: ProductDetails): Int {
         val productDetailsParamsList = listOf(
             BillingFlowParams.ProductDetailsParams.newBuilder()
                 .setProductDetails(productDetails)
@@ -211,7 +211,7 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
      *
      * @param purchase the purchase
      */
-    fun consumePurchase(purchase: Purchase) {
+    public fun consumePurchase(purchase: Purchase) {
         if (purchase.purchaseState != Purchase.PurchaseState.PURCHASED) {
             // Don't consume if not purchased (e.g., pending)
             return
@@ -237,7 +237,7 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
      *
      * @param purchase The purchase to acknowledge.
      */
-    fun acknowledgePurchase(purchase: Purchase) {
+    public fun acknowledgePurchase(purchase: Purchase) {
         if (purchase.purchaseState != Purchase.PurchaseState.PURCHASED) {
             // Don't acknowledge if not purchased (e.g., pending)
             return
@@ -307,7 +307,7 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
      * Queries current user's active INAPP and SUBS purchases.
      * Call this on onResume() of your Activity/Fragment to ensure purchases are synced.
      */
-    fun queryPurchasesAsync() {
+    public fun queryPurchasesAsync() {
         if (!::billingClient.isInitialized || !billingClient.isReady) {
             return
         }
@@ -335,11 +335,11 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
         }
     }
 
-    interface BillingClientHandler {
+    public interface BillingClientHandler {
         /**
          * Invoked when the BillingClient has setup correctly.
          */
-        fun onBillingClientSetup()
+        public fun onBillingClientSetup()
 
         /**
          * Provide a list of product IDs (formerly SKUs) that your app offers.
@@ -347,14 +347,14 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
          *
          * @return list of product IDs (e.g., "my_consumable_1", "my_premium_upgrade")
          */
-        fun getProductIds(): List<String> // Changed from getSkus
+        public fun getProductIds(): List<String> // Changed from getSkus
 
         /**
          * Callback when ProductDetails query is complete.
          *
          * @param productDetailsList list of ProductDetails (new, replaces SkuDetails)
          */
-        fun productDetailsResponse(productDetailsList: List<ProductDetails>)
+        public fun productDetailsResponse(productDetailsList: List<ProductDetails>)
 
         /**
          * Callback when there is a purchase error during the flow or in onPurchasesUpdated.
@@ -363,14 +363,14 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
          * @param responseCode responseCode from BillingResponseCode
          * @param debugMessage Optional debug message from BillingResult
          */
-        fun handlePurchaseError(purchases: List<Purchase>?, responseCode: Int, debugMessage: String? = null)
+        public fun handlePurchaseError(purchases: List<Purchase>?, responseCode: Int, debugMessage: String? = null)
 
         /**
          * Callback when user has cancelled the purchase flow.
          *
          * @param purchases list of purchases (can be null)
          */
-        fun handleUserCancelled(purchases: List<Purchase>?)
+        public fun handleUserCancelled(purchases: List<Purchase>?)
 
         /**
          * Method invoked on a successful purchase or when a purchase needs processing.
@@ -384,52 +384,52 @@ open class AeBillingClient : PurchasesUpdatedListener, DefaultLifecycleObserver 
          *
          * @param purchase purchase details
          */
-        fun handlePurchase(purchase: Purchase)
+        public fun handlePurchase(purchase: Purchase)
 
         /**
          * Callback when a purchase is successfully consumed.
          * @param purchaseToken The token of the consumed purchase.
          */
-        fun onPurchaseConsumed(purchaseToken: String)
+        public fun onPurchaseConsumed(purchaseToken: String)
 
         /**
          * Callback when consuming a purchase fails.
          * @param purchaseToken The token of the purchase that failed to consume.
          * @param responseCode The error code.
          */
-        fun onConsumePurchaseError(purchaseToken: String?, responseCode: Int)
+        public fun onConsumePurchaseError(purchaseToken: String?, responseCode: Int)
 
         /**
          * Callback when a purchase is successfully acknowledged.
          * @param purchaseToken The token of the acknowledged purchase.
          */
-        fun onPurchaseAcknowledged(purchaseToken: String)
+        public fun onPurchaseAcknowledged(purchaseToken: String)
 
         /**
          * Callback when acknowledging a purchase fails.
          * @param purchaseToken The token of the purchase that failed to acknowledge.
          * @param responseCode The error code.
          */
-        fun onAcknowledgePurchaseError(purchaseToken: String?, responseCode: Int)
+        public fun onAcknowledgePurchaseError(purchaseToken: String?, responseCode: Int)
 
         /**
          * Callback when the user already owns the item they are trying to buy.
          * @param purchases List of relevant purchases, may be null.
          */
-        fun handleItemAlreadyOwned(purchases: List<Purchase>?)
+        public fun handleItemAlreadyOwned(purchases: List<Purchase>?)
 
         /**
          * Callback with the results of a queryPurchasesAsync call.
          * @param productType The type of product queried (INAPP or SUBS).
          * @param purchasesList The list of active purchases for that type.
          */
-        fun onQueryPurchasesResponse(productType: String, purchasesList: List<Purchase>)
+        public fun onQueryPurchasesResponse(productType: String, purchasesList: List<Purchase>)
 
         /**
          * Callback if queryPurchasesAsync fails for a product type.
          * @param productType The type of product queried.
          * @param responseCode The error code.
          */
-        fun onQueryPurchasesError(productType: String, responseCode: Int)
+        public fun onQueryPurchasesError(productType: String, responseCode: Int)
         }
 }

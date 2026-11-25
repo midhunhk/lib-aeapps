@@ -1,0 +1,38 @@
+public class com/ae/apps/lib/billingclient/AeBillingClient : androidx/lifecycle/DefaultLifecycleObserver, com/android/billingclient/api/PurchasesUpdatedListener {
+	public fun <init> ()V
+	public final fun acknowledgePurchase (Lcom/android/billingclient/api/Purchase;)V
+	public final fun consumePurchase (Lcom/android/billingclient/api/Purchase;)V
+	public final fun initialize (Landroidx/appcompat/app/AppCompatActivity;Lcom/ae/apps/lib/billingclient/AeBillingClient$BillingClientHandler;)V
+	public final fun launchBillingFlow (Landroid/app/Activity;Lcom/android/billingclient/api/ProductDetails;)I
+	public final fun launchBillingFlowForProductId (Landroid/app/Activity;Ljava/lang/String;)I
+	public fun onCreate (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onDestroy (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onPause (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onPurchasesUpdated (Lcom/android/billingclient/api/BillingResult;Ljava/util/List;)V
+	public fun onResume (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onStart (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun onStop (Landroidx/lifecycle/LifecycleOwner;)V
+	public final fun queryPurchasesAsync ()V
+}
+
+public abstract interface class com/ae/apps/lib/billingclient/AeBillingClient$BillingClientHandler {
+	public abstract fun getProductIds ()Ljava/util/List;
+	public abstract fun handleItemAlreadyOwned (Ljava/util/List;)V
+	public abstract fun handlePurchase (Lcom/android/billingclient/api/Purchase;)V
+	public abstract fun handlePurchaseError (Ljava/util/List;ILjava/lang/String;)V
+	public static synthetic fun handlePurchaseError$default (Lcom/ae/apps/lib/billingclient/AeBillingClient$BillingClientHandler;Ljava/util/List;ILjava/lang/String;ILjava/lang/Object;)V
+	public abstract fun handleUserCancelled (Ljava/util/List;)V
+	public abstract fun onAcknowledgePurchaseError (Ljava/lang/String;I)V
+	public abstract fun onBillingClientSetup ()V
+	public abstract fun onConsumePurchaseError (Ljava/lang/String;I)V
+	public abstract fun onPurchaseAcknowledged (Ljava/lang/String;)V
+	public abstract fun onPurchaseConsumed (Ljava/lang/String;)V
+	public abstract fun onQueryPurchasesError (Ljava/lang/String;I)V
+	public abstract fun onQueryPurchasesResponse (Ljava/lang/String;Ljava/util/List;)V
+	public abstract fun productDetailsResponse (Ljava/util/List;)V
+}
+
+public final class com/ae/apps/lib/billingclient/AeBillingClient$BillingClientHandler$DefaultImpls {
+	public static synthetic fun handlePurchaseError$default (Lcom/ae/apps/lib/billingclient/AeBillingClient$BillingClientHandler;Ljava/util/List;ILjava/lang/String;ILjava/lang/Object;)V
+}
+

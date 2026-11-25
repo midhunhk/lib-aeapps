@@ -1,0 +1,50 @@
+public abstract interface class com/ae/apps/lib/api/sms/SmsApiGateway {
+	public abstract fun getMessageCountForContact (Ljava/lang/String;Ljava/lang/String;)J
+	public abstract fun getMessageCountForUri (Ljava/lang/String;)J
+	public abstract fun getMessagesForContact (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	public abstract fun getMessagesForUri (Ljava/lang/String;)Ljava/util/List;
+}
+
+public abstract class com/ae/apps/lib/api/sms/impl/AbstractSmsApiGateway : com/ae/apps/lib/api/sms/SmsApiGateway {
+	protected field contentResolver Landroid/content/ContentResolver;
+	public fun <init> ()V
+	public fun getMessageCountForContact (Ljava/lang/String;Ljava/lang/String;)J
+	public fun getMessageCountForUri (Ljava/lang/String;)J
+	protected fun isValidUri (Ljava/lang/String;)Z
+	protected fun validateInputParams (Ljava/lang/String;)V
+}
+
+public class com/ae/apps/lib/api/sms/impl/SmsApiGatewayImpl : com/ae/apps/lib/api/sms/impl/AbstractSmsApiGateway {
+	public fun <init> (Landroid/content/Context;)V
+	public fun getMessagesForContact (Ljava/lang/String;Ljava/lang/String;)Ljava/util/List;
+	public fun getMessagesForUri (Ljava/lang/String;)Ljava/util/List;
+}
+
+public abstract interface class com/ae/apps/lib/api/sms/types/SmsApiGatewayFactory {
+	public abstract fun getSmsApiGateway (Landroid/content/Context;)Lcom/ae/apps/lib/api/sms/SmsApiGateway;
+}
+
+public abstract interface class com/ae/apps/lib/api/sms/utils/SmsApiConstants {
+	public static final field ALL_URIS Ljava/util/List;
+	public static final field COLUMN_ADDRESS Ljava/lang/String;
+	public static final field COLUMN_BODY Ljava/lang/String;
+	public static final field COLUMN_DATE Ljava/lang/String;
+	public static final field COLUMN_ID Ljava/lang/String;
+	public static final field COLUMN_PERSON Ljava/lang/String;
+	public static final field COLUMN_PROTOCOL Ljava/lang/String;
+	public static final field COLUMN_THREAD_ID Ljava/lang/String;
+	public static final field COLUMN_TYPE Ljava/lang/String;
+	public static final field SELECT_BY_PERSON Ljava/lang/String;
+	public static final field SMS_TABLE_PROJECTION [Ljava/lang/String;
+	public static final field URI_ALL Ljava/lang/String;
+	public static final field URI_DRAFTS Ljava/lang/String;
+	public static final field URI_INBOX Ljava/lang/String;
+	public static final field URI_SENT Ljava/lang/String;
+}
+
+public class com/ae/apps/lib/api/sms/utils/SmsApiUtils {
+	public fun <init> ()V
+	public static fun createMessageInfo (Landroid/database/Cursor;)Lcom/ae/apps/lib/common/models/MessageInfo;
+	public static fun createMessageInfoList (Landroid/database/Cursor;)Ljava/util/List;
+}
+

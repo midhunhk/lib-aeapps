@@ -17,7 +17,7 @@ package com.ae.apps.lib.mock
 
 import com.ae.apps.lib.common.models.MessageInfo
 
-object MockSmsApiUtils {
+public object MockSmsApiUtils {
     private val messageInfo: MessageInfo
         get() {
             val messageInfo = MessageInfo()
@@ -30,7 +30,7 @@ object MockSmsApiUtils {
         }
 
     @JvmStatic
-    fun getMessageInfoList(size: Int): List<MessageInfo> {
+    public fun getMessageInfoList(size: Int): List<MessageInfo> {
         val messages: MutableList<MessageInfo> = ArrayList()
         var messageInfo: MessageInfo
         for (i in 0 until size) {

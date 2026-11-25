@@ -1,0 +1,23 @@
+public abstract class com/ae/apps/lib/multicontact/ContactPickerFragment : androidx/fragment/app/Fragment {
+	public fun <init> ()V
+	public abstract fun onContactPicked (Landroid/net/Uri;)V
+	public fun pickContact ()V
+}
+
+public abstract class com/ae/apps/lib/multicontact/MultiContactBaseActivity : androidx/appcompat/app/AppCompatActivity, com/ae/apps/lib/multicontact/MultiContactInteractionListener {
+	protected field continueButton Landroid/view/View;
+	protected field searchView Landroidx/appcompat/widget/SearchView;
+	protected field selectedContactIds Ljava/util/List;
+	public fun <init> ()V
+	public abstract fun getLayoutResourceId ()I
+	public fun onContactSelected (Ljava/lang/String;)V
+	public fun onContactUnselected (Ljava/lang/String;)V
+	protected fun onCreate (Landroid/os/Bundle;)V
+}
+
+public abstract interface class com/ae/apps/lib/multicontact/MultiContactPickerConstants {
+	public static final field CONTACT_ID_SEPARATOR Ljava/lang/String;
+	public static final field PRESELECTED_CONTACT_IDS Ljava/lang/String;
+	public static final field RESULT_CONTACT_IDS Ljava/lang/String;
+}
+

@@ -22,9 +22,9 @@ import com.ae.apps.lib.common.models.PhoneNumberInfo
 import com.ae.apps.lib.mocks.R
 import java.util.Random
 
-object MockContactDataUtils {
+public object MockContactDataUtils {
 
-    fun getMockContact(context: Context): ContactInfo {
+    public fun getMockContact(context: Context): ContactInfo {
             val contactInfo = ContactInfo()
 
             // Create the phone number list and add one

@@ -13,6 +13,7 @@ agp = "9.5.2"
 kotlin = "2.2.10"
 dokka = "2.2.0"
 kover = "0.9.11"
+binary-compatibility-validator = "0.18.2"
 
 # AndroidX
 androidx-appcompat = "1.7.1"
@@ -62,6 +63,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
 
 # Convention plugins from build-logic (no version: they are part of this build)
 aeapps-android-library = { id = "aeapps.android.library" }

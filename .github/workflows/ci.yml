@@ -29,6 +29,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      # Fails if a module's public API differs from its committed api/<module>.api dump.
+      # For an intended change, run ./gradlew apiDump and commit the updated dump.
+      - name: Public API check
+        run: ./gradlew apiCheck
+
       - name: Unit tests
         run: ./gradlew testDebugUnitTest --continue
 

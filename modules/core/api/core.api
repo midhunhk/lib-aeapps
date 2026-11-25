@@ -1,0 +1,112 @@
+public abstract class com/ae/apps/lib/activities/ToolBarBaseActivity : androidx/appcompat/app/AppCompatActivity {
+	public fun <init> ()V
+	protected fun displayHomeAsUp ()V
+	protected abstract fun getLayoutResourceId ()I
+	protected fun getToolBar ()Landroidx/appcompat/widget/Toolbar;
+	protected abstract fun getToolbarResourceId ()I
+	protected fun onCreate (Landroid/os/Bundle;)V
+	public fun onKeyDown (ILandroid/view/KeyEvent;)Z
+	public fun onKeyUp (ILandroid/view/KeyEvent;)Z
+	protected fun setToolbarTitle (Ljava/lang/String;)V
+}
+
+public class com/ae/apps/lib/common/models/ContactInfo : java/lang/Comparable {
+	public fun <init> ()V
+	public fun compareTo (Lcom/ae/apps/lib/common/models/ContactInfo;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getId ()Ljava/lang/String;
+	public fun getName ()Ljava/lang/String;
+	public fun getPhoneNumbersList ()Ljava/util/List;
+	public fun getPicture ()Landroid/graphics/Bitmap;
+	public fun hasPhoneNumber ()Z
+	public fun setHasPhoneNumber (Z)V
+	public fun setId (Ljava/lang/String;)V
+	public fun setName (Ljava/lang/String;)V
+	public fun setPhoneNumbersList (Ljava/util/List;)V
+	public fun setPicture (Landroid/graphics/Bitmap;)V
+}
+
+public class com/ae/apps/lib/common/models/MessageInfo {
+	public fun <init> ()V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getAddress ()Ljava/lang/String;
+	public fun getBody ()Ljava/lang/String;
+	public fun getDate ()J
+	public fun getId ()Ljava/lang/String;
+	public fun getPerson ()Ljava/lang/String;
+	public fun getProtocol ()Ljava/lang/String;
+	public fun getThreadId ()Ljava/lang/String;
+	public fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun setAddress (Ljava/lang/String;)V
+	public fun setBody (Ljava/lang/String;)V
+	public fun setDate (J)V
+	public fun setId (Ljava/lang/String;)V
+	public fun setPerson (Ljava/lang/String;)V
+	public fun setProtocol (Ljava/lang/String;)V
+	public fun setThreadId (Ljava/lang/String;)V
+	public fun setType (Ljava/lang/String;)V
+}
+
+public class com/ae/apps/lib/common/models/PhoneNumberInfo {
+	public fun <init> ()V
+	public fun getLastTimeContacted ()Ljava/lang/String;
+	public fun getPhoneNumber ()Ljava/lang/String;
+	public fun getPhoneType ()Ljava/lang/String;
+	public fun getUnformattedPhoneNumber ()Ljava/lang/String;
+	public fun setLastTimeContacted (Ljava/lang/String;)V
+	public fun setPhoneNumber (Ljava/lang/String;)V
+	public fun setPhoneType (Ljava/lang/String;)V
+	public fun setUnformattedPhoneNumber (Ljava/lang/String;)V
+}
+
+public abstract interface class com/ae/apps/lib/custom/views/ColorThemes {
+	public static final field LAVENDER_CLOUDS [I
+	public static final field RETRO [I
+}
+
+public class com/ae/apps/lib/custom/views/EmptyRecyclerView : androidx/recyclerview/widget/RecyclerView {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun setAdapter (Landroidx/recyclerview/widget/RecyclerView$Adapter;)V
+	public fun setEmptyView (Landroid/view/View;)V
+}
+
+public class com/ae/apps/lib/custom/views/RoundedImageView : androidx/appcompat/widget/AppCompatImageView {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	protected fun getCroppedBitmap (Landroid/graphics/Bitmap;I)Landroid/graphics/Bitmap;
+	protected fun getImageRadiusSize ()I
+	protected fun onDraw (Landroid/graphics/Canvas;)V
+}
+
+public class com/ae/apps/lib/custom/views/SimpleGraphView : android/view/View {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun <init> (Landroid/content/Context;[F[I)V
+	public fun <init> (Landroid/content/Context;[F[Ljava/lang/String;)V
+	public fun <init> (Landroid/content/Context;[F[Ljava/lang/String;[I)V
+	protected fun onDraw (Landroid/graphics/Canvas;)V
+	protected fun onMeasure (II)V
+}
+
+public abstract interface class com/ae/apps/lib/review/AppReview {
+	public abstract fun launchAppReviewFlow (Landroid/app/Activity;)V
+	public abstract fun userInteractionEvent (Landroid/content/Context;)V
+}
+
+public class com/ae/apps/lib/review/AppReviewImpl : com/ae/apps/lib/review/AppReview {
+	protected static final field PREF_KEY_TIMES_PROMPTED Ljava/lang/String;
+	protected static final field PREF_KEY_USER_INTERACTION_COUNT Ljava/lang/String;
+	protected field preferences Landroid/content/SharedPreferences;
+	protected fun conditionsMetForShowingReview (Landroid/content/Context;)Z
+	public static fun getInstance ()Lcom/ae/apps/lib/review/AppReview;
+	protected fun getReviewRequestThreshold ()I
+	public fun launchAppReviewFlow (Landroid/app/Activity;)V
+	public fun userInteractionEvent (Landroid/content/Context;)V
+}
+

@@ -33,7 +33,7 @@ import java.io.OutputStream
  *
  * @author Midhun
  */
-abstract class CopiedDataBaseHelper(
+public abstract class CopiedDataBaseHelper(
     context: Context,
     private val databaseName: String,
     factory: CursorFactory?,
@@ -48,7 +48,7 @@ abstract class CopiedDataBaseHelper(
      * Creates the database
      *
      */
-    fun createDataBase() {
+    public fun createDataBase() {
         val dbExist = checkDataBase()
         if (dbExist) {
             // do nothing - database already exists
@@ -103,7 +103,7 @@ abstract class CopiedDataBaseHelper(
      * @throws SQLException while opening the database
      */
     @Throws(SQLException::class)
-    fun openDataBase() {
+    public fun openDataBase() {
         // Open the database
         val myPath = databasePath
         mDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY)

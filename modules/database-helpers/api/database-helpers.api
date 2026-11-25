@@ -1,0 +1,23 @@
+public abstract class com/ae/apps/lib/db/CopiedDataBaseHelper : android/database/sqlite/SQLiteOpenHelper {
+	public fun <init> (Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I)V
+	public fun close ()V
+	protected final fun copyDataBase ()V
+	public final fun createDataBase ()V
+	public fun onCreate (Landroid/database/sqlite/SQLiteDatabase;)V
+	public fun onUpgrade (Landroid/database/sqlite/SQLiteDatabase;II)V
+	public final fun openDataBase ()V
+	protected final fun query (Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+}
+
+public class com/ae/apps/lib/db/DataBaseHelper : android/database/sqlite/SQLiteOpenHelper {
+	public fun <init> (Landroid/content/Context;Ljava/lang/String;Landroid/database/sqlite/SQLiteDatabase$CursorFactory;I[Ljava/lang/String;)V
+	protected fun delete (Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)J
+	protected fun insert (Ljava/lang/String;Landroid/content/ContentValues;)J
+	public fun onCreate (Landroid/database/sqlite/SQLiteDatabase;)V
+	public fun onUpgrade (Landroid/database/sqlite/SQLiteDatabase;II)V
+	protected fun query (Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Landroid/database/Cursor;
+	protected fun query (Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+	protected fun rawQuery (Ljava/lang/String;[Ljava/lang/String;)Landroid/database/Cursor;
+	protected fun update (Ljava/lang/String;Landroid/content/ContentValues;Ljava/lang/String;[Ljava/lang/String;)J
+}
+

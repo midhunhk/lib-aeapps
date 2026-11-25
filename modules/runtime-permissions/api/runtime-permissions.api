@@ -1,0 +1,60 @@
+public abstract class com/ae/apps/lib/permissions/AbstractPermissionsAwareActivity : androidx/appcompat/app/AppCompatActivity, com/ae/apps/lib/permissions/PermissionsAwareComponent, com/ae/apps/lib/permissions/PermissionsRequestableComponent {
+	protected static final field PERMISSION_CHECK_REQUEST_CODE I
+	public fun <init> ()V
+	protected fun checkPermissions ()V
+	public fun invokeRequestPermissions ()V
+	public fun onPermissionsDenied ()V
+	public fun onPermissionsRequired ()V
+	public fun onRequestPermissionsResult (I[Ljava/lang/String;[I)V
+	public fun requestForPermissions ()V
+	protected fun requestPermissionsForAPI ()V
+	public abstract fun showPermissionsRequiredView ()V
+}
+
+public abstract class com/ae/apps/lib/permissions/PermissionCheckingActivity : androidx/appcompat/app/AppCompatActivity, com/ae/apps/lib/permissions/PermissionsAwareComponent {
+	protected field permissionChecker Lcom/ae/apps/lib/permissions/RuntimePermissionChecker;
+	public fun <init> ()V
+	protected abstract fun getPermissionDeniedLayout ()Landroid/view/View;
+	protected abstract fun getPermissionGrantedLayout ()Landroid/view/View;
+	protected fun onCreate (Landroid/os/Bundle;)V
+	public fun onPermissionsDenied ()V
+	public fun onPermissionsGranted ()V
+	public fun onPermissionsRequired ()V
+	public fun onRequestPermissionsResult (I[Ljava/lang/String;[I)V
+	public fun requestForPermissions ()V
+}
+
+public abstract class com/ae/apps/lib/permissions/PermissionCheckingFragment : androidx/fragment/app/Fragment {
+	protected field container Landroid/view/ViewGroup;
+	protected field context Landroid/content/Context;
+	protected field inflater Landroid/view/LayoutInflater;
+	public fun <init> ()V
+	protected abstract fun getRequiredPermissions ()[Ljava/lang/String;
+	public fun onAttach (Landroid/content/Context;)V
+	public final fun onCreateView (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
+	public fun onDetach ()V
+	protected abstract fun onPermissionNotGranted (I[Ljava/lang/String;[I)V
+	public fun onRequestPermissionsResult (I[Ljava/lang/String;[I)V
+	protected fun requestForPermissions ()V
+	protected abstract fun setupViewWithPermission (Landroid/os/Bundle;)Landroid/view/View;
+	protected abstract fun setupViewWithoutPermission ()Landroid/view/View;
+}
+
+public abstract interface class com/ae/apps/lib/permissions/PermissionsAwareComponent {
+	public abstract fun onPermissionsDenied ()V
+	public abstract fun onPermissionsGranted ()V
+	public abstract fun onPermissionsRequired ()V
+	public abstract fun requestForPermissions ()V
+	public abstract fun requiredPermissions ()[Ljava/lang/String;
+}
+
+public abstract interface class com/ae/apps/lib/permissions/PermissionsRequestableComponent {
+	public abstract fun invokeRequestPermissions ()V
+}
+
+public class com/ae/apps/lib/permissions/RuntimePermissionChecker {
+	public fun checkPermissions ()V
+	public fun handlePermissionsResult ([Ljava/lang/String;[I)V
+	public static fun newInstance (Lcom/ae/apps/lib/permissions/PermissionsAwareComponent;)Lcom/ae/apps/lib/permissions/RuntimePermissionChecker;
+}
+

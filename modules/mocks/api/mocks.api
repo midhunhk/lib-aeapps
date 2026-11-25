@@ -1,0 +1,10 @@
+public final class com/ae/apps/lib/mock/MockContactDataUtils {
+	public static final field INSTANCE Lcom/ae/apps/lib/mock/MockContactDataUtils;
+	public final fun getMockContact (Landroid/content/Context;)Lcom/ae/apps/lib/common/models/ContactInfo;
+}
+
+public final class com/ae/apps/lib/mock/MockSmsApiUtils {
+	public static final field INSTANCE Lcom/ae/apps/lib/mock/MockSmsApiUtils;
+	public static final fun getMessageInfoList (I)Ljava/util/List;
+}
+

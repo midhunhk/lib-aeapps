@@ -1,0 +1,116 @@
+public abstract interface class com/ae/apps/lib/api/contacts/ContactsApiGateway {
+	public abstract fun getAllContacts ()Ljava/util/List;
+	public abstract fun getContactIdFromAddress (Ljava/lang/String;)Ljava/lang/String;
+	public abstract fun getContactIdFromRawContact (Ljava/lang/String;)Ljava/lang/String;
+	public abstract fun getContactInfo (Ljava/lang/String;)Lcom/ae/apps/lib/common/models/ContactInfo;
+	public abstract fun getContactInfo (Ljava/lang/String;Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions;)Lcom/ae/apps/lib/common/models/ContactInfo;
+	public abstract fun getRandomContact ()Lcom/ae/apps/lib/common/models/ContactInfo;
+	public abstract fun getReadContactsCount ()J
+	public abstract fun initialize (Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;)V
+	public abstract fun initializeAsync (Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;Lcom/ae/apps/lib/api/contacts/types/ContactsDataConsumer;)V
+}
+
+public abstract class com/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway : com/ae/apps/lib/api/contacts/ContactsApiGateway {
+	protected field contacts Ljava/util/List;
+	protected field contentResolver Landroid/content/ContentResolver;
+	protected field gatewayState Lcom/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE;
+	protected field resources Landroid/content/res/Resources;
+	public fun <init> ()V
+	protected fun checkIfApiInitialized ()Z
+	protected fun checkIfApiNotInitialized ()Z
+	protected fun createCallbackExecutor ()Ljava/util/concurrent/Executor;
+	public fun getAllContacts ()Ljava/util/List;
+	public fun getContactInfo (Ljava/lang/String;)Lcom/ae/apps/lib/common/models/ContactInfo;
+	protected fun getContactPicture (Ljava/lang/String;)Landroid/graphics/Bitmap;
+	public fun getReadContactsCount ()J
+	protected fun hasMultiplePhoneNumbers (Lcom/ae/apps/lib/common/models/ContactInfo;)Z
+	public fun initialize (Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;)V
+	public fun initializeAsync (Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;Lcom/ae/apps/lib/api/contacts/types/ContactsDataConsumer;)V
+	protected abstract fun readContacts (Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;)V
+	protected fun throwExceptionIfNotInitialized ()V
+	protected fun updateWithPhoneDetails (Lcom/ae/apps/lib/common/models/ContactInfo;)V
+}
+
+protected final class com/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE : java/lang/Enum {
+	public static final field INITIALIZING Lcom/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE;
+	public static final field READY Lcom/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE;
+	public static final field UNINITIALIZED Lcom/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE;
+	public static fun valueOf (Ljava/lang/String;)Lcom/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE;
+	public static fun values ()[Lcom/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway$STATE;
+}
+
+public class com/ae/apps/lib/api/contacts/impl/ContactsApiGatewayImpl : com/ae/apps/lib/api/contacts/impl/AbstractContactsApiGateway {
+	public fun getContactIdFromAddress (Ljava/lang/String;)Ljava/lang/String;
+	public fun getContactIdFromRawContact (Ljava/lang/String;)Ljava/lang/String;
+	public fun getContactInfo (Ljava/lang/String;)Lcom/ae/apps/lib/common/models/ContactInfo;
+	public fun getContactInfo (Ljava/lang/String;Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions;)Lcom/ae/apps/lib/common/models/ContactInfo;
+	public fun getRandomContact ()Lcom/ae/apps/lib/common/models/ContactInfo;
+	protected fun readContacts (Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;)V
+}
+
+public class com/ae/apps/lib/api/contacts/impl/ContactsApiGatewayImpl$Builder {
+	public fun <init> (Landroid/content/Context;)V
+	public fun build ()Lcom/ae/apps/lib/api/contacts/ContactsApiGateway;
+}
+
+public final class com/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions {
+	public fun <init> ()V
+	public fun isIncludeContactsWithPhoneNumbers ()Z
+	public static fun of (Z)Lcom/ae/apps/lib/api/contacts/types/ContactInfoFilterOptions;
+}
+
+public final class com/ae/apps/lib/api/contacts/types/ContactInfoOptions {
+	public fun getDefaultContactPicture ()I
+	public fun isFilterDuplicatePhoneNumbers ()Z
+	public fun isIncludeContactPicture ()Z
+	public fun isIncludePhoneDetails ()Z
+}
+
+public class com/ae/apps/lib/api/contacts/types/ContactInfoOptions$Builder {
+	public fun <init> ()V
+	public fun build ()Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions;
+	public fun defaultContactPicture (I)Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions$Builder;
+	public fun filterDuplicatePhoneNumbers (Z)Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions$Builder;
+	public fun includeContactPicture (Z)Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions$Builder;
+	public fun includePhoneDetails (Z)Lcom/ae/apps/lib/api/contacts/types/ContactInfoOptions$Builder;
+}
+
+public abstract interface class com/ae/apps/lib/api/contacts/types/ContactsApiGatewayFactory {
+	public abstract fun getContactsApiGateway (Landroid/content/Context;)Lcom/ae/apps/lib/api/contacts/ContactsApiGateway;
+}
+
+public abstract interface class com/ae/apps/lib/api/contacts/types/ContactsDataConsumer {
+	public abstract fun onContactsRead ()V
+	public fun onContactsReadFailed (Ljava/lang/Exception;)V
+}
+
+public abstract interface class com/ae/apps/lib/api/contacts/utils/ContactsApiConstants {
+	public static final field COLUMN_ID Ljava/lang/String;
+	public static final field DATE_FORMAT Ljava/lang/String;
+	public static final field PROJECTION_CONTACTS [Ljava/lang/String;
+	public static final field PROJECTION_ID_RAW_CONTACT_ID [Ljava/lang/String;
+	public static final field SELECT_WITH_CONTACT_ID Ljava/lang/String;
+	public static final field SELECT_WITH_RAW_CONTACT_ID Ljava/lang/String;
+}
+
+public class com/ae/apps/lib/api/contacts/utils/ContactsApiUtils {
+	public static final field NON_DIGITS_REGEX Ljava/lang/String;
+	public fun <init> ()V
+	public static fun createContactInfo (Landroid/database/Cursor;)Lcom/ae/apps/lib/common/models/ContactInfo;
+	public static fun createContactsList (Landroid/database/Cursor;Z)Ljava/util/List;
+	public static fun createPhoneNumberList (Landroid/database/Cursor;Landroid/content/res/Resources;)Ljava/util/List;
+}
+
+public class com/ae/apps/lib/api/contacts/utils/DefaultPictureCache : com/ae/apps/lib/api/contacts/utils/PictureCache {
+	public fun insert (Ljava/lang/String;Landroid/graphics/Bitmap;)V
+	public static fun newInstance ()Lcom/ae/apps/lib/api/contacts/utils/DefaultPictureCache;
+	public fun remove (Ljava/lang/String;)V
+	public fun retrieve (Ljava/lang/String;)Landroid/graphics/Bitmap;
+}
+
+public abstract interface class com/ae/apps/lib/api/contacts/utils/PictureCache {
+	public abstract fun insert (Ljava/lang/String;Landroid/graphics/Bitmap;)V
+	public abstract fun remove (Ljava/lang/String;)V
+	public abstract fun retrieve (Ljava/lang/String;)Landroid/graphics/Bitmap;
+}
+

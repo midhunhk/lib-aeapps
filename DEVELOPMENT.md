@@ -137,6 +137,7 @@ Every library module has the same shape:
 ```
 modules/<name>/
 ├── build.gradle.kts       Convention plugin, namespace and dependencies only
+├── api/<module>.api       Public API dump, checked in CI (section 3.7)
 ├── consumer-rules.pro     Empty (shipped to consumers; nothing needs keeping)
 ├── proguard-rules.pro     Generic template; unused because minify is off
 └── src/
@@ -265,7 +266,8 @@ this in the workflow).
 
 [.github/workflows/ci.yml](.github/workflows/ci.yml) runs on every push to any branch, on pull
 requests to `main`, and on manual dispatch. It runs unit tests, lint, the release build and a
-publish to Maven Local, and uploads test and lint reports if anything fails. It builds a
+publish to Maven Local, and uploads test and lint reports if anything fails. It starts with
+`apiCheck`, which fails if a module's public API changed without an updated dump (section 3.7). It builds a
 coverage report on every run, shows the overall line coverage in the run's summary and uploads
 the HTML and XML report as the `coverage` artifact. It also builds the
 API reference to catch broken Dokka configuration, but does not commit it. It does not publish
@@ -350,6 +352,32 @@ python -m http.server 8765 --directory docs
   Generated classes (`R`, `BuildConfig`) are excluded. Kover only instruments modules that apply
   the Kotlin plugin, which is why every library module applies it, including those that are
   still Java.
+
+### 3.7 Public API
+
+Every library module has a committed dump of its public API in `modules/<module>/api/<module>.api`,
+produced by Kotlin's
+[binary-compatibility validator](https://github.com/Kotlin/binary-compatibility-validator) and
+covering Java and Kotlin classes alike. It lists every public and protected class, method and field
+with its JVM signature.
+
+```bash
+./gradlew apiCheck
+```
+
+```bash
+./gradlew apiDump
+```
+
+- **`apiCheck`** compares the compiled API with the dump and fails on any difference. CI runs it
+  first; it is also part of `./gradlew check`.
+- **`apiDump`** rewrites the dumps. Run it when you change the API on purpose and commit the `.api`
+  diff with the code: the diff is what reviewers check. Additions are safe in a minor release;
+  removals and signature changes break consumers and belong in a major release.
+- **Explicit API mode** is on for Kotlin code: every public Kotlin declaration must say `public`
+  and declare its return type, so nothing becomes API by accident. Java code is unaffected;
+  there, only `public` and `protected` members appear in the dump.
+- The validator is applied by the convention plugin; its version is in the catalog.
 
 ---
 
@@ -544,7 +572,7 @@ To add `:new-module`:
    The artifact ID is the project name, so choose it with care.
 2. Add the `include` and `projectDir` lines to `settings.gradle.kts`.
 3. Add it to the `dokka`/`kover` list in the root `build.gradle.kts`, so it appears in the API
-   reference and the coverage report.
+   reference and the coverage report, and run `./gradlew apiDump` to create its API dump.
 4. Add `api(project(":new-module"))` to `modules/aeapps/build.gradle.kts` if it belongs in the
    umbrella.
 5. Add any new dependency to `gradle/libs.versions.toml` first.

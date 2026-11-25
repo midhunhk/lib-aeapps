@@ -23,12 +23,15 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
  * set here:
  * - Android: SDK levels and Java level from the version catalog, consumer ProGuard rules, a
  *   release build type without minification, and a release variant published with sources.
- * - Kotlin: the JVM toolchain. Every library module applies Kotlin, including those still
- *   written in Java, so coverage and the API reference treat them all the same.
+ * - Kotlin: the JVM toolchain and explicit API mode. Every library module applies Kotlin,
+ *   including those still written in Java, so coverage and the API reference treat them all
+ *   the same.
  * - Publishing: a `release` Maven publication. The artifact ID is the Gradle project name; the
  *   group and version come from `aeapps.group` and `aeapps.version` in gradle.properties.
  * - Tests: JUnit 6 (Jupiter) and Mockito on the JUnit Platform.
  * - Coverage: Kover.
+ * - Public API: the binary-compatibility validator. `apiDump` records the public API in
+ *   `api/<module>.api`; `apiCheck` (part of `check`) fails if it changes without a new dump.
  * - API reference: Dokka, documenting public and protected members only, without members
  *   inherited from Android framework classes.
  */
@@ -45,6 +48,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             apply("maven-publish")
             apply("org.jetbrains.dokka")
             apply("org.jetbrains.kotlinx.kover")
+            apply("org.jetbrains.kotlinx.binary-compatibility-validator")
         }
 
         extensions.configure<LibraryExtension> {
@@ -82,6 +86,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
         extensions.configure<KotlinAndroidProjectExtension> {
             jvmToolchain(javaLevel)
+            // Public Kotlin declarations must state their visibility and return type, so nothing
+            // becomes public API by accident
+            explicitApi()
         }
 
         configurePublishing()

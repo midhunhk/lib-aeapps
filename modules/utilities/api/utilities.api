@@ -1,0 +1,60 @@
+public class com/ae/apps/lib/common/utils/CommonUtils {
+	public static final field MINIMUM_STRING_LENGTH I
+	public fun <init> ()V
+	public static fun checkIfPackageIsInstalled (Landroid/content/Context;Ljava/lang/String;)Z
+	public static fun createAnimation (Landroid/content/Context;II)Landroid/view/animation/Animation;
+	public static fun createParentLayout (Landroid/content/Context;)Landroid/view/ViewGroup;
+	public static fun formatTimeStamp (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public static fun isFirstInstall (Landroid/content/Context;)Z
+	public static fun isPackageInstalled (Ljava/lang/String;Landroid/content/Context;)Z
+	public static fun isPackageInstalled2 (Landroid/content/Context;Ljava/lang/String;)Z
+	public static fun launchWebPage (Landroid/content/Context;Ljava/lang/String;)V
+	public static fun truncateString (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public class com/ae/apps/lib/common/utils/ContactUtils {
+	public fun <init> ()V
+	public static fun checkIfPhoneNumberExists (Ljava/util/List;Ljava/lang/String;)Z
+	public static fun cleanupPhoneNumber (Ljava/lang/String;)Ljava/lang/String;
+	public static fun openWhatsAppContact (Landroid/content/Context;Ljava/lang/String;)V
+	public static fun sendWhatsAppMethod (Landroid/content/Context;Ljava/lang/String;)V
+	public static fun showContactInAddressBook (Landroid/content/Context;Ljava/lang/String;)V
+}
+
+public class com/ae/apps/lib/common/utils/DialogUtils {
+	public fun <init> ()V
+	public static fun showCustomViewDialog (Landroid/content/Context;Landroid/view/LayoutInflater;II)V
+	public static fun showMaterialInfoDialog (Landroid/content/Context;III)V
+	public static fun showWithMessageAndOkButton (Landroid/content/Context;III)V
+}
+
+public class com/ae/apps/lib/common/utils/MobileNetworkUtils {
+	public static final field ADDRESS Ljava/lang/String;
+	public static final field SMSTO Ljava/lang/String;
+	public static final field TEL Ljava/lang/String;
+	public fun <init> ()V
+	public static fun callContact (Landroid/content/Context;Ljava/lang/String;)V
+	public static fun dialContact (Landroid/content/Context;Ljava/lang/String;)V
+	public static fun launchWebPage (Landroid/content/Context;Ljava/lang/String;)V
+	public static fun textContact (Landroid/content/Context;Ljava/lang/String;)V
+}
+
+public class com/ae/apps/lib/common/utils/ValueComparator : java/util/Comparator {
+	public fun <init> (Ljava/util/Map;)V
+	public fun compare (Ljava/lang/Object;Ljava/lang/Object;)I
+}
+
+public class com/ae/apps/lib/common/utils/intents/EmailIntentBuilder {
+	public fun <init> ()V
+	public fun body (Ljava/lang/String;)Lcom/ae/apps/lib/common/utils/intents/EmailIntentBuilder;
+	public fun get ()Landroid/content/Intent;
+	public fun subject (Ljava/lang/String;)Lcom/ae/apps/lib/common/utils/intents/EmailIntentBuilder;
+	public fun to (Ljava/lang/String;)Lcom/ae/apps/lib/common/utils/intents/EmailIntentBuilder;
+}
+
+public class com/ae/apps/lib/common/utils/intents/IntentUtils {
+	public fun <init> ()V
+	public static fun getShareIntent (Landroid/content/Context;III)Landroid/content/Intent;
+	public static fun getUriIntent (Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;
+}
+
