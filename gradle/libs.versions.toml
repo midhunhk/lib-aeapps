@@ -25,7 +25,7 @@ androidx-constraintlayout = "2.2.2"
 material = "1.14.0"
 
 # Google Play
-play-billing = "8.0.0"
+play-billing = "9.1.0"
 play-review = "2.0.2"
 
 # Tests. JUnit 6 is the continuation of JUnit 5 (Jupiter): same APIs, requires Java 17.
