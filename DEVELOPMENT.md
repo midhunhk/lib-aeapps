@@ -15,16 +15,16 @@ the "now" and the plan is the "next".
 lib-aeapps/
 ├── settings.gradle.kts        Module list and directory mapping
 ├── build.gradle.kts           Plugin versions (AGP, Kotlin) — nothing else
-├── gradle.properties          JVM args, AndroidX, non-transitive R, configuration cache
-├── gradle/wrapper/            Gradle 8.13 wrapper
+├── gradle.properties          Library version and group (aeapps.*), AndroidX and Gradle flags
+├── gradle/
+│   ├── libs.versions.toml     Version catalog: every dependency, plugin and SDK level
+│   └── wrapper/               Gradle wrapper
 ├── jitpack.yml                Tells JitPack to build with JDK 17
 ├── local_release.bat          Publishes all modules to ~/.m2 for local testing
 │
-├── buildSrc/                  Shared build constants (see section 3)
-│   └── src/main/java/com/ae/apps/lib/
-│       ├── ConfigurationData.kt   compileSdk, minSdk, Java version
-│       ├── Dependencies.kt        Every third-party dependency coordinate
-│       └── Publish.kt             Group ID, VERSION_STRING, artifact IDs
+├── build-logic/               Included build with the convention plugin (see section 3)
+│   └── convention/src/main/kotlin/
+│       └── AndroidLibraryConventionPlugin.kt   aeapps.android.library
 │
 ├── modules/                   The library — one directory per published artifact
 │   ├── core/
@@ -96,9 +96,9 @@ Two naming details worth knowing:
   `com.ae.apps.lib.multicontact`. With `android.nonTransitiveRClass=true`, code must import the
   `R` of the module that owns the resource — for example `multi-contact` references
   `com.ae.apps.lib.multi_contact.R.id.list` explicitly.
-- **Artifact IDs use hyphens** and are defined once in
-  [Publish.kt](buildSrc/src/main/java/com/ae/apps/lib/Publish.kt). An underscore slipped into
-  `sms_api` once and needed a follow-up release (beta.02) to correct.
+- **Artifact IDs use hyphens** and are the Gradle project names (`:sms-api` publishes
+  `sms-api`); the convention plugin sets them. Before that they were typed by hand, and an
+  underscore slipped into `sms_api` once and needed a follow-up release (beta.02) to correct.
 
 ### 2.2 Dependencies between modules
 
@@ -136,7 +136,7 @@ Every library module has the same shape:
 
 ```
 modules/<name>/
-├── build.gradle.kts       ~60 lines, near-identical across modules
+├── build.gradle.kts       Convention plugin, namespace and dependencies only
 ├── consumer-rules.pro     Empty (shipped to consumers; nothing needs keeping)
 ├── proguard-rules.pro     Generic template; unused because minify is off
 └── src/
@@ -145,15 +145,33 @@ modules/<name>/
     │   ├── java/…                 Java and Kotlin both live under java/
     │   └── res/
     └── test/
-        ├── java/…                 JUnit 4 modules
-        └── kotlin/…               JUnit 5 modules (billing-client, mocks)
+        ├── java/…                 Java tests (JUnit 6 / Jupiter)
+        └── kotlin/…               Kotlin tests (billing-client, mocks)
+```
+
+A module's `build.gradle.kts` looks like this; everything else comes from the convention plugin:
+
+```kotlin
+plugins {
+    alias(libs.plugins.aeapps.android.library)
+}
+
+android {
+    namespace = "com.ae.apps.lib.contacts_api"
+}
+
+dependencies {
+    api(project(":core"))
+    implementation(libs.androidx.appcompat)
+    testImplementation(project(":mocks"))
+}
 ```
 
 Because the library manifests are empty, **the consuming app must declare permissions itself**
 (`READ_CONTACTS`, `READ_SMS`, `CALL_PHONE`, and `<queries>` entries for package checks).
 
 All unit tests use **JUnit 6 (Jupiter) and Mockito** on the JUnit Platform. The setup is shared
-and lives in the root `build.gradle.kts`, so a module's own script only adds what is specific to
+and lives in the convention plugin, so a module's own script only adds what is specific to
 it (for example `mockito-kotlin` for Kotlin tests, or `project(":mocks")`). See section 3.6.
 
 | Has unit tests | No unit tests yet |
@@ -171,23 +189,30 @@ permission flows is planned with the 6.0 API rewrite.
 
 | To change… | Edit |
 |---|---|
-| AGP or Kotlin version | [build.gradle.kts](build.gradle.kts) (root `plugins` block) |
+| AGP, Kotlin, Dokka or Kover version | [libs.versions.toml](gradle/libs.versions.toml) `[versions]` |
+| A dependency or its version | [libs.versions.toml](gradle/libs.versions.toml) `[libraries]`, then `libs.…` in the module |
+| compileSdk, minSdk, targetSdk, Java level | [libs.versions.toml](gradle/libs.versions.toml) (`compileSdk`, `minSdk`, `targetSdk`, `jvmTarget`) — used by every library module and the sample |
+| Anything shared by all library modules | [AndroidLibraryConventionPlugin.kt](build-logic/convention/src/main/kotlin/AndroidLibraryConventionPlugin.kt) |
+| Library version and group | [gradle.properties](gradle.properties) (`aeapps.version`, `aeapps.group`) |
+| A module's namespace or dependencies | That module's `build.gradle.kts` |
 | Gradle version | `gradle/wrapper/gradle-wrapper.properties` (or `./gradlew wrapper --gradle-version …`) |
-| compileSdk, minSdk, Java level | [ConfigurationData.kt](buildSrc/src/main/java/com/ae/apps/lib/ConfigurationData.kt) |
-| A third-party dependency version | [Dependencies.kt](buildSrc/src/main/java/com/ae/apps/lib/Dependencies.kt) |
-| Library version, group, artifact IDs | [Publish.kt](buildSrc/src/main/java/com/ae/apps/lib/Publish.kt) |
 | JDK used by JitPack | [jitpack.yml](jitpack.yml) |
-| Sample app SDK levels and version | [sample/build.gradle.kts](sample/build.gradle.kts) — hard-coded, **not** read from `ConfigurationData` |
+| Sample app version | [sample/build.gradle.kts](sample/build.gradle.kts) |
+
+**The convention plugin** (`aeapps.android.library`, in the `build-logic` included build) is
+applied by every library module. It applies AGP, Kotlin, `maven-publish`, Dokka and Kover, and
+sets: the SDK and Java levels; consumer ProGuard rules; a release build type without
+minification; a `release` publication with sources whose artifact ID is the project name; the
+test dependencies and JUnit Platform; and the Dokka options. Change it there, not in a module.
 
 Things that are easy to miss:
 
-- `ConfigurationData.JAVA_LANG_VERSION` only feeds the Kotlin toolchain. The Java
-  `compileOptions` in each module are hard-coded to `JavaVersion.VERSION_17`, so a Java-level
-  change needs both.
-- The sample's `compileSdk`/`minSdk`/`targetSdk` must be bumped by hand whenever
-  `ConfigurationData` changes.
-- Any edit under `buildSrc/` invalidates the whole build, so a version bump triggers a full
-  recompile.
+- Every library module applies the Kotlin plugin, including those still written in Java, so
+  their POMs list `kotlin-stdlib`. Kover and Dokka rely on it.
+- The `build-logic` build compiles against AGP, Kotlin and Dokka at the catalog's versions, so
+  upgrading one of them is still a one-line change in the catalog.
+- Lint reads the catalog and reports newer dependency versions as `GradleDependency` and
+  `NewerVersionAvailable` warnings (shown once, on `core`).
 - `org.gradle.configuration-cache=true` is on. A new plugin or task that is not
   configuration-cache compatible will fail the build rather than warn.
 - JDK 17 is required locally and is what CI and JitPack use.
@@ -282,16 +307,18 @@ It runs three tasks, each also usable on its own (all in the `documentation` gro
 |---|---|---|
 | `updateApiDocs` | `docs/api/` — regenerated with Dokka; pages for removed classes are deleted | KDoc and Javadoc in the library modules |
 | `updateReleaseNotes` | `docs/release_notes.html` | `VersionHistory.md`, via `scripts/release_notes.py` |
-| `updateSiteVersion` | The version in the `docs/index.html` dependency snippet | `Publish.VERSION_STRING`, with a `v` prefix |
+| `updateSiteVersion` | The version in the `docs/index.html` dependency snippet | `aeapps.version` in `gradle.properties`, with a `v` prefix |
 
 `updateReleaseNotes` needs Python 3 on the `PATH` (`python` on Windows, `python3` elsewhere).
 Pass `-PpythonExecutable=/path/to/python` to use a different one.
 
 The generated files are git-ignored, so running `updateSite` locally leaves the working tree
 clean, except that `updateSiteVersion` may change the version line in `docs/index.html`. Commit
-that change or not, as you like: the published page always gets its version from `Publish.kt`.
+that change or not, as you like: the published page always gets its version from
+`aeapps.version`.
 
-Dokka is configured in the root [build.gradle.kts](build.gradle.kts). It documents the nine
+Dokka is applied by the convention plugin and combined in the root
+[build.gradle.kts](build.gradle.kts). It documents the nine
 library modules (not `sample` or the empty `aeapps` umbrella), Java and Kotlin together, public
 and protected members only, and hides members inherited from Android framework classes. The root
 script also works around two Dokka limitations with this project: Java-only Android modules get
@@ -309,10 +336,10 @@ python -m http.server 8765 --directory docs
 
 - **Framework:** JUnit 6 (the continuation of JUnit 5's Jupiter API; it needs Java 17) with
   Mockito and `mockito-junit-jupiter`. Use `org.junit.jupiter.api.*` imports and, for mocks,
-  `@ExtendWith(MockitoExtension.class)`. Versions are in `Libs.Test` in `Dependencies.kt`.
-- **Where it is configured:** the `subprojects { pluginManager.withPlugin("com.android.library") }`
-  block in the root `build.gradle.kts` adds the test dependencies, switches every `Test` task to
-  the JUnit Platform and applies Kover to every library module.
+  `@ExtendWith(MockitoExtension.class)`. Versions are in the catalog (`junit`, `mockito`).
+- **Where it is configured:** the convention plugin adds the test dependencies, switches every
+  `Test` task to the JUnit Platform and applies Kover to every library module. The root
+  `build.gradle.kts` merges the coverage of all modules.
 - **Android classes:** unit tests run on the JVM against a stub `android.jar`. Mock framework
   types with Mockito (static ones such as `Uri.parse` with `mockStatic`), or set
   `testOptions.unitTests.isReturnDefaultValues = true` as `contacts-api` does. Robolectric is not
@@ -339,13 +366,13 @@ demand the first time someone requests a given tag:
 3. It serves whatever artifacts that build produced.
 
 Each module registers one `MavenPublication` named `release` built from the Android `release`
-component, with coordinates taken from `Publish.kt`:
+component, set up by the convention plugin:
 
 ```
-groupId    = com.github.midhunhk.lib-aeapps
-artifactId = core | utilities | contacts-api | sms-api | runtime-permissions |
+groupId    = aeapps.group (com.github.midhunhk.lib-aeapps)
+artifactId = the project name: core | utilities | contacts-api | sms-api | runtime-permissions |
              multi-contact | database-helpers | billing-client | mocks | aeapps
-version    = Publish.VERSION_STRING
+version    = aeapps.version
 ```
 
 Consequences:
@@ -380,7 +407,7 @@ implementation("com.github.midhunhk.lib-aeapps:aeapps:<version>")
 ```
 
 > **Use the tag name, including the `v`, as `<version>`** — for example `v5.1.0`.
-> `VERSION_STRING` in `Publish.kt` has no prefix, but JitPack serves artifacts under the git tag
+> `aeapps.version` in `gradle.properties` has no prefix, but JitPack serves artifacts under the git tag
 > name. Random Contact resolves the library this way (`v5.0.0-beta.02`).
 
 ---
@@ -411,8 +438,8 @@ version or codename and are not updated automatically:
 
 | Location | What it holds | Updated by |
 |---|---|---|
-| [Publish.kt](buildSrc/src/main/java/com/ae/apps/lib/Publish.kt) `VERSION_STRING` | **Library version — the real one** | Hand |
-| Git tag | Must equal `v` + `VERSION_STRING` | Hand |
+| [gradle.properties](gradle.properties) `aeapps.version` | **Library version — the real one** | Hand |
+| Git tag | Must equal `v` + `aeapps.version` | Hand |
 | [VersionHistory.md](VersionHistory.md) | Changelog entry and month | Hand |
 | [README.md](README.md) | Codename line, "commits since" badge tag, migration table | Hand |
 | [sample/build.gradle.kts](sample/build.gradle.kts) | Sample `versionCode` / `versionName` (currently 12 / 1.4.4) — independent of the library version | Hand |
@@ -428,7 +455,7 @@ Steps 1–6 happen on the codename branch.
 1. **Confirm the branch is green.** CI passing on the latest commit, or locally:
    `testDebugUnitTest`, `lintDebug`, `assembleRelease`.
 
-2. **Bump `VERSION_STRING`** in `Publish.kt`.
+2. **Bump `aeapps.version`** in `gradle.properties`.
 
 3. **Dry-run the publication locally** and look at what was produced:
 
@@ -480,7 +507,7 @@ Additional steps for a **stable** release (`x.y.0` with no suffix):
     `main`.
 12. Update the wiki pages (Distribution, Migration Guide, Codenames).
 13. Move the dependent apps (Message Counter, Random Contact, Trip 'O Meter) to the new version.
-14. Start the next line: create the next codename branch and set `VERSION_STRING` to the next
+14. Start the next line: create the next codename branch and set `aeapps.version` to the next
     `-alpha.01`.
 
 ### 5.4 Pre-release stages
@@ -496,7 +523,7 @@ Additional steps for a **stable** release (`x.y.0` with no suffix):
 
 - **Artifact ID typo** (`sms_api` instead of `sms-api`) shipped in beta.01 and needed beta.02 the
   same day. Step 3 catches this — look at the directory names under `~/.m2`.
-- **Version constant left behind.** Commits after a tag keep the old `VERSION_STRING`, so a
+- **Version left behind.** Commits after a tag keep the old `aeapps.version`, so a
   locally published build is indistinguishable from the tagged one. Bump to the next counter
   soon after tagging if you publish locally during development.
 - **Changelog ahead of reality.** `VersionHistory.md` has listed "5.0.0 [Nov 2024]" since the
@@ -511,13 +538,16 @@ Additional steps for a **stable** release (`x.y.0` with no suffix):
 
 To add `:new-module`:
 
-1. Create `modules/new-module/` with `build.gradle.kts`, `consumer-rules.pro` and
-   `src/main/AndroidManifest.xml` — copying an existing module of the same language is quickest.
-2. Set a unique `namespace` in its build script.
-3. Add an artifact ID constant to `ArtifactId` in `Publish.kt` and use it in the publication.
-4. Add the `include` and `projectDir` lines to `settings.gradle.kts`.
-5. Add `api(project(":new-module"))` to `modules/aeapps/build.gradle.kts` if it belongs in the
+1. Create `modules/new-module/` with `consumer-rules.pro`, `proguard-rules.pro` and
+   `src/main/AndroidManifest.xml`, and a `build.gradle.kts` that applies
+   `alias(libs.plugins.aeapps.android.library)` and sets a unique `namespace` (section 2.3).
+   The artifact ID is the project name, so choose it with care.
+2. Add the `include` and `projectDir` lines to `settings.gradle.kts`.
+3. Add it to the `dokka`/`kover` list in the root `build.gradle.kts`, so it appears in the API
+   reference and the coverage report.
+4. Add `api(project(":new-module"))` to `modules/aeapps/build.gradle.kts` if it belongs in the
    umbrella.
+5. Add any new dependency to `gradle/libs.versions.toml` first.
 6. Add it to the module tables in the README and in this file.
 
 Removing or renaming a published module is a breaking change for consumers, since the artifact
@@ -530,10 +560,12 @@ coordinate disappears — do it only at a major version and call it out in the m
 Tracked in detail in [RELEASE-PLAN-v5.md](guides/RELEASE-PLAN-v5.md); listed here so this guide is not read
 as a description of a finished setup.
 
-- Release steps are entirely manual; nothing checks that the tag matches `VERSION_STRING`.
+- Release steps are entirely manual; nothing checks that the tag matches `aeapps.version`.
 - No sources/Javadoc jars and no POM metadata in the publications.
-- Build logic is duplicated across ten module scripts; dependency versions live in `buildSrc`
-  rather than a version catalog.
+- `android.newDsl=false` and `android.builtInKotlin=false` in `gradle.properties` keep AGP's
+  old DSL, so every `android { }` block reports a deprecation warning. Moving to the new DSL
+  means switching to AGP's built-in Kotlin support (and checking Dokka and Kover with it); the
+  convention plugin already uses the new DSL types.
 - The published site is rebuilt only for release tags or a manual run, so it shows the latest
   release, not unreleased work on `main`. The wiki is maintained by hand and is behind the code.
 - The CI workflow has been added but had not yet run on GitHub at the time of writing.

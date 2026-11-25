@@ -1,72 +1,19 @@
-import com.ae.apps.lib.ArtifactId
-import com.ae.apps.lib.ConfigurationData
-import com.ae.apps.lib.Libs
-import com.ae.apps.lib.Publish
-
 plugins {
-    id ("com.android.library")
-    id ("maven-publish")
-    id ("org.jetbrains.dokka")
-    id ("org.jetbrains.kotlin.android")
+    alias(libs.plugins.aeapps.android.library)
 }
 
 android {
     namespace = "com.ae.apps.lib.contacts_api"
-    compileSdk = ConfigurationData.SDK_COMPILE_VERSION
-
-    defaultConfig {
-        minSdk = ConfigurationData.MIN_SDK_VERSION
-        aarMetadata {
-            minCompileSdk = ConfigurationData.MIN_SDK_VERSION
-        }
-        consumerProguardFiles ("consumer-rules.pro")
-        // testInstrumentationRunner ("androidx.test.runner.AndroidJUnitRunner")
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles (
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     testOptions {
         // Let android.util.Log and similar framework calls be no-ops in JVM unit tests
         unitTests.isReturnDefaultValues = true
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            // creates a maven publication called release
-            register<MavenPublication>("release") {
-                from (components["release"])
-
-                groupId = Publish.GROUP_ID
-                artifactId = ArtifactId.CONTACTS_API
-                version = Publish.VERSION_STRING
-            }
-        }
-    }
 }
 
 dependencies {
-    implementation(Libs.AndroidX.APPCOMPAT)
+    api(project(":core"))
 
-    api (project(":core"))
+    implementation(libs.androidx.appcompat)
 
-    testImplementation (project(":mocks"))
+    testImplementation(project(":mocks"))
 }

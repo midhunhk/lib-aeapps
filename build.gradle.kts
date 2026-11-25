@@ -1,94 +1,62 @@
-plugins {
-    /**
-     * Use `apply false` in the top-level build.gradle file to add a Gradle
-     * plugin as a build dependency but not apply it to the current (root)
-     * project. Don't use `apply false` in sub-projects. For more information,
-     * see Applying external plugins with same version to subprojects.
-     */
+// Root build. Shared module configuration is in the aeapps.android.library convention plugin
+// (build-logic/), and every version is in gradle/libs.versions.toml. See "Build configuration"
+// in DEVELOPMENT.md.
 
-    // https://developer.android.com/build/releases/gradle-plugin
-    id("com.android.application") version "9.5.2" apply false
-    id("com.android.library") version "9.5.2" apply false
-    id("org.jetbrains.kotlin.android") version "2.2.10" apply false
-    // API documentation, see "API documentation" in DEVELOPMENT.md
-    id("org.jetbrains.dokka") version "2.2.0"
-    // Test coverage, see "Tests and coverage" in DEVELOPMENT.md
-    id("org.jetbrains.kotlinx.kover") version "0.9.11"
-    id("maven-publish")
+plugins {
+    // Put the plugins on the build classpath at the catalog's versions; modules apply them
+    // through the convention plugin
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+
+    // Applied here to combine every library module into one API reference and one coverage report
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.kover)
 }
+
+val libraryVersion = providers.gradleProperty("aeapps.version")
 
 // Combine the API docs and the test coverage of every published library module.
 // The sample app and the aeapps umbrella (no sources) are left out on purpose.
 dependencies {
-    dokka(project(":core"))
-    kover(project(":core"))
-    dokka(project(":utilities"))
-    kover(project(":utilities"))
-    dokka(project(":contacts-api"))
-    kover(project(":contacts-api"))
-    dokka(project(":sms-api"))
-    kover(project(":sms-api"))
-    dokka(project(":runtime-permissions"))
-    kover(project(":runtime-permissions"))
-    dokka(project(":multi-contact"))
-    kover(project(":multi-contact"))
-    dokka(project(":database-helpers"))
-    kover(project(":database-helpers"))
-    dokka(project(":billing-client"))
-    kover(project(":billing-client"))
-    dokka(project(":mocks"))
-    kover(project(":mocks"))
+    listOf(
+        ":core",
+        ":utilities",
+        ":contacts-api",
+        ":sms-api",
+        ":runtime-permissions",
+        ":multi-contact",
+        ":database-helpers",
+        ":billing-client",
+        ":mocks",
+    ).forEach { module ->
+        dokka(project(module))
+        kover(project(module))
+    }
 }
 
 dokka {
     moduleName.set("lib-aeapps")
-    moduleVersion.set(com.ae.apps.lib.Publish.VERSION_STRING)
+    moduleVersion.set(libraryVersion)
     dokkaPublications.html {
         outputDirectory.set(layout.buildDirectory.dir("dokka/html"))
     }
 }
 
-// Dokka needs help with this project's mix of Java-only and Kotlin Android modules:
-//  - Kotlin modules get the same sources registered twice (Kotlin's "main" and Android's
-//    "release"), which Dokka rejects, so the "release" copy is suppressed.
-//  - Java-only modules get no source set at all, so one is registered from src/main/java,
-//    with the Android and AndroidX classes on its classpath so links and supertypes resolve.
-subprojects {
-    pluginManager.withPlugin("org.jetbrains.dokka") {
-        afterEvaluate {
-            val dokkaExtension = extensions.getByType<org.jetbrains.dokka.gradle.DokkaExtension>()
-            // Without this, every page lists hundreds of members inherited from Activity and View
-            dokkaExtension.suppressInheritedMembers.set(true)
-            // Protected members are part of the API: subclasses of the base Activities implement them
-            dokkaExtension.dokkaSourceSets.configureEach {
-                documentedVisibilities(
-                    org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier.Public,
-                    org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier.Protected,
-                )
-            }
-            if (plugins.hasPlugin("org.jetbrains.kotlin.android")) {
-                dokkaExtension.dokkaSourceSets.named("release") { suppress.set(true) }
-            } else {
-                val android = extensions.getByType<com.android.build.gradle.LibraryExtension>()
-                val androidClasses = configurations.named("releaseCompileClasspath").map { config ->
-                    config.incoming.artifactView {
-                        attributes {
-                            attribute(Attribute.of("artifactType", String::class.java), "android-classes-jar")
-                        }
-                    }.files
-                }
-                dokkaExtension.dokkaSourceSets.register("main") {
-                    sourceRoots.from(file("src/main/java"))
-                    classpath.from(android.bootClasspath)
-                    classpath.from(androidClasses)
-                }
+kover {
+    reports {
+        filters {
+            excludes {
+                // Generated classes
+                classes("*.R", "*.R$*", "*.BuildConfig", "*.databinding.*")
             }
         }
     }
 }
 
 // ---------------------------------------------------------------------------------------------
-// Documentation site (docs/, served by GitHub Pages). Run before each release:
+// Documentation site (docs/, served by GitHub Pages). Built and deployed by
+// .github/workflows/pages.yml; run locally to preview:
 //
 //     ./gradlew updateSite
 //
@@ -98,7 +66,7 @@ subprojects {
 val siteDir = layout.projectDirectory.dir("docs")
 
 // Copies the generated API reference into docs/api, removing pages for classes that no longer exist
-val updateApiDocs by tasks.registering(Sync::class) {
+val updateApiDocs = tasks.register<Sync>("updateApiDocs") {
     group = "documentation"
     description = "Regenerates the API reference with Dokka and copies it into docs/api."
     dependsOn("dokkaGenerate")
@@ -110,7 +78,7 @@ val updateApiDocs by tasks.registering(Sync::class) {
 }
 
 // Rebuilds docs/release_notes.html from VersionHistory.md
-val updateReleaseNotes by tasks.registering(Exec::class) {
+val updateReleaseNotes = tasks.register<Exec>("updateReleaseNotes") {
     group = "documentation"
     description = "Regenerates docs/release_notes.html from VersionHistory.md."
     val python = providers.gradleProperty("pythonExecutable").orElse(
@@ -124,12 +92,12 @@ val updateReleaseNotes by tasks.registering(Exec::class) {
     args("scripts/release_notes.py")
 }
 
-// Keeps the version in the landing page's dependency snippet in step with Publish.kt
-val updateSiteVersion by tasks.registering {
+// Keeps the version in the landing page's dependency snippet in step with aeapps.version
+val updateSiteVersion = tasks.register("updateSiteVersion") {
     group = "documentation"
-    description = "Sets the version in the docs/index.html dependency snippet from Publish.VERSION_STRING."
+    description = "Sets the version in the docs/index.html dependency snippet from aeapps.version."
     val indexFile = siteDir.file("index.html").asFile
-    val tag = "v" + com.ae.apps.lib.Publish.VERSION_STRING
+    val tag = libraryVersion.map { "v$it" }
     inputs.property("tag", tag)
     doLast {
         val pattern = Regex("""val libAeAppsVersion = "[^"]*"""")
@@ -137,12 +105,12 @@ val updateSiteVersion by tasks.registering {
         check(pattern.containsMatchIn(original)) {
             "Could not find the libAeAppsVersion line in ${indexFile.path}"
         }
-        val updated = original.replace(pattern, "val libAeAppsVersion = \"$tag\"")
+        val updated = original.replace(pattern, "val libAeAppsVersion = \"${tag.get()}\"")
         if (updated != original) {
             indexFile.writeText(updated)
-            println("docs/index.html now uses $tag")
+            println("docs/index.html now uses ${tag.get()}")
         } else {
-            println("docs/index.html already uses $tag")
+            println("docs/index.html already uses ${tag.get()}")
         }
     }
 }
@@ -151,36 +119,4 @@ tasks.register("updateSite") {
     group = "documentation"
     description = "Updates the docs/ site for a release: API reference, release notes and version."
     dependsOn(updateApiDocs, updateReleaseNotes, updateSiteVersion)
-}
-
-// Tests and coverage for every library module: JUnit 6 (Jupiter) and Mockito on the JUnit
-// Platform, with Kover collecting coverage. Modules add only what is specific to them,
-// such as mockito-kotlin for Kotlin tests.
-subprojects {
-    pluginManager.withPlugin("com.android.library") {
-        apply(plugin = "org.jetbrains.kotlinx.kover")
-
-        dependencies {
-            "testImplementation"(platform(com.ae.apps.lib.Libs.Test.JUNIT_BOM))
-            "testImplementation"(com.ae.apps.lib.Libs.Test.JUNIT_JUPITER)
-            "testRuntimeOnly"(com.ae.apps.lib.Libs.Test.JUNIT_PLATFORM_LAUNCHER)
-            "testImplementation"(com.ae.apps.lib.Libs.Test.Mockito.MOCKITO_CORE)
-            "testImplementation"(com.ae.apps.lib.Libs.Test.Mockito.MOCKITO_JUNIT)
-        }
-
-        tasks.withType<Test>().configureEach {
-            useJUnitPlatform()
-        }
-    }
-}
-
-kover {
-    reports {
-        filters {
-            excludes {
-                // Generated classes
-                classes("*.R", "*.R$*", "*.BuildConfig", "*.databinding.*")
-            }
-        }
-    }
 }

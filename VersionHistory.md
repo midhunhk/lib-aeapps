@@ -4,6 +4,7 @@
 #### Version 6.0.0 [Unreleased]
 - lib: start of the 6.0 development line; see `guides/RELEASE-PLAN-v6.md` for the planned changes
 - agp: upgrade to 9.5.2
+- lib: build configuration moved to a version catalog (`gradle/libs.versions.toml`) and a convention plugin (`build-logic`); `buildSrc` removed, and the library version is now `aeapps.version` in `gradle.properties` (#52)
 - lib: all unit tests use JUnit 6 (Jupiter) and Mockito on the JUnit Platform; test coverage is reported by Kover in CI (#55)
 - lib: `contacts-api`, `sms-api`, `runtime-permissions` and `multi-contact` now apply the Kotlin plugin, so their POMs list `kotlin-stdlib` like the other modules
 

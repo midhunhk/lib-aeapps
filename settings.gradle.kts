@@ -1,4 +1,7 @@
 pluginManagement {
+    // Convention plugins shared by the library modules (aeapps.android.library)
+    includeBuild("build-logic")
+
 
     /**
      * The pluginManagement.repositories block configures the

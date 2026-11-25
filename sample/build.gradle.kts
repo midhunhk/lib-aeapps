@@ -1,4 +1,3 @@
-import com.ae.apps.lib.Libs
 
 /*
  * Copyright (c) 2019 Midhun Harikumar
@@ -18,18 +17,18 @@ import com.ae.apps.lib.Libs
  */
 
 plugins {
-    id ("com.android.application")
+    alias(libs.plugins.android.application)
 }
 
 android {
     namespace = "com.ae.apps.lib.sample"
 
-    compileSdk = 37
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.ae.apps.lib.sample"
-        minSdk = 21
-        targetSdk = 37
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 14
         versionName = "1.5.0"
 
@@ -60,10 +59,10 @@ android {
 }
 dependencies {
 
-    implementation(Libs.AndroidX.APPCOMPAT)
-    implementation(Libs.AndroidX.RECYCLER_VIEW)
-    implementation(Libs.AndroidX.CONSTRAINT_LAYOUT)
-    implementation(Libs.Material.DESIGN)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
 
     // Use these to test library features while in development
     api (project(":core"))

@@ -5,7 +5,7 @@ name: Docs site
 # docs/index.html, docs/assets and docs/resources are committed. The API reference
 # (docs/api) and the release notes page (docs/release_notes.html) are not: they are
 # generated here by ./gradlew updateSite, which also sets the version shown in the
-# landing page's dependency snippet from Publish.VERSION_STRING.
+# landing page's dependency snippet from aeapps.version in gradle.properties.
 #
 # Runs when a release tag is pushed, and on demand from the Actions tab (for example after
 # editing docs/index.html between releases). See "Documentation site" in DEVELOPMENT.md.
