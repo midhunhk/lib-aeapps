@@ -16,8 +16,6 @@
 
 package com.ae.apps.lib.permissions;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -39,7 +37,6 @@ public abstract class PermissionCheckingActivity extends AppCompatActivity
         permissionChecker = RuntimePermissionChecker.newInstance(this);
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     public void requestForPermissions() {
         requestPermissions(requiredPermissions(), PERMISSION_CODE);
     }

@@ -1,8 +1,6 @@
 package com.ae.apps.lib.sample.features.contacts;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -70,7 +68,6 @@ public class ContactsSampleActivity extends AppCompatActivity
     }
 
     @Override
-    @TargetApi(Build.VERSION_CODES.M)
     public void requestForPermissions() {
         requestPermissions(requiredPermissions(), PERMISSION_CODE);
     }

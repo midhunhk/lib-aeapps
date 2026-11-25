@@ -224,7 +224,7 @@ Things that are easy to miss:
 | Android Gradle Plugin | 9.5.2 |
 | Kotlin | 2.2.10 |
 | compileSdk | 37 |
-| minSdk | 21 (to be raised in 6.0, #56) |
+| minSdk | 26 (Android 8.0), from 6.0 (#56) |
 | Java source/target | 17 |
 
 AGP and the Gradle wrapper are coupled — each AGP release has a minimum Gradle version, so

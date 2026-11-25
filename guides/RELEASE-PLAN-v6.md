@@ -79,7 +79,7 @@ marked **verify**. Re-check them against current documentation when the work sta
 
 | ID | Decision | State |
 |---|---|---|
-| D1 | Raise minSdk 21 → 23 | Not applied; `ConfigurationData.MIN_SDK_VERSION` is still 21 |
+| D1 | Raise minSdk 21 → 23 | Superseded by D8: raised to 26 in 6.0 (#56) |
 | D3 | Remove `mocks` from the `aeapps` umbrella | Not applied; release APKs of umbrella users ship mock data |
 | D5 | Remove `database-helpers` in 6.0 | Done on `nannyberry` (#57) |
 | D7 | Split `core` into models and UI in 6.0 | Pending — this release |
@@ -218,7 +218,7 @@ Considered and left out of 6.0:
 
 | ID | Question | Recommendation |
 |---|---|---|
-| **D8** | Which minSdk for 6.0? | **23** at minimum (D1). 24 or 26 only if a dependency requires it or the apps' install bases allow it — check the Play Console. |
+| **D8** | Which minSdk for 6.0? | **Decided 2026-11-25: 26 (Android 8.0).** Random Contact, the only app moving to 6.0, has most installs on Android 13 and newer (Android 17: 39%, 16: 15%, 13: 16%). Older devices keep the last 5.x-based release. |
 | **D9** | Keep `SimpleGraphView`, `ColorThemes` and `RoundedImageView`? | Delete `SimpleGraphView` and `ColorThemes`: none of the three apps use them (checked 2026-11-19). Keep `RoundedImageView` (12 uses) and `EmptyRecyclerView` (18 uses) in `ui`; rewrite `RoundedImageView` without per-frame bitmap allocations. |
 | **D10** | Port `sms-api` to 6.0? | **No.** Google Play restricts `READ_SMS`, and its only user, Message Counter, cannot function on Play for that reason. Leave it on 5.x; revive it in a later 6.x if an app needs it. |
 | **D11** | Rename artifacts (`contacts-api` → `contacts`, …)? | **Yes**, once, in 6.0 — renaming is cheapest when every app is migrating anyway. |
@@ -262,7 +262,7 @@ codename branch; each phase ends with a green build and a pre-release tag.
 | Binary-compatibility validation with API dumps in CI; Kotlin explicit API mode | Q2, A5 | M |
 | Pin GitHub Actions to SHAs; add Dependabot/Renovate | S8 | S |
 | Unify on JUnit 5 + Robolectric; add Kover coverage to CI | Q4 | M |
-| Raise minSdk (D8) and delete pre-23 branches | P3 | S |
+| Raise minSdk (D8) and delete pre-26 branches — done (#56) | P3 | S |
 
 ### Phase 1 — Removals and restructure (6.0.0-alpha)
 

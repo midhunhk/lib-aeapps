@@ -4,6 +4,7 @@
 #### Version 6.0.0 [Unreleased]
 - lib: start of the 6.0 development line; see `guides/RELEASE-PLAN-v6.md` for the planned changes
 - agp: upgrade to 9.5.2
+- lib: minSdk raised from 21 to 26 (Android 8.0); pre-Android 6 permission code paths removed (#56)
 - ci: GitHub Actions pinned to commit SHAs; Dependabot opens weekly update pull requests for Gradle dependencies and Actions (#54)
 - database-helpers: module removed, including `DataBaseHelper` (deprecated since 5.0) and `CopiedDataBaseHelper`; use Room instead (#57)
 - lib: public API of every module recorded in `api/<module>.api` and checked in CI; Kotlin explicit API mode enabled (#53)

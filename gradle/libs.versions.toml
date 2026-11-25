@@ -4,7 +4,7 @@
 [versions]
 # Android SDK levels and Java/Kotlin bytecode level for all modules
 compileSdk = "37"
-minSdk = "21"
+minSdk = "26"
 targetSdk = "37"
 jvmTarget = "17"
 

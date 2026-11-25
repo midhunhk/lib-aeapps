@@ -19,7 +19,6 @@ package com.ae.apps.lib.permissions;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import androidx.core.content.PermissionChecker;
 
 /**
@@ -67,14 +66,10 @@ public class RuntimePermissionChecker {
      * that permissions are required
      */
     public void checkPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkAllPermissions(component.requiredPermissions())) {
-                component.onPermissionsGranted();
-            } else {
-                component.onPermissionsRequired();
-            }
-        } else {
+        if (checkAllPermissions(component.requiredPermissions())) {
             component.onPermissionsGranted();
+        } else {
+            component.onPermissionsRequired();
         }
     }
 

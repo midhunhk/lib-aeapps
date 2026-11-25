@@ -17,11 +17,9 @@
 package com.ae.apps.lib.sample.features.dev;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -147,7 +145,6 @@ public class ContactGeneratorActivity extends AppCompatActivity implements Permi
     }
 
     @Override
-    @TargetApi(Build.VERSION_CODES.M)
     public void requestForPermissions() {
         requestPermissions(requiredPermissions(), PERMISSION_CODE);
     }
