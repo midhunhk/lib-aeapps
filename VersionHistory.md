@@ -4,6 +4,8 @@
 #### Version 6.0.0 [Unreleased]
 - lib: start of the 6.0 development line; see `guides/RELEASE-PLAN-v6.md` for the planned changes
 - agp: upgrade to 9.5.2
+- core: removed `SimpleGraphView` and `ColorThemes`, which no app uses, and the LG hardware menu-key workaround (`onKeyDown`/`onKeyUp`) in `ToolBarBaseActivity` (#60)
+- utilities: removed duplicate helpers; use `CommonUtils.isPackageInstalled` instead of `checkIfPackageIsInstalled` and `isPackageInstalled2`, and `CommonUtils.launchWebPage` instead of `MobileNetworkUtils.launchWebPage` (#60)
 - lib: Android lint fails on any warning not recorded in the module's `lint-baseline.xml`; ktlint checks Kotlin style in CI (#77)
 - lib: minSdk raised from 21 to 26 (Android 8.0); pre-Android 6 permission code paths removed (#56)
 - ci: GitHub Actions pinned to commit SHAs; Dependabot opens weekly update pull requests for Gradle dependencies and Actions (#54)

@@ -83,16 +83,4 @@ public class MobileNetworkUtils {
 		}
 	}
 
-	/**
-	 * Launches an Intent to open a web page
-	 * 
-	 * @param context the context
-	 * @param url url
-	 */
-	public static void launchWebPage(Context context, String url) {
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(url));
-		context.startActivity(i);
-	}
-
 }

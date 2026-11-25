@@ -5,8 +5,6 @@ public abstract class com/ae/apps/lib/activities/ToolBarBaseActivity : androidx/
 	protected fun getToolBar ()Landroidx/appcompat/widget/Toolbar;
 	protected abstract fun getToolbarResourceId ()I
 	protected fun onCreate (Landroid/os/Bundle;)V
-	public fun onKeyDown (ILandroid/view/KeyEvent;)Z
-	public fun onKeyUp (ILandroid/view/KeyEvent;)Z
 	protected fun setToolbarTitle (Ljava/lang/String;)V
 }
 
@@ -61,11 +59,6 @@ public class com/ae/apps/lib/common/models/PhoneNumberInfo {
 	public fun setUnformattedPhoneNumber (Ljava/lang/String;)V
 }
 
-public abstract interface class com/ae/apps/lib/custom/views/ColorThemes {
-	public static final field LAVENDER_CLOUDS [I
-	public static final field RETRO [I
-}
-
 public class com/ae/apps/lib/custom/views/EmptyRecyclerView : androidx/recyclerview/widget/RecyclerView {
 	public fun <init> (Landroid/content/Context;)V
 	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
@@ -81,17 +74,6 @@ public class com/ae/apps/lib/custom/views/RoundedImageView : androidx/appcompat/
 	protected fun getCroppedBitmap (Landroid/graphics/Bitmap;I)Landroid/graphics/Bitmap;
 	protected fun getImageRadiusSize ()I
 	protected fun onDraw (Landroid/graphics/Canvas;)V
-}
-
-public class com/ae/apps/lib/custom/views/SimpleGraphView : android/view/View {
-	public fun <init> (Landroid/content/Context;)V
-	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
-	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
-	public fun <init> (Landroid/content/Context;[F[I)V
-	public fun <init> (Landroid/content/Context;[F[Ljava/lang/String;)V
-	public fun <init> (Landroid/content/Context;[F[Ljava/lang/String;[I)V
-	protected fun onDraw (Landroid/graphics/Canvas;)V
-	protected fun onMeasure (II)V
 }
 
 public abstract interface class com/ae/apps/lib/review/AppReview {

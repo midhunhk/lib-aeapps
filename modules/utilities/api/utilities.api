@@ -1,13 +1,11 @@
 public class com/ae/apps/lib/common/utils/CommonUtils {
 	public static final field MINIMUM_STRING_LENGTH I
 	public fun <init> ()V
-	public static fun checkIfPackageIsInstalled (Landroid/content/Context;Ljava/lang/String;)Z
 	public static fun createAnimation (Landroid/content/Context;II)Landroid/view/animation/Animation;
 	public static fun createParentLayout (Landroid/content/Context;)Landroid/view/ViewGroup;
 	public static fun formatTimeStamp (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 	public static fun isFirstInstall (Landroid/content/Context;)Z
 	public static fun isPackageInstalled (Ljava/lang/String;Landroid/content/Context;)Z
-	public static fun isPackageInstalled2 (Landroid/content/Context;Ljava/lang/String;)Z
 	public static fun launchWebPage (Landroid/content/Context;Ljava/lang/String;)V
 	public static fun truncateString (Ljava/lang/String;)Ljava/lang/String;
 }
@@ -35,7 +33,6 @@ public class com/ae/apps/lib/common/utils/MobileNetworkUtils {
 	public fun <init> ()V
 	public static fun callContact (Landroid/content/Context;Ljava/lang/String;)V
 	public static fun dialContact (Landroid/content/Context;Ljava/lang/String;)V
-	public static fun launchWebPage (Landroid/content/Context;Ljava/lang/String;)V
 	public static fun textContact (Landroid/content/Context;Ljava/lang/String;)V
 }
 

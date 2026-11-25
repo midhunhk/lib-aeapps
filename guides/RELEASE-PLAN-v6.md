@@ -219,7 +219,7 @@ Considered and left out of 6.0:
 | ID | Question | Recommendation |
 |---|---|---|
 | **D8** | Which minSdk for 6.0? | **Decided 2026-11-25: 26 (Android 8.0).** Random Contact, the only app moving to 6.0, has most installs on Android 13 and newer (Android 17: 39%, 16: 15%, 13: 16%). Older devices keep the last 5.x-based release. |
-| **D9** | Keep `SimpleGraphView`, `ColorThemes` and `RoundedImageView`? | Delete `SimpleGraphView` and `ColorThemes`: none of the three apps use them (checked 2026-11-19). Keep `RoundedImageView` (12 uses) and `EmptyRecyclerView` (18 uses) in `ui`; rewrite `RoundedImageView` without per-frame bitmap allocations. |
+| **D9** | Keep `SimpleGraphView`, `ColorThemes` and `RoundedImageView`? | **Decided 2026-11-25: delete `SimpleGraphView` and `ColorThemes`** (#60). No app uses them (rechecked 2026-11-25: Random Contact, Trip O Meter, Message Counter, PNR Status, the sticker app and the sample). Keep `RoundedImageView` (12 uses) and `EmptyRecyclerView` (18 uses) in `ui`; rewrite `RoundedImageView` without per-frame bitmap allocations. |
 | **D10** | Port `sms-api` to 6.0? | **No.** Google Play restricts `READ_SMS`, and its only user, Message Counter, cannot function on Play for that reason. Leave it on 5.x; revive it in a later 6.x if an app needs it. |
 | **D11** | Rename artifacts (`contacts-api` → `contacts`, …)? | **Yes**, once, in 6.0 — renaming is cheapest when every app is migrating anyway. |
 | **D12** | Kotlin-only, or keep Java callers working? | **Decided 2026-11-19: Kotlin-first.** Sources and public APIs are Kotlin; Java interop is not a goal. Trip O Meter stays on 5.x until it is converted to Kotlin. |

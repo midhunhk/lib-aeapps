@@ -16,9 +16,7 @@
 
 package com.ae.apps.lib.activities;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,7 +25,6 @@ import androidx.appcompat.widget.Toolbar;
  * Base Activity if using a NoActionBar theme and to supply a custom toolbar
  */
 public abstract class ToolBarBaseActivity extends AppCompatActivity {
-    private static final String BRAND_LGE = "LGE";
     Toolbar mToolbar = null;
 
     @Override
@@ -83,23 +80,6 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // Fix for NPE on LG Devices when pressing hardware menu button
-        return keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)
-                || super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        // Fix for NPE on LG Devices when pressing hardware menu button
-        if (keyCode == KeyEvent.KEYCODE_MENU && BRAND_LGE.equals(Build.BRAND)) {
-            openOptionsMenu();
-            return true;
-        }
-        return super.onKeyUp(keyCode, event);
     }
 
 }
