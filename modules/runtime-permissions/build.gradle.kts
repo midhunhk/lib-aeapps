@@ -7,6 +7,7 @@ plugins {
     id ("com.android.library")
     id ("maven-publish")
     id ("org.jetbrains.dokka")
+    id ("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -63,11 +64,4 @@ dependencies {
     // Exposed in the public API of this module
     api(Libs.AndroidX.APPCOMPAT)
     api(Libs.AndroidX.FRAGMENT)
-
-    // Test Dependencies
-    testImplementation (Libs.Test.JUNIT)
-    testImplementation (Libs.Test.Mockito.MOCKITO_CORE)
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }

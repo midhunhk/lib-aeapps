@@ -1,8 +1,8 @@
 package com.ae.apps.lib.api.contacts.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -17,15 +17,15 @@ import com.ae.apps.lib.api.contacts.ContactsApiGateway;
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
 import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ContactsApiGatewayImplTest {
 
     private ContentResolver contentResolver;
     private ContactsApiGateway gateway;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Context context = mock(Context.class);
         contentResolver = mock(ContentResolver.class);

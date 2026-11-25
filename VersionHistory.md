@@ -3,6 +3,8 @@
 ## Version 6.0 (Nannyberry)
 #### Version 6.0.0 [Unreleased]
 - lib: start of the 6.0 development line; see `guides/RELEASE-PLAN-v6.md` for the planned changes
+- lib: all unit tests use JUnit 6 (Jupiter) and Mockito on the JUnit Platform; test coverage is reported by Kover in CI (#55)
+- lib: `contacts-api`, `sms-api`, `runtime-permissions` and `multi-contact` now apply the Kotlin plugin, so their POMs list `kotlin-stdlib` like the other modules
 
 ## Version 5.1 (Mulberry)
 #### Version 5.1.0 [Nov 2026]

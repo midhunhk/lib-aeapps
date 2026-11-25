@@ -12,21 +12,32 @@ plugins {
     id("org.jetbrains.kotlin.android") version "2.2.10" apply false
     // API documentation, see "API documentation" in DEVELOPMENT.md
     id("org.jetbrains.dokka") version "2.2.0"
+    // Test coverage, see "Tests and coverage" in DEVELOPMENT.md
+    id("org.jetbrains.kotlinx.kover") version "0.9.11"
     id("maven-publish")
 }
 
-// Combine the API docs of every published library module into one site.
+// Combine the API docs and the test coverage of every published library module.
 // The sample app and the aeapps umbrella (no sources) are left out on purpose.
 dependencies {
     dokka(project(":core"))
+    kover(project(":core"))
     dokka(project(":utilities"))
+    kover(project(":utilities"))
     dokka(project(":contacts-api"))
+    kover(project(":contacts-api"))
     dokka(project(":sms-api"))
+    kover(project(":sms-api"))
     dokka(project(":runtime-permissions"))
+    kover(project(":runtime-permissions"))
     dokka(project(":multi-contact"))
+    kover(project(":multi-contact"))
     dokka(project(":database-helpers"))
+    kover(project(":database-helpers"))
     dokka(project(":billing-client"))
+    kover(project(":billing-client"))
     dokka(project(":mocks"))
+    kover(project(":mocks"))
 }
 
 dokka {
@@ -140,4 +151,36 @@ tasks.register("updateSite") {
     group = "documentation"
     description = "Updates the docs/ site for a release: API reference, release notes and version."
     dependsOn(updateApiDocs, updateReleaseNotes, updateSiteVersion)
+}
+
+// Tests and coverage for every library module: JUnit 6 (Jupiter) and Mockito on the JUnit
+// Platform, with Kover collecting coverage. Modules add only what is specific to them,
+// such as mockito-kotlin for Kotlin tests.
+subprojects {
+    pluginManager.withPlugin("com.android.library") {
+        apply(plugin = "org.jetbrains.kotlinx.kover")
+
+        dependencies {
+            "testImplementation"(platform(com.ae.apps.lib.Libs.Test.JUNIT_BOM))
+            "testImplementation"(com.ae.apps.lib.Libs.Test.JUNIT_JUPITER)
+            "testRuntimeOnly"(com.ae.apps.lib.Libs.Test.JUNIT_PLATFORM_LAUNCHER)
+            "testImplementation"(com.ae.apps.lib.Libs.Test.Mockito.MOCKITO_CORE)
+            "testImplementation"(com.ae.apps.lib.Libs.Test.Mockito.MOCKITO_JUNIT)
+        }
+
+        tasks.withType<Test>().configureEach {
+            useJUnitPlatform()
+        }
+    }
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                // Generated classes
+                classes("*.R", "*.R$*", "*.BuildConfig", "*.databinding.*")
+            }
+        }
+    }
 }

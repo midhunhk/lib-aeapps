@@ -32,6 +32,20 @@ jobs:
       - name: Unit tests
         run: ./gradlew testDebugUnitTest --continue
 
+      - name: Coverage report
+        if: success() || failure()
+        run: |
+          ./gradlew :koverXmlReport :koverHtmlReport :koverLog --console=plain | tee coverage.log
+          echo "### Test coverage" >> "$GITHUB_STEP_SUMMARY"
+          grep -i "coverage:" coverage.log >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Upload coverage report
+        if: success() || failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage
+          path: build/reports/kover/
+
       - name: Lint
         run: ./gradlew lintDebug --continue
 

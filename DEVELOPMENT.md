@@ -152,15 +152,16 @@ modules/<name>/
 Because the library manifests are empty, **the consuming app must declare permissions itself**
 (`READ_CONTACTS`, `READ_SMS`, `CALL_PHONE`, and `<queries>` entries for package checks).
 
-Test frameworks by module:
+All unit tests use **JUnit 6 (Jupiter) and Mockito** on the JUnit Platform. The setup is shared
+and lives in the root `build.gradle.kts`, so a module's own script only adds what is specific to
+it (for example `mockito-kotlin` for Kotlin tests, or `project(":mocks")`). See section 3.6.
 
-| Framework | Modules |
+| Has unit tests | No unit tests yet |
 |---|---|
-| JUnit 4 + Mockito | `contacts-api`, `sms-api`, `runtime-permissions`, `utilities` (plus Robolectric declared) |
-| JUnit 5 + Mockito-Kotlin | `billing-client`, `mocks` (these set `useJUnitPlatform()`) |
-| None | `core`, `multi-contact`, `database-helpers`, `aeapps`, `sample` |
+| `contacts-api`, `sms-api`, `runtime-permissions`, `utilities`, `billing-client`, `mocks` | `core`, `multi-contact`, `database-helpers`, `aeapps`, `sample` |
 
-There are no instrumented tests (`src/androidTest`) anywhere.
+There are no instrumented tests (`src/androidTest`) yet; a smoke test for the picker and
+permission flows is planned with the 6.0 API rewrite.
 
 ---
 
@@ -212,6 +213,10 @@ upgrade them together and check the AGP release notes for the pairing.
 ```
 
 ```bash
+./gradlew :koverHtmlReport
+```
+
+```bash
 ./gradlew lintDebug --continue
 ```
 
@@ -235,7 +240,9 @@ this in the workflow).
 
 [.github/workflows/ci.yml](.github/workflows/ci.yml) runs on every push to any branch, on pull
 requests to `main`, and on manual dispatch. It runs unit tests, lint, the release build and a
-publish to Maven Local, and uploads test and lint reports if anything fails. It also builds the
+publish to Maven Local, and uploads test and lint reports if anything fails. It builds a
+coverage report on every run, shows the overall line coverage in the run's summary and uploads
+the HTML and XML report as the `coverage` artifact. It also builds the
 API reference to catch broken Dokka configuration, but does not commit it. It does not publish
 anywhere and does not create tags or releases.
 
@@ -297,6 +304,25 @@ the stylesheet in some browsers):
 ```bash
 python -m http.server 8765 --directory docs
 ```
+
+### 3.6 Tests and coverage
+
+- **Framework:** JUnit 6 (the continuation of JUnit 5's Jupiter API; it needs Java 17) with
+  Mockito and `mockito-junit-jupiter`. Use `org.junit.jupiter.api.*` imports and, for mocks,
+  `@ExtendWith(MockitoExtension.class)`. Versions are in `Libs.Test` in `Dependencies.kt`.
+- **Where it is configured:** the `subprojects { pluginManager.withPlugin("com.android.library") }`
+  block in the root `build.gradle.kts` adds the test dependencies, switches every `Test` task to
+  the JUnit Platform and applies Kover to every library module.
+- **Android classes:** unit tests run on the JVM against a stub `android.jar`. Mock framework
+  types with Mockito (static ones such as `Uri.parse` with `mockStatic`), or set
+  `testOptions.unitTests.isReturnDefaultValues = true` as `contacts-api` does. Robolectric is not
+  used yet; add it for tests that need real framework behaviour.
+- **Coverage:** Kover instruments the debug unit tests of every library module and merges them at
+  the root. `./gradlew :koverHtmlReport` writes `build/reports/kover/html/index.html`,
+  `:koverXmlReport` writes `build/reports/kover/report.xml`, and `:koverLog` prints the total.
+  Generated classes (`R`, `BuildConfig`) are excluded. Kover only instruments modules that apply
+  the Kotlin plugin, which is why every library module applies it, including those that are
+  still Java.
 
 ---
 

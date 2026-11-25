@@ -13,18 +13,18 @@ import android.database.Cursor;
 
 import com.ae.apps.lib.common.models.MessageInfo;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SmsApiUtilsTest {
 
     @Mock
@@ -33,7 +33,7 @@ public class SmsApiUtilsTest {
     // To mock the static method SmsApiUtils.createMessageInfo
     private MockedStatic<SmsApiUtils> mockedSmsApiUtils;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         // Initialize static mock for SmsApiUtils. The method createMessageInfo is in this class.
         // This must be done for each test method where the static mock is needed.
@@ -49,7 +49,7 @@ public class SmsApiUtilsTest {
         // We will then specifically mock createMessageInfo.
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         // It's crucial to close the static mock to avoid interference between tests.
         if (mockedSmsApiUtils != null) {
@@ -84,10 +84,10 @@ public class SmsApiUtilsTest {
         List<MessageInfo> result = SmsApiUtils.createMessageInfoList(mockCursor);
 
         // Assert
-        Assert.assertNotNull(result);
-        Assert.assertEquals(2, result.size());
-        Assert.assertSame("First message should be the first mocked object", mockMessage1, result.get(0));
-        Assert.assertSame("Second message should be the second mocked object", mockMessage2, result.get(1));
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(2, result.size());
+        Assertions.assertSame(mockMessage1, result.get(0), "First message should be the first mocked object");
+        Assertions.assertSame(mockMessage2, result.get(1), "Second message should be the second mocked object");
 
         // Verify createMessageInfo was called twice with the mockCursor
         mockedSmsApiUtils.verify(() -> SmsApiUtils.createMessageInfo(mockCursor), times(2));
@@ -97,7 +97,7 @@ public class SmsApiUtilsTest {
 
     @Test
     public void createMessageInfoList_withSingleRow_returnsListWithOneMessage() {
-        Assert.assertNotNull("mockCursor should be initialized", mockCursor); // Defensive check
+        Assertions.assertNotNull(mockCursor, "mockCursor should be initialized"); // Defensive check
         MessageInfo mockMessage = new MessageInfo();
         mockMessage.setId("single");
 
@@ -108,9 +108,9 @@ public class SmsApiUtilsTest {
 
         List<MessageInfo> result = SmsApiUtils.createMessageInfoList(mockCursor);
 
-        Assert.assertNotNull(result);
-        Assert.assertEquals(1, result.size());
-        Assert.assertSame(mockMessage, result.get(0));
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertSame(mockMessage, result.get(0));
 
         mockedSmsApiUtils.verify(() -> SmsApiUtils.createMessageInfo(mockCursor), times(1));
         verify(mockCursor, times(1)).moveToNext();
@@ -118,7 +118,7 @@ public class SmsApiUtilsTest {
 
     @Test
     public void createMessageInfoList_withEmptyCursor_handlesDoWhileNature() {
-        Assert.assertNotNull("mockCursor should be initialized", mockCursor); // Defensive check
+        Assertions.assertNotNull(mockCursor, "mockCursor should be initialized"); // Defensive check
         MessageInfo mockMessageForPotentiallyInvalidPosition = new MessageInfo();
         mockMessageForPotentiallyInvalidPosition.setId("from_invalid_pos");
 
@@ -128,9 +128,9 @@ public class SmsApiUtilsTest {
 
         List<MessageInfo> result = SmsApiUtils.createMessageInfoList(mockCursor);
 
-        Assert.assertNotNull(result);
-        Assert.assertEquals(1, result.size()); // do-while executes createMessageInfo once
-        Assert.assertSame(mockMessageForPotentiallyInvalidPosition, result.get(0));
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1, result.size()); // do-while executes createMessageInfo once
+        Assertions.assertSame(mockMessageForPotentiallyInvalidPosition, result.get(0));
 
         mockedSmsApiUtils.verify(() -> SmsApiUtils.createMessageInfo(mockCursor), times(1));
         verify(mockCursor, times(1)).moveToNext();
@@ -143,7 +143,7 @@ public class SmsApiUtilsTest {
         NullPointerException exception = assertThrows(NullPointerException.class, () -> {
             SmsApiUtils.createMessageInfoList(null);
         });
-        Assert.assertNotNull(exception);
+        Assertions.assertNotNull(exception);
     }
 
     // A helper for JUnit 4 to assert throws, similar to JUnit 5's assertThrows
@@ -167,15 +167,15 @@ public class SmsApiUtilsTest {
 
     @Test
     public void createMessageInfoList_whenCreateMessageInfoReturnsNull_addsNullToList() {
-        Assert.assertNotNull("mockCursor should be initialized", mockCursor); // Defensive check
+        Assertions.assertNotNull(mockCursor, "mockCursor should be initialized"); // Defensive check
         when(mockCursor.moveToNext()).thenReturn(false);
         mockedSmsApiUtils.when(() -> SmsApiUtils.createMessageInfo(mockCursor)).thenReturn(null);
 
         List<MessageInfo> result = SmsApiUtils.createMessageInfoList(mockCursor);
 
-        Assert.assertNotNull(result);
-        Assert.assertEquals(1, result.size());
-        Assert.assertNull("The list should contain the null returned by createMessageInfo", result.get(0));
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertNull(result.get(0), "The list should contain the null returned by createMessageInfo");
 
         mockedSmsApiUtils.verify(() -> SmsApiUtils.createMessageInfo(mockCursor), times(1));
     }
@@ -183,7 +183,7 @@ public class SmsApiUtilsTest {
     @Test
     public void createMessageInfo_whenAllColumnsExist_populatesMessageInfoCorrectly() {
         // Arrange
-        Assert.assertNotNull("mockCursor should be initialized", mockCursor);
+        Assertions.assertNotNull(mockCursor, "mockCursor should be initialized");
 
         // Define expected values
         String expectedId = "sms_123";
@@ -217,15 +217,15 @@ public class SmsApiUtilsTest {
         MessageInfo result = SmsApiUtils.createMessageInfo(mockCursor);
 
         // Assert
-        Assert.assertNotNull(result);
-        Assert.assertEquals(expectedId, result.getId());
-        Assert.assertEquals(expectedThreadId, result.getThreadId());
-        Assert.assertEquals(expectedAddress, result.getAddress());
-        Assert.assertEquals(expectedBody, result.getBody());
-        Assert.assertEquals(expectedDate, result.getDate());
-        Assert.assertEquals(expectedPerson, result.getPerson());
-        Assert.assertEquals("2", result.getType());
-        Assert.assertEquals("0", result.getProtocol());
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(expectedId, result.getId());
+        Assertions.assertEquals(expectedThreadId, result.getThreadId());
+        Assertions.assertEquals(expectedAddress, result.getAddress());
+        Assertions.assertEquals(expectedBody, result.getBody());
+        Assertions.assertEquals(expectedDate, result.getDate());
+        Assertions.assertEquals(expectedPerson, result.getPerson());
+        Assertions.assertEquals("2", result.getType());
+        Assertions.assertEquals("0", result.getProtocol());
 
         // Verify interactions (optional, but good for completeness)
         verify(mockCursor).getColumnIndex(SmsApiConstants.COLUMN_ID);
@@ -250,7 +250,7 @@ public class SmsApiUtilsTest {
     @Test
     public void createMessageInfo_whenSomeColumnsAreMissing_populatesAvailableFields() {
         // Arrange
-        Assert.assertNotNull("mockCursor should be initialized", mockCursor);
+        Assertions.assertNotNull(mockCursor, "mockCursor should be initialized");
 
         String expectedId = "sms_only_id";
         String expectedBody = "Body only";
@@ -273,13 +273,13 @@ public class SmsApiUtilsTest {
         MessageInfo result = SmsApiUtils.createMessageInfo(mockCursor);
 
         // Assert
-        Assert.assertNotNull(result);
-        Assert.assertEquals(expectedId, result.getId());
-        Assert.assertNull("ThreadId should be null as column was missing", result.getThreadId());
-        Assert.assertNull("Address should be null as column was missing", result.getAddress());
-        Assert.assertEquals(expectedBody, result.getBody());
-        Assert.assertEquals(0, result.getDate()); // Default long value if not set
-        Assert.assertNull("Person should be null as column was missing", result.getPerson());
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(expectedId, result.getId());
+        Assertions.assertNull(result.getThreadId(), "ThreadId should be null as column was missing");
+        Assertions.assertNull(result.getAddress(), "Address should be null as column was missing");
+        Assertions.assertEquals(expectedBody, result.getBody());
+        Assertions.assertEquals(0, result.getDate()); // Default long value if not set
+        Assertions.assertNull(result.getPerson(), "Person should be null as column was missing");
 
         // Verify interactions: getString/getLong only called for existing columns
         verify(mockCursor).getString(0); // For ID
@@ -296,7 +296,7 @@ public class SmsApiUtilsTest {
     @Test
     public void createMessageInfo_whenAllColumnsAreMissing_returnsMessageInfoWithNullOrDefaults() {
         // Arrange
-        Assert.assertNotNull("mockCursor should be initialized", mockCursor);
+        Assertions.assertNotNull(mockCursor, "mockCursor should be initialized");
 
         // Simulate all columns are missing
         when(mockCursor.getColumnIndex(anyString())).thenReturn(-1); // anyString() matches any column name
@@ -305,13 +305,13 @@ public class SmsApiUtilsTest {
         MessageInfo result = SmsApiUtils.createMessageInfo(mockCursor);
 
         // Assert
-        Assert.assertNotNull(result);
-        Assert.assertNull("Id should be null", result.getId());
-        Assert.assertNull("ThreadId should be null", result.getThreadId());
-        Assert.assertNull("Address should be null", result.getAddress());
-        Assert.assertNull("Body should be null", result.getBody());
-        Assert.assertEquals("Date should be default long", 0, result.getDate());
-        Assert.assertNull("Person should be null", result.getPerson());
+        Assertions.assertNotNull(result);
+        Assertions.assertNull(result.getId(), "Id should be null");
+        Assertions.assertNull(result.getThreadId(), "ThreadId should be null");
+        Assertions.assertNull(result.getAddress(), "Address should be null");
+        Assertions.assertNull(result.getBody(), "Body should be null");
+        Assertions.assertEquals(0, result.getDate(), "Date should be default long");
+        Assertions.assertNull(result.getPerson(), "Person should be null");
 
         // Verify no getString or getLong calls were made on the cursor
         verify(mockCursor, never()).getString(anyInt());
@@ -328,6 +328,6 @@ public class SmsApiUtilsTest {
         } catch (NullPointerException e) {
             exception = e;
         }
-        Assert.assertNotNull("Should throw NullPointerException for null cursor", exception);
+        Assertions.assertNotNull(exception, "Should throw NullPointerException for null cursor");
     }
 }

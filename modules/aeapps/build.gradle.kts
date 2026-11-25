@@ -70,7 +70,4 @@ dependencies {
     api (project(":billing-client"))
     api (project(":sms-api"))
     api (project(":utilities"))
-
-    testImplementation (project(":mocks"))
-    testImplementation(Libs.Test.TEST_NG)
 }

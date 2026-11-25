@@ -65,6 +65,4 @@ dependencies {
     api(Libs.AndroidX.RECYCLER_VIEW)
     implementation(Libs.AndroidX.PREFERENCE)
     implementation(Libs.GooglePlay.IN_APP_REVIEW)
-
-    testImplementation (project(":mocks"))
 }

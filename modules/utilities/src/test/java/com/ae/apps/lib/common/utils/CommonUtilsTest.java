@@ -17,10 +17,10 @@
 
 package com.ae.apps.lib.common.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,8 +28,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by user on 6/24/2017.
@@ -67,13 +67,13 @@ public class CommonUtilsTest {
     @Test
     public void truncateString() {
         String result = CommonUtils.truncateString(null);
-        Assert.assertEquals("", result);
+        Assertions.assertEquals("", result);
 
         result = CommonUtils.truncateString("ABCD");
-        Assert.assertEquals("ABCD", result);
+        Assertions.assertEquals("ABCD", result);
 
         result = CommonUtils.truncateString("The quick brown fox jumped over the lazy dog!");
-        Assert.assertEquals("The quick brown fox jumped...", result);
+        Assertions.assertEquals("The quick brown fox jumped...", result);
     }
 
     @Test

@@ -21,9 +21,11 @@ import android.content.ContentResolver;
 
 import com.ae.apps.lib.api.sms.utils.SmsApiConstants;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.mockito.Mock;
 
 public class SmsApiGatewayTest {
@@ -33,7 +35,7 @@ public class SmsApiGatewayTest {
 
     private SmsApiGateway apiGateway;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         MockSmsApiGateway mockSmsApiGateway = new MockSmsApiGateway();
         mockSmsApiGateway.setContentResolver(contentResolver);
@@ -43,22 +45,22 @@ public class SmsApiGatewayTest {
     @Test
     public void shouldReturnMessageCountForUri() {
         long messageCount = apiGateway.getMessageCountForUri(SmsApiConstants.URI_ALL);
-        Assert.assertEquals(MockSmsApiGateway.MESSAGE_INFO_COUNT, messageCount);
+        Assertions.assertEquals(MockSmsApiGateway.MESSAGE_INFO_COUNT, messageCount);
     }
 
     @Test
     public void shouldReturnMessageCountForContactId() {
         long messageCount = apiGateway.getMessageCountForContact(SmsApiConstants.URI_ALL, "contact_id");
-        Assert.assertEquals(MockSmsApiGateway.MESSAGE_INFO_COUNT, messageCount);
+        Assertions.assertEquals(MockSmsApiGateway.MESSAGE_INFO_COUNT, messageCount);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowExceptionForInvalidUri_messageCountForUri() {
-        apiGateway.getMessageCountForUri("INVALID_URI");
+        assertThrows(IllegalArgumentException.class, () -> apiGateway.getMessageCountForUri("INVALID_URI"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowExceptionForInvalidUri_messageCountForContact() {
-        apiGateway.getMessageCountForContact("INVALID_URI", "contact_id");
+        assertThrows(IllegalArgumentException.class, () -> apiGateway.getMessageCountForContact("INVALID_URI", "contact_id"));
     }
 }

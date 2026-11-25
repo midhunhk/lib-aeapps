@@ -37,32 +37,18 @@ object Libs {
     }
 
     object Test {
-        private const val JUNIT_VERSION = "4.13.2"
-        private const val JUNIT5_VERSION = "5.10.2"
-        private const val MOCKITO_CORE_VERSION = "5.18.0"
+        // JUnit 6 is the continuation of JUnit 5 (Jupiter); same APIs, requires Java 17
+        private const val JUNIT_VERSION = "6.1.3"
+        private const val MOCKITO_VERSION = "5.24.0"
 
-        const val JUNIT ="junit:junit:$JUNIT_VERSION"
-        const val TEST_RUNNER = "androidx.test:runner:1.6.2"
-        const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:3.6.1"
-        const val JUNIT_EXT = "androidx.test.ext:junit:1.2.1"
-        const val RULES = "androidx.test:rules:1.6.1"
-        const val ROBO_ELECTRIC = "org.robolectric:robolectric:4.13"
-        const val TEST_NG = "org.testng:testng:6.9.6"
-
-        object JunitJupiter {
-            @Suppress("unused")
-            const val JUNIT5 = "org.junit.jupiter:junit-jupiter:$JUNIT5_VERSION"
-            const val API = "org.junit.jupiter:junit-jupiter-api:$JUNIT5_VERSION"
-            const val ENGINE = "org.junit.jupiter:junit-jupiter-engine:$JUNIT5_VERSION"
-            const val LAUNCHER = "org.junit.platform:junit-platform-launcher:1.10.2"
-            @Suppress("unused")
-            const val PARAMS = "org.junit.jupiter:junit-jupiter-params:$JUNIT5_VERSION"
-        }
+        const val JUNIT_BOM = "org.junit:junit-bom:$JUNIT_VERSION"
+        const val JUNIT_JUPITER = "org.junit.jupiter:junit-jupiter"
+        const val JUNIT_PLATFORM_LAUNCHER = "org.junit.platform:junit-platform-launcher"
 
         object Mockito {
-            const val MOCKITO_CORE = "org.mockito:mockito-core:$MOCKITO_CORE_VERSION"
-            const val MOCKITO_JUNIT = "org.mockito:mockito-junit-jupiter:$MOCKITO_CORE_VERSION"
-            const val MOCKITO_KOTLIN = "org.mockito.kotlin:mockito-kotlin:3.2.0"
+            const val MOCKITO_CORE = "org.mockito:mockito-core:$MOCKITO_VERSION"
+            const val MOCKITO_JUNIT = "org.mockito:mockito-junit-jupiter:$MOCKITO_VERSION"
+            const val MOCKITO_KOTLIN = "org.mockito.kotlin:mockito-kotlin:6.4.0"
         }
     }
 }

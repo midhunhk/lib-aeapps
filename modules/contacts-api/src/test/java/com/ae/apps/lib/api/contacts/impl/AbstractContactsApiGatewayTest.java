@@ -1,18 +1,18 @@
 package com.ae.apps.lib.api.contacts.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions;
 import com.ae.apps.lib.api.contacts.types.ContactInfoOptions;
 import com.ae.apps.lib.api.contacts.types.ContactsDataConsumer;
 import com.ae.apps.lib.common.models.ContactInfo;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +126,7 @@ public class AbstractContactsApiGatewayTest {
         }
 
         void awaitCallback() throws InterruptedException {
-            assertTrue("Callback was not delivered", done.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
+            assertTrue(done.await(TIMEOUT_SECONDS, TimeUnit.SECONDS), "Callback was not delivered");
         }
     }
 
@@ -194,8 +194,7 @@ public class AbstractContactsApiGatewayTest {
         // The second request arrives while the first is still reading
         gateway.initializeAsync(OPTIONS, secondConsumer);
 
-        assertFalse("Callback delivered before the contacts were read",
-                secondConsumer.done.await(200, TimeUnit.MILLISECONDS));
+        assertFalse(secondConsumer.done.await(200, TimeUnit.MILLISECONDS), "Callback delivered before the contacts were read");
 
         gateway.allowReadToFinish.countDown();
         firstConsumer.awaitCallback();
@@ -247,8 +246,7 @@ public class AbstractContactsApiGatewayTest {
         consumer.awaitCallback();
 
         assertSame(denied, consumer.failure.get());
-        assertNull("onContactsRead must not be called after a failure",
-                consumer.countSeenInCallback.get());
+        assertNull(consumer.countSeenInCallback.get(), "onContactsRead must not be called after a failure");
         assertNull(consumer.errorInCallback.get());
     }
 

@@ -42,9 +42,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    tasks.withType<Test>().configureEach {
-        useJUnitPlatform()
-    }
 }
 
 kotlin {
@@ -75,12 +72,5 @@ dependencies {
     api (Libs.AndroidX.APPCOMPAT)
     api (Libs.GooglePlay.BILLING_CLIENT)
 
-    testImplementation (Libs.Test.JunitJupiter.API)
-    testRuntimeOnly(Libs.Test.JunitJupiter.ENGINE)
-    testRuntimeOnly(Libs.Test.JunitJupiter.LAUNCHER)
-    testImplementation(Libs.Test.Mockito.MOCKITO_JUNIT)
     testImplementation(Libs.Test.Mockito.MOCKITO_KOTLIN)
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }

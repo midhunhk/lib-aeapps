@@ -7,6 +7,7 @@ plugins {
     id ("com.android.library")
     id ("maven-publish")
     id ("org.jetbrains.dokka")
+    id ("org.jetbrains.kotlin.android")
 }
 
 afterEvaluate {
@@ -67,10 +68,4 @@ dependencies {
     // Exposed in the public API of this module
     api(Libs.AndroidX.APPCOMPAT)
     api(Libs.AndroidX.RECYCLER_VIEW)
-
-    // Test Dependencies
-    testImplementation (Libs.Test.JUNIT)
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.Mockito.MOCKITO_CORE)
 }

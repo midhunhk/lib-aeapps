@@ -60,16 +60,5 @@ afterEvaluate {
 
 dependencies {
     implementation(Libs.AndroidX.APPCOMPAT)
-
-    testImplementation(Libs.Test.JUNIT)
-    testImplementation (Libs.Test.JUNIT_EXT)
-    testImplementation (Libs.Test.ROBO_ELECTRIC)
-    testImplementation (Libs.Test.Mockito.MOCKITO_CORE)
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.Mockito.MOCKITO_CORE)
-    androidTestImplementation (Libs.Test.RULES)
-    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }
-
 

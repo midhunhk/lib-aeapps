@@ -1,7 +1,7 @@
 package com.ae.apps.lib.api.sms;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -18,9 +18,9 @@ import com.ae.apps.lib.api.sms.impl.SmsApiGatewayImpl;
 import com.ae.apps.lib.api.sms.utils.SmsApiConstants;
 import com.ae.apps.lib.common.models.MessageInfo;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class SmsApiGatewayImplTest {
     private ContentResolver contentResolver;
     private SmsApiGateway gateway;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mockedUri = mockStatic(Uri.class);
         mockedUri.when(() -> Uri.parse(anyString())).thenReturn(mock(Uri.class));
@@ -43,7 +43,7 @@ public class SmsApiGatewayImplTest {
         gateway = new SmsApiGatewayImpl(context);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         mockedUri.close();
     }

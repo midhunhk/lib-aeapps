@@ -7,6 +7,7 @@ plugins {
     id ("com.android.library")
     id ("maven-publish")
     id ("org.jetbrains.dokka")
+    id ("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -65,9 +66,4 @@ dependencies {
     implementation(Libs.AndroidX.APPCOMPAT)
 
     testImplementation (project(":mocks"))
-    testImplementation (Libs.Test.JUNIT)
-    testImplementation (Libs.Test.Mockito.MOCKITO_CORE)
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.ESPRESSO_CORE)
 }

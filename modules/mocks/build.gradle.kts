@@ -38,9 +38,6 @@ android {
             )
         }
     }
-    tasks.withType<Test>().configureEach {
-        useJUnitPlatform()
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -76,12 +73,5 @@ dependencies {
     implementation(Libs.AndroidX.APPCOMPAT)
     implementation(Libs.AndroidX.CORE_KTX)
 
-    testImplementation (Libs.Test.JunitJupiter.API)
-    testRuntimeOnly(Libs.Test.JunitJupiter.ENGINE)
-    testRuntimeOnly(Libs.Test.JunitJupiter.LAUNCHER)
-    testImplementation(Libs.Test.Mockito.MOCKITO_JUNIT)
     testImplementation(Libs.Test.Mockito.MOCKITO_KOTLIN)
-
-    androidTestImplementation (Libs.Test.TEST_RUNNER)
-    androidTestImplementation (Libs.Test.Mockito.MOCKITO_CORE)
 }
